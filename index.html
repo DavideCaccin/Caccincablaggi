@@ -138,6 +138,27 @@ Index
         .submit-btn:hover { background: var(--primary-hover); }
     </style>
 </head>
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            // Prende il nome del referente
+            var referente = document.getElementById('referente').value || 'Cliente';
+            
+            // Trova le lavorazioni selezionate
+            var lavorazioni = [];
+            var checkboxes = document.querySelectorAll('input[name="Lavorazione[]"]:checked');
+            checkboxes.forEach(function(cb) {
+                lavorazioni.push(cb.value);
+            });
+            
+            var tipoLavorazione = lavorazioni.length > 0 ? lavorazioni.join(', ') : 'Cablaggio';
+            
+            // Genera l'oggetto unico (Es: "Preventivo ABC Automation - Quadro elettrico")
+            var nuovoOggetto = "Preventivo " + referente + " - " + tipoLavorazione;
+            
+            // Imposta l'oggetto nel campo nascosto di FormSubmit
+            document.getElementById('email_subject').value = nuovoOggetto;
+        });
+    </script>
 <body>
 
     <header>
@@ -181,6 +202,7 @@ Index
             <form action="https://formsubmit.co/caccin.cablaggi@gmail.com" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="_next" value="https://meldon96.github.io/Caccincablaggi/">
                 <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" id="email_subject" value="Nuova richiesta di preventivo">
                 
                 <!-- Dati Cliente -->
                 <div class="form-section">
