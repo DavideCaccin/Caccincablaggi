@@ -139,23 +139,25 @@ Index
     </style>
 </head>
     <script>
+        // Controlla se l'URL contiene "?success=true" quando la pagina si ricarica
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            // Mostra il messaggio di successo
+            document.getElementById('success-message').style.display = 'block';
+            // Scorre la pagina automaticamente fino al messaggio per farlo vedere bene
+            document.getElementById('success-message').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Gestione dell'oggetto dinamico della mail
         document.querySelector('form').addEventListener('submit', function(e) {
-            // Prende il nome del referente
             var referente = document.getElementById('referente').value || 'Cliente';
-            
-            // Trova le lavorazioni selezionate
             var lavorazioni = [];
             var checkboxes = document.querySelectorAll('input[name="Lavorazione[]"]:checked');
             checkboxes.forEach(function(cb) {
                 lavorazioni.push(cb.value);
             });
-            
             var tipoLavorazione = lavorazioni.length > 0 ? lavorazioni.join(', ') : 'Cablaggio';
-            
-            // Genera l'oggetto unico (Es: "Preventivo ABC Automation - Quadro elettrico")
             var nuovoOggetto = "Preventivo " + referente + " - " + tipoLavorazione;
-            
-            // Imposta l'oggetto nel campo nascosto di FormSubmit
             document.getElementById('email_subject').value = nuovoOggetto;
         });
     </script>
@@ -199,8 +201,12 @@ Index
             <p>Compila il modulo sottostante inserendo i dettagli tecnici. Riceverai il tuo preventivo strutturato nel minor tempo possibile.</p>
             
             <!-- IMPORTANTE: Sostituirai l'action con il tuo link Formspree nella Fase 2 -->
+            <!-- Messaggio di successo nascostodi default -->
+            <div id="success-message" style="display: none; background-color #d4edda; color: #155724; border: 1px solid #c3e6cb; padding: 1.5rem; border-radius: 5px; margin-bottom: 2rem; text-align: center; front-size: 1.2rem; font-weight: bold;">
+                Preventivo richiesto correttamente, Le risponderemo il prima possibile!
+            </div>
             <form action="https://formsubmit.co/caccin.cablaggi@gmail.com" method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="_next" value="https://meldon96.github.io/Caccincablaggi/">
+                <input type="hidden" name="_next" value="https://meldon96.github.io/Caccincablaggi/?success=true">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_subject" id="email_subject" value="Nuova richiesta di preventivo">
                 
