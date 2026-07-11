@@ -1,0 +1,310 @@
+Index
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caccin Cablaggi - Richiesta Preventivo</title>
+    <style>
+        :root {
+            --primary: #0056b3;
+            --primary-hover: #004085;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            margin-left: 1.5rem;
+            font-weight: 500;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        h1, h2 { color: var(--primary); }
+        .hero {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: linear-gradient(135deg, #0056b3 0%, #002d62 100%);
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .hero h1 { color: white; margin-top: 0; }
+        .btn-large {
+            display: inline-block;
+            background: #ffc107;
+            color: #212529;
+            padding: 1rem 2rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 1rem;
+            transition: background 0.2s;
+        }
+        .btn-large:hover { background: #e0a800; }
+        
+        /* Form Styles */
+        .form-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .form-section h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        input[type="text"], input[type="email"], input[type="tel"], textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .grid-checkbox {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1xl));
+            gap: 0.5rem;
+        }
+        @media(min-width: 600px) {
+            .grid-checkbox { grid-template-columns: repeat(3, 1fr); }
+            .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        }
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            cursor: pointer;
+        }
+        .checkbox-label input { margin-right: 0.5rem; }
+        .file-help { font-size: 0.85rem; color: var(--gray); margin-top: 0.25rem; }
+        
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            width: 100%;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .submit-btn:hover { background: var(--primary-hover); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">Caccin Cablaggi</div>
+            <nav>
+                <a href="#chi-siamo">Chi Siamo</a>
+                <a href="#cosa-facciamo">Cosa Facciamo</a>
+                <a href="#preventivo">Preventivo</a>
+            </nav>
+        </div>
+    </header>
+
+    <div style="max-width: 1100px; margin: 0 auto; padding: 0 1rem;">
+        
+        <!-- SEZIONE HOME / HERO -->
+        <div class="hero">
+            <h1>Cablaggi Elettrici ed Elettromeccanici Industriali</h1>
+            <p>Qualità, precisione e componentistica dei migliori marchi per le tue automazioni.</p>
+            <a href="#preventivo" class="btn-large">Richiedi un Preventivo Online 📋</a>
+        </div>
+
+        <!-- CHI SIAMO & COSA FACCIAMO -->
+        <div class="container" id="chi-siamo" style="margin-top:0;">
+            <h2>Chi Siamo & Cosa Facciamo</h2>
+            <p><strong>Caccin Cablaggi</strong> è il partner ideale per la progettazione e la realizzazione di quadri elettrici e assemblaggi elettromeccanici. Offriamo soluzioni su misura per l'automazione industriale.</p>
+            <h3>I vantaggi di lavorare con Caccin Cablaggi:</h3>
+            <ul>
+                <li>Massima precisione nel rispetto degli schemi elettrici forniti.</li>
+                <li>Utilizzo di componentistica certificata dei leader di mercato.</li>
+                <li>Flessibilità nelle consegne e supporto tecnico dedicato.</li>
+            </ul>
+        </div>
+
+        <!-- MODULO DI PREVENTIVO -->
+        <div class="container" id="preventivo">
+            <h2>Richiedi un Preventivo</h2>
+            <p>Compila il modulo sottostante inserendo i dettagli tecnici. Riceverai il tuo preventivo strutturato nel minor tempo possibile.</p>
+            
+            <!-- IMPORTANTE: Sostituirai l'action con il tuo link Formspree nella Fase 2 -->
+            <form action="https://formspree.io/f/https://formspree.io/f/mnjkeewe" method="POST" enctype="multipart/form-data">
+                
+                <!-- Dati Cliente -->
+                <div class="form-section">
+                    <h3>📋 Dati Cliente</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="ragione_sociale">Ragione Sociale *</label>
+                            <input type="text" id="ragione_sociale" name="Ragione Sociale" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="referente">Nome Referente *</label>
+                            <input type="text" id="referente" name="Nome Referente" required>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Telefono *</label>
+                            <input type="tel" id="telefono" name="Telefono" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tipo Lavorazione -->
+                <div class="form-section">
+                    <h3>⚙️ Tipo di lavorazione</h3>
+                    <div class="grid-checkbox">
+                        <label class="checkbox-label"><input type="checkbox" name="Lavorazione[]" value="Quadro elettrico"> Quadro elettrico</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Lavorazione[]" value="Quadro elettropneumatico"> Quadro elettropneumatico</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Lavorazione[]" value="Assemblaggio elettromeccanico"> Assemblaggio elettromeccanico</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Lavorazione[]" value="Altro"> Altro</label>
+                    </div>
+                </div>
+
+                <!-- Dimensione Quadro -->
+                <div class="form-section">
+                    <h3>📐 Dimensione quadro</h3>
+                    <div class="grid-checkbox">
+                        <label class="checkbox-label"><input type="checkbox" name="Dimensione[]" value="Piccolo"> Piccolo</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Dimensione[]" value="Medio"> Medio</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Dimensione[]" value="Grande"> Grande</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Dimensione[]" value="Armadio"> Armadio</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Dimensione[]" value="Personalizzato"> Personalizzato</label>
+                    </div>
+                </div>
+
+                <!-- Componentistica -->
+                <div class="form-section">
+                    <h3>🔌 Componentistica preferenziale</h3>
+                    <p style="font-size:0.9rem; color:var(--gray); margin-top:0;">Seleziona i marchi desiderati e specifica i codici o allega la distinta base sotto.</p>
+                    <div class="grid-checkbox">
+                        <label class="checkbox-label"><input type="checkbox" name="Marchi[]" value="Siemens"> Siemens</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Marchi[]" value="Schneider Electric"> Schneider Electric</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Marchi[]" value="ABB"> ABB</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Marchi[]" value="Eaton"> Eaton</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Marchi[]" value="Phoenix Contact"> Phoenix Contact</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Marchi[]" value="WAGO"> WAGO</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Marchi[]" value="Weidmüller"> Weidmüller</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Marchi[]" value="Omron"> Omron</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Marchi[]" value="Allen-Bradley"> Allen-Bradley</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Marchi[]" value="IFM"> IFM</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Marchi[]" value="SICK"> SICK</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Marchi[]" value="Festo"> Festo</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Marchi[]" value="SMC"> SMC</label>
+                    </div>
+                    <div class="form-group" style="margin-top: 1rem;">
+                        <label for="altro_marchio">Altro (specificare):</label>
+                        <input type="text" id="altro_marchio" name="Altro Marchio">
+                    </div>
+                </div>
+
+                <!-- Documenti / Allegati -->
+                <div class="form-section">
+                    <h3>📂 Documenti e Allegati</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Schema elettrico (PDF/DWG)</label>
+                            <input type="file" name="Schema_Elettrico">
+                        </div>
+                        <div class="form-group">
+                            <label>Layout quadro</label>
+                            <input type="file" name="Layout_Quadro">
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Distinta base (BOM)</label>
+                            <input type="file" name="Distinta_Base">
+                        </div>
+                        <div class="form-group">
+                            <label>Eventuali note aggiuntive</label>
+                            <input type="file" name="Allegato_Note">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Descrizione libera -->
+                <div class="form-section">
+                    <h3>✍️ Dettagli progetto</h3>
+                    <div class="form-group">
+                        <label for="descrizione">Descrivi eventuali richieste particolari:</label>
+                        <textarea id="descrizione" name="Note_Particolari" rows="5" placeholder="Inserisci qui note su lavorazioni speciali, particolari esigenze di spazio..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Consegna -->
+                <div class="form-section">
+                    <h3>📅 Consegna richiesta</h3>
+                    <div class="grid-checkbox">
+                        <label class="checkbox-label"><input type="radio" name="Consegna" value="Urgente"> 🔴 Urgente</label>
+                        <label class="checkbox-label"><input type="radio" name="Consegna" value="Standard" checked> 🟡 Standard</label>
+                        <label class="checkbox-label"><input type="radio" name="Consegna" value="Da concordare"> 🟢 Da concordare</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Invia Richiesta Preventivo 🚀</button>
+            </form>
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 2rem; color: var(--gray); font-size: 0.9rem;">
+        &copy; 2026 Caccin Cablaggi. Tutti i diritti riservati.
+    </footer>
+
+</body>
+</html>
