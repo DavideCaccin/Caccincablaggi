@@ -546,7 +546,7 @@
 
 <section class="hero" style="padding:60px 0; background: linear-gradient(135deg,#006666,#004d4d);">
     <div class="container" style="text-align:center;">
-        <h2 style="color:white;font-size:36px;">Hai un progetto da sottoporci?</h2>
+        <h2 style="color:white;font-size:36px;">Hai un project da sottoporci?</h2>
         <p style="font-size:18px;max-width:900px;margin:auto;margin-top:20px;margin-bottom:30px; line-height: 1.6;">
             Che tu sia un'azienda manifatturiera in cerca di un cablatore affidabile o un privato che vuole sistemare casa, seleziona il percorso più adatto a te.
         </p>
@@ -570,10 +570,9 @@
         <div id="form-industriale">
             <form id="form-b2b-ele" action="https://formsubmit.co/caccin.cablaggi@gmail.com" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="_captcha" value="false">
-                <!-- Reindirizzamento alla pagina elegante personalizzata -->
-                <input type="hidden" name="_next" value="grazie.html">
-                <!-- ID aggiunto per iniettare l'oggetto via JavaScript -->
-                <input type="hidden" name="_subject" id="subject-b2b" value="Preventivo Industriale">
+                <input type="hidden" name="_next" value="https://caccincablaggi.it/grazie.html">
+                <input type="hidden" name="_template" value="box">
+                <input type="hidden" name="_subject" id="subject-b2b" value="⚡ Nuovo Preventivo Industriale">
                 <input type="hidden" name="📁 Categoria Canale" value="Industriale / Quadristica B2B">
 
                 <div class="cards">
@@ -713,8 +712,9 @@
         <div id="form-civile">
             <form id="form-b2c-ele" action="https://formsubmit.co/caccin.cablaggi@gmail.com" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="grazie.html">
-                <input type="hidden" name="_subject" id="subject-b2c" value="Preventivo Civile">
+                <input type="hidden" name="_next" value="https://caccincablaggi.it/grazie.html">
+                <input type="hidden" name="_template" value="box">
+                <input type="hidden" name="_subject" id="subject-b2c" value="🏠 Nuovo Preventivo Civile">
                 <input type="hidden" name="📁 Categoria Canale" value="Residenziale / Civile Privati">
 
                 <div class="cards">
@@ -981,13 +981,11 @@
         let tipoLavoro = "Quadro Elettrico"; // Default
         
         if (cbSelezionati.length > 0) {
-            // Estrae i valori dei box spuntati (es. Quadro Elettrico, Elettropneumatico)
             const valori = Array.from(cbSelezionati).map(cb => cb.value);
             tipoLavoro = valori.join(' + ');
         }
         
-        // Iniezione nel campo hidden dell'oggetto mail FormSubmit
-        document.getElementById('subject-b2b').value = `${ragSoc} - ${tipoLavoro}`;
+        document.getElementById('subject-b2b').value = `⚡ ${ragSoc} - ${tipoLavoro}`;
     });
 
     document.getElementById('form-b2c-ele').addEventListener('submit', function() {
@@ -995,8 +993,7 @@
         const selectIntervento = document.getElementById('select-tipo-civile');
         const testoIntervento = selectIntervento.options[selectIntervento.selectedIndex].text;
         
-        // Iniezione nel campo hidden dell'oggetto mail FormSubmit
-        document.getElementById('subject-b2c').value = `${nomeCliente} - Civile (${testoIntervento})`;
+        document.getElementById('subject-b2c').value = `🏠 ${nomeCliente} - Civile (${testoIntervento})`;
     });
 </script>
 </body>
