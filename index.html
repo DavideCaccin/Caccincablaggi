@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="LOGO.jpg">
+    <link class="aics-autolink" href="https://caccincablaggi.it" title="Caccin Cablaggi" target="_blank"> <link rel="icon" href="LOGO.jpg">
 
-    <title>Caccin Cablaggi | Realizzazione conto terzi di quadri elettrici</title>
-
-    <meta name="description" content="Realizzazione conto terzi di quadri elettrici, quadri elettropneumatici e assemblaggi elettromeccanici per costruttori di macchine e aziende dell'automazione industriale.">
-    <meta name="keywords" content="quadri elettrici, cablaggi industriali, automazione industriale, quadri elettrici conto terzi, Caccin Cablaggi">
+    <title>Caccin Cablaggi | Quadri Elettrici Industriali e Impianti Civili Pianiga</title>
+    <meta name="description" content="Realizzazione conto terzi di quadri elettrici, quadri elettropneumatici ed impianti elettrici civili/residenziali. Pronto intervento guasti a Pianiga, Venezia e Padova.">
+    <meta name="keywords" content="quadri elettrici, cablaggi industriali, automazione industriale, impianti elettrici civili, elettricista pianiga, riparazione guasto elettrico venezia, installazione wallbox padova">
     <meta name="author" content="Caccin Cablaggi">
 
-    <!-- Open Graph per i social/WhatsApp -->
-    <meta property="og:title" content="Caccin Cablaggi">
+    <meta property="og:title" content="Caccin Cablaggi | Quadri Elettrici e Impianti Civili">
     <meta property="og:type" content="website">
     <meta property="og:image" content="LOGO.jpg">
-    <meta property="og:description" content="Quadri elettrici conto terzi per automazione industriale.">
+    <meta property="og:description" content="Quadri elettrici industriali conto terzi e soluzioni elettriche civili per privati a Pianiga, Venezia e Padova.">
     <meta name="robots" content="index,follow">
 
     <style>
@@ -165,7 +163,7 @@
             border-radius:10px;
             padding:25px;
             box-shadow:0 5px 20px rgba(0,0,0,.08);
-            transition: transform .3s, opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition: transform .3s, opacity 0.6s ease-out;
             opacity: 0;
             transform: translateY(20px);
         }
@@ -186,7 +184,7 @@
             font-size: 20px;
         }
 
-        /* Form di Preventivo */
+        /* Configurazione Campi Modulo Preventivi */
         .card label {
             display: block;
             margin-bottom: 8px;
@@ -215,7 +213,7 @@
             transform: scale(1.1);
         }
 
-        /* Selettori del Bivio Principale */
+        /* Selettori Bivio Principale */
         .bivio-container {
             display: flex;
             gap: 20px;
@@ -275,6 +273,31 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             z-index: 999;
         }
+
+        /* Pulsante Emergenza Fluttuante */
+        .fab-emergency {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #25d366;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .fab-emergency:hover {
+            background: #128c7e;
+            transform: scale(1.05);
+        }
         
         .gallery{
             display:grid;
@@ -333,6 +356,16 @@
             margin-bottom: 10px;
             opacity: 0.9;
         }
+
+        footer a {
+            color: #ff6b35;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
             
         @media(max-width:900px){
             .navbar {
@@ -370,6 +403,17 @@
                 width: 100%;
                 max-width: 320px;
             }
+
+            .fab-emergency span {
+                display: none;
+            }
+
+            .fab-emergency {
+                padding: 15px;
+                border-radius: 50%;
+                bottom: 15px;
+                left: 15px;
+            }
         }
     </style>
 </head>
@@ -378,6 +422,10 @@
 <div id="progress-bar"></div>
 
 <button id="topButton" title="Torna su">⬆</button>
+
+<a href="https://wa.me/393392859037?text=Buongiorno%2C%20avrei%20bisogno%20di%20un%20intervento%20o%20di%20un%20preventivo%20urgente." class="fab-emergency" target="_blank" title="Contatto Diretto Elettricista">
+    💬 <span>Guasto o Urgenza Civile? Scrivici subito</span>
+</a>
 
 <div id="lightbox">
     <span id="closeLightbox">&times;</span>
@@ -407,12 +455,12 @@
 <section class="hero">
     <div class="container hero-grid">
         <div>
-            <h1>Realizzazione conto terzi di quadri elettrici per automazione industriale</h1>
-            <p>Supportiamo costruttori di macchine e aziende dell'automazione industriale nella realizzazione di quadri elettrici, quadri elettropneumatici e assemblaggi elettromeccanici.</p>
-            <a href="#preventivo" class="btn">Carica il tuo progetto</a>
+            <h1>Realizzazione quadri elettrici industriali e impianti tecnologici civili</h1>
+            <p>Supportiamo le aziende dell'automazione industriale nella quadristica conto terzi e affianchiamo i privati nella realizzazione di impianti elettrici ad alte prestazioni per le abitazioni.</p>
+            <a href="#preventivo" class="btn">Richiedi un'analisi di progetto</a>
         </div>
         <div>
-            <img src="quadro 1.png" alt="Quadro elettrico">
+            <img src="quadro 1.png" alt="Quadro elettrico e automazione Caccin">
         </div>
     </div>
 </section>
@@ -420,20 +468,20 @@
 <section class="section" id="azienda">
     <div class="container">
         <h2>Perché scegliere Caccin Cablaggi</h2>
-        <p class="section-intro">Siamo specializzati nella realizzazione di quadri elettrici e assemblaggi elettromeccanici per aziende dell'automazione industriale. Collaboriamo con costruttori di macchine offrendo qualità, precisione e massima riservatezza.</p>
+        <p class="section-intro">Siamo specializzati nella realizzazione di quadri elettrici industriali e sistemi elettromeccanici complessi, unendo a questa competenza un servizio dedicato all'impiantistica civile avanzata e al pronto intervento locale.</p>
         
         <div class="cards">
             <div class="card">
                 <h3>Oltre 10 anni di esperienza</h3>
-                <p>Esperienza maturata nel cablaggio industriale e nella costruzione di quadri elettrici conto terzi.</p>
+                <p>Esperienza maturata nel cablaggio conto terzi per l'automazione industriale e nell'impiantistica residenziale.</p>
             </div>
             <div class="card">
-                <h3>Produzione flessibile</h3>
-                <p>Supportiamo i clienti durante i picchi produttivi con consegne rapids e lavorazioni personalizzate.</p>
+                <h3>Flessibilità e Intervento Rapido</h3>
+                <p>Supportiamo i picchi produttivi industriali e garantiamo tempi di risposta veloci per le necessità domestiche.</p>
             </div>
             <div class="card">
-                <h3>Massima qualità</h3>
-                <p>Cablaggi eseguiti secondo gli schemi elettrici forniti dal cliente, utilizzando componentistica dei migliori marchi.</p>
+                <h3>Certificazione e Qualità</h3>
+                <p>Ogni lavorazione rispetta rigorosamente le normative vigenti, gli schemi di progetto e gli standard tecnici di sicurezza.</p>
             </div>
         </div>
     </div>
@@ -441,21 +489,21 @@
 
 <section class="section" id="servizi">
     <div class="container">
-        <h2>I nostri servizi</h2>
-        <p class="section-intro">Realizziamo quadri elettrici industriali e assemblaggi elettromeccanici per costruttori di macchine e aziende dell'automazione.</p>
+        <h2>I nostri ambiti operativi</h2>
+        <p class="section-intro">Dalla quadristica B2B alla domotica residenziale: soluzioni professionali su misura per ogni esigenza.</p>
         
         <div class="cards">
             <div class="card">
-                <h3>⚡ Quadri elettrici</h3>
-                <p>Cablaggio completo di quadri elettrici industriali seguendo la documentazione tecnica fornita.</p>
+                <h3>⚡ Quadristica & Automazione</h3>
+                <p>Cablaggio conto terzi di quadri elettrici ed elettropneumatici su specifiche fornite dal partner industriale.</p>
             </div>
             <div class="card">
-                <h3>⚙️ Quadri elettropneumatici</h3>
-                <p>Assemblaggio e cablaggio di sistemi elettropneumatici personalizzati.</p>
+                <h3>🏠 Impianti Civili & Smart Home</h3>
+                <p>Progettazione e installazione di impianti ex-novo, ristrutturazioni, sistemi domotici avanzati e reti dati.</p>
             </div>
             <div class="card">
-                <h3>🔧 Assemblaggi elettromeccanici</h3>
-                <p>Realizzazione di gruppi e sottoassiemi elettromeccanici pronti all'installazione.</p>
+                <h3>🚗 Energie e Sicurezza</h3>
+                <p>Installazione sistemi di ricarica veicoli elettrici (Wallbox), impianti antintrusione, TVCC e allacci fotovoltaico.</p>
             </div>
         </div>
     </div>
@@ -464,30 +512,30 @@
 <section class="section" id="galleria">
     <div class="container">
         <h2>Alcune nostre realizzazioni</h2>
-        <p class="section-intro">Ogni quadro viene cablato con la massima attenzione ai dettagli e nel rispetto delle specifiche.</p>
+        <p class="section-intro">Precisione millimetrica e pulizia esecutiva in ogni nostra installazione.</p>
         <div class="gallery">
-            <img src="quadro 1.png" alt="Quadro elettrico">
-            <img src="quadro 2.png" alt="Quadro elettrico">
-            <img src="quadro 3.png" alt="Quadro elettrico">
+            <img src="quadro 1.png" alt="Dettaglio cablaggio industriale">
+            <img src="quadro 2.png" alt="Quadro elettrico bordo macchina">
+            <img src="quadro 3.png" alt="Assemblaggio elettromeccanico finito">
         </div>
     </div>
 </section>
 
 <section class="section">
     <div class="container">
-        <h2>Come lavoriamo</h2>
+        <h2>Il nostro metodo</h2>
         <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; text-align: center; margin-top: 30px;">
             <div class="card" style="flex: 1 1 300px; max-width: 350px;">
-                <h3>1️⃣ Inviaci il progetto</h3>
-                <p>Carica schema elettrico, layout e distinta base.</p>
+                <h3>1️⃣ Raccolta Dettagli</h3>
+                <p>Inviaci gli schemi industriali o richiedi un sopralluogo per la tua casa tramite il configuratore.</p>
             </div>
             <div class="card" style="flex: 1 1 300px; max-width: 350px;">
-                <h3>2️⃣ Analizziamo la documentazione</h3>
-                <p>Verifichiamo tutta la documentazione e prepariamo il preventivo.</p>
+                <h3>2️⃣ Studio di Fattibilità</h3>
+                <p>Analizziamo la documentazione tecnica o l'anomalia per redigere un piano economico preciso.</p>
             </div>
             <div class="card" style="flex: 1 1 300px; max-width: 350px;">
-                <h3>3️⃣ Produzione</h3>
-                <p>Realizziamo il quadro nel rispetto delle specifiche tecniche.</p>
+                <h3>3️⃣ Posa e Consegna</h3>
+                <p>Eseguiamo i cablaggi o l'installazione a regola d'arte fornendo la dichiarazione di conformità.</p>
             </div>
         </div>
     </div>
@@ -495,30 +543,24 @@
 
 <section class="hero" style="padding:60px 0; background: linear-gradient(135deg,#006666,#004d4d);">
     <div class="container" style="text-align:center;">
-        <h2 style="color:white;font-size:36px;">Hai già il progetto?</h2>
+        <h2 style="color:white;font-size:36px;">Hai un progetto da sottoporci?</h2>
         <p style="font-size:18px;max-width:900px;margin:auto;margin-top:20px;margin-bottom:30px; line-height: 1.6;">
-            Carica schema elettrico, layout del quadro e distinta base. Ti invieremo un preventivo nel più breve tempo possibile.
+            Che tu sia un'azienda manifatturiera in cerca di un cablatore affidabile o un privato che vuole ristrutturare casa, seleziona il percorso più adatto a te.
         </p>
-        <a href="#preventivo" class="btn">📄 Carica il tuo progetto</a>
+        <a href="#preventivo" class="btn">📄 Avvia il Configuratore</a>
     </div>
 </section>
 
-<!-- ========================================================================= -->
-<!-- SEZIONE CONFIGURATORE / PREVENTIVO BIVIO INDUSTRIALE VS CIVILE -->
-<!-- ========================================================================= -->
 <section class="section" id="preventivo">
     <div class="container">
         <h2>Richiedi un preventivo</h2>
-        <p class="section-intro">Seleziona la tipologia di intervento per accedere al configuratore dedicato.</p>
+        <p class="section-intro">Seleziona la tua categoria di appartenenza per accedere ai campi tecnici personalizzati.</p>
         
         <div class="bivio-container">
             <button class="bivio-btn" id="btn-scelta-industriale">⚡ Quadristica & Automazione B2B</button>
             <button class="bivio-btn" id="btn-scelta-civile">🏠 Impianti Elettrici Civili / Privati</button>
         </div>
 
-        <!-- ========================================== -->
-        <!-- FORM QUADRI INDUSTRIALI (VECCHIO INTEGRATO) -->
-        <!-- ========================================== -->
         <div id="form-industriale">
             <form action="https://formsubmit.co/caccin.cablaggi@gmail.com" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="_captcha" value="false">
@@ -639,18 +681,23 @@
                         </select>
 
                         <label>Note</label>
-                        <textarea name="Note" rows="4" placeholder="Inserisci dettagli particolari..."></textarea>
+                        <textarea name="Note" rows="4" placeholder="Note tecniche aggiuntive..."></textarea>
                     </div>
                 </div>
-                <div style="text-align: center; margin-top: 30px;">
+
+                <div style="max-width:600px; margin: 25px auto; text-align: left; padding: 0 15px;">
+                    <label style="font-weight: normal; font-size: 14px; display: flex; align-items: flex-start; gap: 10px;">
+                        <input type="checkbox" name="Privacy Consenso" required style="margin-top: 3px;">
+                        <span>Acconsento al trattamento dei miei dati in conformità alla <a href="privacy.html" target="_blank">Privacy Policy</a> del sito.</span>
+                    </label>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
                     <button class="btn" style="width:100%; max-width: 500px; font-size:20px; padding:18px;">🚀 INVIA RICHIESTA INDUSTRIALE</button>
                 </div>
             </form>
         </div>
 
-        <!-- ========================================== -->
-        <!-- NUOVO FORM CIVILE PER PRIVATI (RAMIFICATO) -->
-        <!-- ========================================== -->
         <div id="form-civile">
             <form action="https://formsubmit.co/caccin.cablaggi@gmail.com" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="_captcha" value="false">
@@ -658,10 +705,9 @@
                 <input type="hidden" name="Settore" value="Civile / Abitazioni">
 
                 <div class="cards">
-                    <!-- Step 1: Dati Anagrafici -->
                     <div class="card">
                         <h3>I tuoi Riferimenti</h3>
-                        <label>Nome e Cognome / Ragione Sociale</label>
+                        <label>Nome e Cognome / Richiedente</label>
                         <input type="text" name="Cliente Civile" required>
 
                         <label>Città dell'intervento</label>
@@ -674,10 +720,9 @@
                         <input type="text" name="Telefono Civile" required>
                     </div>
 
-                    <!-- Step 2: Bivio Tipo Intervento -->
                     <div class="card">
                         <h3>Tipologia di Intervento Civile</h3>
-                        <label>Seleziona l'esigenza principale:</label>
+                        <label>Seleziona la tua esigenza:</label>
                         <select name="Tipo Intervento Civile" id="select-tipo-civile" required>
                             <option value="" disabled selected>-- Scegli un'opzione --</option>
                             <option value="nuova-costruzione">Nuova costruzione (Impianto Ex-Novo)</option>
@@ -685,239 +730,243 @@
                             <option value="riparazione-guasto">Riparazione Guasto urgente / Manutenzione</option>
                             <option value="ampliamento-installazione">Ampliamento o Nuova Installazione Dedicata</option>
                         </select>
-                        <p style="font-size: 14px; color:#555; margin-top: 10px;">Seleziona una voce per sbloccare le domande specifiche nel box successivo.</p>
+                        <p style="font-size: 14px; color:#555; margin-top: 10px;">La selezione sbloccherà le domande nel riquadro a fianco.</p>
                     </div>
 
-                    <!-- Step 3: Domande Specifiche Dinamiche -->
                     <div class="card" id="box-domande-specifiche" style="display: none;">
-                        <h3>Dettagli Tecnici</h3>
+                        <h3>Dettagli Tecnici Intervento</h3>
                         
-                        <!-- Sotto-bivio: Nuova Costruzione / Ristrutturazione -->
                         <div id="ramo-costruzione-ristrutturazione" style="display: none;">
                             <label>Superficie indicativa immobile</label>
                             <select name="Dimensione Immobile">
-                                <option>Fino a 70 mq (Appartamento piccolo/Mini)</option>
-                                <option>Da 70 a 130 mq (Appartamento grande/Casa singola standard)</option>
+                                <option>Fino a 70 mq (Appartamento/Mini)</option>
+                                <option>Da 70 a 130 mq (Casa standard/Tricamere)</option>
                                 <option>Oltre 130 mq / Villa plurifamiliare</option>
                             </select>
 
-                            <label>Piani totali dell'abitazione</label>
+                            <label>Piani totali abitazione</label>
                             <input type="number" name="Numero Piani Abitazione" min="1" value="1">
 
                             <label>Predisposizione Smart Home / Domotica</label>
                             <select name="Richiesta Domotica">
-                                <option value="No">No, impianto elettrico di tipo tradizionale</option>
-                                <option value="Sì">Sì, desidero una gestione Smart (luci, tapparelle, scenari)</option>
-                                <option value="Da valutare">Da valutare/Consigliami tu</option>
+                                <option value="No">No, impianto elettrico tradizionale</option>
+                                <option value="Sì">Sì, desidero una gestione Smart (luci, tapparelle, automazioni)</option>
+                                <option value="Da valutare">Da valutare con il tecnico</option>
                             </select>
 
-                            <label style="margin-top: 15px; font-weight: bold;">Sistemi ausiliari da integrare:</label>
-                            <label><input type="checkbox" name="Impianti Extra[]" value="Predisposizione Fotovoltaico"> Predisposizione/Allaccio Fotovoltaico</label>
-                            <label><input type="checkbox" name="Impianti Extra[]" value="Impianto Antifurto / Allarme"> Impianto Antifurto perimetrale/volumetrico</label>
+                            <label style="margin-top: 15px; font-weight: bold;">Sistemi tecnologici extra richiesti:</label>
+                            <label><input type="checkbox" name="Impianti Extra[]" value="Predisposizione Fotovoltaico"> Allaccio/Predisposizione Fotovoltaico</label>
+                            <label><input type="checkbox" name="Impianti Extra[]" value="Impianto Antifurto / Allarme"> Impianto Antifurto (Volumetrico/Perimetrale)</label>
                             <label><input type="checkbox" name="Impianti Extra[]" value="Videosorveglianza TVCC"> Videosorveglianza (TVCC)</label>
-                            <label><input type="checkbox" name="Impianti Extra[]" value="Rete Dati Cablata / LAN"> Rete Internet Cablata (Prese LAN nelle stanze)</label>
+                            <label><input type="checkbox" name="Impianti Extra[]" value="Rete Dati Cablata / LAN"> Rete Internet LAN Cablata nelle stanze</label>
                         </div>
 
-                        <!-- Sotto-bivio: Riparazione Guasto -->
                         <div id="ramo-riparazione-guasto" style="display: none;">
-                            <label>Natura del problema riscontrato</label>
+                            <label>Anomalia o problema riscontrato</label>
                             <select name="Natura Guasto">
-                                <option>Mancanza totale di corrente elettrica</option>
-                                <option>Il salvavita scatta continuamente (Dispersione)</option>
-                                <option>Presa elettrica, interruttore o punto luce non funzionante</option>
-                                <option>Linee danneggiate o cortocircuito localizzato</option>
-                                <option>Altro problema (specificare nelle note)</option>
+                                <option>Mancanza totale di energia elettrica</option>
+                                <option>Il salvavita scatta continuamente (Problema di isolamento)</option>
+                                <option>Presa elettrica o punto luce non funzionante</option>
+                                <option>Cortocircuito localizzato su linee esistenti</option>
+                                <option>Altro problema specifico</option>
                             </select>
 
-                            <label>Grado di urgenza dell'intervento</label>
+                            <label>Livello di priorità dell'intervento</label>
                             <select name="Urgenza Guasto">
-                                <option value="Urgente">🆘 URGENTE (Blocco totale/Pericolo)</option>
-                                <option value="Pochi giorni">Entro 2-3 giorni lavorativi</option>
-                                <option value="Pianificabile">Intervento di controllo programmabile</option>
+                                <option value="Urgente">🆘 MASSIMA URGENZA (Blackout/Pericolo)</option>
+                                <option value="Pochi giorni">Risoluzione entro 48-72 ore</option>
+                                <option value="Pianificabile">Intervento di manutenzione ordinaria</option>
                             </select>
                         </div>
 
-                        <!-- Sotto-bivio: Ampliamento / Nuova Installazione -->
                         <div id="ramo-ampliamento-installazione" style="display: none;">
-                            <label>Quale blocco elettrico dedicato desideri aggiungere?</label>
+                            <label>Quale opera dedicata desideri integrare?</label>
                             <select name="Tipo Specifico Ampliamento">
                                 <option value="Wallbox">Installazione Stazione di Ricarica Auto Elettrica (Wallbox)</option>
-                                <option value="Sicurezza">Nuovo Impianto Antifurto / Videosorveglianza</option>
-                                <option value="Automazione">Automazione Cancello carraio / Basculante garage</option>
-                                <option value="Esterno">Illuminazione e Prese per giardino / spazi esterni</option>
-                                <option value="Linea Dedicata">Nuova linea di alimentazione dedicata (Es. induzione, clima)</option>
+                                <option value="Antifurto">Impianto Antintrusione / Allarme perimetrale</option>
+                                <option value="Videosorveglianza">Semaforizzazione o Telecamere di sicurezza (TVCC)</option>
+                                <option value="Automazione">Automazione Cancelli / Tapparelle / Basculanti</option>
+                                <option value="Linea Dedicata">Nuova linea di alimentazione dedicata (Es. Climatizzatore, Induzione)</option>
+                                <option value="Altro">Altro intervento mirato</option>
                             </select>
 
-                            <label>È già presente una dichiarazione di conformità dell'impianto attuale?</label>
-                            <select name="Di.Co Presente">
-                                <option>Sì, l'impianto esistente è certificato</option>
-                                <option>No / Non lo so</option>
-                            </select>
+                            <label>Descrizione sintetica del lavoro richiesto</label>
+                            <textarea name="Dettaglio Ampliamento" rows="3" placeholder="Es: Devo installare una wallbox Tesla in garage coordinandola con il contatore..."></textarea>
                         </div>
-                    </div>
-
-                    <!-- Step 4: Allegati e Note finali -->
-                    <div class="card">
-                        <h3>Dettagli e Planimetrie</h3>
-                        <label>Note o descrizione libera delle tue necessità</label>
-                        <textarea name="Note Intervento Civile" rows="6" placeholder="Descrivi il tuo progetto o il problema riscontrato con le tue parole..."></textarea>
-
-                        <label>Allega foto del guasto o planimetria della casa (Opzionale)</label>
-                        <input type="file" name="Allegato Civile">
                     </div>
                 </div>
 
-                <div style="text-align: center; margin-top: 30px;">
-                    <button class="btn" style="width:100%; max-width: 500px; font-size:20px; padding:18px; background: #006666;">✉️ INVIA RICHIESTA CIVILE</button>
+                <div style="max-width:600px; margin: 25px auto; text-align: left; padding: 0 15px;">
+                    <label style="font-weight: normal; font-size: 14px; display: flex; align-items: flex-start; gap: 10px;">
+                        <input type="checkbox" name="Privacy Consenso Civile" required style="margin-top: 3px;">
+                        <span>Acconsento al trattamento dei dati personali in conformità alla <a href="privacy.html" target="_blank">Privacy Policy</a>.</span>
+                    </label>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn" style="width:100%; max-width: 500px; font-size:20px; padding:18px;">🚀 INVIA RICHIESTA CIVILE</button>
                 </div>
             </form>
         </div>
     </div>
 </section>
 
-<footer id="contatti">
+<section class="section" id="contatti" style="background: #eaeff5;">
+    <div class="container" style="text-align: center;">
+        <h2>I nostri recapiti diretti</h2>
+        <p class="section-intro">Ufficio tecnico e operatività sul territorio di Pianiga, Venezia e Padova.</p>
+        <div class="cards" style="max-width: 900px; margin: auto;">
+            <div class="card">
+                <h3>📞 Telefono / WhatsApp</h3>
+                <p style="font-size: 18px; font-weight: bold; color: #006666; margin-top: 10px;">
+                    <a href="tel:+393392859037" style="color: inherit; text-decoration: none;">+39 339 285 9037</a>
+                </p>
+            </div>
+            <div class="card">
+                <h3>✉️ Email Ufficiale</h3>
+                <p style="font-size: 18px; font-weight: bold; color: #006666; margin-top: 10px;">
+                    <a href="mailto:caccin.cablaggi@gmail.com" style="color: inherit; text-decoration: none;">caccin.cablaggi@gmail.com</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
     <div class="container">
-        <h2>Caccin Cablaggi</h2>
-        <p>Realizzazione conto terzi di quadri elettrici industriali e impianti elettrici civili.</p>
-        <p style="margin-top: 15px;">📍 Via Cavin Maggiore 5 | 30030 Pianiga (VE)</p>
-        <p>📞 339 2859037 | ✉️ caccin.cablaggi@gmail.com</p>
-        <p style="margin-top: 20px; font-size: 14px; opacity: 0.6;">&copy; 2026 Caccin Cablaggi</p>
+        <p style="font-weight: bold; font-size: 18px;">Caccin Cablaggi di Caccin Nicola</p>
+        <p>Sede Operativa: Pianiga (Venezia) | Interventi in tutto il Veneto per la quadristica industriale</p>
+        <p style="font-size: 13px; margin-top: 15px; opacity: 0.7;">
+            &copy; 2026 Caccin Cablaggi. Tutti i diritti riservati. P.IVA 04473340277 | <a href="privacy.html" target="_blank" style="color: #fff; text-decoration: underline;">Privacy Policy</a>
+        </p>
     </div>
 </footer>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    // ==========================================
-    // LOGICA DI SCELTA MACRO (BIVIO PRINCIPALE)
-    // ==========================================
-    const btnInd = document.getElementById("btn-scelta-industriale");
-    const btnCiv = document.getElementById("btn-scelta-civile");
-    const containerInd = document.getElementById("form-industriale");
-    const containerCiv = document.getElementById("form-civile");
-
-    btnInd.addEventListener("click", () => {
-        btnInd.classList.add("active");
-        btnCiv.classList.remove("active");
-        containerInd.style.display = "block";
-        containerCiv.style.display = "none";
-    });
-
-    btnCiv.addEventListener("click", () => {
-        btnCiv.classList.add("active");
-        btnInd.classList.remove("active");
-        containerCiv.style.display = "block";
-        containerInd.style.display = "none";
-    });
-
-    // ==========================================
-    // LOGICA RAMIFICATA FORM CIVILE
-    // ==========================================
-    const selectTipoCivile = document.getElementById("select-tipo-civile");
-    const boxDomandeSpecifiche = document.getElementById("box-domande-specifiche");
-    const ramoCostruzione = document.getElementById("ramo-costruzione-ristrutturazione");
-    const ramoGuasto = document.getElementById("ramo-riparazione-guasto");
-    const ramoAmpliamento = document.getElementById("ramo-ampliamento-installazione");
-
-    selectTipoCivile.addEventListener("change", function() {
-        boxDomandeSpecifiche.style.display = "block";
+    // 1. Barra di avanzamento dello scorrimento (Progress Bar)
+    window.addEventListener('scroll', () => {
+        const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        document.getElementById('progress-bar').style.width = scrolled + '%';
         
-        // Resetta i sottomenu
-        ramoCostruzione.style.display = "none";
-        ramoGuasto.style.display = "none";
-        ramoAmpliamento.style.display = "none";
-
-        const valore = this.value;
-        if(valore === "nuova-costruzione" || valore === "ristrutturazione") {
-            ramoCostruzione.style.display = "block";
-        } else if(valore === "riparazione-guasto") {
-            ramoGuasto.style.display = "block";
-        } else if(valore === "ampliamento-installazione") {
-            ramoAmpliamento.style.display = "block";
+        // Gestione visibilità pulsante Top
+        const topButton = document.getElementById('topButton');
+        if (winScroll > 300) {
+            topButton.style.display = 'block';
+        } else {
+            topButton.style.display = 'none';
         }
     });
 
-    // ==========================================
-    // GESTIONE SOTTO-CAMPI MOSTRA/NASCONDI FORM INDUSTRIALE
-    // ==========================================
-    const carpClientes = document.querySelectorAll(".carpCliente");
-    const carpCaccins = document.querySelectorAll(".carpCaccin");
-    const compClientes = document.querySelectorAll(".compCliente");
-    const compCaccins = document.querySelectorAll(".compCaccin");
-
-    const carpenteriaBoxes = document.querySelectorAll(".carpenteriaBox");
-    const componentiBoxes = document.querySelectorAll(".componentiBox");
-
-    function togglerIndustriale() {
-        carpenteriaBoxes.forEach(box => {
-            box.style.display = carpCaccins[0].checked ? "block" : "none";
-        });
-        componentiBoxes.forEach(box => {
-            box.style.display = compCaccins[0].checked ? "block" : "none";
-        });
-    }
-
-    [...carpClientes, ...carpCaccins, ...compClientes, ...compCaccins].forEach(el => {
-        if(el) el.addEventListener("change", togglerIndustriale);
+    // Torna su al click del pulsante
+    document.getElementById('topButton').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    togglerIndustriale();
-
-    // ==========================================
-    // ANIMAZIONE DELLE CARD (INTERSECTION OBSERVER)
-    // ==========================================
-    const cards = document.querySelectorAll(".card");
-    const observer = new IntersectionObserver(entries => {
+    // 2. Animazione di comparsa delle Card all'ingresso nella Viewport (Scroll Animate)
+    const cards = document.querySelectorAll('.card');
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    
+    const cardObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("show");
+            if(entry.isIntersecting){
+                entry.target.classList.add('show');
+                observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.05 });
-    
-    cards.forEach(card => observer.observe(card));
+    }, observerOptions);
 
-    // ==========================================
-    // LIGHTBOX IMMAGINI
-    // ==========================================
-    const immagini = document.querySelectorAll(".gallery img");
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImage = document.getElementById("lightboxImage");
-    const closeLightbox = document.getElementById("closeLightbox");
+    cards.forEach(card => cardObserver.observe(card));
 
-    immagini.forEach(img => {
-        img.addEventListener("click", () => {
-            lightbox.style.display = "flex";
+    // 3. Gestione Bivio Principale del Configuratore (Industriale vs Civile)
+    const btnIndustriale = document.getElementById('btn-scelta-industriale');
+    const btnCivile = document.getElementById('btn-scelta-civile');
+    const formIndustriale = document.getElementById('form-industriale');
+    const formCivile = document.getElementById('form-civile');
+
+    btnIndustriale.addEventListener('click', () => {
+        btnIndustriale.classList.add('active');
+        btnCivile.classList.remove('active');
+        formIndustriale.style.display = 'block';
+        formCivile.style.display = 'none';
+    });
+
+    btnCivile.addEventListener('click', () => {
+        btnCivile.classList.add('active');
+        btnIndustriale.classList.remove('active');
+        formCivile.style.display = 'block';
+        formIndustriale.style.display = 'none';
+    });
+
+    // 4. Gestione dinamica dei Sotto-Campi di Carpenteria e Componenti (Form Industriale)
+    const radioCarpCliente = document.querySelector('.carpCliente');
+    const radioCarpCaccin = document.querySelector('.carpCaccin');
+    const carpenteriaBox = document.querySelector('.carpenteriaBox');
+
+    const toggleCarpenteria = () => {
+        carpenteriaBox.style.display = radioCarpCaccin.checked ? 'block' : 'none';
+    };
+    radioCarpCliente.addEventListener('change', toggleCarpenteria);
+    radioCarpCaccin.addEventListener('change', toggleCarpenteria);
+
+    const radioCompCliente = document.querySelector('.compCliente');
+    const radioCompCaccin = document.querySelector('.compCaccin');
+    const componentiBox = document.querySelector('.componentiBox');
+
+    const toggleComponenti = () => {
+        componentiBox.style.display = radioCompCaccin.checked ? 'block' : 'none';
+    };
+    radioCompCliente.addEventListener('change', toggleComponenti);
+    radioCompCaccin.addEventListener('change', toggleComponenti);
+
+    // 5. Gestione Sotto-Bivio del Form Civile (Nuova Costruzione, Guasto, Ampliamento)
+    const selectTipoCivile = document.getElementById('select-tipo-civile');
+    const boxDomandeSpecifiche = document.getElementById('box-domande-specifiche');
+    const ramoCostruzione = document.getElementById('ramo-costruzione-ristrutturazione');
+    const ramoGuasto = document.getElementById('ramo-riparazione-guasto');
+    const ramoAmpliamento = document.getElementById('ramo-ampliamento-installazione');
+
+    selectTipoCivile.addEventListener('change', (e) => {
+        boxDomandeSpecifiche.style.display = 'block';
+        
+        // Reset dei rami tecnici
+        ramoCostruzione.style.display = 'none';
+        ramoGuasto.style.display = 'none';
+        ramoAmpliamento.style.display = 'none';
+
+        const valore = e.target.value;
+        if (valore === 'nuova-costruzione' || valore === 'ristrutturazione') {
+            ramoCostruzione.style.display = 'block';
+        } else if (valore === 'riparazione-guasto') {
+            ramoGuasto.style.display = 'block';
+        } else if (valore === 'ampliamento-installazione') {
+            ramoAmpliamento.style.display = 'block';
+        }
+    });
+
+    // 6. Lightbox per l'ingrandimento delle immagini della galleria
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const closeLightbox = document.getElementById('closeLightbox');
+    const galleryImages = document.querySelectorAll('.gallery img');
+
+    galleryImages.forEach(img => {
+        img.addEventListener('click', () => {
+            lightbox.style.display = 'flex';
             lightboxImage.src = img.src;
         });
     });
 
-    closeLightbox.addEventListener("click", () => { lightbox.style.display = "none"; });
-    lightbox.addEventListener("click", (e) => {
-        if (e.target === lightbox) lightbox.style.display = "none";
+    closeLightbox.addEventListener('click', () => {
+        lightbox.style.display = 'none';
     });
-});
 
-// ==========================================
-// PROGRESS BAR E BOTTONE TORNA SU
-// ==========================================
-window.addEventListener("scroll", () => {
-    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const percent = (scrollTop / scrollHeight) * 100;
-    
-    const pBar = document.getElementById("progress-bar");
-    if(pBar) pBar.style.width = percent + "%";
-
-    const topButton = document.getElementById("topButton");
-    if(topButton) {
-        topButton.style.display = window.scrollY > 500 ? "block" : "none";
-    }
-});
-
-document.getElementById("topButton").onclick = function() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-};
+    lightbox.addEventListener('click', (e) => {
+        if(e.target === lightbox) {
+            lightbox.style.display = 'none';
+        }
+    });
 </script>
-
 </body>
 </html>
