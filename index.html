@@ -568,9 +568,8 @@
         <!-- FORM QUADRI INDUSTRIALI (B2B) -->
         <!-- ========================================== -->
         <div id="form-industriale">
-            <form id="form-b2b-ele" action="https://formsubmit.co/caccin.cablaggi@gmail.com" method="POST" enctype="multipart/form-data">
+           <form id="form-b2b-ele" action="https://formsubmit.co/ajax/caccin.cablaggi@gmail.com" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://caccincablaggi.it/grazie.html">
                 <input type="hidden" name="_template" value="box">
                 <input type="hidden" name="_subject" id="subject-b2b" value="⚡ Nuovo Preventivo Industriale">
                 <input type="hidden" name="📁 Categoria Canale" value="Industriale / Quadristica B2B">
@@ -710,9 +709,8 @@
         <!-- FORM CIVILE RAMIFICATO (PRIVATI / B2C) -->
         <!-- ========================================== -->
         <div id="form-civile">
-            <form id="form-b2c-ele" action="https://formsubmit.co/caccin.cablaggi@gmail.com" method="POST" enctype="multipart/form-data">
+            <form id="form-b2c-ele" action="https://formsubmit.co/ajax/caccin.cablaggi@gmail.com" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://caccincablaggi.it/grazie.html">
                 <input type="hidden" name="_template" value="box">
                 <input type="hidden" name="_subject" id="subject-b2c" value="🏠 Nuovo Preventivo Civile">
                 <input type="hidden" name="📁 Categoria Canale" value="Residenziale / Civile Privati">
@@ -973,27 +971,118 @@
     });
 
     // =========================================================================
-    // TRUCCO JS: CONFIGURAZIONE DINAMICA OGGETTO EMAIL PRIMA DELL'INVIO
+    // TRUCCO JS + INVIO REALE IN BACKGROUND (Senza ricaricare la pagina)
     // =========================================================================
-    document.getElementById('form-b2b-ele').addEventListener('submit', function() {
+
+    // Funzione universale per mostrare il messaggio di ringraziamento sul posto
+    function mostraRingraziamentoSulPosto(formElement, nomeCliente) {
+        // Creiamo il box di ringraziamento stile "Card" con i colori del tuo sito
+        const grazieBox = document.createElement('div');
+        grazieBox.className = 'card show';
+        grazieBox.style.textAlign = 'center';
+        grazieBox.style.padding = '40px 20px';
+        grazieBox.style.margin = '20px auto';
+        grazieBox.style.maxWidth = '600px';
+        grazieBox.style.border = '2px solid #006666'; // Verde del tuo sito
+        
+        grazieBox.innerHTML = `
+            <h3 style="font-size: 26px; color: #006666; margin-bottom: 15px;">Grazie ${nomeCliente}!</h3>
+            <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px;">
+                I tuoi dati sono stati trasmessi con successo a <strong>Caccin Cablaggi</strong>.<br>
+                Nicola analizzerà le tue specifiche e ti risponderà il prima possibile.
+            </p>
+            <span style="font-size: 40px;">✉️</span>
+        `;
+        
+        // Sostituiamo il form con il messaggio di ringraziamento
+        formElement.innerHTML = '';
+        formElement.appendChild(grazieBox);
+        
+        // Scrolla la pagina leggermente per centrare il messaggio sullo schermo
+        grazieBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // Gestione Invio Form INDUSTRIALE (B2B)
+    document.getElementById('form-b2b-ele').addEventListener('submit', function(e) {
+        e.preventDefault(); // Blocca l'errore della pagina bianca o non raggiungibile
+        
+        const form = this;
         const ragSoc = document.getElementById('b2b-rag-soc').value.trim() || 'Azienda';
-        const cbSelezionati = this.querySelectorAll('.tipo-lav-cb:checked');
-        let tipoLavoro = "Quadro Elettrico"; // Default
+        const cbSelezionati = form.querySelectorAll('.tipo-lav-cb:checked');
+        let tipoLavoro = "Quadro Elettrico";
         
         if (cbSelezionati.length > 0) {
             const valori = Array.from(cbSelezionati).map(cb => cb.value);
             tipoLavoro = valori.join(' + ');
         }
         
+        // Imposta l'oggetto dell'email con emoji
         document.getElementById('subject-b2b').value = `⚡ ${ragSoc} - ${tipoLavoro}`;
+        
+        // Trasforma il tasto invio in uno stato di caricamento
+        const btnInvia = form.querySelector('.btn');
+        btnInvia.innerText = "Invio in corso...";
+        btnInvia.style.opacity = "0.7";
+        btnInvia.disabled = true;
+
+        // Invio invisibile (AJAX) a FormSubmit
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form)
+        })
+        .then(response => {
+            if(response.ok) {
+                mostraRingraziamentoSulPosto(form, ragSoc);
+            } else {
+                alert("Si è verificato un errore nell'invio. Riprova o contattaci direttamente.");
+                btnInvia.innerText = "🚀 INVIA RICHIESTA INDUSTRIALE";
+                btnInvia.disabled = false;
+                btnInvia.style.opacity = "1";
+            }
+        })
+        .catch(error => {
+            console.error('Errore:', error);
+            alert("Errore di connessione. Controlla la tua rete.");
+        });
     });
 
-    document.getElementById('form-b2c-ele').addEventListener('submit', function() {
-        const nomeCliente = document.getElementById('b2c-nome-cliente').value.trim() || 'Privato';
+    // Gestione Invio Form CIVILE (B2C)
+    document.getElementById('form-b2c-ele').addEventListener('submit', function(e) {
+        e.preventDefault(); // Blocca l'errore della pagina bianca o non raggiungibile
+        
+        const form = this;
+        const nomeCliente = document.getElementById('b2c-nome-cliente').value.trim() || 'Cliente';
         const selectIntervento = document.getElementById('select-tipo-civile');
         const testoIntervento = selectIntervento.options[selectIntervento.selectedIndex].text;
         
+        // Imposta l'oggetto dell'email con emoji
         document.getElementById('subject-b2c').value = `🏠 ${nomeCliente} - Civile (${testoIntervento})`;
+        
+        // Modifica temporanea del pulsante
+        const btnInvia = form.querySelector('.btn');
+        btnInvia.innerText = "Invio in corso...";
+        btnInvia.style.opacity = "0.7";
+        btnInvia.disabled = true;
+
+        // Invio invisibile (AJAX) a FormSubmit
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form)
+        })
+        .then(response => {
+            if(response.ok) {
+                mostraRingraziamentoSulPosto(form, nomeCliente);
+            } else {
+                alert("Si è verificato un errore nell'invio. Riprova o contattaci direttamente.");
+                btnInvia.innerText = "🚀 INVIA RICHIESTA CIVILE";
+                btnInvia.disabled = false;
+                btnInvia.style.opacity = "1";
+            }
+        })
+        .catch(error => {
+            console.error('Errore:', error);
+            alert("Errore di connessione. Controlla la tua rete.");
+        });
     });
 </script>
 </body>
