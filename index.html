@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="it">
-    <head>
-    <link rel="icon" href="LOGO.jpg">
-
-
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="LOGO.jpg">
 
     <title>Caccin Cablaggi | Realizzazione conto terzi di quadri elettrici</title>
 
-    <meta name="description"
-        content="Realizzazione conto terzi di quadri elettrici, quadri elettropneumatici e assemblaggi elettromeccanici per costruttori di macchine e aziende dell'automazione industriale.">
-
-    <meta name="keywords"
-        content="quadri elettrici, cablaggi industriali, automazione industriale, quadri elettrici conto terzi, Caccin Cablaggi">
-
+    <meta name="description" content="Realizzazione conto terzi di quadri elettrici, quadri elettropneumatici e assemblaggi elettromeccanici per costruttori di macchine e aziende dell'automazione industriale.">
+    <meta name="keywords" content="quadri elettrici, cablaggi industriali, automazione industriale, quadri elettrici conto terzi, Caccin Cablaggi">
     <meta name="author" content="Caccin Cablaggi">
 
- <style>
+    <meta property="og:title" content="Caccin Cablaggi">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="LOGO.jpg">
+    <meta property="og:description" content="Quadri elettrici conto terzi per automazione industriale.">
+    <meta name="robots" content="index,follow">
+
+    <style>
         *{
             margin:0;
             padding:0;
@@ -26,9 +26,10 @@
         }
 
         body{
-            font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background:#f5f7fa;
             color:#222;
+            overflow-x: hidden; /* Previene lo scorrimento laterale su smartphone */
         }
 
         header{
@@ -49,7 +50,7 @@
             display:flex;
             justify-content:space-between;
             align-items:center;
-            padding:18px 0;
+            padding:15px 0;
         }
 
         .logo{
@@ -59,17 +60,18 @@
         }
 
         .logo img{
-            height:60px;
+            height:50px;
         }
 
         .logo h2{
-            color:#006666; /* Petrolio */
+            color:#006666;
+            font-size: 22px;
         }
 
         nav ul{
             display:flex;
             list-style:none;
-            gap:35px;
+            gap:25px;
         }
 
         nav a{
@@ -82,15 +84,18 @@
             color:#006666;
         }
 
-        /* Pulsante Principale - Arancio Magnetico per incuriosire */
         .btn{
             background:#ff6b35; 
             color:white;
             text-decoration:none;
-            padding:14px 24px;
+            padding:12px 20px;
             border-radius:6px;
             transition:.3s;
             font-weight:bold;
+            display: inline-block;
+            text-align: center;
+            border: none;
+            cursor: pointer;
         }
 
         .btn:hover{
@@ -98,29 +103,29 @@
             transform: translateY(-2px);
         }
 
-        /* Sfondo Hero - Gradiente Petrolio Profondo */
+        /* Hero responsive */
         .hero{
             background:linear-gradient(135deg,#006666,#004d4d);
             color:white;
-            padding:80px 0;
+            padding:60px 0;
         }
 
         .hero-grid{
             display:grid;
             grid-template-columns:1fr 1fr;
-            gap:60px;
+            gap:40px;
             align-items:center;
         }
 
         .hero h1{
-            font-size:46px;
-            margin-bottom:25px;
+            font-size:38px;
+            margin-bottom:20px;
             line-height:1.2;
         }
 
         .hero p{
-            font-size:20px;
-            margin-bottom:35px;
+            font-size:18px;
+            margin-bottom:30px;
         }
 
         .hero img{
@@ -130,78 +135,111 @@
         }
 
         .section{
-            padding:80px 0;
+            padding:60px 0;
         }
 
         .section h2{
             text-align:center;
             color:#006666;
             margin-bottom:20px;
-            font-size:38px;
+            font-size:32px;
         }
 
         .section-intro{
             text-align:center;
             max-width:850px;
             margin:auto;
-            margin-bottom:50px;
-            font-size:18px;
+            margin-bottom:40px;
+            font-size:17px;
+            line-height: 1.5;
         }
 
+        /* Griglia flessibile per le card */
         .cards{
             display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-            gap:30px;
+            grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+            gap:25px;
         }
 
-        /* Effetto dissolvenza iniziale per le card */
         .card{
             background:white;
             border-radius:10px;
-            padding:35px;
+            padding:25px;
             box-shadow:0 5px 20px rgba(0,0,0,.08);
-            transition: transform .3s, opacity 0.6s ease-out, translateY 0.6s ease-out;
+            transition: transform .3s, opacity 0.6s ease-out, transform 0.6s ease-out;
             opacity: 0;
             transform: translateY(20px);
         }
 
-        /* Quando l'observer si attiva, le card appaiono fluidamente */
         .card.show {
             opacity: 1;
             transform: translateY(0);
         }
 
         .card:hover{
-            transform:translateY(-8px);
+            transform:translateY(-5px);
             box-shadow: 0 10px 25px rgba(0,102,102,0.15);
         }
 
         .card h3{
             color:#006666;
             margin-bottom:15px;
+            font-size: 20px;
         }
-        
+
+        /* Ottimizzazione Campi Form per Mobile */
+        .card label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        .card input[type="text"],
+        .card input[type="email"],
+        .card input[type="number"],
+        .card select,
+        .card textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-family: inherit;
+            font-size: 16px; /* Evita lo zoom forzato su iOS */
+        }
+
+        .card input[type="checkbox"],
+        .card input[type="radio"] {
+            margin-right: 8px;
+            transform: scale(1.1);
+        }
+
+        .card br {
+            display: none; /* Rimosso l'uso dei vecchi br per il posizionamento */
+        }
+
         #progress-bar{
             position:fixed;
             top:0;
             left:0;
             width:0;
             height:5px;
-            background:#ff6b35; /* Barra progresso arancio */
+            background:#ff6b35;
             z-index:99999;
         }
         
         #topButton{
             position:fixed;
-            bottom:25px;
-            right:25px;
-            width:60px;
-            height:60px;
+            bottom:20px;
+            right:20px;
+            width:50px;
+            height:50px;
             border:none;
             border-radius:50%;
             background:#006666;
             color:white;
-            font-size:28px;
+            font-size:22px;
             cursor:pointer;
             display:none;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
@@ -210,8 +248,8 @@
         
         .gallery{
             display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-            gap:25px;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:20px;
         }
         
         .gallery img{
@@ -222,11 +260,10 @@
         }
         
         .gallery img:hover{
-            transform: scale(1.03);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transform: scale(1.02);
         }
 
-        /* Stili mancanti per far funzionare il Lightbox */
+        /* Lightbox */
         #lightbox {
             display: none;
             position: fixed;
@@ -235,1082 +272,399 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
+            background-color: rgba(0, 0, 0, 0.9);
             align-items: center;
             justify-content: center;
         }
 
         #lightboxImage {
             max-width: 90%;
-            max-height: 90%;
+            max-height: 80%;
             border-radius: 8px;
         }
 
         #closeLightbox {
             position: absolute;
             top: 20px;
-            right: 40px;
+            right: 30px;
             color: white;
             font-size: 40px;
             font-weight: bold;
             cursor: pointer;
         }
+
+        footer {
+            background: #004d4d;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
             
+        /* =======================================
+           MEDIA QUERY SPECIFICHE PER SMARTPHONE
+        ======================================= */
         @media(max-width:900px){
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            nav {
+                width: 100%;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+                padding: 0 10px;
+            }
+
             .hero-grid{
                 grid-template-columns:1fr;
                 text-align:center;
+                gap: 30px;
             }
-            nav{
-                display:none;
-            }
+
             .hero h1{
-                font-size:36px;
+                font-size:28px;
+            }
+
+            .hero p{
+                font-size:16px;
+            }
+
+            .btn {
+                width: 100%; /* I bottoni prendono tutta la larghezza per facilitare il click */
+                max-width: 320px;
             }
         }
     </style>
-
 </head>
-    <meta property="og:title" content="Caccin Cablaggi">
-
-<meta property="og:type" content="website">
-
-<meta property="og:image" content="LOGO.jpg">
-
-<meta property="og:description"
-content="Quadri elettrici conto terzi per automazione industriale.">
-
-<meta name="robots"
-content="index,follow">
-
 <body>
     
 <div id="progress-bar"></div>
 
-<button id="topButton" title="Torna su">
-
-⬆
-
-</button>
+<button id="topButton" title="Torna su">⬆</button>
 
 <div id="lightbox">
-
-<span id="closeLightbox">&times;</span>
-
-<img id="lightboxImage">
-
+    <span id="closeLightbox">&times;</span>
+    <img id="lightboxImage" alt="Ingrandimento">
 </div>
+
 <header>
-
-<div class="container navbar">
-
-<div class="logo">
-
-<img src="LOGO.jpg" alt="Caccin Cablaggi">
-
-<h2>Caccin Cablaggi</h2>
-
-</div>
-
-<nav>
-
-<ul>
-
-<li><a href="#">Home</a></li>
-
-<li><a href="#azienda">Azienda</a></li>
-
-<li><a href="#servizi">Servizi</a></li>
-
-<li><a href="#galleria">Galleria</a></li>
-
-<li><a href="#preventivo">Preventivo</a></li>
-
-<li><a href="#contatti">Contatti</a></li>
-
-</ul>
-
-</nav>
-
-<a href="#preventivo" class="btn">
-
-Richiedi Preventivo
-
-</a>
-
-</div>
-
+    <div class="container navbar">
+        <div class="logo">
+            <img src="LOGO.jpg" alt="Caccin Cablaggi">
+            <h2>Caccin Cablaggi</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#azienda">Azienda</a></li>
+                <li><a href="#servizi">Servizi</a></li>
+                <li><a href="#galleria">Galleria</a></li>
+                <li><a href="#preventivo">Preventivo</a></li>
+                <li><a href="#contatti">Contatti</a></li>
+            </ul>
+        </nav>
+        <a href="#preventivo" class="btn">Richiedi Preventivo</a>
+    </div>
 </header>
 
 <section class="hero">
-
-<div class="container hero-grid">
-
-<div>
-
-<h1>
-
-Realizzazione conto terzi di quadri elettrici per automazione industriale
-
-</h1>
-
-<p>
-
-Supportiamo costruttori di macchine e aziende dell'automazione industriale
-nella realizzazione di quadri elettrici, quadri elettropneumatici
-e assemblaggi elettromeccanici.
-
-</p>
-
-<a href="#preventivo" class="btn">
-
-Carica il tuo progetto
-
-</a>
-
-</div>
-
-<div>
-
-<img src="quadro 1.png" alt="Quadro elettrico">
-
-</div>
-
-</div>
-
-</section>
-
-<section class="section" id="azienda">
-
-<div class="container">
-
-<h2>
-
-Perché scegliere Caccin Cablaggi
-
-</h2>
-
-<p class="section-intro">
-
-Siamo specializzati nella realizzazione di quadri elettrici e assemblaggi
-elettromeccanici per aziende dell'automazione industriale.
-Collaboriamo con costruttori di macchine offrendo qualità,
-precisione e massima riservatezza.
-
-</p>
-
-<div class="cards">
-
-<div class="card">
-
-<h3>
-
-Oltre 10 anni di esperienza
-
-</h3>
-
-<p>
-
-Esperienza maturata nel cablaggio industriale e nella costruzione
-di quadri elettrici conto terzi.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>
-
-Produzione flessibile
-
-</h3>
-
-<p>
-
-Supportiamo i clienti durante i picchi produttivi con consegne rapide
-e lavorazioni personalizzate.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>
-
-Massima qualità
-
-</h3>
-
-<p>
-
-Cablaggi eseguiti secondo gli schemi elettrici forniti dal cliente,
-utilizzando componentistica dei migliori marchi.
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-    <!-- ===================== -->
-<!-- SERVIZI -->
-<!-- ===================== -->
-
-<section class="section" id="servizi">
-
-<div class="container">
-
-<h2>I nostri servizi</h2>
-
-<p class="section-intro">
-
-Realizziamo quadri elettrici industriali e assemblaggi
-elettromeccanici per costruttori di macchine e aziende
-dell'automazione.
-
-</p>
-
-<div class="cards">
-
-<div class="card">
-
-<h3>⚡ Quadri elettrici</h3>
-
-<p>
-
-Cablaggio completo di quadri elettrici industriali
-seguendo la documentazione tecnica fornita.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>⚙️ Quadri elettropneumatici</h3>
-
-<p>
-
-Assemblaggio e cablaggio di sistemi
-elettropneumatici personalizzati.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>🔧 Assemblaggi elettromeccanici</h3>
-
-<p>
-
-Realizzazione di gruppi e sottoassiemi
-elettromeccanici pronti all'installazione.
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- ===================== -->
-<!-- GALLERIA -->
-<!-- ===================== -->
-
-<section class="section" id="galleria">
-
-<div class="container">
-
-<h2>Alcune nostre realizzazioni</h2>
-
-<p class="section-intro">
-Ogni quadro viene cablato con la massima attenzione ai dettagli e nel rispetto delle specifiche.
-
-</p>
-
-<div class="gallery">
-
-<img src="quadro 1.png" alt="Quadro elettrico">
-
-<img src="quadro 2.png" alt="Quadro elettrico">
-
-<img src="quadro 3.png" alt="Quadro elettrico">
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- ===================== -->
-<!-- COME LAVORIAMO -->
-<!-- ===================== -->
-
-<section class="section">
-    <div class="container">
-        <h2>Come lavoriamo</h2>
-        
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; text-align: center;">
-            
-            <div class="card" style="flex: 1 1 300px; max-width: 350px;">
-                <h3>1️⃣ Inviaci il progetto</h3>
-                <p>
-                    Carica schema elettrico, layout e distinta base.
-                </p>
-            </div>
-            
-            <div class="card" style="flex: 1 1 300px; max-width: 350px;">
-                <h3>2️⃣ Analizziamo la documentazione</h3>
-                <p>
-                    Verifichiamo tutta la documentazione e prepariamo il preventivo.
-                </p>
-            </div>
-            
-            <div class="card" style="flex: 1 1 300px; max-width: 350px;">
-                <h3>3️⃣ Produzione</h3>
-                <p>
-                    Realizziamo il quadro nel rispetto delle specifiche tecniche.
-                </p>
-            </div>
-            
+    <div class="container hero-grid">
+        <div>
+            <h1>Realizzazione conto terzi di quadri elettrici per automazione industriale</h1>
+            <p>Supportiamo costruttori di macchine e aziende dell'automazione industriale nella realizzazione di quadri elettrici, quadri elettropneumatici e assemblaggi elettromeccanici.</p>
+            <a href="#preventivo" class="btn">Carica il tuo progetto</a>
+        </div>
+        <div>
+            <img src="quadro 1.png" alt="Quadro elettrico">
         </div>
     </div>
 </section>
 
-
-
-<!-- ===================== -->
-<!-- CTA -->
-<!-- ===================== -->
-<section class="hero" style="padding:60px 0; background: linear-gradient(135deg,#006666,#004d4d);">
-
-<div class="container" style="text-align:center;">
-
-<h2 style="color:white;font-size:40px;">
-
-Hai già il progetto?
-
-</h2>
-
-<p style="font-size:22px;max-width:900px;margin:auto;margin-top:25px;margin-bottom:40px;">
-
-Carica schema elettrico,
-layout del quadro e distinta base.
-
-Ti invieremo un preventivo
-nel più breve tempo possibile.
-
-</p>
-
-<a href="#preventivo" class="btn">
-
-📄 Carica il tuo progetto
-
-</a>
-
-</div>
-
+<section class="section" id="azienda">
+    <div class="container">
+        <h2>Perché scegliere Caccin Cablaggi</h2>
+        <p class="section-intro">Siamo specializzati nella realizzazione di quadri elettrici e assemblaggi elettromeccanici per aziende dell'automazione industriale. Collaboriamo con costruttori di macchine offrendo qualità, precisione e massima riservatezza.</p>
+        
+        <div class="cards">
+            <div class="card">
+                <h3>Oltre 10 anni di esperienza</h3>
+                <p>Esperienza maturata nel cablaggio industriale e nella costruzione di quadri elettrici conto terzi.</p>
+            </div>
+            <div class="card">
+                <h3>Produzione flessibile</h3>
+                <p>Supportiamo i clienti durante i picchi produttivi con consegne rapide e lavorazioni personalizzate.</p>
+            </div>
+            <div class="card">
+                <h3>Massima qualità</h3>
+                <p>Cablaggi eseguiti secondo gli schemi elettrici forniti dal cliente, utilizzando componentistica dei migliori marchi.</p>
+            </div>
+        </div>
+    </div>
 </section>
 
+<section class="section" id="servizi">
+    <div class="container">
+        <h2>I nostri servizi</h2>
+        <p class="section-intro">Realizziamo quadri elettrici industriali e assemblaggi elettromeccanici per costruttori di macchine e aziende dell'automazione.</p>
+        
+        <div class="cards">
+            <div class="card">
+                <h3>⚡ Quadri elettrici</h3>
+                <p>Cablaggio completo di quadri elettrici industriali seguendo la documentazione tecnica fornita.</p>
+            </div>
+            <div class="card">
+                <h3>⚙️ Quadri elettropneumatici</h3>
+                <p>Assemblaggio e cablaggio di sistemi elettropneumatici personalizzati.</p>
+            </div>
+            <div class="card">
+                <h3>🔧 Assemblaggi elettromeccanici</h3>
+                <p>Realizzazione di gruppi e sottoassiemi elettromeccanici pronti all'installazione.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
+<section class="section" id="galleria">
+    <div class="container">
+        <h2>Alcune nostre realizzazioni</h2>
+        <p class="section-intro">Ogni quadro viene cablato con la massima attenzione ai dettagli e nel rispetto delle specifiche.</p>
+        <div class="gallery">
+            <img src="quadro 1.png" alt="Quadro elettrico">
+            <img src="quadro 2.png" alt="Quadro elettrico">
+            <img src="quadro 3.png" alt="Quadro elettrico">
+        </div>
+    </div>
+</section>
 
-<!-- ===================== -->
-<!-- PREVENTIVO -->
-<!-- ===================== -->
+<section class="section">
+    <div class="container">
+        <h2>Come lavoriamo</h2>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; text-align: center; margin-top: 30px;">
+            <div class="card" style="flex: 1 1 300px; max-width: 350px;">
+                <h3>1️⃣ Inviaci il progetto</h3>
+                <p>Carica schema elettrico, layout e distinta base.</p>
+            </div>
+            <div class="card" style="flex: 1 1 300px; max-width: 350px;">
+                <h3>2️⃣ Analizziamo la documentazione</h3>
+                <p>Verifichiamo tutta la documentazione e prepariamo il preventivo.</p>
+            </div>
+            <div class="card" style="flex: 1 1 300px; max-width: 350px;">
+                <h3>3️⃣ Produzione</h3>
+                <p>Realizziamo il quadro nel rispetto delle specifiche tecniche.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hero" style="padding:60px 0; background: linear-gradient(135deg,#006666,#004d4d);">
+    <div class="container" style="text-align:center;">
+        <h2 style="color:white;font-size:36px;">Hai già il progetto?</h2>
+        <p style="font-size:18px;max-width:900px;margin:auto;margin-top:20px;margin-bottom:30px; line-height: 1.6;">
+            Carica schema elettrico, layout del quadro e distinta base. Ti invieremo un preventivo nel più breve tempo possibile.
+        </p>
+        <a href="#preventivo" class="btn">📄 Carica il tuo progetto</a>
+    </div>
+</section>
 
 <section class="section" id="preventivo">
-
-<div class="container">
-
-<h2>
-
-Richiedi un preventivo
-
-</h2>
-
-<p class="section-intro">
-
-Compila il configuratore qui sotto.
-
-Riceverai una risposta entro 48 ore lavorative.
-
-</p>
-
-<form action="https://formsubmit.co/caccin.cablaggi@gmail.com"
-method="POST"
-enctype="multipart/form-data">
-
-<input type="hidden"
-name="_captcha"
-value="false">
-
-<input type="hidden"
-name="_subject"
-value="Nuova richiesta preventivo Caccin Cablaggi">
-
-<div class="cards">
-
-<div class="card">
-
-<h3>Dati Azienda</h3>
-
-<label>Ragione Sociale</label>
-
-<input type="text"
-name="Ragione Sociale"
-required>
-
-<br><br>
-
-<label>Referente</label>
-
-<input type="text"
-name="Referente"
-required>
-
-<br><br>
-
-<label>Ruolo</label>
-
-<select name="Ruolo">
-
-<option>Titolare</option>
-
-<option>Responsabile Acquisti</option>
-
-<option>Responsabile Produzione</option>
-
-<option>Ufficio Tecnico</option>
-
-<option>Altro</option>
-
-</select>
-
-<br><br>
-
-<label>Email</label>
-
-<input type="email"
-name="Email"
-required>
-
-<br><br>
-
-<label>Telefono</label>
-
-<input type="text"
-name="Telefono">
-
-</div>
-    <!-- ================================= -->
-<!-- CONFIGURATORE PREVENTIVO -->
-<!-- ================================= -->
-
-<div class="card">
-
-<h3>Tipo di lavorazione</h3>
-
-<label>
-
-<input type="checkbox" name="Lavorazione[]" value="Quadro elettrico">
-
-Quadro elettrico
-
-</label>
-
-<br>
-
-<label>
-
-<input type="checkbox" name="Lavorazione[]" value="Quadro elettropneumatico">
-
-Quadro elettropneumatico
-
-</label>
-
-<br>
-
-<label>
-
-<input type="checkbox" name="Lavorazione[]" value="Assemblaggio elettromeccanico">
-
-Assemblaggio elettromeccanico
-
-</label>
-
-<br>
-
-<label>
-
-<input type="checkbox" name="Lavorazione[]" value="Altro">
-
-Altro
-
-</label>
-
-</div>
-
-
-
-<div class="card">
-
-<h3>Carpenteria</h3>
-
-<label>
-
-<input type="radio"
-
-name="Carpenteria"
-
-value="Cliente"
-
-checked
-
-onclick="nascondiCarpenteria()">
-
-Fornita dal cliente
-
-</label>
-
-<br>
-
-<label>
-
-<input type="radio"
-
-name="Carpenteria"
-
-value="Caccin"
-
-onclick="mostraCarpenteria()">
-
-Fornita da Caccin Cablaggi
-
-</label>
-
-
-
-<div id="carpenteriaBox"
-
-style="display:none;margin-top:20px;">
-
-<label>
-
-Marca carpenteria
-
-</label>
-
-<select name="Marca Carpenteria">
-
-<option>Rittal</option>
-
-<option>ETA</option>
-
-<option>Schneider Electric</option>
-
-<option>ABB</option>
-
-<option>Eldon</option>
-
-<option>Fibox</option>
-
-<option>Gewiss</option>
-
-<option>Legrand</option>
-
-<option>Altra marca</option>
-
-</select>
-
-<br><br>
-
-<label>
-
-Modello carpenteria
-
-</label>
-
-<input
-
-type="text"
-
-name="Modello Carpenteria"
-
-placeholder="Es. AX 1200x800x300">
-
-</div>
-
-</div>
-
-
-
-<div class="card">
-
-<h3>Componentistica</h3>
-
-<label>
-
-<input
-
-type="radio"
-
-name="Componenti"
-
-value="Cliente"
-
-checked
-
-onclick="nascondiComponenti()">
-
-Fornita dal cliente
-
-</label>
-
-<br>
-
-<label>
-
-<input
-
-type="radio"
-
-name="Componenti"
-
-value="Caccin"
-
-onclick="mostraComponenti()">
-
-Fornita da Caccin Cablaggi
-
-</label>
-
-
-
-<div id="componentiBox"
-
-style="display:none;margin-top:20px;">
-
-<p>
-
-Marchi richiesti
-
-</p>
-
-<label><input type="checkbox" name="Marchi[]" value="Siemens"> Siemens</label><br>
-
-<label><input type="checkbox" name="Marchi[]" value="Schneider Electric"> Schneider Electric</label><br>
-
-<label><input type="checkbox" name="Marchi[]" value="ABB"> ABB</label><br>
-
-<label><input type="checkbox" name="Marchi[]" value="Phoenix Contact"> Phoenix Contact</label><br>
-
-<label><input type="checkbox" name="Marchi[]" value="WAGO"> WAGO</label><br>
-
-<label><input type="checkbox" name="Marchi[]" value="Weidmüller"> Weidmüller</label><br>
-
-<label><input type="checkbox" name="Marchi[]" value="Eaton"> Eaton</label><br>
-
-<label><input type="checkbox" name="Marchi[]" value="Omron"> Omron</label><br>
-
-<label><input type="checkbox" name="Marchi[]" value="IFM"> IFM</label><br>
-
-<label><input type="checkbox" name="Marchi[]" value="SICK"> SICK</label><br>
-
-<label><input type="checkbox" name="Marchi[]" value="Festo"> Festo</label><br>
-
-<label><input type="checkbox" name="Marchi[]" value="SMC"> SMC</label><br>
-
-<br>
-
-<label>
-
-Altro marchio
-
-</label>
-
-<input
-
-type="text"
-
-name="Altro Marchio">
-
-</div>
-
-</div>
-
-
-
-<div class="card">
-
-<h3>Documentazione</h3>
-
-<label>
-
-Schema elettrico
-
-</label>
-
-<input type="file" name="Schema">
-
-<br><br>
-
-<label>
-
-Layout quadro
-
-</label>
-
-<input type="file" name="Layout">
-
-<br><br>
-
-<label>
-
-Distinta base
-
-</label>
-
-<input type="file" name="BOM">
-
-<br><br>
-
-<label>
-
-Altri allegati
-
-</label>
-
-<input type="file" name="Altro Allegato">
-
-</div>
-
-
-
-<div class="card">
-
-<h3>Informazioni aggiuntive</h3>
-
-<label>
-
-Numero quadri
-
-</label>
-
-<input
-
-type="number"
-
-name="Quantità"
-
-min="1"
-
-value="1">
-
-<br><br>
-
-<label>
-
-Consegna richiesta
-
-</label>
-
-<select
-
-name="Consegna">
-
-<option>Urgente</option>
-
-<option>15 giorni</option>
-
-<option>30 giorni</option>
-
-<option>Da concordare</option>
-
-</select>
-
-<br><br>
-
-<label>
-
-Note
-
-</label>
-
-<textarea
-
-name="Note"
-
-rows="8"
-
-placeholder="Inserisci eventuali richieste particolari..."></textarea>
-
-</div>
-
-</div>
-
-<br><br>
-
-<button class="btn"
-
-style="width:100%;
-font-size:22px;
-padding:20px;">
-
-🚀 INVIA RICHIESTA PREVENTIVO
-
-</button>
-
-</form>
-
-
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-
-    // ==========================
-    // ELEMENTI
-    // ==========================
-
-    const carpenteriaCliente = document.querySelector('input[name="Carpenteria"][value="Cliente"]');
-    const carpenteriaCaccin = document.querySelector('input[name="Carpenteria"][value="Caccin"]');
-
-    const componentiCliente = document.querySelector('input[name="Componenti"][value="Cliente"]');
-    const componentiCaccin = document.querySelector('input[name="Componenti"][value="Caccin"]');
+    <div class="container">
+        <h2>Richiedi un preventivo</h2>
+        <p class="section-intro">Compila il configuratore qui sotto. Riceverai una risposta entro 48 ore lavorative.</p>
+        
+        <form action="https://formsubmit.co/caccin.cablaggi@gmail.com" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="Nuova richiesta preventivo Caccin Cablaggi">
+
+            <div class="cards">
+                <div class="card">
+                    <h3>Dati Azienda</h3>
+                    <label>Ragione Sociale</label>
+                    <input type="text" name="Ragione Sociale" required>
+
+                    <label>Referente</label>
+                    <input type="text" name="Referente" required>
+
+                    <label>Ruolo</label>
+                    <select name="Ruolo">
+                        <option>Titolare</option>
+                        <option>Responsabile Acquisti</option>
+                        <option>Responsabile Produzione</option>
+                        <option>Ufficio Tecnico</option>
+                        <option>Altro</option>
+                    </select>
+
+                    <label>Email</label>
+                    <input type="email" name="Email" required>
+
+                    <label>Telefono</label>
+                    <input type="text" name="Telefono">
+                </div>
+
+                <div class="card">
+                    <h3>Tipo di lavorazione</h3>
+                    <div style="text-align: left; margin-top: 10px;">
+                        <label><input type="checkbox" name="Lavorazione[]" value="Quadro elettrico"> Quadro elettrico</label>
+                        <label><input type="checkbox" name="Lavorazione[]" value="Quadro elettropneumatico"> Quadro elettropneumatico</label>
+                        <label><input type="checkbox" name="Lavorazione[]" value="Assemblaggio elettromeccanico"> Assemblaggio elettromeccanico</label>
+                        <label><input type="checkbox" name="Lavorazione[]" value="Altro"> Altro</label>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Carpenteria</h3>
+                    <div style="text-align: left; margin-top: 10px; margin-bottom: 15px;">
+                        <label><input type="radio" name="Carpenteria" value="Cliente" checked id="carpCliente"> Fornita dal cliente</label>
+                        <label><input type="radio" name="Carpenteria" value="Caccin" id="carpCaccin"> Fornita da Caccin Cablaggi</label>
+                    </div>
+
+                    <div id="carpenteriaBox" style="display:none;margin-top:20px;">
+                        <label>Marca carpenteria</label>
+                        <select name="Marca Carpenteria">
+                            <option>Rittal</option>
+                            <option>ETA</option>
+                            <option>Schneider Electric</option>
+                            <option>ABB</option>
+                            <option>Eldon</option>
+                            <option>Fibox</option>
+                            <option>Gewiss</option>
+                            <option>Legrand</option>
+                            <option>Altra marca</option>
+                        </select>
+
+                        <label>Modello carpenteria</label>
+                        <input type="text" name="Modello Carpenteria" placeholder="Es. AX 1200x800x300">
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Componentistica</h3>
+                    <div style="text-align: left; margin-top: 10px; margin-bottom: 15px;">
+                        <label><input type="radio" name="Componenti" value="Cliente" checked id="compCliente"> Fornita dal cliente</label>
+                        <label><input type="radio" name="Componenti" value="Caccin" id="compCaccin"> Fornita da Caccin Cablaggi</label>
+                    </div>
+
+                    <div id="componentiBox" style="display:none;margin-top:20px; text-align: left;">
+                        <p style="font-weight: bold; margin-bottom: 10px;">Marchi richiesti</p>
+                        <label><input type="checkbox" name="Marchi[]" value="Siemens"> Siemens</label>
+                        <label><input type="checkbox" name="Marchi[]" value="Schneider Electric"> Schneider Electric</label>
+                        <label><input type="checkbox" name="Marchi[]" value="ABB"> ABB</label>
+                        <label><input type="checkbox" name="Marchi[]" value="Phoenix Contact"> Phoenix Contact</label>
+                        <label><input type="checkbox" name="Marchi[]" value="WAGO"> WAGO</label>
+                        <label><input type="checkbox" name="Marchi[]" value="Weidmüller"> Weidmüller</label>
+                        <label><input type="checkbox" name="Marchi[]" value="Eaton"> Eaton</label>
+                        <label><input type="checkbox" name="Marchi[]" value="Omron"> Omron</label>
+                        <label><input type="checkbox" name="Marchi[]" value="IFM"> IFM</label>
+                        <label><input type="checkbox" name="Marchi[]" value="SICK"> SICK</label>
+                        <label><input type="checkbox" name="Marchi[]" value="Festo"> Festo</label>
+                        <label><input type="checkbox" name="Marchi[]" value="SMC"> SMC</label>
+                        <br>
+                        <label>Altro marchio</label>
+                        <input type="text" name="Altro Marchio">
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Documentazione</h3>
+                    <label>Schema elettrico</label>
+                    <input type="file" name="Schema">
+
+                    <label>Layout quadro</label>
+                    <input type="file" name="Layout">
+
+                    <label>Distinta base</label>
+                    <input type="file" name="BOM">
+
+                    <label>Altri allegati</label>
+                    <input type="file" name="Altro Allegato">
+                </div>
+
+                <div class="card">
+                    <h3>Informazioni aggiuntive</h3>
+                    <label>Numero quadri</label>
+                    <input type="number" name="Quantità" min="1" value="1">
+
+                    <label>Consegna richiesta</label>
+                    <select name="Consegna">
+                        <option>Urgente</option>
+                        <option>15 giorni</option>
+                        <option>30 giorni</option>
+                        <option>Da concordare</option>
+                    </select>
+
+                    <label>Note</label>
+                    <textarea name="Note" rows="6" placeholder="Inserisci eventuali richieste particolari..."></textarea>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn" style="width:100%; max-width: 500px; font-size:20px; padding:18px;">🚀 INVIA RICHIESTA PREVENTIVO</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<footer id="contatti">
+    <div class="container">
+        <h2>Caccin Cablaggi</h2>
+        <p>Realizzazione conto terzi di quadri elettrici industriali.</p>
+        <p style="margin-top: 15px;">📍 Via Cavin Maggiore 5 | 30030 Pianiga (VE)</p>
+        <p>📞 339 2859037 | ✉️ caccin.cablaggi@gmail.com</p>
+        <p style="margin-top: 20px; font-size: 14px; opacity: 0.6;">&copy; 2026 Caccin Cablaggi</p>
+    </div>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // ==========================================
+    // GESTIONE CAMPI MOSTRA/NASCONDI FORM
+    // ==========================================
+    const carpCliente = document.getElementById("carpCliente");
+    const carpCaccin = document.getElementById("carpCaccin");
+    const compCliente = document.getElementById("compCliente");
+    const compCaccin = document.getElementById("compCaccin");
 
     const carpenteriaBox = document.getElementById("carpenteriaBox");
     const componentiBox = document.getElementById("componentiBox");
 
-    // ==========================
-    // CARPENTERIA
-    // ==========================
-
-    function aggiornaCarpenteria(){
-
-        if(carpenteriaCaccin.checked){
-
-            carpenteriaBox.style.display="block";
-
-        }else{
-
-            carpenteriaBox.style.display="none";
-
-        }
-
+    function toggler() {
+        carpenteriaBox.style.display = carpCaccin.checked ? "block" : "none";
+        componentiBox.style.display = compCaccin.checked ? "block" : "none";
     }
 
-    // ==========================
-    // COMPONENTI
-    // ==========================
-
-    function aggiornaComponenti(){
-
-        if(componentiCaccin.checked){
-
-            componentiBox.style.display="block";
-
-        }else{
-
-            componentiBox.style.display="none";
-
-        }
-
-    }
-
-    carpenteriaCliente.addEventListener("change", aggiornaCarpenteria);
-    carpenteriaCaccin.addEventListener("change", aggiornaCarpenteria);
-
-    componentiCliente.addEventListener("change", aggiornaComponenti);
-    componentiCaccin.addEventListener("change", aggiornaComponenti);
-
-    aggiornaCarpenteria();
-    aggiornaComponenti();
-
-    // ==========================
-    // OGGETTO DELLA MAIL
-    // ==========================
-
-    const form=document.querySelector("form");
-
-    form.addEventListener("submit",function(){
-
-        const referente=document.querySelector('input[name="Referente"]').value;
-
-        const lavorazioni=[];
-
-        document.querySelectorAll('input[name="Lavorazione[]"]:checked').forEach(function(el){
-
-            lavorazioni.push(el.value);
-
-        });
-
-        const oggetto=lavorazioni.length>0
-        ? lavorazioni.join(", ")
-        : "Richiesta Preventivo";
-
-        document.querySelector('input[name="_subject"]').value=
-
-        "Preventivo - "+referente+" - "+oggetto;
-
+    [carpCliente, carpCaccin, compCliente, compCaccin].forEach(el => {
+        if(el) el.addEventListener("change", toggler);
     });
 
-});
-/* =======================
-PROGRESS BAR
-======================= */
-
-window.addEventListener("scroll",()=>{
-
-const scrollTop=document.documentElement.scrollTop;
-
-const scrollHeight=document.documentElement.scrollHeight-document.documentElement.clientHeight;
-
-const percent=(scrollTop/scrollHeight)*100;
-
-document.getElementById("progress-bar").style.width=percent+"%";
-
-});
-
-
-/* =======================
-TORNA SU
-======================= */
-
-const topButton=document.getElementById("topButton");
-
-window.addEventListener("scroll",()=>{
-
-if(window.scrollY>500){
-
-topButton.style.display="block";
-
-}else{
-
-topButton.style.display="none";
-
-}
-
-});
-
-topButton.onclick=function(){
-
-window.scrollTo({
-
-top:0,
-
-behavior:"smooth"
-
-});
-
-}
-
-
-/* =======================
-LIGHTBOX
-======================= */
-
-const immagini=document.querySelectorAll(".gallery img");
-
-const lightbox=document.getElementById("lightbox");
-
-const lightboxImage=document.getElementById("lightboxImage");
-
-const close=document.getElementById("closeLightbox");
-
-immagini.forEach(img=>{
-
-img.addEventListener("click",()=>{
-
-lightbox.style.display="flex";
-
-lightboxImage.src=img.src;
-
-});
-
-});
-
-close.onclick=function(){
-
-lightbox.style.display="none";
-
-}
-
-lightbox.onclick=function(e){
-
-if(e.target===lightbox){
-
-lightbox.style.display="none";
-
-}
-
-}
-    </script>
-    <footer>
-
-<footer id="contatti">
-
-<div class="container">
-
-<h2>Caccin Cablaggi</h2>
-
-<p>
-
-Realizzazione conto terzi di quadri elettrici industriali.
-
-</p>
-
-<br>
-
-<p>
-
-📍 Via Cavin Maggiore 5
-
-</p>
-
-<p>
-
-30030 Pianiga (VE)
-
-</p>
-
-<br>
-
-<p>
-
-📞 339 2859037
-
-</p>
-
-<p>
-
-✉️ caccin.cablaggi@gmail.com
-
-</p>
-
-<br>
-
-<p>
-
-© 2026 Caccin Cablaggi
-
-</p>
-
-</div>
-
-</footer>
-
-<script>
+    toggler(); // Stato iniziale
+
+    // ==========================================
+    // OGGETTO DELLA MAIL AUTOMATICO
+    // ==========================================
+    const form = document.querySelector("form");
+    form.addEventListener("submit", function() {
+        const referente = document.querySelector('input[name="Referente"]').value;
+        const lavorazioni = [];
+        document.querySelectorAll('input[name="Lavorazione[]"]:checked').forEach(function(el) {
+            lavorazioni.push(el.value);
+        });
+        const oggetto = lavorazioni.length > 0 ? lavorazioni.join(", ") : "Richiesta Preventivo";
+        document.querySelector('input[name="_subject"]').value = "Preventivo - " + referente + " - " + oggetto;
+    });
+
+    // ==========================================
+    // ANIMAZIONE COMPATIBILE DELLE CARD (INTERSECTION OBSERVER)
+    // ==========================================
     const cards = document.querySelectorAll(".card");
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
@@ -1318,54 +672,52 @@ Realizzazione conto terzi di quadri elettrici industriali.
                 entry.target.classList.add("show");
             }
         });
-    });
+    }, { threshold: 0.05 });
+    
     cards.forEach(card => observer.observe(card));
+
+    // ==========================================
+    // LIGHTBOX IMMAGINI
+    // ==========================================
+    const immagini = document.querySelectorAll(".gallery img");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const closeLightbox = document.getElementById("closeLightbox");
+
+    immagini.forEach(img => {
+        img.addEventListener("click", () => {
+            lightbox.style.display = "flex";
+            lightboxImage.src = img.src;
+        });
+    });
+
+    closeLightbox.addEventListener("click", () => { lightbox.style.display = "none"; });
+    lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) lightbox.style.display = "none";
+    });
+});
+
+// ==========================================
+// PROGRESS BAR E BOTTONE TORNA SU
+// ==========================================
+window.addEventListener("scroll", () => {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const percent = (scrollTop / scrollHeight) * 100;
+    
+    const pBar = document.getElementById("progress-bar");
+    if(pBar) pBar.style.width = percent + "%";
+
+    const topButton = document.getElementById("topButton");
+    if(topButton) {
+        topButton.style.display = window.scrollY > 500 ? "block" : "none";
+    }
+});
+
+document.getElementById("topButton").onclick = function() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+};
 </script>
 
-    </footer>
-    <script>
-        
-document.addEventListener("DOMContentLoaded", function(){
-
-const carpenteriaCliente=document.querySelector('input[name="Carpenteria"][value="Cliente"]');
-const carpenteriaCaccin=document.querySelector('input[name="Carpenteria"][value="Caccin"]');
-
-const carpenteriaBox=document.getElementById("carpenteriaBox");
-
-
-carpenteriaCliente.addEventListener("change",function(){
-carpenteriaBox.style.display="none";
-});
-
-
-carpenteriaCaccin.addEventListener("change",function(){
-carpenteriaBox.style.display="block";
-});
-
-
-const immagini=document.querySelectorAll(".gallery img");
-
-const lightbox=document.getElementById("lightbox");
-
-const lightboxImage=document.getElementById("lightboxImage");
-
-
-immagini.forEach(img=>{
-
-img.onclick=function(){
-
-lightbox.style.display="flex";
-
-lightboxImage.src=this.src;
-
-}
-
-});
-
-
-});
-
-    </script>
 </body>
 </html>
-    
