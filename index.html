@@ -107,31 +107,22 @@
         .hero{
             background:linear-gradient(135deg,#006666,#004d4d);
             color:white;
-            padding:60px 0;
-        }
-
-        .hero-grid{
-            display:grid;
-            grid-template-columns:1fr 1fr;
-            gap:40px;
-            align-items:center;
+            padding:80px 0;
+            text-align: center;
         }
 
         .hero h1{
-            font-size:38px;
+            font-size:42px;
             margin-bottom:20px;
             line-height:1.2;
         }
 
         .hero p{
-            font-size:18px;
+            font-size:19px;
             margin-bottom:30px;
-        }
-
-        .hero img{
-            width:100%;
-            border-radius:10px;
-            box-shadow:0 15px 35px rgba(0,0,0,.3);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .section{
@@ -387,14 +378,8 @@
                 padding: 0 10px;
             }
 
-            .hero-grid{
-                grid-template-columns:1fr;
-                text-align:center;
-                gap: 30px;
-            }
-
             .hero h1{
-                font-size:28px;
+                font-size:30px;
             }
 
             .hero p{
@@ -456,22 +441,21 @@
 </header>
 
 <section class="hero">
-    <div class="container hero-grid">
-      <div>
-    <h1>Realizzazione quadri elettrici industriali e impianti elettrici civili</h1>
-    <p>Supportiamo le aziende dell'automazione industriale nella quadristica conto terzi e affianchiamo i privati nella realizzazione di impianti elettrici tradizionali ad alte prestazioni per le abitazioni.</p>
-    
-    <div style="margin-bottom: 15px;">
-        <a href="#preventivo" class="btn" style="padding: 15px 30px; font-size: 18px;">Richiedi un'analisi di progetto</a>
+    <div class="container">
+        <h1>Realizzazione quadri elettrici industriali e impianti elettrici civili</h1>
+        <p>Supportiamo le aziende dell'automazione industriale nella quadristica conto terzi e affianchiamo i privati nella realizzazione di impianti elettrici tradizionali ad alte prestazioni per le abitazioni.</p>
+        
+        <div style="margin-bottom: 25px;">
+            <a href="#preventivo" class="btn" style="padding: 15px 30px; font-size: 18px;">Richiedi un'analisi di progetto</a>
+        </div>
+        
+        <!-- ELEMENTI DI RASSICURAZIONE CENTRATI -->
+        <div style="display: flex; gap: 20px; font-size: 14px; opacity: 0.9; flex-wrap: wrap; justify-content: center;">
+            <span>⏱️ Richiede solo 60 secondi</span>
+            <span>🔒 100% Gratuito e senza impegno</span>
+            <span>⚡ Risposta entro 24 ore </span>
+        </div>
     </div>
-    
-    <!-- ELEMENTI DI RASSICURAZIONE -->
-    <div style="display: flex; gap: 15px; font-size: 14px; opacity: 0.9; flex-wrap: wrap;">
-        <span>⏱️ Richiede solo 60 secondi</span>
-        <span>🔒 100% Gratuito e senza impegno</span>
-        <span>⚡ Risposta entro 24 ore lavorative</span>
-    </div>
-</div>
 </section>
 
 <section class="section" id="azienda">
@@ -482,7 +466,7 @@
         <div class="cards">
             <div class="card">
                 <h3>Oltre 10 anni di esperienza</h3>
-                <p>Esperienza maturata nel cablaggio conto terzi per l'automazione industriale e nell'impiantistica residenziale.</p>
+                <p>Esperienza maturata nel cablaggio conto terzi for l'automazione industriale e nell'impiantistica residenziale.</p>
             </div>
             <div class="card">
                 <h3>Flessibilità e Intervento Rapido</h3>
@@ -512,7 +496,7 @@
             </div>
             <div class="card">
                 <h3>🛠️ Manutenzione & Reti Dati</h3>
-                <p>Riparazione guasti, rifacimento di linee elettriche existent, aggiunta punti luce/prese e cablaggio di reti internet LAN.</p>
+                <p>Riparazione guasti, rifacimento di linee elettriche esistenti, aggiunta punti luce/prese e cablaggio di reti internet LAN.</p>
             </div>
         </div>
     </div>
@@ -549,33 +533,10 @@
         </div>
     </div>
 </section>
-<section class="section" style="background: #fff;">
-    <div class="container">
-        <h2>Cosa dicono i nostri clienti</h2>
-        <p class="section-intro">La precisione e l'affidabilità si vedono dai fatti. Ecco l'esperienza di chi lavora regolarmente con Davide.</p>
-        
-        <div class="cards" style="max-width: 900px; margin: auto;">
-            <!-- Recensione B2B -->
-            <div class="card" style="border-left: 4px solid #ff6b35;">
-                <p style="font-style: italic; font-size: 16px; line-height: 1.6; margin-bottom: 15px;">
-                    "Collaboriamo con Davide per i picchi di produzione sulla quadristica conto terzi. Massima precisione nel rispetto degli schemi elettrici, cablaggi puliti ordinati e consegne puntuali. Un partner affidabile per l'automazione."
-                </p>
-                <p style="font-weight: bold; color: #006666; font-size: 15px;">— Responsabile Produzione, Azienda di Automazione (Padova)</p>
-            </div>
-            
-            <!-- Recensione B2C -->
-            <div class="card" style="border-left: 4px solid #006666;">
-                <p style="font-style: italic; font-size: 16px; line-height: 1.6; margin-bottom: 15px;">
-                    "Dovevo installare la linea per il piano a induzione e sistemare il quadro di casa a Pianiga. Davide è stato rapidissimo, mi ha spiegato tutto con estrema chiarezza e il preventivo online è stato facilissimo da compilare. Consigliatissimo!"
-                </p>
-                <p style="font-weight: bold; color: #ff6b35; font-size: 15px;">— Marco R., Privato (Pianiga)</p>
-            </div>
-        </div>
-    </div>
-</section>
+
 <section class="hero" style="padding:60px 0; background: linear-gradient(135deg,#006666,#004d4d);">
     <div class="container" style="text-align:center;">
-        <h2 style="color:white;font-size:36px;">Hai un project da sottoporci?</h2>
+        <h2 style="color:white;font-size:36px;">Hai un progetto da sottoporci?</h2>
         <p style="font-size:18px;max-width:900px;margin:auto;margin-top:20px;margin-bottom:30px; line-height: 1.6;">
             Che tu sia un'azienda manifatturiera in cerca di un cablatore affidabile o un privato che vuole sistemare casa, seleziona il percorso più adatto a te.
         </p>
@@ -799,7 +760,7 @@
                                 <option>Mancanza totale di energia elettrica</option>
                                 <option>Il salvavita scatta continuamente (Problema di isolamento)</option>
                                 <option>Presa elettrica o punto luce non funzionante</option>
-                                <option>Cortocircuito localizzato su linee existent</option>
+                                <option>Cortocircuito localizzato su linee esistenti</option>
                                 <option>Altro problema specifico</option>
                             </select>
 
@@ -1000,19 +961,18 @@
     });
 
     // =========================================================================
-    // TRUCCO JS + INVIO REALE IN BACKGROUND (Senza ricaricare la pagina)
+    // REALE INVIO IN BACKGROUND (Senza ricaricare la pagina)
     // =========================================================================
 
     // Funzione universale per mostrare il messaggio di ringraziamento sul posto
     function mostraRingraziamentoSulPosto(formElement, nomeCliente) {
-        // Creiamo il box di ringraziamento stile "Card" con i colori del tuo sito
         const grazieBox = document.createElement('div');
         grazieBox.className = 'card show';
         grazieBox.style.textAlign = 'center';
         grazieBox.style.padding = '40px 20px';
         grazieBox.style.margin = '20px auto';
         grazieBox.style.maxWidth = '600px';
-        grazieBox.style.border = '2px solid #006666'; // Verde del tuo sito
+        grazieBox.style.border = '2px solid #006666';
         
         grazieBox.innerHTML = `
             <h3 style="font-size: 26px; color: #006666; margin-bottom: 15px;">Grazie ${nomeCliente}!</h3>
@@ -1023,17 +983,14 @@
             <span style="font-size: 40px;">✉️</span>
         `;
         
-        // Sostituiamo il form con il messaggio di ringraziamento
         formElement.innerHTML = '';
         formElement.appendChild(grazieBox);
-        
-        // Scrolla la pagina leggermente per centrare il messaggio sullo schermo
         grazieBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     // Gestione Invio Form INDUSTRIALE (B2B)
     document.getElementById('form-b2b-ele').addEventListener('submit', function(e) {
-        e.preventDefault(); // Blocca l'errore della pagina bianca o non raggiungibile
+        e.preventDefault();
         
         const form = this;
         const ragSoc = document.getElementById('b2b-rag-soc').value.trim() || 'Azienda';
@@ -1045,16 +1002,13 @@
             tipoLavoro = valori.join(' + ');
         }
         
-        // Imposta l'oggetto dell'email con emoji
         document.getElementById('subject-b2b').value = `⚡ ${ragSoc} - ${tipoLavoro}`;
         
-        // Trasforma il tasto invio in uno stato di caricamento
         const btnInvia = form.querySelector('.btn');
         btnInvia.innerText = "Invio in corso...";
         btnInvia.style.opacity = "0.7";
         btnInvia.disabled = true;
 
-        // Invio invisibile (AJAX) a FormSubmit
         fetch(form.action, {
             method: 'POST',
             body: new FormData(form)
@@ -1077,23 +1031,20 @@
 
     // Gestione Invio Form CIVILE (B2C)
     document.getElementById('form-b2c-ele').addEventListener('submit', function(e) {
-        e.preventDefault(); // Blocca l'errore della pagina bianca o non raggiungibile
+        e.preventDefault();
         
         const form = this;
         const nomeCliente = document.getElementById('b2c-nome-cliente').value.trim() || 'Cliente';
         const selectIntervento = document.getElementById('select-tipo-civile');
         const testoIntervento = selectIntervento.options[selectIntervento.selectedIndex].text;
         
-        // Imposta l'oggetto dell'email con emoji
         document.getElementById('subject-b2c').value = `🏠 ${nomeCliente} - Civile (${testoIntervento})`;
         
-        // Modifica temporanea del pulsante
         const btnInvia = form.querySelector('.btn');
         btnInvia.innerText = "Invio in corso...";
         btnInvia.style.opacity = "0.7";
         btnInvia.disabled = true;
 
-        // Invio invisibile (AJAX) a FormSubmit
         fetch(form.action, {
             method: 'POST',
             body: new FormData(form)
