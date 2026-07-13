@@ -490,9 +490,6 @@
     </div>
 </section>
 
-<!-- ========================================================================= -->
-<!-- SEZIONE SERVIZI MODIFICATA (RIMOZIONE SMART HOME, WALLBOX, FOTOVOLTAICO, ALLARMI) -->
-<!-- ========================================================================= -->
 <section class="section" id="servizi">
     <div class="container">
         <h2>I nostri ambiti operativi</h2>
@@ -509,7 +506,7 @@
             </div>
             <div class="card">
                 <h3>🛠️ Manutenzione & Reti Dati</h3>
-                <p>Riparazione guasti, rifacimento di linee elettriche esistenti, aggiunta punti luce/prese e cablaggio di reti internet LAN.</p>
+                <p>Riparazione guasti, rifacimento di linee elettriche existent, aggiunta punti luce/prese e cablaggio di reti internet LAN.</p>
             </div>
         </div>
     </div>
@@ -571,22 +568,25 @@
         <!-- FORM QUADRI INDUSTRIALI (B2B) -->
         <!-- ========================================== -->
         <div id="form-industriale">
-            <form action="https://formsubmit.co/caccin.cablaggi@gmail.com" method="POST" enctype="multipart/form-data">
+            <form id="form-b2b-ele" action="https://formsubmit.co/caccin.cablaggi@gmail.com" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_subject" value="Preventivo Industriale Caccin Cablaggi">
-                <input type="hidden" name="Settore" value="Industriale / Quadristica">
+                <!-- Reindirizzamento alla pagina elegante personalizzata -->
+                <input type="hidden" name="_next" value="grazie.html">
+                <!-- ID aggiunto per iniettare l'oggetto via JavaScript -->
+                <input type="hidden" name="_subject" id="subject-b2b" value="Preventivo Industriale">
+                <input type="hidden" name="📁 Categoria Canale" value="Industriale / Quadristica B2B">
 
                 <div class="cards">
                     <div class="card">
                         <h3>Dati Azienda</h3>
                         <label>Ragione Sociale</label>
-                        <input type="text" name="Ragione Sociale" required>
+                        <input type="text" name="🏢 Ragione Sociale" id="b2b-rag-soc" required>
 
                         <label>Referente</label>
-                        <input type="text" name="Referente" required>
+                        <input type="text" name="👤 Nome Referente" required>
 
                         <label>Ruolo</label>
-                        <select name="Ruolo">
+                        <select name="💼 Ruolo Aziendale">
                             <option>Titolare</option>
                             <option>Responsabile Acquisti</option>
                             <option>Responsabile Produzione</option>
@@ -595,32 +595,32 @@
                         </select>
 
                         <label>Email</label>
-                        <input type="email" name="Email" required>
+                        <input type="email" name="📩 Email Contatto" required>
 
                         <label>Telefono</label>
-                        <input type="text" name="Telefono">
+                        <input type="text" name="📞 Telefono Diretto">
                     </div>
 
                     <div class="card">
                         <h3>Tipo di lavorazione</h3>
                         <div style="text-align: left; margin-top: 10px;">
-                            <label><input type="checkbox" name="Lavorazione[]" value="Quadro elettrico"> Quadro elettrico</label>
-                            <label><input type="checkbox" name="Lavorazione[]" value="Quadro elettropneumatico"> Quadro elettropneumatico</label>
-                            <label><input type="checkbox" name="Lavorazione[]" value="Assemblaggio elettromeccanico"> Assemblaggio elettromeccanico</label>
-                            <label><input type="checkbox" name="Lavorazione[]" value="Altro"> Altro</label>
+                            <label><input type="checkbox" class="tipo-lav-cb" name="🔧 Servizio Richiesto[]" value="Quadro elettrico"> Quadro elettrico</label>
+                            <label><input type="checkbox" class="tipo-lav-cb" name="🔧 Servizio Richiesto[]" value="Quadro elettropneumatico"> Quadro elettropneumatico</label>
+                            <label><input type="checkbox" class="tipo-lav-cb" name="🔧 Servizio Richiesto[]" value="Assemblaggio elettromeccanico"> Assemblaggio elettromeccanico</label>
+                            <label><input type="checkbox" class="tipo-lav-cb" name="🔧 Servizio Richiesto[]" value="Altro"> Altro</label>
                         </div>
                     </div>
 
                     <div class="card">
                         <h3>Carpenteria</h3>
                         <div style="text-align: left; margin-top: 10px; margin-bottom: 15px;">
-                            <label><input type="radio" name="Carpenteria" value="Cliente" checked class="carpCliente"> Fornita dal cliente</label>
-                            <label><input type="radio" name="Carpenteria" value="Caccin" class="carpCaccin"> Fornita da Caccin Cablaggi</label>
+                            <label><input type="radio" name="📦 Fornitura Carpenteria" value="Fornita dal cliente" checked class="carpCliente"> Fornita dal cliente</label>
+                            <label><input type="radio" name="📦 Fornitura Carpenteria" value="Fornita da Caccin Cablaggi" class="carpCaccin"> Fornita da Caccin Cablaggi</label>
                         </div>
 
                         <div class="carpenteriaBox" style="display:none;margin-top:20px;">
                             <label>Marca carpenteria</label>
-                            <select name="Marca Carpenteria">
+                            <select name="🏷️ Marca Struttura">
                                 <option>Rittal</option>
                                 <option>ETA</option>
                                 <option>Schneider Electric</option>
@@ -633,56 +633,56 @@
                             </select>
 
                             <label>Modello carpenteria</label>
-                            <input type="text" name="Modello Carpenteria" placeholder="Es. AX 1200x800x300">
+                            <input type="text" name="📐 Modello e Misure" placeholder="Es. AX 1200x800x300">
                         </div>
                     </div>
 
                     <div class="card">
                         <h3>Componentistica</h3>
                         <div style="text-align: left; margin-top: 10px; margin-bottom: 15px;">
-                            <label><input type="radio" name="Componenti" value="Cliente" checked class="compCliente"> Fornita dal cliente</label>
-                            <label><input type="radio" name="Componenti" value="Caccin" class="compCaccin"> Fornita da Caccin Cablaggi</label>
+                            <label><input type="radio" name="🔌 Fornitura Materiale Elettrico" value="Fornito dal cliente" checked class="compCliente"> Fornito dal cliente</label>
+                            <label><input type="radio" name="🔌 Fornitura Materiale Elettrico" value="Fornito da Caccin Cablaggi" class="compCaccin"> Fornito da Caccin Cablaggi</label>
                         </div>
 
                         <div class="componentiBox" style="display:none;margin-top:20px; text-align: left;">
                             <p style="font-weight: bold; margin-bottom: 10px;">Marchi richiesti</p>
-                            <label><input type="checkbox" name="Marchi[]" value="Siemens"> Siemens</label>
-                            <label><input type="checkbox" name="Marchi[]" value="Schneider Electric"> Schneider Electric</label>
-                            <label><input type="checkbox" name="Marchi[]" value="ABB"> ABB</label>
-                            <label><input type="checkbox" name="Marchi[]" value="Phoenix Contact"> Phoenix Contact</label>
-                            <label><input type="checkbox" name="Marchi[]" value="WAGO"> WAGO</label>
-                            <label><input type="checkbox" name="Marchi[]" value="Weidmüller"> Weidmüller</label>
-                            <label><input type="checkbox" name="Marchi[]" value="Eaton"> Eaton</label>
-                            <label><input type="checkbox" name="Marchi[]" value="Omron"> Omron</label>
-                            <label><input type="checkbox" name="Marchi[]" value="IFM"> IFM</label>
-                            <label><input type="checkbox" name="Marchi[]" value="SICK"> SICK</label>
-                            <label><input type="checkbox" name="Marchi[]" value="Festo"> Festo</label>
-                            <label><input type="checkbox" name="Marchi[]" value="SMC"> SMC</label>
+                            <label><input type="checkbox" name="🛠️ Brand Componenti[]" value="Siemens"> Siemens</label>
+                            <label><input type="checkbox" name="🛠️ Brand Componenti[]" value="Schneider Electric"> Schneider Electric</label>
+                            <label><input type="checkbox" name="🛠️ Brand Componenti[]" value="ABB"> ABB</label>
+                            <label><input type="checkbox" name="🛠️ Brand Componenti[]" value="Phoenix Contact"> Phoenix Contact</label>
+                            <label><input type="checkbox" name="🛠️ Brand Componenti[]" value="WAGO"> WAGO</label>
+                            <label><input type="checkbox" name="🛠️ Brand Componenti[]" value="Weidmüller"> Weidmüller</label>
+                            <label><input type="checkbox" name="🛠️ Brand Componenti[]" value="Eaton"> Eaton</label>
+                            <label><input type="checkbox" name="🛠️ Brand Componenti[]" value="Omron"> Omron</label>
+                            <label><input type="checkbox" name="🛠️ Brand Componenti[]" value="IFM"> IFM</label>
+                            <label><input type="checkbox" name="🛠️ Brand Componenti[]" value="SICK"> SICK</label>
+                            <label><input type="checkbox" name="🛠️ Brand Componenti[]" value="Festo"> Festo</label>
+                            <label><input type="checkbox" name="🛠️ Brand Componenti[]" value="SMC"> SMC</label>
                             <br>
                             <label>Altro marchio</label>
-                            <input type="text" name="Altro Marchio">
+                            <input type="text" name="✏️ Altri Marchi Specifici">
                         </div>
                     </div>
 
                     <div class="card">
                         <h3>Documentazione</h3>
                         <label>Schema elettrico</label>
-                        <input type="file" name="Schema">
+                        <input type="file" name="📄 Allegato_Schema">
 
                         <label>Layout quadro</label>
-                        <input type="file" name="Layout">
+                        <input type="file" name="📄 Allegato_Layout">
 
                         <label>Distinta base</label>
-                        <input type="file" name="BOM">
+                        <input type="file" name="📄 Allegato_BOM">
                     </div>
 
                     <div class="card">
                         <h3>Informazioni aggiuntive</h3>
                         <label>Numero quadri</label>
-                        <input type="number" name="Quantità" min="1" value="1">
+                        <input type="number" name="🔢 Quantità Commessa" min="1" value="1">
 
                         <label>Consegna richiesta</label>
-                        <select name="Consegna">
+                        <select name="📅 Tempistiche Consegna">
                             <option>Urgente</option>
                             <option>15 giorni</option>
                             <option>30 giorni</option>
@@ -690,13 +690,13 @@
                         </select>
 
                         <label>Note</label>
-                        <textarea name="Note" rows="4" placeholder="Note tecniche aggiuntive..."></textarea>
+                        <textarea name="📝 Note Specifiche" rows="4" placeholder="Note tecniche aggiuntive..."></textarea>
                     </div>
                 </div>
 
                 <div style="max-width:600px; margin: 25px auto; text-align: left; padding: 0 15px;">
                     <label style="font-weight: normal; font-size: 14px; display: flex; align-items: flex-start; gap: 10px;">
-                        <input type="checkbox" name="Privacy Consenso" required style="margin-top: 3px;">
+                        <input type="checkbox" name="🔒 Accettazione Privacy B2B" required style="margin-top: 3px;">
                         <span>Acconsento al trattamento dei miei dati in conformità alla <a href="privacy.html" target="_blank">Privacy Policy</a> del sito.</span>
                     </label>
                 </div>
@@ -708,34 +708,35 @@
         </div>
 
         <!-- ========================================== -->
-        <!-- FORM CIVILE MODIFICATO (RIMOZIONE OPZIONI EXTRA NON SVOLTE) -->
+        <!-- FORM CIVILE RAMIFICATO (PRIVATI / B2C) -->
         <!-- ========================================== -->
         <div id="form-civile">
-            <form action="https://formsubmit.co/caccin.cablaggi@gmail.com" method="POST" enctype="multipart/form-data">
+            <form id="form-b2c-ele" action="https://formsubmit.co/caccin.cablaggi@gmail.com" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_subject" value="Preventivo Civile Residenziale Caccin Cablaggi">
-                <input type="hidden" name="Settore" value="Civile / Abitazioni">
+                <input type="hidden" name="_next" value="grazie.html">
+                <input type="hidden" name="_subject" id="subject-b2c" value="Preventivo Civile">
+                <input type="hidden" name="📁 Categoria Canale" value="Residenziale / Civile Privati">
 
                 <div class="cards">
                     <div class="card">
                         <h3>I tuoi Riferimenti</h3>
                         <label>Nome e Cognome / Richiedente</label>
-                        <input type="text" name="Cliente Civile" required>
+                        <input type="text" name="👤 Cliente Richiedente" id="b2c-nome-cliente" required>
 
                         <label>Città dell'intervento</label>
-                        <input type="text" name="Località Intervento" placeholder="Es. Pianiga (VE)" required>
+                        <input type="text" name="📍 Località Intervento" placeholder="Es. Pianiga (VE)" required>
 
                         <label>Email di contatto</label>
-                        <input type="email" name="Email Civile" required>
+                        <input type="email" name="📩 Email Privato" required>
 
                         <label>Telefono / Cellulare</label>
-                        <input type="text" name="Telefono Civile" required>
+                        <input type="text" name="📞 Recapito Telefonico" required>
                     </div>
 
                     <div class="card">
                         <h3>Tipologia di Intervento Civile</h3>
                         <label>Seleziona la tua esigenza:</label>
-                        <select name="Tipo Intervento Civile" id="select-tipo-civile" required>
+                        <select name="🛠️ Tipologia Intervento" id="select-tipo-civile" required>
                             <option value="" disabled selected>-- Scegli un'opzione --</option>
                             <option value="nuova-costruzione">Nuova costruzione (Impianto Ex-Novo)</option>
                             <option value="ristrutturazione">Ristrutturazione Edilizia / Rifacimento Totale</option>
@@ -748,45 +749,45 @@
                     <div class="card" id="box-domande-specifiche" style="display: none;">
                         <h3>Dettagli Tecnici Intervento</h3>
                         
-                        <!-- Sotto-bivio: Nuova Costruzione / Ristrutturazione (Pulito da Domotica/Fotovoltaico/Allarmi) -->
+                        <!-- Sotto-bivio: Nuova Costruzione / Ristrutturazione -->
                         <div id="ramo-costruzione-ristrutturazione" style="display: none;">
                             <label>Superficie indicativa immobile</label>
-                            <select name="Dimensione Immobile">
+                            <select name="📐 Dimensione Abitazione">
                                 <option>Fino a 70 mq (Appartamento/Mini)</option>
                                 <option>Da 70 a 130 mq (Casa standard/Tricamere)</option>
                                 <option>Oltre 130 mq / Villa plurifamiliare</option>
                             </select>
 
                             <label>Piani totali abitazione</label>
-                            <input type="number" name="Numero Piani Abitazione" min="1" value="1">
+                            <input type="number" name="🏢 Numero Livelli Immobile" min="1" value="1">
 
                             <label style="margin-top: 15px; font-weight: bold;">Servizi aggiuntivi richiesti:</label>
-                            <label><input type="checkbox" name="Impianti Extra[]" value="Rete Dati Cablata / LAN"> Rete Internet LAN Cablata (Prese Ethernet nelle stanze)</label>
+                            <label><input type="checkbox" name="🌐 Cablaggi Extra[]" value="Rete Dati Cablata / LAN"> Rete Internet LAN Cablata (Prese Ethernet nelle stanze)</label>
                         </div>
 
                         <!-- Sotto-bivio: Riparazione Guasto -->
                         <div id="ramo-riparazione-guasto" style="display: none;">
                             <label>Anomalia o problema riscontrato</label>
-                            <select name="Natura Guasto">
+                            <select name="🔍 Sintomatologia Guasto">
                                 <option>Mancanza totale di energia elettrica</option>
                                 <option>Il salvavita scatta continuamente (Problema di isolamento)</option>
                                 <option>Presa elettrica o punto luce non funzionante</option>
-                                <option>Cortocircuito localizzato su linee esistenti</option>
+                                <option>Cortocircuito localizzato su linee existent</option>
                                 <option>Altro problema specifico</option>
                             </select>
 
                             <label>Livello di priorità dell'intervento</label>
-                            <select name="Urgenza Guasto">
+                            <select name="🆘 Livello Urgenza">
                                 <option value="Urgente">🆘 MASSIMA URGENZA (Blackout/Pericolo)</option>
                                 <option value="Pochi giorni">Risoluzione entro 48-72 ore</option>
                                 <option value="Pianificabile">Intervento di manutenzione ordinaria</option>
                             </select>
                         </div>
 
-                        <!-- Sotto-bivio: Ampliamento / Nuova Installazione (Pulito da Wallbox/Allarmi) -->
+                        <!-- Sotto-bivio: Ampliamento / Nuova Installazione -->
                         <div id="ramo-ampliamento-installazione" style="display: none;">
                             <label>Quale opera dedicata desideri integrare?</label>
-                            <select name="Tipo Specifico Ampliamento">
+                            <select name="⚡ Tipo Ampliamento Selezionato">
                                 <option value="Linea Dedicata">Nuova linea di alimentazione dedicata (Es. Climatizzatore, Piano Induzione)</option>
                                 <option value="Punti Luce Prese">Aggiunta e spostamento di nuove prese o punti luce</option>
                                 <option value="Rete LAN">Estensione rete internet cablata LAN</option>
@@ -794,14 +795,14 @@
                             </select>
 
                             <label>Descrizione sintetica del lavoro richiesto</label>
-                            <textarea name="Dettaglio Ampliamento" rows="3" placeholder="Es: Devo portare una nuova linea protetta dal quadro principale fino in cucina per il nuovo piano a induzione..."></textarea>
+                            <textarea name="📝 Descrizione Opere Richieste" rows="3" placeholder="Es: Devo portare una nuova linea protetta dal quadro principale fino in cucina per il nuovo piano a induzione..."></textarea>
                         </div>
                     </div>
                 </div>
 
                 <div style="max-width:600px; margin: 25px auto; text-align: left; padding: 0 15px;">
                     <label style="font-weight: normal; font-size: 14px; display: flex; align-items: flex-start; gap: 10px;">
-                        <input type="checkbox" name="Privacy Consenso Civile" required style="margin-top: 3px;">
+                        <input type="checkbox" name="🔒 Accettazione Privacy B2C" required style="margin-top: 3px;">
                         <span>Acconsento al trattamento dei dati personali in conformità alla <a href="privacy.html" target="_blank">Privacy Policy</a>.</span>
                     </label>
                 </div>
@@ -837,7 +838,7 @@
 
 <footer>
     <div class="container">
-        <p style="font-weight: bold; font-size: 18px;">Caccin Cablaggi di Caccin Davide</p>
+        <p style="font-weight: bold; font-size: 18px;">Caccin Cablaggi di Caccin Nicola</p>
         <p>Sede Operativa: Pianiga (Venezia) | Interventi in tutto il Veneto per la quadristica industriale</p>
         <p style="font-size: 13px; margin-top: 15px; opacity: 0.7;">
             &copy; 2026 Caccin Cablaggi. Tutti i diritti riservati. P.IVA 04473340277 | <a href="privacy.html" target="_blank" style="color: #fff; text-decoration: underline;">Privacy Policy</a>
@@ -969,6 +970,33 @@
         if(e.target === lightbox) {
             lightbox.style.display = 'none';
         }
+    });
+
+    // =========================================================================
+    // TRUCCO JS: CONFIGURAZIONE DINAMICA OGGETTO EMAIL PRIMA DELL'INVIO
+    // =========================================================================
+    document.getElementById('form-b2b-ele').addEventListener('submit', function() {
+        const ragSoc = document.getElementById('b2b-rag-soc').value.trim() || 'Azienda';
+        const cbSelezionati = this.querySelectorAll('.tipo-lav-cb:checked');
+        let tipoLavoro = "Quadro Elettrico"; // Default
+        
+        if (cbSelezionati.length > 0) {
+            // Estrae i valori dei box spuntati (es. Quadro Elettrico, Elettropneumatico)
+            const valori = Array.from(cbSelezionati).map(cb => cb.value);
+            tipoLavoro = valori.join(' + ');
+        }
+        
+        // Iniezione nel campo hidden dell'oggetto mail FormSubmit
+        document.getElementById('subject-b2b').value = `${ragSoc} - ${tipoLavoro}`;
+    });
+
+    document.getElementById('form-b2c-ele').addEventListener('submit', function() {
+        const nomeCliente = document.getElementById('b2c-nome-cliente').value.trim() || 'Privato';
+        const selectIntervento = document.getElementById('select-tipo-civile');
+        const testoIntervento = selectIntervento.options[selectIntervento.selectedIndex].text;
+        
+        // Iniezione nel campo hidden dell'oggetto mail FormSubmit
+        document.getElementById('subject-b2c').value = `${nomeCliente} - Civile (${testoIntervento})`;
     });
 </script>
 </body>
