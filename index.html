@@ -143,6 +143,49 @@
             gap: 12px;
         }
 
+        /* Nuovo Footer per l'input della Chat */
+        .cablobot-footer {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #e0e0e0;
+            background: #ffffff;
+            align-items: center;
+        }
+
+        #cablobot-input {
+            flex: 1;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 10px 15px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        #cablobot-input:focus {
+            border-color: #006666;
+        }
+
+        #cablobot-send {
+            background: #006666;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            margin-left: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: background 0.2s;
+        }
+
+        #cablobot-send:hover {
+            background: #ff6b35;
+        }
+
         .msg {
             max-width: 80%;
             padding: 10px 14px;
@@ -632,7 +675,7 @@
 <section class="hero" style="text-align: center; padding: 60px 0;">
     <div class="container" style="max-width: 800px; margin: auto;">
         <h1>Realizzazione quadri elettrici industriali e impianti elettrici civili</h1>
-        <p>Supportiamo le aziende dell'automazione industriale nella quadristica conto terzi e affianchiamo i privati nella realizzazione di impianti elettrici tradizionali ad alte prestazioni for le abitazioni.</p>
+        <p>Supportiamo le aziende dell'automazione industriale nella quadristica conto terzi e affianchiamo i privati nella realizzazione di impianti elettrici tradizionali ad alte prestazioni per le abitazioni.</p>
         
         <div style="margin-bottom: 20px; text-align: center;">
             <a href="#preventivo" class="btn" style="padding: 15px 30px; font-size: 18px;">Richiedi un'analisi di progetto</a>
@@ -1072,6 +1115,40 @@
     </div>
 </footer>
 
+<!-- ==========================================
+   INTERFACCIA GRAFICA DI CABLOBOT
+   ========================================== -->
+<div class="cablobot-button" id="cablobot-toggle" title="Parla con Cablobot">
+    <div class="robot-face">
+        <div class="robot-eye"></div>
+        <div class="robot-eye"></div>
+    </div>
+</div>
+
+<div class="cablobot-window" id="cablobot-win">
+    <div class="cablobot-header">
+        <div class="robot-face" style="width:30px; height:25px; background:#004d4d;">
+            <div class="robot-eye" style="width:5px; height:5px; background:#fff;"></div>
+            <div class="robot-eye" style="width:5px; height:5px; background:#fff;"></div>
+        </div>
+        <div>
+            <div>Cablobot 🤖</div>
+            <div class="status"><span style="color:#25d366;">●</span> Assistente Caccin Cablaggi</div>
+        </div>
+        <span id="close-cablobot" style="margin-left:auto; cursor:pointer; font-size:20px;">&times;</span>
+    </div>
+    
+    <div class="cablobot-body" id="cablobot-messages">
+        <!-- I messaggi appariranno qui dinamicamente -->
+    </div>
+
+    <!-- NUOVA SEZIONE: Barra di digitazione e pulsante di invio -->
+    <div class="cablobot-footer">
+        <input type="text" id="cablobot-input" placeholder="Chiedimi qualsiasi cosa..." autocomplete="off">
+        <button id="cablobot-send" title="Invia">✈️</button>
+    </div>
+</div>
+
 <script>
     // ==========================================
     // IL CERVELLO DI CABLOBOT
@@ -1080,6 +1157,8 @@
     const cbWin = document.getElementById('cablobot-win');
     const cbClose = document.getElementById('close-cablobot');
     const cbMessages = document.getElementById('cablobot-messages');
+    const cbInput = document.getElementById('cablobot-input');
+    const cbSend = document.getElementById('cablobot-send');
 
     let chatIniziata = false;
 
@@ -1100,6 +1179,14 @@
         cbWin.style.display = 'none';
     });
 
+    // Invio con tasto cliccato o tasto INVIO sulla tastiera
+    cbSend.addEventListener('click', gestisciInvioMessaggio);
+    cbInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            gestisciInvioMessaggio();
+        }
+    });
+
     function aggiungiMessaggio(testo, mittente) {
         const m = document.createElement('div');
         m.className = `msg ${mittente}`;
@@ -1117,7 +1204,6 @@
             btn.className = 'opt-btn';
             btn.innerText = opt.testo;
             btn.addEventListener('click', () => {
-                // Rimuovi i pulsanti opzione appena cliccati
                 containerOpzioni.remove();
                 aggiungiMessaggio(opt.testo, 'user');
                 setTimeout(() => opt.azione(), 600);
@@ -1128,14 +1214,15 @@
         cbMessages.scrollTop = cbMessages.scrollHeight;
     }
 
+    // Presentazione iniziale modificata su tua richiesta
     function avviaCablobot() {
         chatIniziata = true;
         cbMessages.innerHTML = ''; // Pulisce la chat
-        aggiungiMessaggio("Bip bop! 🤖 Ciao! Sono <strong>Cablobot</strong>, l'assistente virtuale di Caccin Cablaggi.", 'bot');
+        aggiungiMessaggio("Bip bop! 🤖 Ciao! Sono <strong>Cablobot</strong>, l'assistente intelligente di Caccin Cablaggi.", 'bot');
         setTimeout(() => {
-            aggiungiMessaggio("Come posso aiutarti oggi? Scegli un'opzione qui sotto così so come indirizzarti:", 'bot');
+            aggiungiMessaggio("<strong>Fammi qualsiasi domanda!</strong> Puoi scriverla liberamente qui sotto, oppure scegliere un percorso rapido da queste opzioni:", 'bot');
             menuPrincipale();
-        }, 1000);
+        }, 800);
     }
 
     function menuPrincipale() {
@@ -1145,6 +1232,83 @@
             { testo: "📍 Dove operate / Zone coperte", azione: gestisciZone },
             { testo: "💰 Quanto costa un preventivo?", azione: gestisciCosti }
         ]);
+    }
+
+    // Gestore dell'invio dei messaggi dell'utente
+    function gestisciInvioMessaggio() {
+        const testoUtente = cbInput.value.trim();
+        if (!testoUtente) return;
+
+        // Aggiungi testo utente a schermo
+        aggiungiMessaggio(testoUtente, 'user');
+        cbInput.value = '';
+
+        // Mostra un piccolo indicatore di caricamento "sta scrivendo" temporaneo
+        const tempMsg = document.createElement('div');
+        tempMsg.className = 'msg bot';
+        tempMsg.innerHTML = '<em>Cablobot sta scrivendo... 💬</em>';
+        cbMessages.appendChild(tempMsg);
+        cbMessages.scrollTop = cbMessages.scrollHeight;
+
+        // Rispondi in base alle parole chiave scritte
+        setTimeout(() => {
+            tempMsg.remove();
+            const rispostaBot = elaboraRispostaIntelligente(testoUtente);
+            aggiungiMessaggio(rispostaBot, 'bot');
+        }, 1000);
+    }
+
+    // MOTORE DI RISPOSTA DINAMICO (Elabora e risponde a qualsiasi cosa)
+    function elaboraRispostaIntelligente(testo) {
+        const t = testo.toLowerCase();
+
+        // Saluti
+        if (t.includes('ciao') || t.includes('salve') || t.includes('buongiorno') || t.includes('buonasera') || t.includes('hey')) {
+            return "Ciao! Come posso aiutarti oggi? Chiedimi pure informazioni sui quadri elettrici, impianti civili o su come richiedere un preventivo! 🤖";
+        }
+
+        // Preventivo / Costi
+        if (t.includes('preventiv') || t.includes('cost') || t.includes('prezz') || t.includes('tariff') || t.includes('pagar') || t.includes('gratis') || t.includes('gratuito')) {
+            return "Il preventivo e lo studio di fattibilità con Caccin Cablaggi sono <strong>100% gratuiti</strong> e senza impegno!<br><br>Puoi compilare direttamente i moduli qui sulla pagina oppure scriverci direttamente. Desideri che ti mostri dove compilare la richiesta?";
+        }
+
+        // Quadri elettrici / Industriale
+        if (t.includes('quadr') || t.includes('industrial') || t.includes('cablagg') || t.includes('b2b') || t.includes('macchin') || t.includes('schema') || t.includes('bom')) {
+            return "Siamo specializzati nella quadristica industriale conto terzi (quadri elettrici ed elettropneumatici) seguendo i vostri schemi tecnici e distinte base.<br><br>Se vuoi, posso sbloccarti subito il modulo industriale sulla pagina per inviarci la tua documentazione! Vuoi procedere?";
+        }
+
+        // Impianti Civili / Case
+        if (t.includes('casa') || t.includes('civile') || t.includes('ristruttura') || t.includes('appartament') || t.includes('impiant') || t.includes('villa') || t.includes('prese')) {
+            return "Realizziamo impianti elettrici civili tradizionali ad alte prestazioni per nuove abitazioni o ristrutturazioni complete a Pianiga e province di Venezia e Padova.<br><br>Vuoi che ti mostri il configuratore per calcolare una richiesta di preventivo civile?";
+        }
+
+        // Zone Operative
+        if (t.includes('dove') || t.includes('zona') || t.includes('zone') || t.includes('pianiga') || t.includes('venezia') || t.includes('padova') || t.includes('veneto') || t.includes('comun') || t.includes('città')) {
+            return "La nostra sede operativa è a <strong>Pianiga (Venezia)</strong>. 📍<br><br>Per <strong>impianti civili e manutenzioni</strong> operiamo tra Venezia, Padova e comuni limitrofi.<br><br>Per la <strong>quadristica industriale conto terzi</strong>, gestiamo commesse e spedizioni in tutto il Veneto e Nord Italia!";
+        }
+
+        // Guasti ed Emergenze
+        if (t.includes('guast') || t.includes('rott') || t.includes('urgente') || t.includes('salvavita') || t.includes('corto') || t.includes('blackout') || t.includes('corrente') || t.includes('emergenz')) {
+            return "Se hai un'emergenza elettrica o un guasto a casa, ti consiglio di cliccare sul pulsante verde in basso a sinistra 💬 per scriverci subito su WhatsApp, oppure chiama Davide direttamente al <strong>+39 339 285 9037</strong> per un intervento urgente!";
+        }
+
+        // Contatti
+        if (t.includes('telefon') || t.includes('cellular') || t.includes('contatt') || t.includes('scriver') || t.includes('email') || t.includes('mail') || t.includes('whatsapp') || t.includes('numero')) {
+            return "Certamente! Puoi contattare Davide di Caccin Cablaggi al telefono o WhatsApp al numero <strong>+39 339 285 9037</strong>, oppure scriverci una mail a <strong>caccin.cablaggi@gmail.com</strong>.";
+        }
+
+        // Chi è Cablobot
+        if (t.includes('chi sei') || t.includes('cosa fai') || t.includes('tuo nome') || t.includes('cablobot')) {
+            return "Sono Cablobot, il fedele assistente virtuale di Caccin Cablaggi! 🤖 Il mio scopo è aiutarti a navigare nel sito, darti informazioni repentine sui nostri cablaggi e indirizzarti verso il preventivo perfetto.";
+        }
+
+        // Ringraziamenti
+        if (t.includes('grazie') || t.includes('perfetto') || t.includes('ottimo') || t.includes('ok') || t.includes('va bene') || t.includes('gentile')) {
+            return "Figurati, è un vero piacere aiutarti! Se hai altre domande, scrivi pure qui sotto, altrimenti ti auguro una splendida giornata! ⚡🤖";
+        }
+
+        // Fallback per qualsiasi altra domanda generica
+        return "La tua domanda è molto interessante! 🤖 Trattandosi di una richiesta specifica, il modo migliore per avere una risposta precisa è parlarne direttamente con Davide al <strong>+39 339 285 9037</strong> (anche su WhatsApp 💬) o scriverci a <strong>caccin.cablaggi@gmail.com</strong>.<br><br>Se invece vuoi informazioni su preventivi, impianti o dove operiamo, chiedimi pure!";
     }
 
     function gestisciB2B() {
@@ -1176,8 +1340,7 @@
         setTimeout(() => {
             aggiungiMessaggio("Per gli <strong>impianti civili e guasti</strong> operiamo principalmente tra Venezia, Padova e comuni limitrofi.<br><br>Per la <strong>quadristica industriale conto terzi</strong>, gestiamo commesse e spedizioni in tutto il Veneto e Nord Italia.", 'bot');
             setTimeout(() => {
-                aggiungiMessaggio("Vuoi sapere altro?", 'bot');
-                menuPrincipale();
+                aggiungiMessaggio("Vuoi sapere altro? Puoi scrivermelo qui sotto in qualunque momento!", 'bot');
             }, 1500);
         }, 1000);
     }
@@ -1187,10 +1350,11 @@
         setTimeout(() => {
             aggiungiMessaggio("Ci mandi i dati (o gli schemi se sei un'azienda) e ti rispondiamo entro 24 ore lavorative.", 'bot');
             setTimeout(() => {
-                menuPrincipale();
+                aggiungiMessaggio("Scrivimi pure se hai dubbi su come procedere!", 'bot');
             }, 1000);
         }, 1000);
     }
+
     // 1. Barra di avanzamento dello scorrimento (Progress Bar)
     window.addEventListener('scroll', () => {
         const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
@@ -1544,31 +1708,5 @@
         }
     });
 </script>
-    <!-- ==========================================
-       INTERFACCIA GRAFICA DI CABLOBOT
-       ========================================== -->
-    <div class="cablobot-button" id="cablobot-toggle" title="Parla con Cablobot">
-        <div class="robot-face">
-            <div class="robot-eye"></div>
-            <div class="robot-eye"></div>
-        </div>
-    </div>
-
-    <div class="cablobot-window" id="cablobot-win">
-        <div class="cablobot-header">
-            <div class="robot-face" style="width:30px; height:25px; background:#004d4d;">
-                <div class="robot-eye" style="width:5px; height:5px; background:#fff;"></div>
-                <div class="robot-eye" style="width:5px; height:5px; background:#fff;"></div>
-            </div>
-            <div>
-                <div>Cablobot 🤖</div>
-                <div class="status"><span style="color:#25d366;">●</span> Assistente Caccin Cablaggi</div>
-            </div>
-            <span id="close-cablobot" style="margin-left:auto; cursor:pointer; font-size:20px;">&times;</span>
-        </div>
-        <div class="cablobot-body" id="cablobot-messages">
-            <!-- I messaggi appariranno qui dinamicamente -->
-        </div>
-    </div>
 </body>
 </html>
