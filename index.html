@@ -539,7 +539,7 @@
 
         @keyframes blinkRobot {
             0%, 90%, 100% { transform: scaleY(1); }
-            95% { transform: scaleY(0.1); }
+            55%, 95% { transform: scaleY(0.1); }
         }
 
         .robot-face::before {
@@ -813,8 +813,7 @@
 <section class="hero" style="text-align: center;">
     <div class="container" style="max-width: 900px; margin: auto;">
         <h1>Cablaggio Quadri Elettrici Industriali, Assemblaggi in Serie e Impiantistica Civile</h1>
-        <p>Dal prototipo speciale alla produzione di lotti industriali continui per costruttori di macchine.
-        Forniamo anche interventi elettrici e impiantistica civile d'eccellenza sul territorio padovano e veneziano.</p>
+        <p>Dal prototipo speciale alla produzione di lotti industriali continui per costruttori di macchine. Forniamo anche interventi elettrici e impiantistica civile d'eccellenza sul territorio padovano e veneziano.</p>
         
         <div class="hero-bivio-hub">
             <div class="hub-card">
@@ -929,9 +928,7 @@
         <div class="lock-icon">🔒</div>
         <div>
             <h4>La tua Proprietà Intellettuale è protetta</h4>
-            <p>Sei un ufficio tecnico o un costruttore di macchinari?
-            Puoi inviarci schemi industriali, schemi pneumatici o distinte in totale tranquillità.
-            Se preferisci, <strong>siamo pronti a firmare un accordo di riservatezza (NDA)</strong> prima che tu ci invii la documentazione della commessa.</p>
+            <p>Sei un ufficio tecnico o un costruttore di macchinari? Puoi inviarci schemi industriali, schemi pneumatici o distinte in totale tranquillità. Se preferisci, <strong>siamo pronti a firmare un accordo di riservatezza (NDA)</strong> prima che tu ci invii la documentazione della commessa.</p>
         </div>
     </div>
 </div>
@@ -946,7 +943,6 @@
             <button class="bivio-btn" id="btn-scelta-civile">🏠 Impianti Elettrici Civili / Privati</button>
         </div>
 
-        <!-- FORM B2B INDUSTRIALE -->
         <div id="form-industriale">
             <form id="form-b2b-ele" action="https://script.google.com/macros/s/AKfycbx9_4M3iiKIaemKFdGMQe_nTPbbhxS050lI5ctAj8MMvFEu_Uxf_XgAxIbbTA9nj5V2Uw/exec" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="_captcha" value="false">
@@ -961,36 +957,27 @@
                         <label>Referente</label>
                         <input type="text" name="👤 Nome Referente" placeholder="Nome e Cognome" required>
                         <label>Ruolo</label>
-                        <select name="💼 Ruolo Aziendale">
-                            <option>Responsabile Acquisti</option>
-                            <option>Responsabile Produzione</option>
-                            <option>Titolare / Amministratore</option>
-                            <option>Ufficio Tecnico</option>
-                            <option>Altro</option>
-                        </select>
+                        <input type="text" name="💼 Ruolo Aziendale" placeholder="Es. Responsabile Acquisti / Progettista">
                         <label>Email Diretta</label>
-                        <input type="email" name="📩 Email Contatto" placeholder="nome@azienda.it" required>
+                        <input type="email" name="📩 Email Referente" placeholder="Es. nome@azienda.it" required>
                         <label>Telefono / Cellulare</label>
-                        <input type="text" name="📞 Telefono Diretto" placeholder="Ufficio o Mobile">
+                        <input type="text" name="📞 Telefono Referente" placeholder="Contatto telefonico" required>
                     </div>
+
                     <div class="card">
                         <h3>Dettagli Commessa</h3>
-                        <label>Tipologia di Produzione</label>
-                        <div style="text-align: left; margin-top: 5px; margin-bottom: 15px;">
-                            <label><input type="radio" name="📦 Tipo Produzione" value="Prototipo" checked> Prototipo Singolo / Progetto Speciale</label><br>
-                            <label style="margin-top: 8px; display:inline-block;"><input type="radio" name="📦 Tipo Produzione" value="Produzione in serie"> Lotto in Serie / Fornitura Programmata</label>
-                        </div>
-                        <label>Pezzi Totali Previsti (Opzionale)</label>
-                        <input type="number" name="🤖 Numero Macchine Previste" placeholder="Es. 20" min="0">
-                        <label>Pezzi richiesti per singola consegna/lotto</label>
-                        <input type="number" name="🔲 Quadri per Singola Macchina" value="1" min="1" required>
-                        <label>Frequenza Consegne</label>
-                        <select name="📅 Frequenza di Fornitura">
-                            <option value="Una tantum">Fornitura singola (Una Tantum)</option>
+                        <label>Nome Macchina / Progetto Interno</label>
+                        <input type="text" name="🏷️ Progetto / Macchinario" placeholder="Es. Isola Robotizzata XY">
+                        <label>Quantità Lotto Richiesto</label>
+                        <input type="number" name="🔢 Quantità Lotto" placeholder="Es. 1 per prototipo, o 10 per serie" min="1" required>
+                        <label>Tipologia di Fornitura Commessa</label>
+                        <select name="📦 Tipo Fornitura">
+                            <option value="Singola / Prototipo">Prototipo / Lotto Singolo (Una Tantum)</option>
                             <option value="Mensile">Fornitura programmata mensile</option>
                             <option value="Continuativa">Fornitura continuativa / A chiamata</option>
                         </select>
                     </div>
+
                     <div class="card">
                         <h3>Lavorazione Richiesta</h3>
                         <div style="text-align: left; margin-top: 10px;">
@@ -1001,6 +988,7 @@
                             <label><input type="checkbox" class="tipo-lav-cb" name="🔧 Servizio Richiesto[]" value="Altro"> Altro / Da capitolato</label>
                         </div>
                     </div>
+
                     <div class="card">
                         <h3>Struttura, Carpenteria & IP</h3>
                         <div style="text-align: left; margin-top: 10px; margin-bottom: 15px;">
@@ -1029,29 +1017,35 @@
                             <option value="Non specificato / Da schema">Non specificato / Da schema</option>
                         </select>
                     </div>
+
                     <div class="card">
-                        <h3>Materiali & Componenti</h3>
+                        <h3>Fornitura Materiale Elettrico</h3>
                         <div style="text-align: left; margin-top: 10px; margin-bottom: 15px;">
-                            <label><input type="radio" name="🔌 Fornitura Materiale Elettrico" value="Fornito dal cliente" checked class="compCliente"> Componenti forniti in conto lavoro dal Cliente</label>
-                            <label style="margin-top: 8px; display:inline-block;"><input type="radio" name="🔌 Fornitura Materiale Elettrico" value="Fornito da Caccin Cablaggi" class="compCaccin"> Forniti interamente da Caccin Cablaggi (Su distinta)</label>
+                            <label><input type="radio" name="🔌 Fornitura Materiale Elettrico" value="In conto lavoro" checked class="compCliente"> Tutto in conto lavoro (Fornito dal cliente)</label><br>
+                            <label style="margin-top: 8px; display:inline-block;"><input type="radio" name="🔌 Fornitura Materiale Elettrico" value="Acquistato da Caccin" class="compCaccin"> Acquistato e fornito da Caccin Cablaggi (Su distinta)</label>
                         </div>
-                        <div class="componentiBox" style="display:none; margin-top:15px; text-align: left;">
-                            <p style="font-weight: bold; font-size: 14px; margin-bottom: 10px; color: #475569;">Brand di riferimento desiderati:</p>
+                        
+                        <div class="componentiBox" style="display:none; margin-top:15px;">
+                            <label style="color:#006666; font-weight:bold; margin-bottom:12px; display:block;">Seleziona i Brand preferiti per i componenti:</label>
                             <div class="brand-grid">
-                                <span class="brand-badge"><input type="checkbox" name="🛠️ Brand Componenti[]" value="Siemens"> Siemens</span>
-                                <span class="brand-badge"><input type="checkbox" name="🛠️ Brand Componenti[]" value="Schneider"> Schneider</span>
-                                <span class="brand-badge"><input type="checkbox" name="🛠️ Brand Componenti[]" value="ABB"> ABB</span>
-                                <span class="brand-badge"><input type="checkbox" name="🛠️ Brand Componenti[]" value="Finder"> Finder</span>
-                                <span class="brand-badge"><input type="checkbox" name="🛠️ Brand Componenti[]" value="Omron"> Omron</span>
-                                <span class="brand-badge"><input type="checkbox" name="🛠️ Brand Componenti[]" value="Phoenix"> Phoenix</span>
+                                <label class="brand-badge"><input type="checkbox" value="Siemens"> Siemens</label>
+                                <label class="brand-badge"><input type="checkbox" value="Schneider"> Schneider</label>
+                                <label class="brand-badge"><input type="checkbox" value="ABB"> ABB</label>
+                                <label class="brand-badge"><input type="checkbox" value="Rockwell"> Rockwell / AB</label>
+                                <label class="brand-badge"><input type="checkbox" value="Omron"> Omron</label>
+                                <label class="brand-badge"><input type="checkbox" value="Finder"> Finder</label>
+                                <label class="brand-badge"><input type="checkbox" value="Phoenix Contact"> Phoenix</label>
+                                <label class="brand-badge"><input type="checkbox" value="Weidmuller"> Weidmüller</label>
                             </div>
                         </div>
-                        <label>Fornitura Minuterie & Consumabili (Fascette, capicorda, guaine, ecc.)</label>
+
+                        <label>Fornitura Minuterie e Consumabili (Canaline, Morsetti, Capicorda, Guaine)</label>
                         <div style="text-align: left; margin-top: 5px; margin-bottom: 10px;">
                             <label><input type="radio" name="🔧 Minuterie Consumo" value="A carico di Caccin" checked> Forniti da Caccin Cablaggi (Inclusi nel servizio)</label><br>
                             <label style="margin-top: 8px; display:inline-block;"><input type="radio" name="🔧 Minuterie Consumo" value="A carico del cliente"> Forniti dal Cliente in conto lavoro</label>
                         </div>
                     </div>
+
                     <div class="card">
                         <h3>Dettagli Tecnici Cablaggio</h3>
                         <label>Sistema di Siglatura Cavi</label>
@@ -1061,7 +1055,6 @@
                             <option value="Siglatura secondo specifiche cliente">Secondo specifica / Capitolato cliente</option>
                             <option value="Nessuna siglatura">Nessuna siglatura richiesta</option>
                         </select>
-
                         <label>Sezione Massima Cavi Potenza</label>
                         <select name="⚡ Sezione Potenza">
                             <option value="Fino a 6 mm²">Fino a 6 mm² (Solo ausiliari e segnali)</option>
@@ -1069,53 +1062,55 @@
                             <option value="Fino a 50 mm²">Fino a 50 mm²</option>
                             <option value="Oltre 50 mm²">Oltre 50 mm² (Grosse correnti)</option>
                         </select>
-
-                        <label>Certificazioni e Collaudo</label>
-                        <select name="📋 Collaudo Richiesto">
-                            <option value="Standard (Isolamento, continuità + Report)" selected>Standard (Isolamento, continuità + Report interno)</option>
-                            <option value="Funzionale completo sotto tensione">Collaudo funzionale completo (Sotto tensione simulata)</option>
-                            <option value="Solo continuità base">Solo continuità circuitale base</option>
-                        </select>
+                        
+                        <label>Collaudo e Certificazioni</label>
+                        <div style="text-align: left; margin-top: 8px; margin-bottom: 12px;">
+                            <label><input type="checkbox" name="📋 Collaudo Richiesto" value="Collaudo continuità elettrica" checked> Richiedi Collaudo continuità elettrica</label>
+                        </div>
                         <div style="text-align: left; margin-top: 12px;">
-                            <label><input type="checkbox" class="cert-cb" value="Dichiarazione Conformità CE" checked> Dichiarazione Conformità CE</label><br>
-                            <label style="margin-top: 5px; display:inline-block;"><input type="checkbox" class="cert-cb" value="Certificazione UL 508A (Nord America)"> Richiesta Conformità UL 508A (USA / Canada)</label>
+                            <label><input type="checkbox" class="cert-cb" value="Dichiarazione Conformità CE" checked> Dichiarazione Conformità CE</label>
                         </div>
                     </div>
+
                     <div class="card">
                         <h3>Disegni e Schemi Elettrici</h3>
                         <p style="font-size: 13px; color: #64748b; margin-bottom: 12px; line-height: 1.4;">
                             Carica i file necessari. (Se superano 12MB totali, consigliamo WeTransfer a <em>caccin.cablaggi@gmail.com</em>).
                         </p>
                         <label>📄 Schemi Elettrici (PDF / DWG / ZIP)</label>
-                        <input type="file" name="📄 Allegato_Schema" id="allegato-schema">
-                        <label>📐 Disegno 3D / Meccanico (PDF / DWG - Opzionale)</label>
-                        <input type="file" name="📄 Allegato_Layout" id="allegato-layout">
-                        <label>📋 Distinta Base / BOM (XLSX / PDF - Opzionale)</label>
-                        <input type="file" name="📄 Allegato_BOM" id="allegato-bom">
+                        <input type="file" id="allegato-schema" accept=".pdf,.dwg,.zip,.rar,.7z">
+                        
+                        <label>🗺️ Layout Quadro (PDF / DWG / ZIP)</label>
+                        <input type="file" id="allegato-layout" accept=".pdf,.dwg,.zip,.rar,.7z">
+                        
+                        <label>📊 Distinta Base Componenti / BOM (Excel / PDF)</label>
+                        <input type="file" id="allegato-bom" accept=".xls,.xlsx,.csv,.pdf">
                     </div>
-                    <div class="card">
-                        <h3>Tempistiche e Note</h3>
-                        <label>Urgenza Consegna</label>
-                        <select name="📅 Tempistiche Consegna">
-                            <option>Standard (30 giorni)</option>
-                            <option>Urgente (10-15 giorni)</option>
-                            <option>Da concordare in fase di pianificazione</option>
-                        </select>
-                        <label>Note aggiuntive / Requisiti particolari</label>
-                        <textarea name="📝 Note Specifiche" rows="4" placeholder="Indica qui dettagli particolari, passacavi speciali, note d'officina..."></textarea>
+
+                    <div class="card" style="display:flex; flex-direction:column; justify-content:space-between;">
+                        <div>
+                            <h3>Dettagli e Note Aggiuntive</h3>
+                            <label>Note particolari della commessa o richieste speciali</label>
+                            <textarea name="💬 Dettagli / Richieste" rows="6" placeholder="Es. Richiesto l'uso esclusivo di terminali preisolati a bussola, oppure indicate particolari scadenze di consegna preferite..."></textarea>
+                        </div>
+                        <div style="background:#e0f2fe; border: 1px solid #bae6fd; padding:15px; border-radius:6px; margin-top:15px;">
+                            <p style="font-size:13px; color:#0369a1; margin:0; font-weight:600;">
+                                🔒 Spuntando l'invio dichiari di accettare la nostra politica di riservatezza. Caccin Cablaggi non cederà né mostrerà i tuoi disegni a terzi.
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div style="max-width:600px; margin: 30px auto; text-align: left;">
+
+                <div style="max-width:600px; margin: 40px auto; text-align: left;">
                     <label style="font-size: 13.5px; color: #475569; display: flex; align-items: flex-start; gap: 8px;">
                         <input type="checkbox" required name="Consentito Trattamento Dati B2B" style="margin-top: 3px;">
-                        <span>Acconsento al trattamento dei dati per la formulazione del preventivo B2B secondo GDPR.</span>
+                        <span>Acconsento al trattamento dei dati aziendali inviati ai fini dell'elaborazione del preventivo tecnico commerciale.</span>
                     </label>
                     <button type="submit" class="btn" style="width: 100%; margin-top: 20px; font-size: 18px;" id="b2b-submit-btn">⚡ Invia Dati Tecnici Commessa</button>
                 </div>
             </form>
         </div>
 
-        <!-- FORM B2C CIVILE / PRIVATI -->
         <div id="form-civile">
             <form id="form-b2c-ele" action="https://script.google.com/macros/s/AKfycbx9_4M3iiKIaemKFdGMQe_nTPbbhxS050lI5ctAj8MMvFEu_Uxf_XgAxIbbTA9nj5V2Uw/exec" method="POST">
                 <input type="hidden" name="_captcha" value="false">
@@ -1134,6 +1129,7 @@
                         <label>Comune del lavoro</label>
                         <input type="text" name="📍 Località Intervento" placeholder="Es. Pianiga, Mirano, Vigonza, ecc..." required>
                     </div>
+
                     <div class="card">
                         <h3>Dettagli Immobile</h3>
                         <label>Tipologia Immobile</label>
@@ -1144,7 +1140,6 @@
                             <option value="Negozio / Ufficio / Studio">Negozio / Ufficio / Studio</option>
                             <option value="Garage / Esterno">Garage / Esterno</option>
                         </select>
-
                         <label>Stato dell'Immobile</label>
                         <select name="🚧 Stato Immobile">
                             <option value="Nuova costruzione al grezzo">Nuova costruzione (al grezzo)</option>
@@ -1152,39 +1147,37 @@
                             <option value="Modifiche su impianto esistente">Modifiche / Ampliamenti su impianto esistente</option>
                             <option value="Immobile abitato (Solo manutenzione o guasto)">Immobile abitato (Manutenzione / Pronto Intervento)</option>
                         </select>
-
                         <label>Superficie Indicativa (Mq)</label>
                         <input type="number" name="📐 Superficie Mq" placeholder="Es. 120" min="1">
                     </div>
+
                     <div class="card">
                         <h3>Sistemi & Tecnologie Richieste</h3>
                         <p style="font-size: 13.5px; color: #475569; margin-bottom: 10px;">Seleziona i servizi d'interesse per il tuo immobile:</p>
                         <div style="text-align: left; line-height: 1.8;">
-                            <label><input type="checkbox" class="b2c-tech-cb" value="Domotica / Smart Home"> Smart Home (Domotica Connessa / Alexa-Google)</label><br>
-                            <label><input type="checkbox" class="b2c-tech-cb" value="Impianto Antifurto"> Impianto Antifurto / Allarme perimetrale</label><br>
-                            <label><input type="checkbox" class="b2c-tech-cb" value="Videosorveglianza TVCC"> Videosorveglianza (TVCC)</label><br>
-                            <label><input type="checkbox" class="b2c-tech-cb" value="Automazione Cancelli/Serrande"> Automazione Cancelli, Basculanti o Serrande</label><br>
-                            <label><input type="checkbox" class="b2c-tech-cb" value="Predisposizione Fotovoltaico"> Allacciamento o Predisposizione Fotovoltaico / Batteria</label><br>
-                            <label><input type="checkbox" class="b2c-tech-cb" value="Installazione Wallbox Auto"> Stazione ricarica auto elettrica (Wallbox)</label><br>
-                            <label><input type="checkbox" class="b2c-tech-cb" value="Cablaggio Rete LAN domestica"> Cablaggio Rete LAN Ethernet / Punti Accesso WiFi</label><br>
-                            <label><input type="checkbox" class="b2c-tech-cb" value="Videocitofonia"> Videocitofonia IP di ultima generazione</label>
+                            <label><input type="checkbox" class="b2c-tech-cb" value="Impianto Elettrico Tradizionale"> Impianto elettrico tradizionale</label><br>
+                            <label><input type="checkbox" class="b2c-tech-cb" value="Automazioni e Cancelli"> Automazione cancelli / basculanti</label><br>
+                            <label><input type="checkbox" class="b2c-tech-cb" value="Rete Dati e WiFi"> Cablaggio rete LAN strutturato o WiFi</label><br>
+                            <label><input type="checkbox" class="b2c-tech-cb" value="Impianto Antifurto / Videosorveglianza"> Sistema d'antifurto o Videosorveglianza</label><br>
+                            <label><input type="checkbox" class="b2c-tech-cb" value="Ricarica Auto EV"> Predisposizione o installazione Wallbox EV</label><br>
+                            <label><input type="checkbox" class="b2c-tech-cb" value="Solo Riparazione o Guasto"> Solo riparazione guasto improvviso</label>
                         </div>
                     </div>
+
                     <div class="card">
-                        <h3>Tipo di Intervento</h3>
-                        <label>Di cosa hai bisogno?</label>
-                        <select name="🛠️ Ambito Intervento" id="b2c-select">
-                            <option>Rifacimento Impianto Elettrico Completo</option>
-                            <option>Nuova Costruzione</option>
-                            <option>Piccole modifiche (Spostamento prese, punti luce)</option>
-                            <option>Guasto / Ricerca Anomalia o Cortocircuito</option>
-                            <option>Cablaggio Rete Internet LAN domestica</option>
-                            <option>Altro / Non presente in elenco</option>
+                        <h3>Ambito d'Intervento principale</h3>
+                        <label>Seleziona l'urgenza dell'intervento</label>
+                        <select id="b2c-select" name="🎯 Urgenza Lavoro">
+                            <option value="Programmata">Lavoro programmato (Nessuna fretta immediata)</option>
+                            <option value="Medio termine">Intervento entro poche settimane</option>
+                            <option value="Urgente">Urgente (Guasto bloccante o Blackout in corso)</option>
+                            <option value="Altro / Non presente in elenco">Altro / Non presente in elenco</option>
                         </select>
                         <label>Descrizione dettagliata della necessità</label>
                         <textarea name="💬 Messaggio / Richiesta" rows="6" placeholder="Descrivi qui brevemente cosa dobbiamo fare, quante stanze ha l'immobile o qual è il problema riscontrato..." required></textarea>
                     </div>
                 </div>
+
                 <div style="max-width:600px; margin: 30px auto; text-align: left;">
                     <label style="font-size: 13.5px; color: #475569; display: flex; align-items: flex-start; gap: 8px;">
                         <input type="checkbox" required name="Consentito Trattamento Dati B2C" style="margin-top: 3px;">
@@ -1225,7 +1218,10 @@
             <div class="cablobot-options">
                 <button class="opt-btn" onclick="botOption('industriale')">⚙️ Preventivo Quadri o Assemblaggi (B2B)</button>
                 <button class="opt-btn" onclick="botOption('civile')">🏠 Impianti Civili o Guasti Casa (B2C)</button>
-                <button class="opt-btn" onclick="botOption('whatsapp')">💬 Parlare direttamente su WhatsApp</button>
+                <button class="opt-btn" onclick="botOption('tempistiche')">⏱️ Quali sono i tempi di consegna?</button>
+                <button class="opt-btn" onclick="botOption('nda')">🔒 Come funziona la riservatezza (NDA)?</button>
+                <button class="opt-btn" onclick="botOption('ricontatto')">📞 Vorrei essere ricontattato al telefono</button>
+                <button class="opt-btn" onclick="botOption('whatsapp')">💬 Scrivere direttamente su WhatsApp</button>
             </div>
         </div>
     </div>
@@ -1237,42 +1233,39 @@
 
 <script>
     // ==========================================
-    // SELETTORE A BIVIO DINAMICO (CIVILE / INDUSTRIALE)
+    // SELETTORE A BIVIO FORM PREVENTIVO
     // ==========================================
-    const btnInd = document.getElementById('btn-scelta-industriale');
-    const btnCiv = document.getElementById('btn-scelta-civile');
-    const formInd = document.getElementById('form-industriale');
-    const formCiv = document.getElementById('form-civile');
+    const btnIndus = document.getElementById('btn-scelta-industriale');
+    const btnCivile = document.getElementById('btn-scelta-civile');
+    const formIndus = document.getElementById('form-industriale');
+    const formCivile = document.getElementById('form-civile');
 
-    function mostraCanale(scelta) {
-        if(scelta === 'industriale') {
-            btnInd.classList.add('active');
-            btnCiv.classList.remove('active');
-            formInd.style.display = 'block';
-            formCiv.style.display = 'none';
+    const hubB2b = document.getElementById('hub-trigger-b2b');
+    const hubB2c = document.getElementById('hub-trigger-b2c');
+    const btnTriggerIndus = document.getElementById('btn-trigger-industriale');
+
+    function mostraCanale(canale) {
+        if(canale === 'industriale') {
+            btnIndus.classList.add('active');
+            btnCivile.classList.remove('active');
+            formIndus.style.display = 'block';
+            formCivile.style.display = 'none';
         } else {
-            btnCiv.classList.add('active');
-            btnInd.classList.remove('active');
-            formCiv.style.display = 'block';
-            formInd.style.display = 'none';
+            btnCivile.classList.add('active');
+            btnIndus.classList.remove('active');
+            formCivile.style.display = 'block';
+            formIndus.style.display = 'none';
         }
     }
 
-    btnInd.addEventListener('click', () => mostraCanale('industriale'));
-    btnCiv.addEventListener('click', () => mostraCanale('civile'));
+    btnIndus.addEventListener('click', () => mostraCanale('industriale'));
+    btnCivile.addEventListener('click', () => mostraCanale('civile'));
 
-    // Triggers da Hero Hub
-    document.getElementById('hub-trigger-b2b').addEventListener('click', (e) => {
-        mostraCanale('industriale');
-    });
-    document.getElementById('hub-trigger-b2c').addEventListener('click', (e) => {
-        mostraCanale('civile');
-    });
-    document.getElementById('btn-trigger-industriale').addEventListener('click', () => {
-        mostraCanale('industriale');
-    });
+    if(hubB2b) hubB2b.addEventListener('click', () => mostraCanale('industriale'));
+    if(hubB2c) hubB2c.addEventListener('click', () => mostraCanale('civile'));
+    if(btnTriggerIndus) btnTriggerIndus.addEventListener('click', () => mostraCanale('industriale'));
 
-    // Mostra/Nascondi dinamico basato sulle scelte radio del preventivo B2B
+    // Gestori di visualizzazione dinamica campi del modulo B2B
     const carpCliente = document.querySelector('.carpCliente');
     const carpCaccin = document.querySelector('.carpCaccin');
     const carpenteriaBox = document.querySelector('.carpenteriaBox');
@@ -1313,7 +1306,6 @@
             const scrollPercent = (window.pageYOffset / totalScroll) * 100;
             progressBar.style.width = scrollPercent + '%';
         }
-        
         if (window.pageYOffset > 300) {
             topButton.style.display = 'block';
         } else {
@@ -1326,15 +1318,10 @@
     });
 
     // ==========================================
-    // ANIMAZIONE CARDS ALL'ENTRATA IN PAGINA (VIRTUAL SCROLL)
+    // ANIMAZIONE CARDS ALL'ENTRATA IN PAGINA
     // ==========================================
     const cards = document.querySelectorAll('.card');
-    const observerOptions = {
-        root: null,
-        threshold: 0.1,
-        rootMargin: "0px"
-    };
-
+    const observerOptions = { root: null, threshold: 0.1, rootMargin: "0px" };
     const cardObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if(entry.isIntersecting) {
@@ -1366,7 +1353,6 @@
     closeLightbox.addEventListener('click', () => {
         lightbox.style.display = 'none';
     });
-
     lightbox.addEventListener('click', (e) => {
         if(e.target !== lightboxImg) {
             lightbox.style.display = 'none';
@@ -1374,7 +1360,7 @@
     });
 
     // ==========================================
-    // LOGICA DI CABLOBOT (CHATTING & DECISION TREE)
+    // LOGICA DI CABLOBOT POTENZIATO
     // ==========================================
     const botToggle = document.getElementById('bot-toggle');
     const botWindow = document.getElementById('bot-window');
@@ -1394,16 +1380,31 @@
         if(opt === 'industriale') {
             addMessage('Ho bisogno di informazioni per quadristica e lavorazioni industriali B2B.', 'user');
             setTimeout(() => {
-                addMessage('Perfetto! Caccin Cablaggi è l\'officina ideale per esternalizzazioni industriali. Ti suggerisco di compilare il nostro "Configuratore B2B" qui sulla pagina per caricare schemi o distinte. Oppure scrivici a <strong>caccin.cablaggi@gmail.com</strong>.', 'bot');
+                addMessage('Perfetto! Diventiamo la tua officina polmone esterna per darti supporto immediato. Compila il nostro <strong>Configuratore B2B</strong> per inviarci schemi e distinte: analizzeremo il progetto in 24/48 ore.', 'bot');
                 mostraCanale('industriale');
                 document.getElementById('preventivo').scrollIntoView({ behavior: 'smooth' });
             }, 800);
         } else if(opt === 'civile') {
-            addMessage('Vorrei un preventivo o un sopralluogo per casa mia (Impianto civile).', 'user');
+            addMessage('Ho bisogno di informazioni per impianti civili o interventi a casa.', 'user');
             setTimeout(() => {
-                addMessage('Certamente! Offriamo servizi di installazione, manutenzione e ricerca guasti a Pianiga e zone limitrofe. Compila il modulo "Impianti Elettrici Civili" per una rapida risposta, o chiamaci al <strong>+39 345 417 0366</strong>.', 'bot');
+                addMessage('Ci occupiamo di impianti completi, predisposizioni Wallbox, installazione LAN e risoluzione guasti. Compila il modulo <strong>Impianti Civili</strong> per essere ricontattato o chiamaci direttamente al <strong>+39 345 417 0366</strong>.', 'bot');
                 mostraCanale('civile');
                 document.getElementById('preventivo').scrollIntoView({ behavior: 'smooth' });
+            }, 800);
+        } else if(opt === 'tempistiche') {
+            addMessage('Quali sono i vostri tempi di consegna e intervento?', 'user');
+            setTimeout(() => {
+                addMessage('Siamo estremamente reattivi! Per i preventivi e l\'analisi di fattibilità B2B rispondiamo in <strong>24/48 ore</strong>. Per le lavorazioni e le commesse concordiamo scadenze precise in base al volume della richiesta.', 'bot');
+            }, 800);
+        } else if(opt === 'nda') {
+            addMessage('Come gestite la riservatezza dei nostri progetti (NDA)?', 'user');
+            setTimeout(() => {
+                addMessage('La sicurezza dei tuoi disegni è fondamentale. Siamo disponibili a <strong>firmare contratti di non divulgazione (NDA)</strong> ancora prima di ricevere gli schemi tecnici delle tue macchine.', 'bot');
+            }, 800);
+        } else if(opt === 'ricontatto') {
+            addMessage('Desidero essere richiamato telefonicamente.', 'user');
+            setTimeout(() => {
+                addMessage('Certamente! Puoi contattare direttamente Manuel al <strong>+39 345 417 0366</strong>. Se preferisci, scrivici qui il tuo numero di telefono e il tuo nome, ti richiameremo prima possibile.', 'bot');
             }, 800);
         } else if(opt === 'whatsapp') {
             addMessage('Voglio mettermi in contatto diretto via WhatsApp.', 'user');
@@ -1424,20 +1425,22 @@
     function gestisciMessaggioLibero() {
         const testo = botInput.value.trim();
         if(!testo) return;
-
         addMessage(testo, 'user');
         botInput.value = '';
-
         setTimeout(() => {
             const lower = testo.toLowerCase();
             if(lower.includes('costo') || lower.includes('prezzo') || lower.includes('preventivo') || lower.includes('quanto costa')) {
-                addMessage('Il costo varia in base al tipo di lavorazione e ai componenti. Ti invito a compilare il configuratore di richiesta preventivo qui a fianco inserendo i tuoi dettagli per darti una quotazione precisa!', 'bot');
+                addMessage('Il costo delle lavorazioni varia in base alla tipologia di schema e dei componenti. Se utilizzi il nostro configuratore integrato in fondo alla pagina, sapremo darti una quotazione dettagliata!', 'bot');
             } else if(lower.includes('dove vi trovate') || lower.includes('sede') || lower.includes('dove siete') || lower.includes('pianiga')) {
-                addMessage('La nostra sede operativa principale è a Pianiga (Venezia), ma serviamo correntemente aziende e privati in tutto il Veneto, in particolare nelle province di Padova e Venezia.', 'bot');
-            } else if(lower.includes('contatt') || lower.includes('telefono') || lower.includes('chiamare') || lower.includes('mail')) {
-                addMessage('Puoi chiamare Manuel al <strong>+39 345 417 0366</strong>, scrivere un WhatsApp con il tasto in basso a sinistra, o inviare una mail a <strong>caccin.cablaggi@gmail.com</strong>.', 'bot');
+                addMessage('La nostra sede operativa si trova a <strong>Pianiga (Venezia)</strong>. Lavoriamo attivamente con aziende e privati in tutto il Veneto, in particolare nelle province di Venezia e Padova.', 'bot');
+            } else if(lower.includes('tempo') || lower.includes('consegna') || lower.includes('scadenza')) {
+                addMessage('Per l\'elaborazione dei preventivi B2B impieghiamo solitamente 24/48 ore. Le date di consegna delle commesse vengono pianificate di comune accordo per assecondare le scadenze dei tuoi clienti.', 'bot');
+            } else if(lower.includes('nda') || lower.includes('accordo') || lower.includes('riservatezza') || lower.includes('segreto')) {
+                addMessage('Garantiamo il massimo rispetto dei segreti industriali. Possiamo siglare accordi di riservatezza (NDA) bilaterali prima di visionare qualsiasi file o schema elettrico.', 'bot');
+            } else if(lower.includes('contatt') || lower.includes('telefono') || lower.includes('chiamare') || lower.includes('mail') || lower.includes('numero')) {
+                addMessage('Puoi parlare direttamente con Manuel al numero <strong>+39 345 417 0366</strong>, scriverci su WhatsApp tramite il comodo pulsante in basso a sinistra, o inviarci una mail a <strong>caccin.cablaggi@gmail.com</strong>.', 'bot');
             } else {
-                addMessage('Grazie per il messaggio! Per darti una risposta tecnica precisa, ti consigliamo di compilare il nostro modulo preventivi sulla pagina o di scriverci direttamente a <strong>caccin.cablaggi@gmail.com</strong>.', 'bot');
+                addMessage('Grazie per averci scritto! Per fornirti l\'assistenza tecnica più accurata, ti consigliamo di compilare il nostro form preventivi a lato oppure di inviarci un messaggio diretto a <strong>caccin.cablaggi@gmail.com</strong>.', 'bot');
             }
         }, 1000);
     }
@@ -1448,141 +1451,140 @@
     });
 
     // ==========================================
-    // INVIO IN BASE64 MULTIPLO DI APPS SCRIPT (CONVERTITORI INTEGRATI)
+    // INVIO IN BASE64 MULTIPLO DI APPS SCRIPT
     // ==========================================
     const formB2b = document.getElementById('form-b2b-ele');
     const submitBtnB2b = document.getElementById('b2b-submit-btn');
 
-    formB2b.addEventListener('submit', async (e) => {
-        e.preventDefault();
+    if(formB2b) {
+        formB2b.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            submitBtnB2b.innerText = "Invio in corso... Attendere...";
+            submitBtnB2b.disabled = true;
 
-        submitBtnB2b.innerText = "⏳ Conversione e invio file in corso...";
-        submitBtnB2b.disabled = true;
+            const dataB2B = {
+                ragione_sociale: document.getElementById('b2b-rag-soc').value,
+                referente: document.querySelector('input[name="👤 Nome Referente"]').value,
+                ruolo: document.querySelector('input[name="💼 Ruolo Aziendale"]').value,
+                email: document.querySelector('input[name="📩 Email Referente"]').value,
+                telefono: document.querySelector('input[name="📞 Telefono Referente"]').value,
+                progetto: document.querySelector('input[name="🏷️ Progetto / Macchinario"]').value,
+                quantita: document.querySelector('input[name="🔢 Quantità Lotto"]').value,
+                tipo_fornitura: document.querySelector('select[name="📦 Tipo Fornitura"]').value,
+                servizi_richiesti: Array.from(document.querySelectorAll('.tipo-lav-cb:checked')).map(cb => cb.value).join(', '),
+                fornitura_carpenteria: document.querySelector('input[name="📦 Fornitura Carpenteria"]:checked').value,
+                marca_carpenteria: document.querySelector('select[name="🏷️ Marca Struttura"]').value,
+                modello_misure: document.querySelector('input[name="📐 Modello e Misure"]').value,
+                grado_ip: document.querySelector('select[name="🛡️ Grado IP"]').value,
+                materiali_elettrici: document.querySelector('input[name="🔌 Fornitura Materiale Elettrico"]:checked').value,
+                brand_richiesti: Array.from(document.querySelectorAll('.brand-grid input:checked')).map(cb => cb.value).join(', '),
+                minuterie_consumabili: document.querySelector('input[name="🔧 Minuterie Consumo"]:checked').value,
+                tipo_siglatura: document.querySelector('select[name="🏷️ Tipo Siglatura"]').value,
+                sezione_massima_potenza: document.querySelector('select[name="⚡ Sezione Potenza"]').value,
+                collaudo_e_certificazioni: document.querySelector('input[name="📋 Collaudo Richiesto"]:checked') ? "Richiesto Collaudo Continuità Elettrica" : "Nessuno",
+                certificazioni_extra: Array.from(document.querySelectorAll('.cert-cb:checked')).map(cb => cb.value).join(', '),
+                files: []
+            };
 
-        const dataB2B = {
-            canale: "B2B Industriale",
-            ragione_sociale: document.getElementById('b2b-rag-soc').value,
-            referente: document.querySelector('input[name="👤 Nome Referente"]').value,
-            ruolo: document.querySelector('select[name="💼 Ruolo Aziendale"]').value,
-            email: document.querySelector('input[name="📩 Email Contatto"]').value,
-            telefono: document.querySelector('input[name="📞 Telefono Diretto"]').value,
-            produzione: document.querySelector('input[name="📦 Tipo Produzione"]:checked').value,
-            macchine_previste: document.querySelector('input[name="🤖 Numero Macchine Previste"]').value,
-            lotto_singolo: document.querySelector('input[name="🔲 Quadri per Singola Macchina"]').value,
-            frequenza: document.querySelector('select[name="📅 Frequenza di Fornitura"]').value,
-            note: document.querySelector('textarea[name="📝 Note Specifiche"]').value,
-            consegna: document.querySelector('select[name="📅 Tempistiche Consegna"]').value,
-            lavorazioni: Array.from(document.querySelectorAll('.tipo-lav-cb:checked')).map(cb => cb.value).join(', '),
-            carpenteria: document.querySelector('input[name="📦 Fornitura Carpenteria"]:checked').value,
-            marca_carpenteria: document.querySelector('select[name="🏷️ Marca Struttura"]').value,
-            misure_carpenteria: document.querySelector('input[name="📐 Modello e Misure"]').value,
-            grado_ip: document.querySelector('select[name="🛡️ Grado IP"]').value,
-            materiali_elettrici: document.querySelector('input[name="🔌 Fornitura Materiale Elettrico"]:checked').value,
-            brand_richiesti: Array.from(document.querySelectorAll('.brand-grid input:checked')).map(cb => cb.value).join(', '),
-            minuterie_consumabili: document.querySelector('input[name="🔧 Minuterie Consumo"]:checked').value,
-            tipo_siglatura: document.querySelector('select[name="🏷️ Tipo Siglatura"]').value,
-            sezione_massima_potenza: document.querySelector('select[name="⚡ Sezione Potenza"]').value,
-            collaudo_e_certificazioni: document.querySelector('select[name="📋 Collaudo Richiesto"]').value,
-            certificazioni_extra: Array.from(document.querySelectorAll('.cert-cb:checked')).map(cb => cb.value).join(', '),
-            files: []
-        };
+            const fileFields = [
+                { id: 'allegato-schema', label: 'Schema Elettrico' },
+                { id: 'allegato-layout', label: 'Disegno Layout' },
+                { id: 'allegato-bom', label: 'Distinta Base BOM' }
+            ];
 
-        const fileFields = [
-            { id: 'allegato-schema', label: 'Schema Elettrico' },
-            { id: 'allegato-layout', label: 'Disegno Layout' },
-            { id: 'allegato-bom', label: 'Distinta Base BOM' }
-        ];
-
-        const readFilesPromises = fileFields.map(field => {
-            return new Promise((resolve) => {
-                const el = document.getElementById(field.id);
-                if(el && el.files && el.files[0]) {
-                    const file = el.files[0];
-                    const r = new FileReader();
-                    r.onload = function(evt) {
-                        const base64 = evt.target.result.split(',')[1];
-                        dataB2B.files.push({
-                            label: field.label,
-                            filename: file.name,
-                            mimeType: file.type,
-                            data: base64
-                        });
+            const readFilesPromises = fileFields.map(field => {
+                return new Promise((resolve) => {
+                    const el = document.getElementById(field.id);
+                    if(el && el.files && el.files[0]) {
+                        const file = el.files[0];
+                        const r = new FileReader();
+                        r.onload = function(evt) {
+                            const base64Data = evt.target.result.split(',')[1];
+                            dataB2B.files.push({
+                                mimeType: file.type,
+                                fileName: file.name,
+                                label: field.label,
+                                base64: base64Data
+                            });
+                            resolve();
+                        };
+                        r.readAsDataURL(file);
+                    } else {
                         resolve();
-                    };
-                    r.readAsDataURL(file);
+                    }
+                });
+            });
+
+            await Promise.all(readFilesPromises);
+
+            try {
+                const resp = await fetch(formB2b.action, {
+                    method: 'POST',
+                    body: JSON.stringify(dataB2B),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                });
+                const resData = await resp.json();
+                if(resData.result === 'success') {
+                    alert('Grazie! Preventivo B2B inviato con successo. Ti ricontatteremo in 24/48 ore.');
+                    formB2b.reset();
+                    if(carpenteriaBox) carpenteriaBox.style.display = 'none';
+                    if(componentiBox) componentiBox.style.display = 'none';
                 } else {
-                    resolve();
+                    alert('Errore riscontrato: ' + resData.error);
                 }
-            });
-        });
-
-        await Promise.all(readFilesPromises);
-
-        try {
-            const resp = await fetch(formB2b.action, {
-                method: 'POST',
-                body: JSON.stringify(dataB2B),
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-            });
-            const resData = await resp.json();
-            if(resData.result === 'success') {
-                alert('Grazie! Richiesta preventivo B2B inviata con successo. Abbiamo registrato le tue specifiche.');
-                formB2b.reset();
-            } else {
-                alert('Errore Apps Script: ' + resData.error);
+            } catch(err) {
+                alert('Errore generato durante l\'invio: ' + err.toString());
+            } finally {
+                submitBtnB2b.innerText = "⚡ Invia Dati Tecnici Commessa";
+                submitBtnB2b.disabled = false;
             }
-        } catch(err) {
-            alert('Errore di invio: ' + err.toString());
-        } finally {
-            submitBtnB2b.innerText = "⚡ Invia Dati Tecnici Commessa";
-            submitBtnB2b.disabled = false;
-        }
-    });
+        });
+    }
 
-    // Gestione invio modulo Civile B2C
     const formB2c = document.getElementById('form-b2c-ele');
     const submitBtnB2c = document.getElementById('b2c-submit-btn');
 
-    formB2c.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        submitBtnB2c.innerText = "⏳ Invio in corso...";
-        submitBtnB2c.disabled = true;
+    if(formB2c) {
+        formB2c.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            submitBtnB2c.innerText = "Invio in corso...";
+            submitBtnB2c.disabled = true;
 
-        const dataB2C = {
-            canale: "B2C Civile",
-            nome_cliente: document.getElementById('b2c-nome').value,
-            email: document.querySelector('#form-b2c-ele input[name="📩 Email"]').value,
-            telefono: document.querySelector('#form-b2c-ele input[name="📞 Telefono"]').value,
-            localita: document.querySelector('#form-b2c-ele input[name="📍 Località Intervento"]').value,
-            tipo_immobile: document.querySelector('select[name="🏠 Tipo Immobile"]').value,
-            stato_immobile: document.querySelector('select[name="🚧 Stato Immobile"]').value,
-            superficie_indicativa: document.querySelector('input[name="📐 Superficie Mq"]').value,
-            sistemi_tecnologie_desiderate: Array.from(document.querySelectorAll('.b2c-tech-cb:checked')).map(cb => cb.value).join(', '),
-            ambito: document.getElementById('b2c-select').value,
-            messaggio: document.querySelector('#form-b2c-ele textarea[name="💬 Messaggio / Richiesta"]').value,
-            files: []
-        };
+            const dataB2C = {
+                nome_cliente: document.getElementById('b2c-nome').value,
+                email: document.querySelector('#form-b2c-ele input[name="📩 Email"]').value,
+                telefono: document.querySelector('#form-b2c-ele input[name="📞 Telefono"]').value,
+                comune: document.querySelector('input[name="📍 Località Intervento"]').value,
+                tipo_immobile: document.querySelector('select[name="🏠 Tipo Immobile"]').value,
+                stato_immobile: document.querySelector('select[name="🚧 Stato Immobile"]').value,
+                superficie_indicativa: document.querySelector('input[name="📐 Superficie Mq"]').value,
+                sistemi_tecnologie_desiderate: Array.from(document.querySelectorAll('.b2c-tech-cb:checked')).map(cb => cb.value).join(', '),
+                ambito: document.getElementById('b2c-select').value,
+                messaggio: document.querySelector('#form-b2c-ele textarea[name="💬 Messaggio / Richiesta"]').value,
+                files: []
+            };
 
-        try {
-            const resp = await fetch(formB2c.action, {
-                method: 'POST',
-                body: JSON.stringify(dataB2C),
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-            });
-            const resData = await resp.json();
-            if(resData.result === 'success') {
-                alert('Grazie! Richiesta di sopralluogo civile inviata con successo. Ti ricontatteremo a breve.');
-                formB2c.reset();
-            } else {
-                alert('Errore: ' + resData.error);
+            try {
+                const resp = await fetch(formB2c.action, {
+                    method: 'POST',
+                    body: JSON.stringify(dataB2C),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                });
+                const resData = await resp.json();
+                if(resData.result === 'success') {
+                    alert('Grazie! Richiesta di sopralluogo civile inviata con successo. Ti ricontatteremo a breve.');
+                    formB2c.reset();
+                } else {
+                    alert('Errore: ' + resData.error);
+                }
+            } catch(err) {
+                alert('Errore di invio: ' + err.toString());
+            } finally {
+                submitBtnB2c.innerText = "🏠 Richiedi Sopralluogo / Preventivo Civile";
+                submitBtnB2c.disabled = false;
             }
-        } catch(err) {
-            alert('Errore di invio: ' + err.toString());
-        } finally {
-            submitBtnB2c.innerText = "🏠 Richiedi Sopralluogo / Preventivo Civile";
-            submitBtnB2c.disabled = false;
-        }
-    });
+        });
+    }
 </script>
 </body>
 </html>
