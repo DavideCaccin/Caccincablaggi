@@ -126,7 +126,7 @@
             transform: translateY(-2px);
         }
 
-        /* Hero Section Ottimizzata */
+        /* Hero Section */
         .hero{
             background: linear-gradient(135deg, #005252, #003333);
             color:white;
@@ -150,7 +150,7 @@
             margin-right: auto;
         }
 
-        /* Nuovo Elemento: Hub di Sdoppiamento Immediato */
+        /* Hub di Sdoppiamento Immediato */
         .hero-bivio-hub {
             display: flex;
             gap: 20px;
@@ -946,6 +946,7 @@
             <button class="bivio-btn" id="btn-scelta-civile">🏠 Impianti Elettrici Civili / Privati</button>
         </div>
 
+        <!-- FORM B2B INDUSTRIALE -->
         <div id="form-industriale">
             <form id="form-b2b-ele" action="https://script.google.com/macros/s/AKfycbx9_4M3iiKIaemKFdGMQe_nTPbbhxS050lI5ctAj8MMvFEu_Uxf_XgAxIbbTA9nj5V2Uw/exec" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="_captcha" value="false">
@@ -1001,7 +1002,7 @@
                         </div>
                     </div>
                     <div class="card">
-                        <h3>Struttura & Carpenteria</h3>
+                        <h3>Struttura, Carpenteria & IP</h3>
                         <div style="text-align: left; margin-top: 10px; margin-bottom: 15px;">
                             <label><input type="radio" name="📦 Fornitura Carpenteria" value="Fornita dal cliente" checked class="carpCliente"> Fornita in conto lavoro dal Cliente</label>
                             <label style="margin-top: 8px; display:inline-block;"><input type="radio" name="📦 Fornitura Carpenteria" value="Fornita da Caccin Cablaggi" class="carpCaccin"> Acquistata e fornita da Caccin Cablaggi</label>
@@ -1020,12 +1021,19 @@
                             <label>Modello carpenteria e dimensioni indicative</label>
                             <input type="text" name="📐 Modello e Misure" placeholder="Es. Rittal AX 1000x800x300">
                         </div>
+                        <label>Grado di protezione IP richiesto</label>
+                        <select name="🛡️ Grado IP">
+                            <option value="IP20 / IP30 (Interno quadro)">IP20 / IP30 (Interno quadro)</option>
+                            <option value="IP54 / IP55 (Standard Industriale)" selected>IP54 / IP55 (Standard Industriale)</option>
+                            <option value="IP65 / IP66 (Ambienti gravosi / Stagno)">IP65 / IP66 (Ambienti gravosi / Stagno)</option>
+                            <option value="Non specificato / Da schema">Non specificato / Da schema</option>
+                        </select>
                     </div>
                     <div class="card">
                         <h3>Materiali & Componenti</h3>
                         <div style="text-align: left; margin-top: 10px; margin-bottom: 15px;">
-                            <label><input type="radio" name="🔌 Fornitura Materiale Elettrico" value="Fornito dal cliente" checked class="compCliente"> Fornito in conto lavoro dal Cliente</label>
-                            <label style="margin-top: 8px; display:inline-block;"><input type="radio" name="🔌 Fornitura Materiale Elettrico" value="Fornito da Caccin Cablaggi" class="compCaccin"> Fornito da Caccin Cablaggi (Su specifica)</label>
+                            <label><input type="radio" name="🔌 Fornitura Materiale Elettrico" value="Fornito dal cliente" checked class="compCliente"> Componenti forniti in conto lavoro dal Cliente</label>
+                            <label style="margin-top: 8px; display:inline-block;"><input type="radio" name="🔌 Fornitura Materiale Elettrico" value="Fornito da Caccin Cablaggi" class="compCaccin"> Forniti interamente da Caccin Cablaggi (Su distinta)</label>
                         </div>
                         <div class="componentiBox" style="display:none; margin-top:15px; text-align: left;">
                             <p style="font-weight: bold; font-size: 14px; margin-bottom: 10px; color: #475569;">Brand di riferimento desiderati:</p>
@@ -1037,6 +1045,40 @@
                                 <span class="brand-badge"><input type="checkbox" name="🛠️ Brand Componenti[]" value="Omron"> Omron</span>
                                 <span class="brand-badge"><input type="checkbox" name="🛠️ Brand Componenti[]" value="Phoenix"> Phoenix</span>
                             </div>
+                        </div>
+                        <label>Fornitura Minuterie & Consumabili (Fascette, capicorda, guaine, ecc.)</label>
+                        <div style="text-align: left; margin-top: 5px; margin-bottom: 10px;">
+                            <label><input type="radio" name="🔧 Minuterie Consumo" value="A carico di Caccin" checked> Forniti da Caccin Cablaggi (Inclusi nel servizio)</label><br>
+                            <label style="margin-top: 8px; display:inline-block;"><input type="radio" name="🔧 Minuterie Consumo" value="A carico del cliente"> Forniti dal Cliente in conto lavoro</label>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Dettagli Tecnici Cablaggio</h3>
+                        <label>Sistema di Siglatura Cavi</label>
+                        <select name="🏷️ Tipo Siglatura">
+                            <option value="Standard Caccin Cablaggi" selected>Standard Caccin (Termica a tubetto/targhetta)</option>
+                            <option value="Siglatura termorestringente">Targhette termorestringenti</option>
+                            <option value="Siglatura secondo specifiche cliente">Secondo specifica / Capitolato cliente</option>
+                            <option value="Nessuna siglatura">Nessuna siglatura richiesta</option>
+                        </select>
+
+                        <label>Sezione Massima Cavi Potenza</label>
+                        <select name="⚡ Sezione Potenza">
+                            <option value="Fino a 6 mm²">Fino a 6 mm² (Solo ausiliari e segnali)</option>
+                            <option value="Fino a 16 mm²">Fino a 16 mm²</option>
+                            <option value="Fino a 50 mm²">Fino a 50 mm²</option>
+                            <option value="Oltre 50 mm²">Oltre 50 mm² (Grosse correnti)</option>
+                        </select>
+
+                        <label>Certificazioni e Collaudo</label>
+                        <select name="📋 Collaudo Richiesto">
+                            <option value="Standard (Isolamento, continuità + Report)" selected>Standard (Isolamento, continuità + Report interno)</option>
+                            <option value="Funzionale completo sotto tensione">Collaudo funzionale completo (Sotto tensione simulata)</option>
+                            <option value="Solo continuità base">Solo continuità circuitale base</option>
+                        </select>
+                        <div style="text-align: left; margin-top: 12px;">
+                            <label><input type="checkbox" class="cert-cb" value="Dichiarazione Conformità CE" checked> Dichiarazione Conformità CE</label><br>
+                            <label style="margin-top: 5px; display:inline-block;"><input type="checkbox" class="cert-cb" value="Certificazione UL 508A (Nord America)"> Richiesta Conformità UL 508A (USA / Canada)</label>
                         </div>
                     </div>
                     <div class="card">
@@ -1051,7 +1093,7 @@
                         <label>📋 Distinta Base / BOM (XLSX / PDF - Opzionale)</label>
                         <input type="file" name="📄 Allegato_BOM" id="allegato-bom">
                     </div>
-                    <div class="card" style="grid-column: span 1;">
+                    <div class="card">
                         <h3>Tempistiche e Note</h3>
                         <label>Urgenza Consegna</label>
                         <select name="📅 Tempistiche Consegna">
@@ -1060,7 +1102,7 @@
                             <option>Da concordare in fase di pianificazione</option>
                         </select>
                         <label>Note aggiuntive / Requisiti particolari</label>
-                        <textarea name="📝 Note Specifiche" rows="4" placeholder="Indica qui dettagli su siglatura cavi, esigenze particolari o richieste d'officina..."></textarea>
+                        <textarea name="📝 Note Specifiche" rows="4" placeholder="Indica qui dettagli particolari, passacavi speciali, note d'officina..."></textarea>
                     </div>
                 </div>
                 <div style="max-width:600px; margin: 30px auto; text-align: left;">
@@ -1073,6 +1115,7 @@
             </form>
         </div>
 
+        <!-- FORM B2C CIVILE / PRIVATI -->
         <div id="form-civile">
             <form id="form-b2c-ele" action="https://script.google.com/macros/s/AKfycbx9_4M3iiKIaemKFdGMQe_nTPbbhxS050lI5ctAj8MMvFEu_Uxf_XgAxIbbTA9nj5V2Uw/exec" method="POST">
                 <input type="hidden" name="_captcha" value="false">
@@ -1092,6 +1135,42 @@
                         <input type="text" name="📍 Località Intervento" placeholder="Es. Pianiga, Mirano, Vigonza, ecc..." required>
                     </div>
                     <div class="card">
+                        <h3>Dettagli Immobile</h3>
+                        <label>Tipologia Immobile</label>
+                        <select name="🏠 Tipo Immobile">
+                            <option value="Appartamento">Appartamento</option>
+                            <option value="Casa Singola / Porzione di Bifamiliare" selected>Casa Singola / Porzione di Bifamiliare</option>
+                            <option value="Rustico / Casale">Rustico / Casale</option>
+                            <option value="Negozio / Ufficio / Studio">Negozio / Ufficio / Studio</option>
+                            <option value="Garage / Esterno">Garage / Esterno</option>
+                        </select>
+
+                        <label>Stato dell'Immobile</label>
+                        <select name="🚧 Stato Immobile">
+                            <option value="Nuova costruzione al grezzo">Nuova costruzione (al grezzo)</option>
+                            <option value="Ristrutturazione totale">Ristrutturazione totale (impianto da rifare da zero)</option>
+                            <option value="Modifiche su impianto esistente">Modifiche / Ampliamenti su impianto esistente</option>
+                            <option value="Immobile abitato (Solo manutenzione o guasto)">Immobile abitato (Manutenzione / Pronto Intervento)</option>
+                        </select>
+
+                        <label>Superficie Indicativa (Mq)</label>
+                        <input type="number" name="📐 Superficie Mq" placeholder="Es. 120" min="1">
+                    </div>
+                    <div class="card">
+                        <h3>Sistemi & Tecnologie Richieste</h3>
+                        <p style="font-size: 13.5px; color: #475569; margin-bottom: 10px;">Seleziona i servizi d'interesse per il tuo immobile:</p>
+                        <div style="text-align: left; line-height: 1.8;">
+                            <label><input type="checkbox" class="b2c-tech-cb" value="Domotica / Smart Home"> Smart Home (Domotica Connessa / Alexa-Google)</label><br>
+                            <label><input type="checkbox" class="b2c-tech-cb" value="Impianto Antifurto"> Impianto Antifurto / Allarme perimetrale</label><br>
+                            <label><input type="checkbox" class="b2c-tech-cb" value="Videosorveglianza TVCC"> Videosorveglianza (TVCC)</label><br>
+                            <label><input type="checkbox" class="b2c-tech-cb" value="Automazione Cancelli/Serrande"> Automazione Cancelli, Basculanti o Serrande</label><br>
+                            <label><input type="checkbox" class="b2c-tech-cb" value="Predisposizione Fotovoltaico"> Allacciamento o Predisposizione Fotovoltaico / Batteria</label><br>
+                            <label><input type="checkbox" class="b2c-tech-cb" value="Installazione Wallbox Auto"> Stazione ricarica auto elettrica (Wallbox)</label><br>
+                            <label><input type="checkbox" class="b2c-tech-cb" value="Cablaggio Rete LAN domestica"> Cablaggio Rete LAN Ethernet / Punti Accesso WiFi</label><br>
+                            <label><input type="checkbox" class="b2c-tech-cb" value="Videocitofonia"> Videocitofonia IP di ultima generazione</label>
+                        </div>
+                    </div>
+                    <div class="card">
                         <h3>Tipo di Intervento</h3>
                         <label>Di cosa hai bisogno?</label>
                         <select name="🛠️ Ambito Intervento" id="b2c-select">
@@ -1103,7 +1182,7 @@
                             <option>Altro / Non presente in elenco</option>
                         </select>
                         <label>Descrizione dettagliata della necessità</label>
-                        <textarea name="💬 Messaggio / Richiesta" rows="6" placeholder="Descrivi qui brevemente cosa dobbiamo fare, quante stanze ha l'immobile o qual è il problema..." required></textarea>
+                        <textarea name="💬 Messaggio / Richiesta" rows="6" placeholder="Descrivi qui brevemente cosa dobbiamo fare, quante stanze ha l'immobile o qual è il problema riscontrato..." required></textarea>
                     </div>
                 </div>
                 <div style="max-width:600px; margin: 30px auto; text-align: left;">
@@ -1397,8 +1476,14 @@
             carpenteria: document.querySelector('input[name="📦 Fornitura Carpenteria"]:checked').value,
             marca_carpenteria: document.querySelector('select[name="🏷️ Marca Struttura"]').value,
             misure_carpenteria: document.querySelector('input[name="📐 Modello e Misure"]').value,
+            grado_ip: document.querySelector('select[name="🛡️ Grado IP"]').value,
             materiali_elettrici: document.querySelector('input[name="🔌 Fornitura Materiale Elettrico"]:checked').value,
             brand_richiesti: Array.from(document.querySelectorAll('.brand-grid input:checked')).map(cb => cb.value).join(', '),
+            minuterie_consumabili: document.querySelector('input[name="🔧 Minuterie Consumo"]:checked').value,
+            tipo_siglatura: document.querySelector('select[name="🏷️ Tipo Siglatura"]').value,
+            sezione_massima_potenza: document.querySelector('select[name="⚡ Sezione Potenza"]').value,
+            collaudo_e_certificazioni: document.querySelector('select[name="📋 Collaudo Richiesto"]').value,
+            certificazioni_extra: Array.from(document.querySelectorAll('.cert-cb:checked')).map(cb => cb.value).join(', '),
             files: []
         };
 
@@ -1469,6 +1554,10 @@
             email: document.querySelector('#form-b2c-ele input[name="📩 Email"]').value,
             telefono: document.querySelector('#form-b2c-ele input[name="📞 Telefono"]').value,
             localita: document.querySelector('#form-b2c-ele input[name="📍 Località Intervento"]').value,
+            tipo_immobile: document.querySelector('select[name="🏠 Tipo Immobile"]').value,
+            stato_immobile: document.querySelector('select[name="🚧 Stato Immobile"]').value,
+            superficie_indicativa: document.querySelector('input[name="📐 Superficie Mq"]').value,
+            sistemi_tecnologie_desiderate: Array.from(document.querySelectorAll('.b2c-tech-cb:checked')).map(cb => cb.value).join(', '),
             ambito: document.getElementById('b2c-select').value,
             messaggio: document.querySelector('#form-b2c-ele textarea[name="💬 Messaggio / Richiesta"]').value,
             files: []
