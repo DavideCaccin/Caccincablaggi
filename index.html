@@ -732,6 +732,30 @@
             font-size: 13.5px;
             transition: 0.2s;
         }
+        .cablobot-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.opt-btn {
+    background: #e2e8f0;
+    color: #1e293b;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.opt-btn:hover {
+    background: #006666;
+    color: white;
+    transform: scale(1.05);
+}
 
         .opt-btn:hover {
             background: #ff6b35;
@@ -1324,32 +1348,10 @@
 </div>
 
 <script>
-    // 1. SELETTORI E FUNZIONI DI BASE
-    const btnIndus = document.getElementById('btn-scelta-industriale');
-    const btnCivile = document.getElementById('btn-scelta-civile');
-    const formIndus = document.getElementById('form-industriale');
-    const formCivile = document.getElementById('form-civile');
-
-    function mostraCanale(canale) {
-        if(canale === 'industriale') {
-            btnIndus.classList.add('active'); btnCivile.classList.remove('active');
-            formIndus.style.display = 'block'; formCivile.style.display = 'none';
-        } else {
-            btnCivile.classList.add('active'); btnIndus.classList.remove('active');
-            formCivile.style.display = 'block'; formIndus.style.display = 'none';
-        }
-    }
-    btnIndus.addEventListener('click', () => mostraCanale('industriale'));
-    btnCivile.addEventListener('click', () => mostraCanale('civile'));
-
-    // 2. CABLOBOT LOGIC
+    // 1. FUNZIONI DI BASE
     const botToggle = document.getElementById('bot-toggle');
-    const botWindow = document.getElementById('bot-window');
     const botBody = document.getElementById('bot-body');
-    const botInput = document.getElementById('cablobot-input');
-    const botSend = document.getElementById('cablobot-send');
-
-    botToggle.addEventListener('click', () => botWindow.style.display = (botWindow.style.display === 'flex') ? 'none' : 'flex');
+    const botWindow = document.getElementById('bot-window');
 
     function addMessage(text, sender) {
         const div = document.createElement('div');
@@ -1359,138 +1361,75 @@
         botBody.scrollTop = botBody.scrollHeight;
     }
 
-    function mostraTastiPriorita() {
-        const box = document.createElement('div');
-        box.className = 'bot-buttons';
-        const opzioni = [
-            { label: '🚀 Standard / Urgente', val: 'alta' },
-            { label: '⚙️ Complesso / Custom', val: 'media' },
-            { label: '📋 Studio di fattibilità', val: 'bassa' }
-        ];
-        opzioni.forEach(o => {
-            const btn = document.createElement('button');
-            btn.innerText = o.label;
-            btn.onclick = () => {
-                addMessage(`Ho scelto: ${o.label}`, 'user');
-                valutaPriorita(o.val);
-            };
-            box.appendChild(btn);
-        });
-        botBody.appendChild(box);
-    }
-
-    function valutaPriorita(livello) {
-        let risposta = (livello === 'alta') ? 'Ricevuto. Lo segnalo a Davide per una valutazione rapida.' : 
-                       (livello === 'media') ? 'Perfetto, i progetti custom sono la nostra specialità.' : 
-                       'Certamente, possiamo supportarvi nello studio di fattibilità.';
-        addMessage(risposta, 'bot');
-        setTimeout(() => addMessage('Per finalizzare, compila il form tecnico qui sotto.', 'bot'), 1000);
-    }
-function botOption(opt) {
-        // Pulisce l'area messaggi dopo la scelta per non creare confusione
-        botBody.innerHTML = ''; 
-        addMessage('Hai scelto: <b>' + opt.toUpperCase() + '</b>', 'user');
-
-        // LOGICA DI NAVIGAZIONE
-        if(opt === 'start') {
-            mostraMenuPrincipale();
-        } 
-        // --- RAMO AZIENDA ---
-        else if(opt === 'azienda') {
-            mostraSottoMenu(['Richiedi Preventivo', 'Cablaggio Conto Terzi', 'Assemblaggi', 'Officina Polmone']);
-        }
-        // --- RAMO PRIVATO ---
-        else if(opt === 'privato') {
-            mostraSottoMenu(['Impianti Elettrici', 'Impianti per Casette (Legno/PVC/Alluminio)', 'Contatti']);
-        }
-        // --- AZIONI FINALI ---
-        else if(opt === 'Richiedi Preventivo') {
-            mostraCanale('industriale');
-            document.getElementById('preventivo').scrollIntoView();
-        }
-        else if(opt === 'Contatti') {
-            addMessage('Puoi chiamare Davide al 345 417 0366 o scriverci su WhatsApp.', 'bot');
-        }
-        else {
-            addMessage('Certamente! Ti ho indirizzato alla sezione dedicata.', 'bot');
-            // Qui puoi aggiungere lo scroll a sezioni specifiche se vuoi
+    // 2. LOGICA "SGAIA"
+    function botSgaio(messaggio, opzioni = null) {
+        addMessage(messaggio, 'bot');
+        if (opzioni) {
+            const box = document.createElement('div');
+            box.className = 'cablobot-options';
+            opzioni.forEach(o => {
+                const btn = document.createElement('button');
+                btn.className = 'opt-btn';
+                btn.innerText = o.testo;
+                btn.onclick = () => {
+                    addMessage(o.testo, 'user');
+                    o.azione();
+                };
+                box.appendChild(btn);
+            });
+            botBody.appendChild(box);
         }
     }
 
-    // Funzioni helper per i menu
+    function menuAzienda() {
+        botSgaio("Ottimo! Cosa serve alla tua officina?", [
+            { testo: "Preventivo rapido", azione: () => document.getElementById('preventivo').scrollIntoView() },
+            { testo: "Cablaggio conto terzi", azione: () => botSgaio("Perfetto, passami gli schemi o descrivimi il lotto!") },
+            { testo: "Assemblaggi", azione: () => botSgaio("Ci occupiamo noi dei montaggi, che tipo di componenti?") },
+            { testo: "Officina Polmone", azione: () => botSgaio("Siamo pronti a integrare la tua produzione!") }
+        ]);
+    }
+
+    function menuPrivato() {
+        botSgaio("Dimmi tutto, come posso rimettere in sesto casa?", [
+            { testo: "Impianti elettrici", azione: () => botSgaio("Ok, impianti a norma e sicuri. Che tipo di lavoro?") },
+            { testo: "Casette Legno/PVC/All", azione: () => botSgaio("Specializzati in cablaggi per strutture leggere!") },
+            { testo: "Contatti / Guasti", azione: () => window.open('https://wa.me/393392859037', '_blank') }
+        ]);
+    }
+
     function mostraMenuPrincipale() {
-        addMessage('Ciao! Sono CabloBot, come posso guidarti oggi?', 'bot');
-        creaPulsanti(['Sono un Azienda', 'Sono un Privato'], ['azienda', 'privato']);
+        botBody.innerHTML = ''; // Pulisce solo all'apertura
+        botSgaio("Ciao! 👋 Sono il tuo assistente Caccin. Come posso aiutarti oggi?", [
+            { testo: "🏢 Sono un'Azienda", azione: menuAzienda },
+            { testo: "🏠 Sono un Privato", azione: menuPrivato }
+        ]);
     }
 
-    function mostraSottoMenu(opzioni) {
-        addMessage('Cosa ti interessa nello specifico?', 'bot');
-        creaPulsanti(opzioni, opzioni);
-    }
-
-    function creaPulsanti(testi, valori) {
-        const box = document.createElement('div');
-        box.className = 'cablobot-options';
-        testi.forEach((t, i) => {
-            const btn = document.createElement('button');
-            btn.className = 'opt-btn';
-            btn.innerText = t;
-            btn.onclick = () => botOption(valori[i]);
-            box.appendChild(btn);
-        });
-        botBody.appendChild(box);
-    }
-// 3. INVIO FORM E LOGICA FINALE
-    document.querySelectorAll('.faq-question').forEach(button => {
-        button.addEventListener('click', () => {
-            const answer = button.nextElementSibling;
-            button.classList.toggle('active');
-            if (button.classList.contains('active')) {
-                answer.style.maxHeight = answer.scrollHeight + "px";
-            } else {
-                answer.style.maxHeight = 0;
-            }
-        });
+    // 3. APERTURA BOT
+    botToggle.addEventListener('click', () => {
+        botWindow.style.display = (botWindow.style.display === 'flex') ? 'none' : 'flex';
+        if(botBody.children.length === 0) mostraMenuPrincipale();
     });
 
-    // --- LOGICA CONTATORI ---
-    const annoCorrente = 2026;
-    const elementoAnni = document.getElementById('anni-esperienza');
-    if (elementoAnni) {
-        elementoAnni.setAttribute('data-target', annoCorrente - 2016);
-    }
-
+    // 4. LOGICA CONTATORI (che avevamo già fatto)
     const counters = document.querySelectorAll('.counter');
-    const animateCounters = () => {
-        counters.forEach(counter => {
-            const updateCount = () => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                const speed = 100; 
-                const inc = target / speed;
-
-                if (count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(updateCount, 20);
-                } else {
-                    counter.innerText = target;
-                }
-            };
-            updateCount();
-        });
-    };
-
     const observer = new IntersectionObserver(entries => {
         if (entries[0].isIntersecting) {
-            animateCounters();
+            counters.forEach(c => {
+                let target = +c.getAttribute('data-target');
+                let count = 0;
+                let interval = setInterval(() => {
+                    count += Math.ceil(target / 100);
+                    c.innerText = count;
+                    if (count >= target) { c.innerText = target; clearInterval(interval); }
+                }, 20);
+            });
             observer.disconnect();
         }
     }, { threshold: 0.5 });
-
-    const counterSection = document.querySelector('.counters');
-    if (counterSection) {
-        observer.observe(counterSection);
-    }
+    const section = document.querySelector('.counters');
+    if (section) observer.observe(section);
 </script>
 </body>
 </html>
