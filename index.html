@@ -839,6 +839,11 @@
                 left: 15px;
             }
         }
+        .back-btn {
+    background: #64748b !important;
+    margin-top: 15px !important;
+    font-size: 12px !important;
+}
     </style>
 </head>
 <body>
@@ -1352,51 +1357,79 @@
         botBody.scrollTop = botBody.scrollHeight;
     }
 
-    // 2. LOGICA "SGAIA"
-    function botSgaio(messaggio, opzioni = null) {
+   // 2. LOGICA "SGAIA"
+    function botSgaio(messaggio, opzioni = [], mostraIndietro = true) {
         addMessage(messaggio, 'bot');
-        if (opzioni) {
-            const box = document.createElement('div');
-            box.className = 'cablobot-options';
-            opzioni.forEach(o => {
-                const btn = document.createElement('button');
-                btn.className = 'opt-btn';
-                btn.innerText = o.testo;
-                btn.onclick = () => {
-                    addMessage(o.testo, 'user');
-                    o.azione();
-                };
-                box.appendChild(btn);
-            });
-            botBody.appendChild(box);
+        const box = document.createElement('div');
+        box.className = 'cablobot-options';
+
+        opzioni.forEach(o => {
+            const btn = document.createElement('button');
+            btn.className = 'opt-btn';
+            btn.innerText = o.testo;
+            btn.onclick = () => {
+                addMessage(o.testo, 'user');
+                o.azione();
+            };
+            box.appendChild(btn);
+        });
+
+        // Aggiunta Tasto Indietro (se non siamo nel menu principale)
+        if (mostraIndietro) {
+            const backBtn = document.createElement('button');
+            backBtn.className = 'opt-btn';
+            backBtn.style.background = '#64748b'; // Grigio per differenziarlo
+            backBtn.innerText = "⬅️ Indietro";
+            backBtn.onclick = mostraMenuPrincipale;
+            box.appendChild(backBtn);
         }
+
+        botBody.appendChild(box);
+        botBody.scrollTop = botBody.scrollHeight;
+    }
+
+    // Funzione helper per mandare al preventivo
+    function avviaPreventivo() {
+        document.getElementById('preventivo').scrollIntoView();
     }
 
     function menuAzienda() {
+        botBody.innerHTML = ''; 
         botSgaio("Ottimo! Cosa serve alla tua officina?", [
-            { testo: "Preventivo rapido", azione: () => document.getElementById('preventivo').scrollIntoView() },
-            { testo: "Cablaggio conto terzi", azione: () => botSgaio("Perfetto, passami gli schemi o descrivimi il lotto!") },
-            { testo: "Assemblaggi", azione: () => botSgaio("Ci occupiamo noi dei montaggi, che tipo di componenti?") },
+            { testo: "Cablaggio conto terzi", azione: () => 
+                botSgaio("Perfetto, passami gli schemi o descrivimi il lotto nella sezione dedicata nei preventivi.", [
+                    { testo: "Vai ai Preventivi", azione: avviaPreventivo }
+                ]) 
+            },
+            { testo: "Assemblaggi", azione: () => 
+                botSgaio("Ci occupiamo noi dei montaggi, descrivimi i componenti nella sezione dedicata nei preventivi.", [
+                    { testo: "Vai ai Preventivi", azione: avviaPreventivo }
+                ]) 
+            },
             { testo: "Officina Polmone", azione: () => botSgaio("Siamo pronti a integrare la tua produzione!") }
         ]);
     }
 
     function menuPrivato() {
+        botBody.innerHTML = '';
         botSgaio("Dimmi tutto, come posso rimettere in sesto casa?", [
-            { testo: "Impianti elettrici", azione: () => botSgaio("Ok, impianti a norma e sicuri. Che tipo di lavoro?") },
+            { testo: "Impianti elettrici", azione: () => 
+                botSgaio("Ok, per fornirti un'analisi precisa, descrivimi l'intervento nella sezione dedicata nei preventivi.", [
+                    { testo: "Vai ai Preventivi", azione: avviaPreventivo }
+                ]) 
+            },
             { testo: "Casette Legno/PVC/All", azione: () => botSgaio("Specializzati in cablaggi per strutture leggere!") },
             { testo: "Contatti / Guasti", azione: () => window.open('https://wa.me/393392859037', '_blank') }
         ]);
     }
 
     function mostraMenuPrincipale() {
-        botBody.innerHTML = ''; // Pulisce solo all'apertura
+        botBody.innerHTML = ''; 
         botSgaio("Ciao! 👋 Sono il tuo assistente Caccin. Come posso aiutarti oggi?", [
             { testo: "🏢 Sono un'Azienda", azione: menuAzienda },
             { testo: "🏠 Sono un Privato", azione: menuPrivato }
-        ]);
+        ], false); // false = nasconde il tasto indietro nel menu principale
     }
-
     // 3. APERTURA BOT
     botToggle.addEventListener('click', () => {
         botWindow.style.display = (botWindow.style.display === 'flex') ? 'none' : 'flex';
