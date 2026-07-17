@@ -284,9 +284,9 @@
             padding:30px;
             box-shadow:0 10px 30px rgba(0,0,0,.04);
             border: 1px solid #f1f5f9;
-            transition: transform .3s, box-shadow .3s, opacity 0.6s ease-out;
-            opacity: 0;
-            transform: translateY(20px);
+            transition: transform .3s, box-shadow .3s;
+            opacity: 1;
+            transform: none;
         }
 
         .card.show {
@@ -900,18 +900,21 @@
 <section class="section" id="azienda">
     <div class="container">
         <h2>Perché Sceglierci</h2>
-        <p class="section-intro">La precisione esecutiva sposa la massima flessibilità d'officina. Ecco come valorizziamo i tuoi progetti.</p>
+        <p class="section-intro">
+            La precisione esecutiva sposa la massima flessibilità d'officina.
+            Ecco come valorizziamo i tuoi progetti.
+        </p>
         
         <div class="cards">
-            <div class="card">
+            <div class="card show">
                 <h3>🔧 Rigore Tecnico</h3>
                 <p>Eseguiamo ogni cablaggio e montaggio seguendo rigorosamente gli schemi di progetto e la distinta dei componenti, garantendo pulizia e modularità interna.</p>
             </div>
-            <div class="card">
+            <div class="card show">
                 <h3>⚡ Flessibilità sui Lotti</h3>
                 <p>Nessun limite minimo rigido: siamo attrezzati sia per prototipi e pezzi singoli unici, sia per contratti quadro con consegne scaglionate nel tempo.</p>
             </div>
-            <div class="card">
+            <div class="card show">
                 <h3>🔒 Riservatezza Industriale</h3>
                 <p>I tuoi progetti sono la tua ricchezza. Forniamo e firmiamo accordi di non divulgazione (NDA) a tutela della proprietà intellettuale della tua azienda.</p>
             </div>
@@ -922,22 +925,24 @@
 <section class="section" id="servizi" style="background:#f1f5f9;">
     <div class="container">
         <h2>I Nostri Ambiti Operativi</h2>
-        <p class="section-intro">Specializzazione nei rami B2B industriale e manutenzioni/impianti per il ramo residenziale locale.</p>
+        <p class="section-intro">
+            Specializzazione nei rami B2B industriale e manutenzioni/impianti per il ramo residenziale locale.
+        </p>
         
         <div class="cards">
-            <div class="card">
+            <div class="card show">
                 <h3>⚙️ Quadristica Industriale</h3>
                 <p>Cablaggio conto terzi di quadri elettrici ed elettropneumatici (Rittal, Schneider, ABB) partendo dai vostri schemi CAD o PDF.</p>
             </div>
-            <div class="card">
+            <div class="card show">
                 <h3>📦 Assemblaggi in Serie</h3>
                 <p>Montaggio meccanico ed elettromeccanico conto terzi di lotti, sottomoduli e componentistica ripetitiva.</p>
             </div>
-            <div class="card">
+            <div class="card show">
                 <h3>🏠 Impiantistica Civile</h3>
                 <p>Sviluppo di impianti tradizionali chiavi in mano per nuove abitazioni o ristrutturazioni complete a Pianiga, Padova e Venezia.</p>
             </div>
-            <div class="card">
+            <div class="card show">
                 <h3>🔌 Manutenzione e Reti</h3>
                 <p>Ricerca guasti immediata su blackout, adeguamento vecchi quadri di casa, installazione di punti presa e cablaggi di rete LAN domestici.</p>
             </div>
