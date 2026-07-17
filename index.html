@@ -1329,18 +1329,7 @@
         </div>
     </div>
     <div class="cablobot-body" id="bot-body">
-        <div class="msg bot">
-            Buongiorno, come posso esserti utile oggi?;
-            <div class="cablobot-options">
-                <button class="opt-btn" onclick="botOption('industriale')">⚙️ Preventivo Quadri o Assemblaggi (B2B)</button>
-                <button class="opt-btn" onclick="botOption('civile')">🏠 Impianti Civili o Guasti Casa (B2C)</button>
-                <button class="opt-btn" onclick="botOption('tempistiche')">⏱️ Quali sono i tempi di consegna?</button>
-                <button class="opt-btn" onclick="botOption('nda')">🔒 Come funziona la riservatezza (NDA)?</button>
-                <button class="opt-btn" onclick="botOption('ricontatto')">📞 Vorrei essere ricontattato al telefono</button>
-                <button class="opt-btn" onclick="botOption('whatsapp')">💬 Scrivere direttamente su WhatsApp</button>
-            </div>
         </div>
-    </div>
     <div class="cablobot-footer">
         <input type="text" id="cablobot-input" placeholder="Scrivi un messaggio...">
         <button id="cablobot-send">➤</button>
@@ -1348,10 +1337,11 @@
 </div>
 
 <script>
-    // 1. FUNZIONI DI BASE
     const botToggle = document.getElementById('bot-toggle');
     const botBody = document.getElementById('bot-body');
     const botWindow = document.getElementById('bot-window');
+    const botInput = document.getElementById('cablobot-input');
+    const botSend = document.getElementById('cablobot-send');
 
     function addMessage(text, sender) {
         const div = document.createElement('div');
@@ -1361,8 +1351,7 @@
         botBody.scrollTop = botBody.scrollHeight;
     }
 
-    // 2. LOGICA "SGAIA"
-    function botSgaio(messaggio, opzioni = null) {
+    function botSgaio(messaggio, opzioni = null, mostraIndietro = false) {
         addMessage(messaggio, 'bot');
         if (opzioni) {
             const box = document.createElement('div');
@@ -1377,53 +1366,71 @@
                 };
                 box.appendChild(btn);
             });
+            if (mostraIndietro) {
+                const backBtn = document.createElement('button');
+                backBtn.className = 'opt-btn';
+                backBtn.style.background = '#64748b'; // Grigio per differenziarlo
+                backBtn.innerText = "⬅ Torna indietro";
+                backBtn.onclick = mostraMenuPrincipale;
+                box.appendChild(backBtn);
+            }
             botBody.appendChild(box);
+            botBody.scrollTop = botBody.scrollHeight;
         }
     }
 
     function menuAzienda() {
         botSgaio("Ottimo! Cosa serve alla tua officina?", [
-            { testo: "Preventivo rapido", azione: () => document.getElementById('preventivo').scrollIntoView() },
+            { testo: "Preventivo rapido", azione: () => { botWindow.style.display='none'; document.getElementById('preventivo').scrollIntoView(); } },
             { testo: "Cablaggio conto terzi", azione: () => botSgaio("Perfetto, passami gli schemi o descrivimi il lotto!") },
-            { testo: "Assemblaggi", azione: () => botSgaio("Ci occupiamo noi dei montaggi, che tipo di componenti?") },
-            { testo: "Officina Polmone", azione: () => botSgaio("Siamo pronti a integrare la tua produzione!") }
-        ]);
+            { testo: "Assemblaggi", azione: () => botSgaio("Ci occupiamo noi dei montaggi, che tipo di componenti?") }
+        ], true);
     }
 
     function menuPrivato() {
         botSgaio("Dimmi tutto, come posso rimettere in sesto casa?", [
             { testo: "Impianti elettrici", azione: () => botSgaio("Ok, impianti a norma e sicuri. Che tipo di lavoro?") },
-            { testo: "Casette Legno/PVC/All", azione: () => botSgaio("Specializzati in cablaggi per strutture leggere!") },
-            { testo: "Contatti / Guasti", azione: () => window.open('https://wa.me/393392859037', '_blank') }
-        ]);
+            { testo: "Guasti/Contatti", azione: () => window.open('https://wa.me/393392859037', '_blank') }
+        ], true);
     }
 
     function mostraMenuPrincipale() {
-        botBody.innerHTML = ''; // Pulisce solo all'apertura
-        botSgaio("Ciao! 👋 Sono il tuo assistente Caccin. Come posso aiutarti oggi?", [
+        botBody.innerHTML = ''; 
+        botSgaio("Ciao! 👋 Sono il tuo assistente Caccin. Come posso aiutarti?", [
             { testo: "🏢 Sono un'Azienda", azione: menuAzienda },
             { testo: "🏠 Sono un Privato", azione: menuPrivato }
         ]);
     }
 
-    // 3. APERTURA BOT
+    // Invio da input
+    function inviaMessaggio() {
+        const testo = botInput.value.trim();
+        if(testo !== "") {
+            addMessage(testo, 'user');
+            botInput.value = "";
+            setTimeout(() => addMessage("Grazie per il messaggio! Ti risponderemo al più presto.", 'bot'), 500);
+        }
+    }
+
+    botSend.addEventListener('click', inviaMessaggio);
+    botInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') inviaMessaggio(); });
+
     botToggle.addEventListener('click', () => {
         botWindow.style.display = (botWindow.style.display === 'flex') ? 'none' : 'flex';
         if(botBody.children.length === 0) mostraMenuPrincipale();
     });
 
-    // 4. LOGICA CONTATORI (che avevamo già fatto)
-    const counters = document.querySelectorAll('.counter');
+    // Contatori
     const observer = new IntersectionObserver(entries => {
         if (entries[0].isIntersecting) {
-            counters.forEach(c => {
+            document.querySelectorAll('.counter').forEach(c => {
                 let target = +c.getAttribute('data-target');
                 let count = 0;
                 let interval = setInterval(() => {
-                    count += Math.ceil(target / 100);
+                    count += Math.ceil(target / 50);
                     c.innerText = count;
                     if (count >= target) { c.innerText = target; clearInterval(interval); }
-                }, 20);
+                }, 30);
             });
             observer.disconnect();
         }
