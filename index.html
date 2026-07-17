@@ -876,7 +876,28 @@
         </div>
     </div>
 </section>
-
+<section class="section" style="background: #006666; color: white; text-align: center;">
+    <div class="container">
+        <div class="counters">
+            <div class="counter-item">
+                <h3 class="counter" data-target="280">0</h3>
+                <p>Quadri Elettrici Realizzati</p>
+            </div>
+            <div class="counter-item">
+                <h3 class="counter" data-target="200">0</h3>
+                <p>Assemblaggi Completati</p>
+            </div>
+            <div class="counter-item">
+                <h3 class="counter" data-target="45">0</h3>
+                <p>Clienti Serviti</p>
+            </div>
+            <div class="counter-item">
+                <h3 class="counter" id="anni-esperienza" data-target="0">0</h3>
+                <p>Anni di Esperienza</p>
+            </div>
+        </div>
+    </div>
+</section>
 <section class="section" style="background: #ffffff; border-bottom: 1px solid #e2e8f0;">
     <div class="container" style="max-width: 1050px; text-align: center;">
         <h2 style="font-size: 38px; margin-bottom: 15px;">Saturazione in Officina? Riduci i Colli di Bottiglia</h2>
@@ -1407,6 +1428,45 @@
         }
     });
 });
+    <script>
+    // Calcolo automatico anni di esperienza (dal 2016 al 2026)
+    const annoCorrente = 2026;
+    document.getElementById('anni-esperienza').innerText = (annoCorrente - 2016);
+    document.getElementById('anni-esperienza').setAttribute('data-target', annoCorrente - 2016);
+
+    const counters = document.querySelectorAll('.counter');
+
+    const animateCounters = () => {
+        counters.forEach(counter => {
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const speed = 100; 
+                const inc = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + inc);
+                    setTimeout(updateCount, 20);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            updateCount();
+        });
+    };
+
+    const observer = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+            animateCounters();
+            observer.disconnect();
+        }
+    }, { threshold: 0.5 });
+
+    // Assicurati che l'elemento .counters esista nella pagina
+    const counterSection = document.querySelector('.counters');
+    if (counterSection) {
+        observer.observe(counterSection);
+    }
 </script>
 </body>
 </html>
