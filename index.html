@@ -151,7 +151,7 @@
         .hero{
             background: linear-gradient(135deg, #005252, #003333);
             color:white;
-            padding:80px 0;
+            padding:55px 0;
             position: relative;
         }
 
@@ -244,7 +244,7 @@
 
         /* Sezioni standard */
         .section{
-            padding:80px 0;
+            padding:55px 0;
         }
 
         .section h2{
@@ -271,6 +271,12 @@
             grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
             gap:30px;
         }
+        .cards-container{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:30px;
+            margin-top:30px;
+            }
 
         .card{
             background:white;
@@ -755,20 +761,28 @@
         @media(max-width:900px){
             .navbar {
                 flex-direction: column;
-                gap: 15px;
-                text-align: center;
+                align-items:center;
             }
+            .logo h2{
+                font-size:20px;
+                }
 
             nav {
                 width: 100%;
+                overflow-x:auto;
             }
 
             nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-                padding: 0 10px;
+                display:flex;
+                flex-wrap:nowrap;
+                justify-content:flex-start;
+                gap:18px;
+                padding:10px;
+                white-space:nowrap;
             }
+            nev ul::-webkit-scrollbar{
+                display:none;
+                }
 
             .hero h1{
                 font-size:30px;
@@ -797,39 +811,7 @@
     </style>
 </head>
 <body>
-    <!-- Inizia la sezione informativa -->
-<section id="perche-sceglierci">
-    <h2>Perché Sceglierci</h2>
-    <p>La precisione esecutiva sposa la massima flessibilità d'officina. Ecco come valorizziamo i tuoi progetti.</p>
-    
-    <div class="cards-container">
-        <div class="card">
-            <h3>🔧 Rigore Tecnico</h3>
-            <p>Eseguiamo ogni cablaggio e montaggio seguendo rigorosamente gli schemi di progetto e la distinta dei componenti, garantendo pulizia e modularità interna.</p>
-        </div>
-        <div class="card">
-            <h3>⚡ Flessibilità sui Lotti</h3>
-            <p>Nessun limite minimo rigido: siamo attrezzati sia per prototipi e pezzi singoli unici, sia per contratti quadro con consegne scaglionate nel tempo.</p>
-        </div>
-        <div class="card">
-            <h3>🔒 Riservatezza Industriale</h3>
-            <p>I tuoi progetti sono la tua ricchezza. Forniamo e firmiamo accordi di non divulgazione (NDA) a tutela della proprietà intellettuale della tua azienda.</p>
-        </div>
-    </div>
-</section>
-
-<section id="ambiti-operativi">
-    <h2>I Nostri Ambiti Operativi</h2>
-    <p>Specializzazione nei rami B2B industriale e manutenzioni/impianti per il ramo residenziale locale.</p>
-    
-    <ul>
-        <li><strong>⚙️ Quadristica Industriale:</strong> Cablaggio conto terzi di quadri elettrici ed elettropneumatici (Rittal, Schneider, ABB) partendo dai vostri schemi CAD o PDF.</li>
-        <li><strong>📦 Assemblaggi in Serie:</strong> Montaggio meccanico ed elettromeccanico conto terzi di lotti, sottomoduli e componentistica ripetitiva.</li>
-        <li><strong>🏠 Impiantistica Civile:</strong> Sviluppo di impianti tradizionali chiavi in mano per nuove abitazioni o ristrutturazioni complete a Pianiga, Padova.</li>
-    </ul>
-</section>
-<!-- Fine della sezione informativa -->
-    
+        
 <div id="progress-bar"></div>
 
 <button id="topButton" title="Torna su">⬆</button>
