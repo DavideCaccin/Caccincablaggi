@@ -1358,7 +1358,7 @@
         }
     });
 
-   // ==========================================
+    // ==========================================
     // LOGICA DI CABLOBOT - VERSIONE CON BUDGET
     // ==========================================
     let attesaBudget = false;
@@ -1434,20 +1434,8 @@
 
     botSend.addEventListener('click', gestisciMessaggioLibero);
     botInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') gestisciMessaggioLibero(); });
-    const botToggle = document.getElementById('bot-toggle');
-    const botWindow = document.getElementById('bot-window');
-    const botBody = document.getElementById('bot-body');
-    const botInput = document.getElementById('cablobot-input');
-    const botSend = document.getElementById('cablobot-send');
 
-    botToggle.addEventListener('click', () => {
-        if(botWindow.style.display === 'none' || botWindow.style.display === '') {
-            botWindow.style.display = 'flex';
-        } else {
-            botWindow.style.display = 'none';
-        }
-    });
-// ==========================================
+    // ==========================================
     // INVIO IN BASE64 MULTIPLO DI APPS SCRIPT
     // ==========================================
     const formB2b = document.getElementById('form-b2b-ele');
