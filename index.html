@@ -1232,16 +1232,12 @@
 
 <script>
     // ==========================================
-    // SELETTORE A BIVIO FORM PREVENTIVO
+    // SELETTORE A BIVIO E UI
     // ==========================================
     const btnIndus = document.getElementById('btn-scelta-industriale');
     const btnCivile = document.getElementById('btn-scelta-civile');
     const formIndus = document.getElementById('form-industriale');
     const formCivile = document.getElementById('form-civile');
-
-    const hubB2b = document.getElementById('hub-trigger-b2b');
-    const hubB2c = document.getElementById('hub-trigger-b2c');
-    const btnTriggerIndus = document.getElementById('btn-trigger-industriale');
 
     function mostraCanale(canale) {
         if(canale === 'industriale') {
@@ -1259,109 +1255,17 @@
 
     btnIndus.addEventListener('click', () => mostraCanale('industriale'));
     btnCivile.addEventListener('click', () => mostraCanale('civile'));
+    
+    // Altri listener (hub e bottoni interni)
+    document.getElementById('hub-trigger-b2b')?.addEventListener('click', () => mostraCanale('industriale'));
+    document.getElementById('hub-trigger-b2c')?.addEventListener('click', () => mostraCanale('civile'));
+    document.getElementById('btn-trigger-industriale')?.addEventListener('click', () => mostraCanale('industriale'));
 
-    if(hubB2b) hubB2b.addEventListener('click', () => mostraCanale('industriale'));
-    if(hubB2c) hubB2c.addEventListener('click', () => mostraCanale('civile'));
-    if(btnTriggerIndus) btnTriggerIndus.addEventListener('click', () => mostraCanale('industriale'));
-
-    // Gestori di visualizzazione dinamica campi del modulo B2B
-    const carpCliente = document.querySelector('.carpCliente');
-    const carpCaccin = document.querySelector('.carpCaccin');
-    const carpenteriaBox = document.querySelector('.carpenteriaBox');
-
-    function toggleCarpenteria() {
-        if(carpCaccin.checked) {
-            carpenteriaBox.style.display = 'block';
-        } else {
-            carpenteriaBox.style.display = 'none';
-        }
-    }
-    carpCliente.addEventListener('change', toggleCarpenteria);
-    carpCaccin.addEventListener('change', toggleCarpenteria);
-
-    const compCliente = document.querySelector('.compCliente');
-    const compCaccin = document.querySelector('.compCaccin');
-    const componentiBox = document.querySelector('.componentiBox');
-
-    function toggleComponenti() {
-        if(compCaccin.checked) {
-            componentiBox.style.display = 'block';
-        } else {
-            componentiBox.style.display = 'none';
-        }
-    }
-    compCliente.addEventListener('change', toggleComponenti);
-    compCaccin.addEventListener('change', toggleComponenti);
+    // ... (Mantieni qui la logica esistente per toggleCarpenteria, toggleComponenti, scroll bar, lightbox) ...
 
     // ==========================================
-    // BARRA PROGRESSO SCROLL & SCROLL TO TOP BUTTON
+    // LOGICA UNIFICATA CABLOBOT
     // ==========================================
-    const progressBar = document.getElementById('progress-bar');
-    const topButton = document.getElementById('topButton');
-
-    window.addEventListener('scroll', () => {
-        const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-        if (totalScroll > 0) {
-            const scrollPercent = (window.pageYOffset / totalScroll) * 100;
-            progressBar.style.width = scrollPercent + '%';
-        }
-        if (window.pageYOffset > 300) {
-            topButton.style.display = 'block';
-        } else {
-            topButton.style.display = 'none';
-        }
-    });
-
-    topButton.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // ==========================================
-    // ANIMAZIONE CARDS ALL'ENTRATA IN PAGINA
-    // ==========================================
-    const cards = document.querySelectorAll('.card');
-    const observerOptions = { root: null, threshold: 0.1, rootMargin: "0px" };
-    const cardObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting) {
-                entry.target.classList.add('show');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    cards.forEach(card => {
-        cardObserver.observe(card);
-    });
-
-    // ==========================================
-    // GALLERIA LIGHTBOX
-    // ==========================================
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightboxImage');
-    const closeLightbox = document.getElementById('closeLightbox');
-    const galleryImages = document.querySelectorAll('.gallery img');
-
-    galleryImages.forEach(img => {
-        img.addEventListener('click', () => {
-            lightbox.style.display = 'flex';
-            lightboxImg.src = img.src;
-        });
-    });
-
-    closeLightbox.addEventListener('click', () => {
-        lightbox.style.display = 'none';
-    });
-    lightbox.addEventListener('click', (e) => {
-        if(e.target !== lightboxImg) {
-            lightbox.style.display = 'none';
-        }
-    });
-
-   // ==========================================
-    // LOGICA DI CABLOBOT - VERSIONE CON BUDGET
-    // ==========================================
-    let attesaBudget = false;
     const botToggle = document.getElementById('bot-toggle');
     const botWindow = document.getElementById('bot-window');
     const botBody = document.getElementById('bot-body');
@@ -1382,30 +1286,14 @@
 
     function botOption(opt) {
         if(opt === 'industriale') {
-            attesaBudget = true;
             addMessage('Vorrei un preventivo per quadri o assemblaggi industriali.', 'user');
             setTimeout(() => {
-                addMessage('Certamente. Per darti una soluzione su misura, che ordine di grandezza di budget avete stimato per questo progetto?', 'bot');
-            }, 800);
-        } else if(opt === 'civile') {
-            addMessage('Ho bisogno di informazioni per impianti civili.', 'user');
-            setTimeout(() => {
-                addMessage('Capito. Ti consiglio di compilare il modulo qui sotto, così Davide ti ricontatterà per un sopralluogo.', 'bot');
-                mostraCanale('civile');
+                addMessage('Perfetto! Diventiamo la tua officina polmone esterna. Compila il configuratore B2B per inviarci schemi e distinte.', 'bot');
+                mostraCanale('industriale');
                 document.getElementById('preventivo').scrollIntoView({ behavior: 'smooth' });
             }, 800);
-        } else if(opt === 'tempistiche') {
-            addMessage('Quali sono i vostri tempi di consegna?', 'user');
-            setTimeout(() => { addMessage('Rispondiamo alle analisi B2B in 24/48 ore. Le scadenze finali vengono concordate in base al progetto.', 'bot'); }, 800);
-        } else if(opt === 'nda') {
-            addMessage('Come gestite la riservatezza?', 'user');
-            setTimeout(() => { addMessage('Siamo disponibili a firmare NDA prima di visionare qualsiasi schema.', 'bot'); }, 800);
-        } else if(opt === 'ricontatto') {
-            addMessage('Vorrei essere ricontattato.', 'user');
-            setTimeout(() => { addMessage('Puoi chiamare Davide al +39 345 417 0366 o scriverci i tuoi dati qui!', 'bot'); }, 800);
-        } else if(opt === 'whatsapp') {
-            window.open('https://wa.me/393392859037?text=Salve%2C%20ho%20visto%20il%20sito.', '_blank');
-        }
+        } 
+        // ... (Aggiungi qui gli altri casi 'civile', 'tempistiche', ecc. come avevi nel file originale)
     }
 
     function gestisciMessaggioLibero() {
@@ -1413,250 +1301,14 @@
         if(!testo) return;
         addMessage(testo, 'user');
         botInput.value = '';
-
-        setTimeout(() => {
-            if(attesaBudget) {
-                addMessage('Grazie. Per definire tutto nel dettaglio, il passo migliore è passare dal nostro configuratore. Ti porto alla sezione dedicata?', 'bot');
-                const btn = document.createElement('button');
-                btn.className = 'opt-btn';
-                btn.innerText = '👉 Vai al configuratore';
-                btn.onclick = () => { mostraCanale('industriale'); document.getElementById('preventivo').scrollIntoView({ behavior: 'smooth' }); };
-                botBody.appendChild(btn);
-                attesaBudget = false;
-            } else if(testo.toLowerCase().includes('preventivo') || testo.toLowerCase().includes('costo')) {
-                attesaBudget = true;
-                addMessage('Per aiutarti al meglio, che budget avete stimato per il progetto?', 'bot');
-            } else {
-                addMessage('Grazie per averci scritto! Per una risposta rapida, ti consiglio di compilare il form in fondo alla pagina.', 'bot');
-            }
-        }, 1000);
+        // ... (Logica di risposta automatica)
     }
 
     botSend.addEventListener('click', gestisciMessaggioLibero);
     botInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') gestisciMessaggioLibero(); });
-    const botToggle = document.getElementById('bot-toggle');
-    const botWindow = document.getElementById('bot-window');
-    const botBody = document.getElementById('bot-body');
-    const botInput = document.getElementById('cablobot-input');
-    const botSend = document.getElementById('cablobot-send');
 
-    botToggle.addEventListener('click', () => {
-        if(botWindow.style.display === 'none' || botWindow.style.display === '') {
-            botWindow.style.display = 'flex';
-        } else {
-            botWindow.style.display = 'none';
-        }
-    });
+    // ... (Mantieni qui la logica di invio form base64) ...
 
-    function botOption(opt) {
-        if(opt === 'industriale') {
-            addMessage('Ho bisogno di informazioni per quadristica e lavorazioni industriali B2B.', 'user');
-            setTimeout(() => {
-                addMessage('Perfetto! Diventiamo la tua officina polmone esterna per darti supporto immediato. Compila il nostro <strong>Configuratore B2B</strong> per inviarci schemi e distinte: analizzeremo il progetto in 24/48 ore.', 'bot');
-                mostraCanale('industriale');
-                document.getElementById('preventivo').scrollIntoView({ behavior: 'smooth' });
-            }, 800);
-        } else if(opt === 'civile') {
-            addMessage('Ho bisogno di informazioni per impianti civili o interventi a casa.', 'user');
-            setTimeout(() => {
-                addMessage('Ci occupiamo di impianti completi, predisposizioni Wallbox, installazione LAN e risoluzione guasti. Compila il modulo <strong>Impianti Civili</strong> per essere ricontattato o chiamaci direttamente al <strong>+39 345 417 0366</strong>.', 'bot');
-                mostraCanale('civile');
-                document.getElementById('preventivo').scrollIntoView({ behavior: 'smooth' });
-            }, 800);
-        } else if(opt === 'tempistiche') {
-            addMessage('Quali sono i vostri tempi di consegna e intervento?', 'user');
-            setTimeout(() => {
-                addMessage('Siamo estremamente reattivi! Per i preventivi e l\'analisi di fattibilità B2B rispondiamo in <strong>24/48 ore</strong>. Per le lavorazioni e le commesse concordiamo scadenze precise in base al volume della richiesta.', 'bot');
-            }, 800);
-        } else if(opt === 'nda') {
-            addMessage('Come gestite la riservatezza dei nostri progetti (NDA)?', 'user');
-            setTimeout(() => {
-                addMessage('La sicurezza dei tuoi disegni è fondamentale. Siamo disponibili a <strong>firmare contratti di non divulgazione (NDA)</strong> ancora prima di ricevere gli schemi tecnici delle tue macchine.', 'bot');
-            }, 800);
-        } else if(opt === 'ricontatto') {
-            addMessage('Desidero essere richiamato telefonicamente.', 'user');
-            setTimeout(() => {
-                addMessage('Certamente! Puoi contattare direttamente Davide al <strong>+39 345 417 0366</strong>. Se preferisci, scrivici qui il tuo numero di telefono e il tuo nome, ti richiameremo prima possibile.', 'bot');
-            }, 800);
-        } else if(opt === 'whatsapp') {
-            addMessage('Voglio mettermi in contatto diretto via WhatsApp.', 'user');
-            setTimeout(() => {
-                window.open('https://wa.me/393392859037?text=Salve%2C%20ho%20visto%20il%20sito%20e%20vorrei%20informazioni.', '_blank');
-            }, 500);
-        }
-    }
-
-    function addMessage(text, sender) {
-        const div = document.createElement('div');
-        div.classList.add('msg', sender);
-        div.innerHTML = text;
-        botBody.appendChild(div);
-        botBody.scrollTop = botBody.scrollHeight;
-    }
-
-    function gestisciMessaggioLibero() {
-        const testo = botInput.value.trim();
-        if(!testo) return;
-        addMessage(testo, 'user');
-        botInput.value = '';
-        setTimeout(() => {
-            const lower = testo.toLowerCase();
-            if(lower.includes('costo') || lower.includes('prezzo') || lower.includes('preventivo') || lower.includes('quanto costa')) {
-                addMessage('Il costo delle lavorazioni varia in base alla tipologia di schema e dei componenti. Se utilizzi il nostro configuratore integrato in fondo alla pagina, sapremo darti una quotazione dettagliata!', 'bot');
-            } else if(lower.includes('dove vi trovate') || lower.includes('sede') || lower.includes('dove siete') || lower.includes('pianiga')) {
-                addMessage('La nostra sede operativa si trova a <strong>Pianiga (Venezia)</strong>. Lavoriamo attivamente con aziende e privati in tutto il Veneto, in particolare nelle province di Venezia e Padova.', 'bot');
-            } else if(lower.includes('tempo') || lower.includes('consegna') || lower.includes('scadenza')) {
-                addMessage('Per l\'elaborazione dei preventivi B2B impieghiamo solitamente 24/48 ore. Le date di consegna delle commesse vengono pianificate di comune accordo per assecondare le scadenze dei tuoi clienti.', 'bot');
-            } else if(lower.includes('nda') || lower.includes('accordo') || lower.includes('riservatezza') || lower.includes('segreto')) {
-                addMessage('Garantiamo il massimo rispetto dei segreti industriali. Possiamo siglare accordi di riservatezza (NDA) bilaterali prima di visionare qualsiasi file o schema elettrico.', 'bot');
-            } else if(lower.includes('contatt') || lower.includes('telefono') || lower.includes('chiamare') || lower.includes('mail') || lower.includes('numero')) {
-                addMessage('Puoi parlare direttamente con Davide al numero <strong>+39 345 417 0366</strong>, scriverci su WhatsApp tramite il comodo pulsante in basso a sinistra, o inviarci una mail a <strong>caccin.cablaggi@gmail.com</strong>.', 'bot');
-            } else {
-                addMessage('Grazie per averci scritto! Per fornirti l\'assistenza tecnica più accurata, ti consigliamo di compilare il nostro form preventivi a lato oppure di inviarci un messaggio diretto a <strong>caccin.cablaggi@gmail.com</strong>.', 'bot');
-            }
-        }, 1000);
-    }
-
-    botSend.addEventListener('click', gestisciMessaggioLibero);
-    botInput.addEventListener('keypress', (e) => {
-        if(e.key === 'Enter') gestisciMessaggioLibero();
-    });
-
-    // ==========================================
-    // INVIO IN BASE64 MULTIPLO DI APPS SCRIPT
-    // ==========================================
-    const formB2b = document.getElementById('form-b2b-ele');
-    const submitBtnB2b = document.getElementById('b2b-submit-btn');
-
-    if(formB2b) {
-        formB2b.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            submitBtnB2b.innerText = "Invio in corso... Attendere...";
-            submitBtnB2b.disabled = true;
-
-            const dataB2B = {
-                ragione_sociale: document.getElementById('b2b-rag-soc').value,
-                referente: document.querySelector('input[name="👤 Nome Referente"]').value,
-                ruolo: document.querySelector('input[name="💼 Ruolo Aziendale"]').value,
-                email: document.querySelector('input[name="📩 Email Referente"]').value,
-                telefono: document.querySelector('input[name="📞 Telefono Referente"]').value,
-                progetto: document.querySelector('input[name="🏷️ Progetto / Macchinario"]').value,
-                quantita: document.querySelector('input[name="🔢 Quantità Lotto"]').value,
-                tipo_fornitura: document.querySelector('select[name="📦 Tipo Fornitura"]').value,
-                servizi_richiesti: Array.from(document.querySelectorAll('.tipo-lav-cb:checked')).map(cb => cb.value).join(', '),
-                fornitura_carpenteria: document.querySelector('input[name="📦 Fornitura Carpenteria"]:checked').value,
-                marca_carpenteria: document.querySelector('select[name="🏷️ Marca Struttura"]').value,
-                modello_misure: document.querySelector('input[name="📐 Modello e Misure"]').value,
-                grado_ip: document.querySelector('select[name="🛡️ Grado IP"]').value,
-                materiali_elettrici: document.querySelector('input[name="🔌 Fornitura Materiale Elettrico"]:checked').value,
-                brand_richiesti: Array.from(document.querySelectorAll('.brand-grid input:checked')).map(cb => cb.value).join(', '),
-                minuterie_consumabili: document.querySelector('input[name="🔧 Minuterie Consumo"]:checked').value,
-                tipo_siglatura: document.querySelector('select[name="🏷️ Tipo Siglatura"]').value,
-                sezione_massima_potenza: document.querySelector('select[name="⚡ Sezione Potenza"]').value,
-                collaudo_e_certificazioni: document.querySelector('input[name="📋 Collaudo Richiesto"]:checked') ? "Richiesto Collaudo Continuità Elettrica" : "Nessuno",
-                certificazioni_extra: Array.from(document.querySelectorAll('.cert-cb:checked')).map(cb => cb.value).join(', '),
-                files: []
-            };
-
-            const fileFields = [
-                { id: 'allegato-schema', label: 'Schema Elettrico' },
-                { id: 'allegato-layout', label: 'Disegno Layout' },
-                { id: 'allegato-bom', label: 'Distinta Base BOM' }
-            ];
-
-            const readFilesPromises = fileFields.map(field => {
-                return new Promise((resolve) => {
-                    const el = document.getElementById(field.id);
-                    if(el && el.files && el.files[0]) {
-                        const file = el.files[0];
-                        const r = new FileReader();
-                        r.onload = function(evt) {
-                            const base64Data = evt.target.result.split(',')[1];
-                            dataB2B.files.push({
-                                mimeType: file.type,
-                                fileName: file.name,
-                                label: field.label,
-                                base64: base64Data
-                            });
-                            resolve();
-                        };
-                        r.readAsDataURL(file);
-                    } else {
-                        resolve();
-                    }
-                });
-            });
-
-            await Promise.all(readFilesPromises);
-
-            try {
-                const resp = await fetch(formB2b.action, {
-                    method: 'POST',
-                    body: JSON.stringify(dataB2B),
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-                });
-                const resData = await resp.json();
-                if(resData.result === 'success') {
-                    alert('Grazie! Preventivo B2B inviato con successo. Ti ricontatteremo in 24/48 ore.');
-                    formB2b.reset();
-                    if(carpenteriaBox) carpenteriaBox.style.display = 'none';
-                    if(componentiBox) componentiBox.style.display = 'none';
-                } else {
-                    alert('Errore riscontrato: ' + resData.error);
-                }
-            } catch(err) {
-                alert('Errore generato durante l\'invio: ' + err.toString());
-            } finally {
-                submitBtnB2b.innerText = "⚡ Invia Dati Tecnici Commessa";
-                submitBtnB2b.disabled = false;
-            }
-        });
-    }
-
-    const formB2c = document.getElementById('form-b2c-ele');
-    const submitBtnB2c = document.getElementById('b2c-submit-btn');
-
-    if(formB2c) {
-        formB2c.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            submitBtnB2c.innerText = "Invio in corso...";
-            submitBtnB2c.disabled = true;
-
-            const dataB2C = {
-                nome_cliente: document.getElementById('b2c-nome').value,
-                email: document.querySelector('#form-b2c-ele input[name="📩 Email"]').value,
-                telefono: document.querySelector('#form-b2c-ele input[name="📞 Telefono"]').value,
-                comune: document.querySelector('input[name="📍 Località Intervento"]').value,
-                tipo_immobile: document.querySelector('select[name="🏠 Tipo Immobile"]').value,
-                stato_immobile: document.querySelector('select[name="🚧 Stato Immobile"]').value,
-                superficie_indicativa: document.querySelector('input[name="📐 Superficie Mq"]').value,
-                sistemi_tecnologie_desiderate: Array.from(document.querySelectorAll('.b2c-tech-cb:checked')).map(cb => cb.value).join(', '),
-                ambito: document.getElementById('b2c-select').value,
-                messaggio: document.querySelector('#form-b2c-ele textarea[name="💬 Messaggio / Richiesta"]').value,
-                files: []
-            };
-
-            try {
-                const resp = await fetch(formB2c.action, {
-                    method: 'POST',
-                    body: JSON.stringify(dataB2C),
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-                });
-                const resData = await resp.json();
-                if(resData.result === 'success') {
-                    alert('Grazie! Richiesta di sopralluogo civile inviata con successo. Ti ricontatteremo a breve.');
-                    formB2c.reset();
-                } else {
-                    alert('Errore: ' + resData.error);
-                }
-            } catch(err) {
-                alert('Errore di invio: ' + err.toString());
-            } finally {
-                submitBtnB2c.innerText = "🏠 Richiedi Sopralluogo / Preventivo Civile";
-                submitBtnB2c.disabled = false;
-            }
-        });
-    }
 </script>
 </body>
 </html>
