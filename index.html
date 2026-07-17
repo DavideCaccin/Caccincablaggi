@@ -1329,6 +1329,7 @@
         </div>
     </div>
     <div class="cablobot-body" id="bot-body">
+        
         </div>
     <div class="cablobot-footer">
         <input type="text" id="cablobot-input" placeholder="Scrivi un messaggio...">
@@ -1337,106 +1338,67 @@
 </div>
 
 <script>
-    const botToggle = document.getElementById('bot-toggle');
-    const botBody = document.getElementById('bot-body');
-    const botWindow = document.getElementById('bot-window');
-    const botInput = document.getElementById('cablobot-input');
-    const botSend = document.getElementById('cablobot-send');
+   // --- INIZIO LOGICA BOT (Copia questo blocco) ---
+const botWindow = document.getElementById('bot-window');
+const botBody = document.getElementById('bot-body');
 
-    function addMessage(text, sender) {
-        const div = document.createElement('div');
-        div.classList.add('msg', sender);
-        div.innerHTML = text;
-        botBody.appendChild(div);
-        botBody.scrollTop = botBody.scrollHeight;
+function vaiAiPreventivi() {
+    botWindow.style.display = 'none';
+    const sez = document.getElementById('preventivo');
+    if(sez) sez.scrollIntoView({ behavior: 'smooth' });
+}
+
+function botSgaio(messaggio, opzioni = null) {
+    const div = document.createElement('div');
+    div.className = 'msg bot';
+    div.innerHTML = messaggio;
+    botBody.appendChild(div);
+    if (opzioni) {
+        const box = document.createElement('div');
+        box.className = 'cablobot-options';
+        opzioni.forEach(o => {
+            const btn = document.createElement('button');
+            btn.className = 'opt-btn';
+            btn.innerText = o.testo;
+            btn.onclick = o.azione;
+            box.appendChild(btn);
+        });
+        botBody.appendChild(box);
     }
+    botBody.scrollTop = botBody.scrollHeight;
+}
 
-    function botSgaio(messaggio, opzioni = null, mostraIndietro = false) {
-        addMessage(messaggio, 'bot');
-        if (opzioni) {
-            const box = document.createElement('div');
-            box.className = 'cablobot-options';
-            opzioni.forEach(o => {
-                const btn = document.createElement('button');
-                btn.className = 'opt-btn';
-                btn.innerText = o.testo;
-                btn.onclick = () => {
-                    addMessage(o.testo, 'user');
-                    o.azione();
-                };
-                box.appendChild(btn);
-            });
-            if (mostraIndietro) {
-                const backBtn = document.createElement('button');
-                backBtn.className = 'opt-btn';
-                backBtn.style.background = '#64748b'; // Grigio per differenziarlo
-                backBtn.innerText = "⬅ Torna indietro";
-                backBtn.onclick = mostraMenuPrincipale;
-                box.appendChild(backBtn);
-            }
-            botBody.appendChild(box);
-            botBody.scrollTop = botBody.scrollHeight;
-        }
+function mostraMenuPrincipale() {
+    botBody.innerHTML = '';
+    botSgaio("Ciao! Come posso aiutarti?", [
+        { testo: "🏢 Azienda", azione: menuAzienda },
+        { testo: "🏠 Privato", azione: menuPrivato }
+    ]);
+}
+
+function menuAzienda() {
+    botSgaio("Cosa serve alla tua officina?", [
+        { testo: "Cablaggio conto terzi", azione: () => botSgaio("Passami gli schemi o descrivi il lotto nella sezione dedicata ai preventivi.", [{ testo: "Vai ai Preventivi", azione: vaiAiPreventivi }]) },
+        { testo: "Assemblaggi", azione: () => botSgaio("Descrivi i tuoi componenti nella sezione dedicata ai preventivi.", [{ testo: "Vai ai Preventivi", azione: vaiAiPreventivi }]) }
+    ]);
+}
+
+function menuPrivato() {
+    botSgaio("Che tipo di lavoro ti serve?", [
+        { testo: "Impianti elettrici", azione: () => botSgaio("Descrivi il lavoro nella sezione dedicata ai preventivi.", [{ testo: "Vai ai Preventivi", azione: vaiAiPreventivi }]) }
+    ]);
+}
+
+// Collega il bottone di apertura (assicurati che l'ID sia 'bot-toggle')
+document.getElementById('bot-toggle').addEventListener('click', () => {
+    if (botWindow.style.display !== 'flex') {
+        botWindow.style.display = 'flex';
+        if (botBody.innerHTML === '') mostraMenuPrincipale();
+    } else {
+        botWindow.style.display = 'none';
     }
-
-    function menuAzienda() {
-        botSgaio("Ottimo! Cosa serve alla tua officina?", [
-            { testo: "Preventivo rapido", azione: () => { botWindow.style.display='none'; document.getElementById('preventivo').scrollIntoView(); } },
-            { testo: "Cablaggio conto terzi", azione: () => botSgaio("Perfetto, passami gli schemi o descrivimi il lotto!") },
-            { testo: "Assemblaggi", azione: () => botSgaio("Ci occupiamo noi dei montaggi, che tipo di componenti?") }
-        ], true);
-    }
-
-    function menuPrivato() {
-        botSgaio("Dimmi tutto, come posso rimettere in sesto casa?", [
-            { testo: "Impianti elettrici", azione: () => botSgaio("Ok, impianti a norma e sicuri. Che tipo di lavoro?") },
-            { testo: "Guasti/Contatti", azione: () => window.open('https://wa.me/393392859037', '_blank') }
-        ], true);
-    }
-
-    function mostraMenuPrincipale() {
-        botBody.innerHTML = ''; 
-        botSgaio("Ciao! 👋 Sono il tuo assistente Caccin. Come posso aiutarti?", [
-            { testo: "🏢 Sono un'Azienda", azione: menuAzienda },
-            { testo: "🏠 Sono un Privato", azione: menuPrivato }
-        ]);
-    }
-
-    // Invio da input
-    function inviaMessaggio() {
-        const testo = botInput.value.trim();
-        if(testo !== "") {
-            addMessage(testo, 'user');
-            botInput.value = "";
-            setTimeout(() => addMessage("Grazie per il messaggio! Ti risponderemo al più presto.", 'bot'), 500);
-        }
-    }
-
-    botSend.addEventListener('click', inviaMessaggio);
-    botInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') inviaMessaggio(); });
-
-    botToggle.addEventListener('click', () => {
-        botWindow.style.display = (botWindow.style.display === 'flex') ? 'none' : 'flex';
-        if(botBody.children.length === 0) mostraMenuPrincipale();
-    });
-
-    // Contatori
-    const observer = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting) {
-            document.querySelectorAll('.counter').forEach(c => {
-                let target = +c.getAttribute('data-target');
-                let count = 0;
-                let interval = setInterval(() => {
-                    count += Math.ceil(target / 50);
-                    c.innerText = count;
-                    if (count >= target) { c.innerText = target; clearInterval(interval); }
-                }, 30);
-            });
-            observer.disconnect();
-        }
-    }, { threshold: 0.5 });
-    const section = document.querySelector('.counters');
-    if (section) observer.observe(section);
+});
+// --- FINE LOGICA BOT ---
 </script>
 </body>
 </html>
