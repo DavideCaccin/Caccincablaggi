@@ -1393,35 +1393,42 @@
         document.getElementById('preventivo').scrollIntoView();
     }
 
-    function menuAzienda() {
-        botBody.innerHTML = ''; 
-        botSgaio("Ottimo! Cosa serve alla tua officina?", [
-            { testo: "Cablaggio conto terzi", azione: () => 
-                botSgaio("Perfetto, passami gli schemi o descrivimi il lotto nella sezione dedicata nei preventivi.", [
-                    { testo: "Vai ai Preventivi", azione: avviaPreventivo }
-                ]) 
-            },
-            { testo: "Assemblaggi", azione: () => 
-                botSgaio("Ci occupiamo noi dei montaggi, descrivimi i componenti nella sezione dedicata nei preventivi.", [
-                    { testo: "Vai ai Preventivi", azione: avviaPreventivo }
-                ]) 
-            },
-            { testo: "Officina Polmone", azione: () => botSgaio("Siamo pronti a integrare la tua produzione!") }
-        ]);
-    }
+    function mostraContattoDiretto() {
+    const msg = "In caso non ci sia la sezione che fa al caso Suo, può contattare direttamente Davide al +39 3392859037 e all'indirizzo mail: caccin.cablaggi@gmail.com. Grazie!";
+    botSgaio(msg, [
+        { testo: "Vai ai Preventivi", azione: avviaPreventivo }
+    ]);
+}
 
-    function menuPrivato() {
-        botBody.innerHTML = '';
-        botSgaio("Dimmi tutto, come posso rimettere in sesto casa?", [
-            { testo: "Impianti elettrici", azione: () => 
-                botSgaio("Ok, per fornirti un'analisi precisa, descrivimi l'intervento nella sezione dedicata nei preventivi.", [
-                    { testo: "Vai ai Preventivi", azione: avviaPreventivo }
-                ]) 
-            },
-            { testo: "Casette Legno/PVC/All", azione: () => botSgaio("Specializzati in cablaggi per strutture leggere!") },
-            { testo: "Contatti / Guasti", azione: () => window.open('https://wa.me/393392859037', '_blank') }
-        ]);
-    }
+function menuAzienda() {
+    botBody.innerHTML = ''; 
+    botSgaio("Ottimo! Cosa serve alla tua officina?", [
+        { testo: "Cablaggio conto terzi", azione: () => 
+            botSgaio("Perfetto, passami gli schemi o descrivimi il lotto nella sezione dedicata nei preventivi.", [
+                { testo: "Vai ai Preventivi", azione: avviaPreventivo }
+            ]) 
+        },
+        { testo: "Assemblaggi", azione: () => 
+            botSgaio("Ci occupiamo noi dei montaggi, descrivimi i componenti nella sezione dedicata nei preventivi.", [
+                { testo: "Vai ai Preventivi", azione: avviaPreventivo }
+            ]) 
+        },
+        { testo: "Officina Polmone", azione: mostraContattoDiretto },
+        { testo: "Altro / Info", azione: mostraContattoDiretto }
+    ]);
+}
+function menuPrivato() {
+    botBody.innerHTML = '';
+    botSgaio("Dimmi tutto, come posso rimettere in sesto casa?", [
+        { testo: "Impianti elettrici", azione: () => 
+            botSgaio("Ok, per fornirti un'analisi precisa, descrivimi l'intervento nella sezione dedicata nei preventivi.", [
+                { testo: "Vai ai Preventivi", azione: avviaPreventivo }
+            ]) 
+        },
+        { testo: "Casette Legno/PVC/All", azione: mostraContattoDiretto },
+        { testo: "Contatti / Guasti", azione: () => window.open('https://wa.me/393392859037', '_blank') }
+    ]);
+}
 
     function mostraMenuPrincipale() {
         botBody.innerHTML = ''; 
