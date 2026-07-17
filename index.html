@@ -1358,9 +1358,82 @@
         }
     });
 
+   // ==========================================
+    // LOGICA DI CABLOBOT - VERSIONE CON BUDGET
     // ==========================================
-    // LOGICA DI CABLOBOT POTENZIATO
-    // ==========================================
+    let attesaBudget = false;
+    const botToggle = document.getElementById('bot-toggle');
+    const botWindow = document.getElementById('bot-window');
+    const botBody = document.getElementById('bot-body');
+    const botInput = document.getElementById('cablobot-input');
+    const botSend = document.getElementById('cablobot-send');
+
+    botToggle.addEventListener('click', () => {
+        botWindow.style.display = (botWindow.style.display === 'flex') ? 'none' : 'flex';
+    });
+
+    function addMessage(text, sender) {
+        const div = document.createElement('div');
+        div.classList.add('msg', sender);
+        div.innerHTML = text;
+        botBody.appendChild(div);
+        botBody.scrollTop = botBody.scrollHeight;
+    }
+
+    function botOption(opt) {
+        if(opt === 'industriale') {
+            attesaBudget = true;
+            addMessage('Vorrei un preventivo per quadri o assemblaggi industriali.', 'user');
+            setTimeout(() => {
+                addMessage('Certamente. Per darti una soluzione su misura, che ordine di grandezza di budget avete stimato per questo progetto?', 'bot');
+            }, 800);
+        } else if(opt === 'civile') {
+            addMessage('Ho bisogno di informazioni per impianti civili.', 'user');
+            setTimeout(() => {
+                addMessage('Capito. Ti consiglio di compilare il modulo qui sotto, così Davide ti ricontatterà per un sopralluogo.', 'bot');
+                mostraCanale('civile');
+                document.getElementById('preventivo').scrollIntoView({ behavior: 'smooth' });
+            }, 800);
+        } else if(opt === 'tempistiche') {
+            addMessage('Quali sono i vostri tempi di consegna?', 'user');
+            setTimeout(() => { addMessage('Rispondiamo alle analisi B2B in 24/48 ore. Le scadenze finali vengono concordate in base al progetto.', 'bot'); }, 800);
+        } else if(opt === 'nda') {
+            addMessage('Come gestite la riservatezza?', 'user');
+            setTimeout(() => { addMessage('Siamo disponibili a firmare NDA prima di visionare qualsiasi schema.', 'bot'); }, 800);
+        } else if(opt === 'ricontatto') {
+            addMessage('Vorrei essere ricontattato.', 'user');
+            setTimeout(() => { addMessage('Puoi chiamare Davide al +39 345 417 0366 o scriverci i tuoi dati qui!', 'bot'); }, 800);
+        } else if(opt === 'whatsapp') {
+            window.open('https://wa.me/393392859037?text=Salve%2C%20ho%20visto%20il%20sito.', '_blank');
+        }
+    }
+
+    function gestisciMessaggioLibero() {
+        const testo = botInput.value.trim();
+        if(!testo) return;
+        addMessage(testo, 'user');
+        botInput.value = '';
+
+        setTimeout(() => {
+            if(attesaBudget) {
+                addMessage('Grazie. Per definire tutto nel dettaglio, il passo migliore è passare dal nostro configuratore. Ti porto alla sezione dedicata?', 'bot');
+                const btn = document.createElement('button');
+                btn.className = 'opt-btn';
+                btn.innerText = '👉 Vai al configuratore';
+                btn.onclick = () => { mostraCanale('industriale'); document.getElementById('preventivo').scrollIntoView({ behavior: 'smooth' }); };
+                botBody.appendChild(btn);
+                attesaBudget = false;
+            } else if(testo.toLowerCase().includes('preventivo') || testo.toLowerCase().includes('costo')) {
+                attesaBudget = true;
+                addMessage('Per aiutarti al meglio, che budget avete stimato per il progetto?', 'bot');
+            } else {
+                addMessage('Grazie per averci scritto! Per una risposta rapida, ti consiglio di compilare il form in fondo alla pagina.', 'bot');
+            }
+        }, 1000);
+    }
+
+    botSend.addEventListener('click', gestisciMessaggioLibero);
+    botInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') gestisciMessaggioLibero(); });
     const botToggle = document.getElementById('bot-toggle');
     const botWindow = document.getElementById('bot-window');
     const botBody = document.getElementById('bot-body');
