@@ -1436,6 +1436,27 @@
     
 </div>
 <script>
+// FAQ Accordion Logic
+document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+        const answer = button.nextElementSibling;
+        
+        // Chiude le altre risposte aperte (opzionale, per effetto accordion)
+        document.querySelectorAll('.faq-answer').forEach(ans => {
+            if (ans !== answer) {
+                ans.style.maxHeight = null;
+            }
+        });
+
+        // Apre o chiude la risposta corrente
+        if (answer.style.maxHeight) {
+            answer.style.maxHeight = null;
+        } else {
+            answer.style.maxHeight = answer.scrollHeight + "px";
+        }
+    });
+});
+
     // 1. FUNZIONI DI BASE
     const botToggle = document.getElementById('bot-toggle');
     const botBody = document.getElementById('bot-body');
