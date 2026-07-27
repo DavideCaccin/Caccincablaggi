@@ -9,99 +9,49 @@ const transporter = process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD ? n
   }
 }) : null;
 
-async function sendEmail(subject, htmlContent) {
+async function sendAlertEmail(errorDetails) {
   if (!transporter || !process.env.NOTIFICATION_EMAIL) {
-    console.log(`[EMAIL SIMULATA] ${subject}: ${htmlContent}`);
+    console.log(`[EMAIL SIMULATA - ANOMALIA] ${errorDetails}`);
     return;
   }
   
   try {
     let info = await transporter.sendMail({
-      from: `"Caccin Monitor" <${process.env.GMAIL_USER}>`,
+      from: `"Caccin Monitor Alert" <${process.env.GMAIL_USER}>`,
       to: process.env.NOTIFICATION_EMAIL,
-      subject: subject,
-      html: htmlContent
+      subject: '🚨 [ATTENZIONE] Anomalia rilevata sul tuo sito!',
+      html: `
+        <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; border: 2px solid #ef4444; border-radius: 8px; padding: 20px;">
+          <h2 style="color: #ef4444; margin-top: 0;">🚨 Rilevata un'anomalia sul sito!</h2>
+          <p>Il controllo giornaliero automatico ha riscontrato un problema:</p>
+          <div style="background: #fef2f2; border-left: 4px solid #ef4444; padding: 12px; margin: 15px 0; font-family: monospace; color: #991b1b;">
+            ${errorDetails}
+          </div>
+          <p style="font-size: 13px; color: #64748b;">Verifica subito lo stato del server o del sito web.</p>
+        </div>
+      `
     });
-    console.log('Email inviata con successo. ID:', info.messageId);
+    console.log('Email di allerta inviata con successo. ID:', info.messageId);
   } catch (error) {
-    console.error('ERRORE durante l\'invio della mail:', error);
+    console.error('ERRORE durante l\'invio della mail di allerta:', error);
   }
 }
 
-test('Report Visite e Grafico Tabellare', async ({ page }) => {
+test('Controllo giornaliero stato sito', async ({ page }) => {
   const targetUrl = process.env.TARGET_URL || 'https://tuosito.it';
-  const gaMeasurementId = 'G-CBG6CS22TY';
-  let gaHitsDetected = 0;
 
-  page.on('request', request => {
-    const url = request.url();
-    if (url.includes('google-analytics.com') || url.includes('googletagmanager.com')) {
-      gaHitsDetected++;
+  try {
+    const response = await page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
+
+    if (!response || response.status() >= 400) {
+      throw new Error(`Il sito ha restituito un codice di stato HTTP non valido: ${response ? response.status() : 'Nessuna risposta'}`);
     }
-  });
 
-  const startTime = Date.now();
-  const response = await page.goto(targetUrl, { waitUntil: 'networkidle' });
-  const responseTime = Date.now() - startTime;
-
-  if (!response || response.status() >= 400) {
-    throw new Error(`Sito non raggiungibile o errore HTTP: ${response ? response.status() : 'Nessuna risposta'}`);
+    console.log('Controllo completato con successo: il sito è online e funzionante.');
+  } catch (error) {
+    console.error('Errore durante il monitoraggio:', error.message);
+    // Invia l'email solo se il test fallisce (sito giù o errore)
+    await sendAlertEmail(error.message);
+    throw error; // Fa fallire ufficialmente l'azione su GitHub
   }
-
-  await page.waitForTimeout(3000);
-
-  const viewsData = [
-    { day: 'Lunedì', views: 120, width: '40%' },
-    { day: 'Martedì', views: 185, width: '60%' },
-    { day: 'Mercoledì', views: 150, width: '50%' },
-    { day: 'Giovedì', views: 240, width: '80%' },
-    { day: 'Venerdì', views: 310, width: '100%' },
-    { day: 'Sabato', views: 210, width: '70%' },
-    { day: 'Domenica', views: 160, width: '55%' }
-  ];
-
-  const reportHtml = `
-    <div style="font-family: Arial, sans-serif; color: #333333; max-width: 600px; margin: 0 auto; background: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #dddddd;">
-      
-      <!-- Intestazione -->
-      <div style="background: #0284c7; color: #ffffff; padding: 15px; border-radius: 6px; text-align: center; margin-bottom: 20px;">
-        <h2 style="margin: 0; font-size: 20px; color: #ffffff;">📊 Caccin Monitor - Report Visite</h2>
-        <p style="margin: 5px 0 0 0; font-size: 12px; color: #e0f2fe;">Panoramica delle visualizzazioni e dello stato del sito</p>
-      </div>
-
-      <!-- Stato e Performance -->
-      <div style="background: #f8fafc; padding: 15px; border-radius: 6px; margin-bottom: 20px; border: 1px solid #e2e8f0;">
-        <h3 style="margin-top: 0; color: #0f172a; font-size: 15px; border-bottom: 1px solid #cbd5e1; padding-bottom: 5px;">🌐 Stato del Server & Analytics</h3>
-        <p style="margin: 6px 0; font-size: 13px; color: #333333;">🟢 <strong>Stato Sito:</strong> Online (${responseTime}ms)</p>
-        <p style="margin: 6px 0; font-size: 13px; color: #333333;">🎯 <strong>Google Analytics (${gaMeasurementId}):</strong> <span style="color: #16a34a; font-weight: bold;">Connesso (${gaHitsDetected} eventi)</span></p>
-      </div>
-
-      <!-- Grafico delle Visualizzazioni (Tabella Sicura) -->
-      <div style="background: #f8fafc; padding: 15px; border-radius: 6px; margin-bottom: 20px; border: 1px solid #e2e8f0;">
-        <h3 style="margin-top: 0; color: #0f172a; font-size: 15px; border-bottom: 1px solid #cbd5e1; padding-bottom: 10px;">📈 Visualizzazioni (Ultimi 7 Giorni)</h3>
-        
-        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
-          ${viewsData.map(item => `
-            <tr>
-              <td style="padding: 6px 8px; width: 90px; font-weight: bold; color: #333333;">${item.day}</td>
-              <td style="padding: 6px 8px;">
-                <div style="background: #e2e8f0; border-radius: 3px; height: 14px; width: 100%; overflow: hidden;">
-                  <div style="background: #0ea5e9; height: 14px; width: ${item.width};"></div>
-                </div>
-              </td>
-              <td style="padding: 6px 8px; width: 45px; text-align: right; font-weight: bold; color: #333333;">${item.views}</td>
-            </tr>
-          `).join('')}
-        </table>
-      </div>
-
-      <!-- Footer -->
-      <p style="font-size: 11px; color: #666666; text-align: center; margin-top: 20px;">
-        Report generato automaticamente da Caccin Monitor • ${new Date().toLocaleDateString('it-IT')}
-      </p>
-    </div>
-  `;
-
-  console.log("Invio report con tabella pulita in corso...");
-  await sendEmail('📊 [Caccin Monitor] Report Visite e Grafico', reportHtml);
 });
