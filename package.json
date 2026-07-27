@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "resend": "^3.2.0"
+    "nodemailer": "^6.9.12"
   },
   "devDependencies": {
     "@playwright/test": "^1.42.0"
