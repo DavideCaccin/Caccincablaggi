@@ -27,7 +27,8 @@ jobs:
 
       - name: 🚀 Esegui i test di monitoraggio
         env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
           TARGET_URL: ${{ secrets.TARGET_URL }}
         run: npx playwright test tests/monitor.spec.js
