@@ -1,22 +1,29 @@
 const { test, expect } = require('@playwright/test');
-const { Resend } = require('resend');
+const nodemailer = require('nodemailer');
 
-const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+// Configura il trasportatore email con Gmail
+const transporter = process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD ? nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_APP_PASSWORD
+  }
+}) : null;
 
 async function sendAlert(subject, message) {
-  if (!resend || !process.env.NOTIFICATION_EMAIL) {
+  if (!transporter || !process.env.NOTIFICATION_EMAIL) {
     console.log(`[ALERT SIMULATO] ${subject}: ${message}`);
     return;
   }
   
   try {
-    await resend.emails.send({
-      from: 'Caccin Monitor <onboarding@resend.dev>',
+    await transporter.sendMail({
+      from: `"Caccin Monitor" <${process.env.GMAIL_USER}>`,
       to: process.env.NOTIFICATION_EMAIL,
       subject: `🚨 [Caccin Monitor] ${subject}`,
       html: `<p><strong>Errore rilevato nel sistema:</strong></p><p>${message}</p>`
     });
-    console.log('Email di notifica inviata con successo.');
+    console.log('Email di notifica inviata con successo tramite Gmail.');
   } catch (error) {
     console.error('Errore durante l\'invio della mail:', error);
   }
