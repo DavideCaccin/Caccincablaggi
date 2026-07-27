@@ -1,1 +1,33 @@
-behdbd
+name: Caccin Monitor v1.0
+
+on:
+  schedule:
+    - cron: '0 8 * * *' # Ogni giorno alle 08:00 UTC
+  workflow_dispatch: # Permette l'avvio manuale da GitHub
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 🛎️ Checkout del codice
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Installa le dipendenze
+        run: npm ci
+
+      - name: 🎭 Installa i browser di Playwright
+        run: npx playwright install --with-deps
+
+      - name: 🚀 Esegui i test di monitoraggio
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
+          TARGET_URL: ${{ secrets.TARGET_URL }}
+        run: npx playwright test tests/monitor.spec.js
