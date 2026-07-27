@@ -1,0 +1,11 @@
+{
+  "name": "caccin-monitor",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "resend": "^3.2.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.42.0"
+  }
+}
