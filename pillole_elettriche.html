@@ -8,6 +8,23 @@
     <meta name="description" content="Consigli pratici, curiosità e pillole tecniche quotidiane sul mondo elettrico e dei cablaggi a cura di Caccin Davide.">
     <link rel="stylesheet" href="style.css">
     <style>
+        /* Correzione dimensioni logo e header per evitare scompensi */
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 10px 0;
+        }
+        .navbar.container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo img {
+            max-height: 60px; /* Imposta un'altezza fissa e controllata per il logo */
+            width: auto;
+            display: block;
+        }
         .pillole-header {
             background: linear-gradient(135deg, #005252, #003333);
             color: white;
@@ -48,7 +65,7 @@
         .pillola-card p {
             color: #475569;
             line-height: 1.6;
-            margin-bottom: 15px;
+            margin-bottom: 0; /* Tolto margine inferiore visto che non c'è più la firma */
         }
     </style>
 </head>
@@ -66,17 +83,16 @@
     <header>
         <div class="navbar container">
             <div class="logo">
-                <a href="index.html"><img src="LOGO.jpg" alt="Logo"></a>
+                <a href="index.html"><img src="LOGO.jpg" alt="Logo Caccin Cablaggi"></a>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#azienda">Azienda</a></li>
-                    <li><a href="index.html#servizi">Servizi</a></li>
-                    <li><a href="index.html#preventivo">Preventivo</a></li>
-                    <li><a href="pillole.html" style="color: #ff6b35; font-weight: bold;">💊 Pillole Elettriche</a></li>
-                </ul>
-            </nav>
+            <!-- Menu di navigazione -->
+            <div class="menu" style="display: flex; gap: 20px; align-items: center; list-style: none;">
+                <a href="index.html" style="text-decoration: none; color: #333;">Home</a>
+                <a href="index.html#azienda" style="text-decoration: none; color: #333;">Azienda</a>
+                <a href="index.html#servizi" style="text-decoration: none; color: #333;">Servizi</a>
+                <a href="index.html#preventivo" style="text-decoration: none; color: #333;">Preventivo</a>
+                <a href="pillole.html" style="color: #ff6b35; font-weight: bold; text-decoration: none;">💊 Pillole Elettriche</a>
+            </div>
         </div>
     </header>
 
@@ -92,18 +108,11 @@
     <section>
         <div class="pillole-container">
 
-            <!-- INSERISCI QUI LA TUA NUOVA PILLOLA (Metti sempre la più recente in cima) -->
+            <!-- NUOVA PILLOLA (Senza la firma in fondo) -->
             <div class="pillola-card">
-    <div class="pillola-date">📅 27 Luglio 2026</div>
-    <h3>Il serraggio dei morsetti: un controllo che previene i guai</h3>
-    <p>Spesso ci si dimentica che le vibrazioni a bordo macchina o la dilatazione termica dovuta al passaggio della corrente possono allentare le viti dei morsetti nel tempo. Un morsetto lento crea resistenza, genera calore anomalo e può diventare la causa principale di un falso contatto o, nei casi peggiori, di un principio d'incendio. Una buona prassi durante la manutenzione periodica è verificare sempre la coppia di serraggio.</p>
-    <p style="font-style: italic; font-size: 14px; color: #64748b;">— A cura di Davide Caccin</p>
-</div>
-            <div class="pillola-card">
-                <div class="pillola-date">📅 28 Luglio 2026</div>
-                <h3>La prima pillola del giorno: l'importanza della sezione dei cavi</h3>
-                <p>Quando si dimensiona una linea, non bisogna mai sottovalutare la caduta di tensione. Un cavo che lavora al limite del proprio carico termico non solo disperde energia in calore, ma riduce drasticamente la vita utile dell'impianto.</p>
-                <p style="font-style: italic; font-size: 14px; color: #64748b;">— A cura di Davide Caccin</p>
+                <div class="pillola-date">📅 27 Luglio 2026</div>
+                <h3>Il serraggio dei morsetti: un controllo che previene i guai</h3>
+                <p>Spesso ci si dimentica che le vibrazioni a bordo macchina o la dilatazione termica dovuta al passaggio della corrente possono allentare le viti dei morsetti nel tempo. Un morsetto lento crea resistenza, genera calore anomalo e può diventare la causa principale di un falso contatto o, nei casi peggiori, di un principio d'incendio. Una buona prassi durante la manutenzione periodica è verificare sempre la coppia di serraggio.</p>
             </div>
             <!-- FINE DELLA PILLOLA -->
 
