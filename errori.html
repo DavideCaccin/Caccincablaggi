@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="LOGO.jpg">
+    <title>Errori da evitare | Caccin Cablaggi</title>
+    <meta name="description" content="I passi falsi più comuni nel cablaggio, nella quadristica e negli impianti elettrici da evitare per lavorare in sicurezza.">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 10px 0;
+        }
+        .navbar.container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo img {
+            max-height: 60px;
+            width: auto;
+            display: block;
+        }
+        .errori-header {
+            background: linear-gradient(135deg, #005252, #003333);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        .errori-container {
+            max-width: 800px;
+            margin: 40px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            padding: 0 20px;
+        }
+        .errore-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            /* Bordo sinistro rosso/arancio per richiamare il concetto di attenzione/errore */
+            border-left: 5px solid #e11d48;
+            border-top: 1px solid #e2e8f0;
+            border-right: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .errore-tag {
+            font-size: 13px;
+            color: #e11d48;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .errore-card h3 {
+            color: #003333;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        .errore-card p {
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .soluzione-box {
+            background: #f8fafc;
+            border-left: 3px solid #0d9488;
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            color: #334155;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="contact-info">
+            <span>📞 +39 339 2859037</span>
+            <span>📧 caccin.cablaggi@gmail.com</span>
+        </div>
+    </div>
+
+    <!-- Header / Menu -->
+    <header>
+        <div class="navbar container">
+            <div class="logo">
+                <a href="index.html"><img src="LOGO.jpg" alt="Logo Caccin Cablaggi"></a>
+            </div>
+            <!-- Menu di navigazione -->
+            <div class="menu" style="display: flex; gap: 20px; align-items: center; list-style: none;">
+                <a href="index.html" style="text-decoration: none; color: #333;">Home</a>
+                <a href="index.html#azienda" style="text-decoration: none; color: #333;">Azienda</a>
+                <a href="index.html#servizi" style="text-decoration: none; color: #333;">Servizi</a>
+                <a href="errori.html" style="color: #e11d48; font-weight: bold; text-decoration: none;">⚠️ Errori da evitare</a>
+                <a href="pillole.html" style="text-decoration: none; color: #333;">🔍 Nel dettaglio</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Intestazione della pagina -->
+    <section class="errori-header">
+        <div class="container">
+            <h1>Errori da evitare</h1>
+            <p>I passi falsi più comuni nel cablaggio e negli impianti: riconoscerli per prevenirli.</p>
+        </div>
+    </section>
+
+    <!-- Contenitore dei post -->
+    <section>
+        <div class="errori-container">
+
+            <!-- ESEMPIO DI ERRORE -->
+            <div class="errore-card">
+                <div class="errore-tag">⚠️ Errore Comune #1</div>
+                <h3>Mischiare sezioni di cavo diverse sotto lo stesso morsetto</h3>
+                <p>Spesso, per comodità o fretta, capita di infilare nello stesso morsetto di un componente o di una morsettiera due cavi con sezioni differenti (ad esempio un 1.5 mmq e un 4 mmq). A prima vista può sembrare che tengano, ma con la pressione della vite il cavo più piccolo non stringerà mai in modo corretto, creando un falso contatto destinato a scaldare.</p>
+                
+                <div class="soluzione-box">
+                    <strong>Come rimediare:</strong> Utilizzare sempre morsetti doppi, capicorda adeguati o derivare le linee correttamente prima di entrare nel punto di connessione.
+                </div>
+            </div>
+            <!-- FINE ESEMPIO -->
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container" style="text-align: center; padding: 20px; color: #64748b; font-size: 14px;">
+            <p>&copy; 2026 Caccin Cablaggi di Caccin Davide - Pianiga (VE). P.IVA: 04875640277</p>
+            <p><a href="index.html" style="color: #006666; text-decoration: none;">Torna alla Home</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>
