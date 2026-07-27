@@ -116,7 +116,6 @@
     <section>
         <div class="errori-container">
 
-            <!-- ESEMPIO DI ERRORE -->
             <div class="errore-card">
                 <div class="errore-tag">⚠️ Errore Comune #1</div>
                 <h3>Mischiare sezioni di cavo diverse sotto lo stesso morsetto</h3>
@@ -126,7 +125,95 @@
                     <strong>Come rimediare:</strong> Utilizzare sempre morsetti doppi, capicorda adeguati o derivare le linee correttamente prima di entrare nel punto di connessione.
                 </div>
             </div>
-            <!-- FINE ESEMPIO -->
+            <div class="errore-card">
+                <div class="errore-tag">⚠️ Errore Comune #2</div>
+                <h3> Dimenticare di identificare i conduttori (numerazione fili)</h3>
+                <p> Cablare un quadro intero usando cavi dello stesso colore o senza etichette di marcatura. Può sembrare veloce sul momento, ma diventa un incubo alla prima ricerca guasti o modifiche future.</p>
+                
+                <div class="soluzione-box">
+                    <strong>Come rimediare:</strong> Numerare sempre ogni capo filo in modo coerente con lo schema elettrico di riferimento.
+                </div>
+            </div>
+
+<div class="errore-card">
+                <div class="errore-tag">⚠️ Errore Comune #3</div>
+                <h3> Lasciare i cavi in tensione in giro senza cappucci o morsetti durante il lavoro </h3>
+                <p> Lasciare spezzoni di cavo spellati e attivi "per comodità" mentre si lavora all'interno di un quadro in tensione o parzialmente alimentato, rischiando cortocircuiti accidentali con i cacciaviti. </p>
+                
+                <div class="soluzione-box">
+                    <strong>Come rimediare:</strong> Mettere sempre in sicurezza la zona, isolare i capi liberi o togliere completamente tensione prima di operare.
+                </div>
+            </div>
+
+<div class="errore-card">
+                <div class="errore-tag">⚠️ Errore Comune #4</div>
+                <h3> Far passare cavi dati e cavi di potenza nella stessa canalina </h3>
+                <p> Affiancare cavi della 230V/400V (potenza) e cavi schermati di segnale o comunicazione (PLC, bus, ethernet) nello stesso cunicolo senza separazione. I campi magnetici genereranno disturbi e malfunzionamenti anomali. </p>
+                
+                <div class="soluzione-box">
+                    <strong>Come rimediare:</strong> Utilizzare canaline separate o setti divisori metallici di schermatura all'interno del quadro e delle canalizzazioni.
+                </div>
+            </div>
+
+<div class="errore-card">
+                <div class="errore-tag">⚠️ Errore Comune #5</div>
+                <h3> Non prevedere una riserva di spazio (e di morsetti) nei quadri </h3>
+                <p> Realizzare un quadro elettrico dimensionato "al millimetro", senza un singolo morsetto libero o spazio in barra DIN per future implementazioni. </p>
+                
+                <div class="soluzione-box">
+                    <strong>Come rimediare:</strong> Lasciare sempre almeno un 15-20% di spazio libero e morsetti di riserva per rendere il quadro scalabile.
+                </div>
+            </div>
+
+<div class="errore-card">
+                <div class="errore-tag">⚠️ Errore Comune #6</div>
+                <h3> Saltare la prova di continuità del conduttore di protezione (Terra) </h3>
+                <p> Montare sportelli, piastre di fondo e carpenterie metalliche senza verificare che siano correttamente ed equipotenzialmente collegate a terra tramite i relativi treccine o cavi gialloverdi. </p>
+                
+                <div class="soluzione-box">
+                    <strong>Come rimediare:</strong> Eseguire sempre un controllo visivo e strumentale della continuità di terra prima di chiudere e marcare CE il quadro.
+                </div>
+            </div>
+
+<div class="errore-card">
+                <div class="errore-tag">⚠️ Errore Comune #7</div>
+                <h3> Posizionare componenti che scaldano troppo vicini tra loro </h3>
+                <p> Ammassare alimentatori switching, teleruttori o inverter nello stesso punto senza calcolare la dissipazione termica e lo spazio d'aria necessario intorno. </p>
+                
+                <div class="soluzione-box">
+                    <strong>Come rimediare:</strong> Rispettare le distanze di rispetto verticali e orizzontali consigliate dai produttori, valutando l'uso di ventole di ventilazione forzata se l'aria ristagna.
+                </div>
+            </div>
+
+<div class="errore-card">
+                <div class="errore-tag">⚠️ Errore Comune #8</div>
+                <h3> Dimenticare o dimensionare male le schermature dei cavi analogici o bus </h3>
+                <p> Collegare la calza di un cavo schermato (per esempio un encoder, un segnale analogico 4-20mA o una linea di comunicazione Profibus/Canopen) da entrambi i lati a casaccio, oppure lasciarla scollegata da un capo, o peggio ancora attorcigliarla a "treccina" facendola diventare un'antenna per i disturbi elettromagnetici. </p>
+                
+                <div class="soluzione-box">
+                    <strong>Come rimediare:</strong> La regola generale per i segnali di misura e bus è attestare la schermatura a 360 gradi usando gli appositi morsetti EMC direttamente sulla piastra di fondo o sulla barra equipotenziale del quadro, solitamente collegandola dal lato del quadro (o seguendo le specifiche del costruttore del drive/PLC).
+                </div>
+            </div>
+
+<div class="errore-card">
+                <div class="errore-tag">⚠️ Errore Comune #9</div>
+                <h3> Trascurare lo spazio di ventilazione per inverter e azionamenti </h3>
+                <p> Montare i drive (inverter) appiccicati l'uno all'altro sulla piastra o troppo vicini ai canali portacavi superiore e inferiore, ignorando i centimetri di "aria libera" richiesti verticalmente dal costruttore. D'estate o a pieno carico, l'inverter andrà costantemente in blocco per sovratemperatura. </p>
+                
+                <div class="soluzione-box">
+                    <strong>Come rimediare:</strong> Rispettare rigorosamente le distanze di rispetto minime indicate nei manuali tecnici degli azionamenti e prevedere sempre ventole di estrazione o tetti ventilati adeguati sulla carpenteria.
+                </div>
+            </div>
+
+<div class="errore-card">
+                <div class="errore-tag">⚠️ Errore Comune #10</div>
+                <h3> Crimpare male o non usare i puntalini sui cavi cordati (flessibili) </h3>
+                <p> Infilare direttamente un cavo flessibile (cordato) spelato all'interno di un morsetto a vite o a molla senza aver prima crimpato un puntalino terminale. I singoli filamenti di rame rischiano di aprirsi a ventaglio, spezzarsi sotto la pressione della vite o causare micro-cortocircuiti indesiderati con i morsetti vicini. Un altro errore classico è usare una pinza non tarata o di scarsa qualità, lasciando il puntalino lento che si sfila via tirandolo leggermente con due dita. </p>
+                
+                <div class="soluzione-box">
+                    <strong>Come rimediare:</strong> Utilizzare sempre il puntalino della sezione corretta rispetto al cavo, assicurandosi di crimparlo con una pinza a cricchetto adatta per garantire una compressione perfetta e una tenuta meccanica sicura prima di stringerlo nel morsetto.
+                </div>
+            </div>
 
         </div>
     </section>
