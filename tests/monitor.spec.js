@@ -16,21 +16,21 @@ async function sendEmail(subject, htmlContent) {
   }
   
   try {
-    await transporter.sendMail({
+    let info = await transporter.sendMail({
       from: `"Caccin Monitor" <${process.env.GMAIL_USER}>`,
       to: process.env.NOTIFICATION_EMAIL,
       subject: subject,
       html: htmlContent
     });
-    console.log('Email inviata con successo.');
+    console.log('Email inviata con successo. ID:', info.messageId);
   } catch (error) {
-    console.error('Errore durante l\'invio della mail:', error);
+    console.error('ERRORE durante l\'invio della mail:', error);
   }
 }
 
 test('Monitoraggio e Analytics Domenicale', async ({ page }) => {
   const targetUrl = process.env.TARGET_URL || 'https://tuosito.it';
-  const isSunday = true; // Simuliamo che oggi sia domenica
+  const isSunday = true; // Forziamo la domenica per il test
   let errors = [];
 
   try {
@@ -44,7 +44,7 @@ test('Monitoraggio e Analytics Domenicale', async ({ page }) => {
 
     console.log(`Tempo di risposta: ${responseTime}ms`);
 
-    // Se è domenica, inviamo il Report Settimanale (Modulo 2)
+    // Invio forzato del report per il test
     if (isSunday) {
       const reportHtml = `
         <h2>📊 Report Settimanale - Caccin Monitor</h2>
@@ -54,8 +54,8 @@ test('Monitoraggio e Analytics Domenicale', async ({ page }) => {
           <li><strong>Tempo di risposta medio:</strong> ${responseTime}ms</li>
           <li><strong>Protocollo:</strong> HTTPS Sicuro 🔒</li>
         </ul>
-        <p><em>I dati dettagliati di Google Analytics sui click (WhatsApp, Telefono, Preventivi) saranno integrati nella prossima versione!</em></p>
       `;
+      console.log("Invio report domenicale in corso...");
       await sendEmail('📊 [Caccin Monitor] Report Settimanale Analytics', reportHtml);
     }
 
