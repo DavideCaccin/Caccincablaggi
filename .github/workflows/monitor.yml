@@ -20,7 +20,7 @@ jobs:
           cache: 'npm'
 
       - name: 📦 Installa le dipendenze
-        run: npm ci
+        run: npm install
 
       - name: 🎭 Installa i browser di Playwright
         run: npx playwright install --with-deps
