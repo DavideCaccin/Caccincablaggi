@@ -30,7 +30,7 @@ async function sendEmail(subject, htmlContent) {
 
 test('Monitoraggio e Analytics Domenicale', async ({ page }) => {
   const targetUrl = process.env.TARGET_URL || 'https://tuosito.it';
-  const isSunday = new Date().getDay() === 0; // Controlla se oggi è domenica (0 = Domenica)
+  const isSunday = true; // Simuliamo che oggi sia domenica
   let errors = [];
 
   try {
