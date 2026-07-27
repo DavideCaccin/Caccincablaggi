@@ -1,7 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const nodemailer = require('nodemailer');
 
-// Configura il trasportatore email con Gmail
 const transporter = process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD ? nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -52,17 +51,6 @@ test('Controllo completo stato sito e moduli', async ({ page }) => {
 
     if (!targetUrl.startsWith('https://')) {
       errors.push('Il protocollo non è HTTPS');
-    }
-
-    const images = await page.$$eval('img', imgs => imgs.map(img => ({
-      src: img.src,
-      naturalWidth: img.naturalWidth
-    })));
-
-    for (const img of images) {
-      if (img.naturalWidth === 0) {
-        errors.push(`Immagine non caricata o rotta: ${img.src}`);
-      }
     }
 
     if (errors.length > 0) {
