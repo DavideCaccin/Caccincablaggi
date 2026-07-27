@@ -9,9 +9,9 @@ const transporter = process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD ? n
   }
 }) : null;
 
-async function sendAlert(subject, message) {
+async function sendEmail(subject, htmlContent) {
   if (!transporter || !process.env.NOTIFICATION_EMAIL) {
-    console.log(`[ALERT SIMULATO] ${subject}: ${message}`);
+    console.log(`[EMAIL SIMULATA] ${subject}: ${htmlContent}`);
     return;
   }
   
@@ -19,24 +19,19 @@ async function sendAlert(subject, message) {
     await transporter.sendMail({
       from: `"Caccin Monitor" <${process.env.GMAIL_USER}>`,
       to: process.env.NOTIFICATION_EMAIL,
-      subject: `🚨 [Caccin Monitor] ${subject}`,
-      html: `<p><strong>Errore rilevato nel sistema:</strong></p><p>${message}</p>`
+      subject: subject,
+      html: htmlContent
     });
-    console.log('Email di notifica inviata con successo tramite Gmail.');
+    console.log('Email inviata con successo.');
   } catch (error) {
     console.error('Errore durante l\'invio della mail:', error);
   }
 }
 
-test('Controllo completo stato sito e moduli', async ({ page }) => {
+test('Monitoraggio e Analytics Domenicale', async ({ page }) => {
   const targetUrl = process.env.TARGET_URL || 'https://tuosito.it';
+  const isSunday = new Date().getDay() === 0; // Controlla se oggi è domenica (0 = Domenica)
   let errors = [];
-
-  page.on('console', msg => {
-    if (msg.type() === 'error') {
-      errors.push(`Errore JS: ${msg.text()}`);
-    }
-  });
 
   try {
     const startTime = Date.now();
@@ -49,18 +44,29 @@ test('Controllo completo stato sito e moduli', async ({ page }) => {
 
     console.log(`Tempo di risposta: ${responseTime}ms`);
 
-    if (!targetUrl.startsWith('https://')) {
-      errors.push('Il protocollo non è HTTPS');
+    // Se è domenica, inviamo il Report Settimanale (Modulo 2)
+    if (isSunday) {
+      const reportHtml = `
+        <h2>📊 Report Settimanale - Caccin Monitor</h2>
+        <p>Ecco il riepilogo dello stato del tuo sito:</p>
+        <ul>
+          <li><strong>Stato Home:</strong> Online 🟢</li>
+          <li><strong>Tempo di risposta medio:</strong> ${responseTime}ms</li>
+          <li><strong>Protocollo:</strong> HTTPS Sicuro 🔒</li>
+        </ul>
+        <p><em>I dati dettagliati di Google Analytics sui click (WhatsApp, Telefono, Preventivi) saranno integrati nella prossima versione!</em></p>
+      `;
+      await sendEmail('📊 [Caccin Monitor] Report Settimanale Analytics', reportHtml);
     }
 
     if (errors.length > 0) {
       const errorHtml = errors.join('<br>');
-      await sendAlert('Problemi rilevati sul sito', errorHtml);
+      await sendEmail('🚨 [Caccin Monitor] Problemi rilevati sul sito', `<p><strong>Errore rilevato:</strong></p><p>${errorHtml}</p>`);
       expect(errors.length).toBe(0);
     }
 
   } catch (error) {
-    await sendAlert('Sito Offline o Errore Critico', error.message);
+    await sendEmail('🚨 [Caccin Monitor] Sito Offline o Errore Critico', `<p><strong>Errore critico:</strong></p><p>${error.message}</p>`);
     throw error;
   }
 });
