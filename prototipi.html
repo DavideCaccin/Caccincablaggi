@@ -40,6 +40,10 @@
         .btn-submit { width: 100%; padding: 14px; font-size: 16px; background: #006666; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
         .btn-submit:hover { background: #004d4d; }
 
+        /* Stili per la barra di progressione */
+        .progress-container { width: 100%; background: #e2e8f0; border-radius: 6px; height: 10px; margin-top: 15px; overflow: hidden; display: none; }
+        .progress-bar { width: 0%; height: 100%; background: #006666; border-radius: 6px; transition: width 0.4s ease; }
+
         /* Dashboard Risultati */
         #risultato-analisi-ai { display: none; margin-top: 30px; background: white; padding: 30px; border-radius: 12px; border: 2px solid #006666; box-shadow: 0 15px 35px rgba(0,102,102,0.1); text-align: left; }
         .result-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 15px; margin-bottom: 20px; }
@@ -130,6 +134,11 @@
                 </div>
 
                 <button type="button" id="btn-avvia-analisi" class="btn-submit">🚀 Avvia Pre-Analisi IA del Prototipo</button>
+                
+                <!-- Barra di Progressione -->
+                <div id="progress-container" class="progress-container">
+                    <div id="progress-bar" class="progress-bar"></div>
+                </div>
             </form>
         </div>
 
@@ -245,18 +254,28 @@ document.getElementById('btn-avvia-analisi').addEventListener('click', async fun
     });
 
     const btn = this;
-    btn.innerText = "⏳ L'IA sta leggendo il documento e analizzando lo schema...";
+    const progressContainer = document.getElementById('progress-container');
+    const progressBar = document.getElementById('progress-bar');
+
+    btn.innerText = "⏳ Elaborazione in corso...";
     btn.style.background = "#64748b";
     btn.disabled = true;
+    
+    // Mostra e anima la barra di progressione
+    progressContainer.style.display = "block";
+    progressBar.style.width = "30%";
 
-    // Chiave API (inserisci qui la tua chiave o gestiscila tramite variabile d'ambiente sicura)
+    // Chiave API
     const parte1 = "AQ.Ab8RN6KXmnx7lVHgO93knnaw1K9x";
     const parte2 = "Rt7k1ylGOycrhnUHEewasw";
     const apiKey = parte1 + parte2;
 
     try {        
         const ai = new GoogleGenAI({ apiKey: apiKey });
+        progressBar.style.width = "50%";
+        
         const filePart = await fileToGenerativePart(fileInput.files[0]);
+        progressBar.style.width = "75%";
 
         const promptText = `
         Sei un ingegnere senior specializzato nella progettazione, verifica e costruzione di quadri elettrici industriali per Caccin Cablaggi.
@@ -286,19 +305,20 @@ document.getElementById('btn-avvia-analisi').addEventListener('click', async fun
           "ore_uomo": 28
         }
         `;
+        
         let response;
         let tentativi = 0;
         const maxTentativi = 3;
 
         while (tentativi < maxTentativi) {
-                            response = await ai.models.generateContent({
+            try {
+                response = await ai.models.generateContent({
                     model: 'gemini-1.5-flash',
                     contents: [promptText, filePart],
                     config: {
                         responseMimeType: "application/json"
                     }
                 });
-
                 break;
             } catch (err) {
                 tentativi++;
@@ -307,7 +327,7 @@ document.getElementById('btn-avvia-analisi').addEventListener('click', async fun
             }
         }
 
-
+        progressBar.style.width = "100%";
         const dataJson = JSON.parse(response.text);
 
         // Popola la dashboard dei risultati
@@ -318,7 +338,7 @@ document.getElementById('btn-avvia-analisi').addEventListener('click', async fun
 
         document.getElementById('ai-costo-materiali').innerText = `€ ${Number(dataJson.costo_materiali || 0).toLocaleString('it-IT', {minimumFractionDigits: 2})}`;
         document.getElementById('ai-costo-cablaggio').innerText = `€ ${Number(dataJson.costo_cablaggio || 0).toLocaleString('it-IT', {minimumFractionDigits: 2})}`;
-        document.getElementById('ai-costo-collaudo').innerText = `€ ${Number(dataJson.costo_collaudo || 0).toLocaleString('it-IT', {minimumFractionDigits: 2})}`;
+        document.getElementById('ai-costo-collaudo').innerText = `€ ${Number(dataJson.costo_collaudo || 0).toLocaleString('it-IT',2)})`.replace('2)', 'minimumFractionDigits: 2'); // Semplificato
         document.getElementById('ai-costo-totale').innerText = `€ ${Number(dataJson.costo_totale || 0).toLocaleString('it-IT', {minimumFractionDigits: 2})}`;
         document.getElementById('ai-ore-uomo').innerText = `${dataJson.ore_uomo || 0} ore`;
 
@@ -331,9 +351,14 @@ document.getElementById('btn-avvia-analisi').addEventListener('click', async fun
         document.getElementById('ai-output-note').innerHTML = "<ul class='list-items'>" + suggerimentiList.map(s => `<li>${s}</li>`).join('') + "</ul>";
 
         document.getElementById('risultato-analisi-ai').style.display = "block";
+        
+        // Reset pulsante e barra
         btn.innerText = "🚀 Avvia Pre-Analisi IA del Prototipo";
         btn.style.background = "#006666";
         btn.disabled = false;
+        progressContainer.style.display = "none";
+        progressBar.style.width = "0%";
+        
         document.getElementById('risultato-analisi-ai').scrollIntoView({ behavior: 'smooth' });
 
     } catch (error) {
@@ -341,6 +366,8 @@ document.getElementById('btn-avvia-analisi').addEventListener('click', async fun
         btn.innerText = "🚀 Avvia Pre-Analisi IA del Prototipo";
         btn.style.background = "#006666";
         btn.disabled = false;
+        progressContainer.style.display = "none";
+        progressBar.style.width = "0%";
     }
 });
 </script>
