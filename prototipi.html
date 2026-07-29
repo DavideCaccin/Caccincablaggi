@@ -313,7 +313,7 @@ const apiKey = parte1+parte2;
         while (tentativi < maxTentativi) {
             try {
                 response = await ai.models.generateContent({
-                    model: 'gemini-2.5-flash',
+                    model: 'gemini-3.5-flash',
                     contents: [promptText, filePart],
                     config: {
                         responseMimeType: "application/json"
