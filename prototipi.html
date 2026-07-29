@@ -149,10 +149,11 @@ document.getElementById('btn-avvia-analisi').addEventListener('click', async fun
         formData.append('schema', fileInput.files[0]);
 
         // Sostituisci l'URL qui sotto con il tuo link reale di Vercel (es. https://tuo-progetto.vercel.app/api/analizza-schema)
-        const response = await fetch('prj_sQZCDp4ezFiHUbPxpLofFX3UkgL5', { 
-            method: 'POST', 
-            body: formData 
-        });
+        const response = await fetch('https://caccincablaggi.vercel.app/api/analizza-schema', { 
+    method: 'POST', 
+    body: formData 
+});
+
 
         if (!response.ok) {
             throw new Error('Errore di comunicazione con il server di analisi.');
