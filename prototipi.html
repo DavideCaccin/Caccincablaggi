@@ -305,13 +305,29 @@ const apiKey = parte1+parte2;
           "ore_uomo": 28
         }
         `;
-        
-        const response = await ai.models.generateContent({
-            model: 'gemini-3.5-flash',
-            contents: [promptText, filePart],
-            config: {
-                responseMimeType: "application/json"
+          // >>> INCOLLA QUI IL BLOCCO DEI TENTATIVI <<<
+        let response;
+        let tentativi = 0;
+        const maxTentativi = 3;
+
+        while (tentativi < maxTentativi) {
+            try {
+                response = await ai.models.generateContent({
+                    model: 'gemini-2.5-flash',
+                    contents: [promptText, filePart],
+                    config: {
+                        responseMimeType: "application/json"
+                    }
+                });
+                break; // Se ha successo, esce dal ciclo
+            } catch (err) {
+                tentativi++;
+                if (tentativi >= maxTentativi) throw err;
+                // Attende 3 secondi in caso di server sovraccarico (503) e riprova
+                await new Promise(resolve => setTimeout(resolve, 3000));
             }
+        }
+        // >>> FINE BLOCCO <<<
         });
 
         progressBar.style.width = "100%";
