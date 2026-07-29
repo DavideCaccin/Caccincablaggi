@@ -110,16 +110,41 @@ document.getElementById('btn-aggiungi-riga').addEventListener('click', function(
     `;
     tbody.appendChild(nuovariga);
 });
+    try {
+        const formData = new FormData();
+        formData.append('nome', nomeProgetto);
+        formData.append('principio', principio);
+        formData.append('componenti', JSON.stringify(listaComponenti));
+        formData.append('schema', fileInput.files[0]);
+        const response = await fetch('https://prj_sQZCDp4ezFiHUbPxpLofFX3UkgL5', { 
+            method: 'POST', 
+            body: formData 
+        });
 
-document.getElementById('btn-avvia-analisi').addEventListener('click', async function() {
-    const nomeProgetto = document.getElementById('proto-nome').value.trim();
-    const principio = document.getElementById('proto-principio').value.trim();
-    const fileInput = document.getElementById('proto-file');
+        if (!response.ok) {
+            throw new Error('Errore di comunicazione con il server di analisi.');
+        }
 
-    if (!nomeProgetto || !principio || fileInput.files.length === 0) {
-        alert("Per favore, compila tutti i campi e carica lo schema o la distinta per avviare l'analisi IA.");
-        return;
+        const risultato = await response.json();
+
+        // Mostra i dati veri restituiti dal backend e dall'IA
+        document.getElementById('ai-output-positivo').innerText = risultato.positivo;
+        document.getElementById('ai-output-criticità').innerText = risultato.criticita;
+        document.getElementById('ai-output-costo').innerText = risultato.costo;
+
+        document.getElementById('risultato-analisi-ai').style.display = "block";
+        btn.innerText = "🚀 Avvia Pre-Analisi IA del Prototipo";
+        btn.style.background = "#006666";
+        btn.disabled = false;
+        document.getElementById('risultato-analisi-ai').scrollIntoView({ behavior: 'smooth' });
+
+    } catch (error) {
+        alert("Errore durante l'elaborazione dell'analisi con l'IA: " + error.message);
+        btn.innerText = "🚀 Avvia Pre-Analisi IA del Prototipo";
+        btn.style.background = "#006666";
+        btn.disabled = false;
     }
+
 
     // Raccogliamo i componenti della tabella
     const righe = document.querySelectorAll('#tabella-componenti-body tr');
