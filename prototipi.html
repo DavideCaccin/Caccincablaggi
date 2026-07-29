@@ -121,7 +121,6 @@ document.getElementById('btn-avvia-analisi').addEventListener('click', async fun
         return;
     }
 
-    // Raccogliamo i componenti della tabella
     const righe = document.querySelectorAll('#tabella-componenti-body tr');
     let listaComponenti = [];
     righe.forEach(riga => {
@@ -137,30 +136,29 @@ document.getElementById('btn-avvia-analisi').addEventListener('click', async fun
     });
 
     const btn = this;
-    btn.innerText = "⏳ L'IA sta leggendo lo schema e verificando i circuiti...";
+    btn.innerText = "⏳ L'IA sta analizzando lo schema e i parametri...";
     btn.style.background = "#64748b";
     btn.disabled = true;
 
     try {
-        const formData = new FormData();
-        formData.append('nome', nomeProgetto);
-        formData.append('principio', principio);
-        formData.append('componenti', JSON.stringify(listaComponenti));
-        formData.append('schema', fileInput.files[0]);
-
-        // URL corretto e pulito per Vercel
         const response = await fetch('https://caccincablaggi.vercel.app/api/analizza-schema', { 
             method: 'POST', 
-            body: formData 
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                nome: nomeProgetto,
+                principio: principio,
+                componenti: listaComponenti
+            })
         });
 
         if (!response.ok) {
-            throw new Error('Errore di comunicazione con il server di analisi.');
+            throw new Error('Errore di comunicazione con il server.');
         }
 
         const risultato = await response.json();
 
-        // Mostra i dati veri restituiti dal backend e dall'IA
         document.getElementById('ai-output-positivo').innerText = risultato.positivo;
         document.getElementById('ai-output-criticità').innerText = risultato.criticita;
         document.getElementById('ai-output-costo').innerText = risultato.costo;
@@ -172,7 +170,7 @@ document.getElementById('btn-avvia-analisi').addEventListener('click', async fun
         document.getElementById('risultato-analisi-ai').scrollIntoView({ behavior: 'smooth' });
 
     } catch (error) {
-        alert("Errore durante l'elaborazione dell'analisi con l'IA: " + error.message);
+        alert("Errore durante l'analisi: " + error.message);
         btn.innerText = "🚀 Avvia Pre-Analisi IA del Prototipo";
         btn.style.background = "#006666";
         btn.disabled = false;
