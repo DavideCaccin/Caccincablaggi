@@ -10,7 +10,7 @@
             <div style="font-size: 28px; color: #16a34a; flex-shrink: 0;">🔒</div>
             <div>
                 <h4 style="color: #14532d; font-size: 15px; margin-bottom: 4px;">Ambiente Protetto e Riservato</h4>
-                <p style="font-size: 13.5px; color: #166534; margin: 0; line-height: 1.4;">I dati inseriti servono solo per la pre-analisi. Nessun disegno o schema verrà condiviso all'esterno[span_0](start_span)[span_0](end_span).</p>
+                <p style="font-size: 13.5px; color: #166534; margin: 0; line-height: 1.4;">I dati inseriti servono solo per la pre-analisi. Nessun disegno o schema verrà condiviso all'esterno.</p>
             </div>
         </div>
 
@@ -91,8 +91,8 @@
             </div>
 
             <div style="text-align: center; border-top: 1px solid #e2e8f0; padding-top: 20px;">
-                <p style="font-size: 13px; color: #64748b; margin-bottom: 15px;">* Analisi avanzata eseguita tramite IA[span_1](start_span)[span_1](end_span).</p>
-                <a href="#preventivo" class="btn" style="padding: 14px 20px; font-size: 15px; display: inline-block; width: 100%;">Invia a Caccin Cablaggi per Conferma Ufficiale[span_2](start_span)[span_2](end_span)</a>
+                <p style="font-size: 13px; color: #64748b; margin-bottom: 15px;">* Analisi avanzata eseguita tramite IA.</p>
+                <a href="#preventivo" class="btn" style="padding: 14px 20px; font-size: 15px; display: inline-block; width: 100%;">Invia a Caccin Cablaggi per Conferma Ufficiale</a>
             </div>
         </div>
     </div>
@@ -110,13 +110,46 @@ document.getElementById('btn-aggiungi-riga').addEventListener('click', function(
     `;
     tbody.appendChild(nuovariga);
 });
+
+document.getElementById('btn-avvia-analisi').addEventListener('click', async function() {
+    const nomeProgetto = document.getElementById('proto-nome').value.trim();
+    const principio = document.getElementById('proto-principio').value.trim();
+    const fileInput = document.getElementById('proto-file');
+
+    if (!nomeProgetto || !principio || fileInput.files.length === 0) {
+        alert("Per favore, compila tutti i campi e carica lo schema o la distinta per avviare l'analisi IA.");
+        return;
+    }
+
+    // Raccogliamo i componenti della tabella
+    const righe = document.querySelectorAll('#tabella-componenti-body tr');
+    let listaComponenti = [];
+    righe.forEach(riga => {
+        const inputs = riga.querySelectorAll('input');
+        if(inputs[0].value.trim() !== "") {
+            listaComponenti.push({
+                componente: inputs[0].value.trim(),
+                marca: inputs[1].value.trim(),
+                codice: inputs[2].value.trim(),
+                note: inputs[3].value.trim()
+            });
+        }
+    });
+
+    const btn = this;
+    btn.innerText = "⏳ L'IA sta leggendo lo schema e verificando i circuiti...";
+    btn.style.background = "#64748b";
+    btn.disabled = true;
+
     try {
         const formData = new FormData();
         formData.append('nome', nomeProgetto);
         formData.append('principio', principio);
         formData.append('componenti', JSON.stringify(listaComponenti));
         formData.append('schema', fileInput.files[0]);
-        const response = await fetch('https://prj_sQZCDp4ezFiHUbPxpLofFX3UkgL5', { 
+
+        // Sostituisci l'URL qui sotto con il tuo link reale di Vercel (es. https://tuo-progetto.vercel.app/api/analizza-schema)
+        const response = await fetch('https://INSERISCI-IL-TUO-LINK-VERCEL.vercel.app/api/analizza-schema', { 
             method: 'POST', 
             body: formData 
         });
@@ -140,65 +173,6 @@ document.getElementById('btn-aggiungi-riga').addEventListener('click', function(
 
     } catch (error) {
         alert("Errore durante l'elaborazione dell'analisi con l'IA: " + error.message);
-        btn.innerText = "🚀 Avvia Pre-Analisi IA del Prototipo";
-        btn.style.background = "#006666";
-        btn.disabled = false;
-    }
-
-
-    // Raccogliamo i componenti della tabella
-    const righe = document.querySelectorAll('#tabella-componenti-body tr');
-    let listaComponenti = [];
-    righe.forEach(riga => {
-        const inputs = riga.querySelectorAll('input');
-        if(inputs[0].value.trim() !== "") {
-            listaComponenti.push({
-                componente: inputs[0].value.trim(),
-                marca: inputs[1].value.trim(),
-                codice: inputs[2].value.trim(),
-                note: inputs[3].value.trim()
-            });
-        }
-    });
-
-    const btn = this;
-    btn.innerText = "⏳ L'IA sta leggendo lo schema e verificando i circuiti...";
-    btn.style.background = "#64748b";
-    btn.disabled = true;
-
-    // NOTA: Qui sotto andrà impostato l'indirizzo della tua funzione di backend (es. su Vercel o Netlify) 
-    // che elaborerà il file tramite le API di un modello di IA (es. OpenAI / Claude / Gemini).
-    try {
-        const formData = new FormData();
-        formData.append('nome', nomeProgetto);
-        formData.append('principio', principio);
-        formData.append('componenti', JSON.stringify(listaComponenti));
-        formData.append('schema', fileInput.files[0]);
-
-        // Esempio di chiamata al backend di elaborazione:
-        // const response = await fetch('npx plugins add vercel/vercel-plugin', {method: 'POST', body: formData });
-        // const risultato = await response.json();
-
-        // Simulazione di risposta dell'IA strutturata per intercettare errori e costi reali:
-        setTimeout(() => {
-            document.getElementById('ai-output-positivo').innerText = 
-                `Il progetto "${nomeProgetto}" è stato analizzato insieme allo schema allegato. I ${listaComponenti.length} componenti principali risultano dimensionati correttamente in base ai parametri termici e di carico dichiarati. Sezioni dei cavi di potenza adeguate (2.5 mm² - 4 mm²).`;
-            
-            document.getElementById('ai-output-criticità').innerText = 
-                `Nessun cortocircuito rilevato nei nodi principali. Si segnala tuttavia un potenziale disallineamento marginale sulla protezione magnetotermica a monte rispetto al picco di spunto dichiarato nel principio di funzionamento: si consiglia di valutare una curva di intervento di tipo C.`;
-            
-            document.getElementById('ai-output-costo').innerText = 
-                `• Costo stimato materiale componenti e morsetteria: ~ 850€ - 1.100€\n• Ore di cablaggio e collaudo in officina: ~ 12 ore\n• Prezzo totale stimato (Fornitura + Lavorazione): Circa 1.450€ - 1.800€ (IVA esclusa).`;
-
-            document.getElementById('risultato-analisi-ai').style.display = "block";
-            btn.innerText = "🚀 Avvia Pre-Analisi IA del Prototipo";
-            btn.style.background = "#006666";
-            btn.disabled = false;
-            document.getElementById('risultato-analisi-ai').scrollIntoView({ behavior: 'smooth' });
-        }, 2000);
-
-    } catch (error) {
-        alert("Errore durante l'elaborazione dell'analisi con l'IA.");
         btn.innerText = "🚀 Avvia Pre-Analisi IA del Prototipo";
         btn.style.background = "#006666";
         btn.disabled = false;
