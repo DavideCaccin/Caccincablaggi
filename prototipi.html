@@ -291,14 +291,14 @@ document.getElementById('btn-avvia-analisi').addEventListener('click', async fun
         const maxTentativi = 3;
 
         while (tentativi < maxTentativi) {
-            try {
-                response = await ai.models.generateContent({
-                    model: 'gemini-2.5-flash',
+                            response = await ai.models.generateContent({
+                    model: 'gemini-1.5-flash',
                     contents: [promptText, filePart],
                     config: {
                         responseMimeType: "application/json"
                     }
                 });
+
                 break;
             } catch (err) {
                 tentativi++;
