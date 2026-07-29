@@ -1,0 +1,63 @@
+<section class="section" id="prototipi-ai" style="background: #f8fafc;">
+    <div class="container" style="max-width: 900px;">
+        <h2 style="color: #006666; text-align: center; font-size: 36px; font-weight: 800;">Laboratorio Prototipi & Pre-Analisi IA</h2>
+        <p class="section-intro" style="text-align: center; margin-bottom: 30px;">
+            Hai un nuovo progetto o uno schema in fase di sviluppo? Inserisci i dati dei componenti o carica la distinta base: la nostra intelligenza artificiale effettuerà un controllo preliminare di fattibilità, evidenziando eventuali criticità e fornendo una stima di massima.
+        </p>
+
+        <!-- Box di Avviso / Sicurezza NDA -->
+        <div style="background: #f0fdf4; border: 1.5px dashed #16a34a; border-radius: 10px; padding: 20px; margin-bottom: 30px; display: flex; align-items: center; gap: 15px;">
+            <div style="font-size: 32px; color: #16a34a;">🔒</div>
+            <div>
+                <h4 style="color: #14532d; font-size: 16px; margin-bottom: 4px;">Ambiente Protetto e Riservato</h4>
+                <p style="font-size: 14px; color: #166534; margin: 0;">I dati inseriti in questo form servono esclusivamente per la pre-analisi algoritmica. Nessun disegno o schema verrà condiviso all'esterno.</p>
+            </div>
+        </div>
+
+        <!-- Form di inserimento prototipo -->
+        <div class="card" style="background: white; padding: 35px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.04);">
+            <form id="form-prototipo-ai">
+                <label>🏷️ Nome del Prototipo / Progetto</label>
+                <input type="text" id="proto-nome" placeholder="Es. Scheda controllo motore passo-passo v1" required>
+
+                <label>📋 Elenco Componenti / Schema (Incolla la distinta o descrivi i moduli principali)</label>
+                <textarea id="proto-componenti" rows="6" placeholder="Es. - 1x Alimentatore 24V 10A&#10;- 3x Rele Finder 22.33&#10;- 1x PLC Siemens S7-1200&#10;- Morsettiera passante 6mm²..." required></textarea>
+
+                <label>⚡ Specifiche di Funzionamento o Tensione</label>
+                <input type="text" id="proto-specifiche" placeholder="Es. Ingresso 230Vac, uscite in 24Vdc, ambiente industriale standard">
+
+                <label>📄 Carica Schema o Distinta Base (Opzionale - PDF / Excel / TXT)</label>
+                <input type="file" id="proto-file" accept=".pdf,.xlsx,.xls,.txt">
+
+                <button type="button" class="btn" id="btn-avvia-analisi" style="width: 100%; margin-top: 25px; font-size: 17px; background: #006666;">
+                    🚀 Avvia Pre-Analisi IA del Prototipo
+                </button>
+            </form>
+        </div>
+
+        <!-- Area Risultati (inizialmente nascosta) -->
+        <div id="risultato-analisi-ai" style="display: none; margin-top: 40px; background: white; padding: 35px; border-radius: 12px; border: 2px solid #006666; box-shadow: 0 15px 35px rgba(0,102,102,0.1);">
+            <h3 style="color: #006666; margin-bottom: 20px; font-size: 24px;">📊 Risultato della Pre-Analisi IA</h3>
+            
+            <div style="margin-bottom: 20px;">
+                <h4 style="color: #16a34a; font-size: 18px; margin-bottom: 8px;">✅ Cosa Funziona / Punti di Forza:</h4>
+                <p id="ai-output-positivo" style="color: #475569; line-height: 1.6; background: #f8fafc; padding: 15px; border-radius: 6px;"></p>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <h4 style="color: #dc2626; font-size: 18px; margin-bottom: 8px;">⚠️ Potenziali Criticità / Cosa potrebbe non funzionare:</h4>
+                <p id="ai-output-criticità" style="color: #475569; line-height: 1.6; background: #fef2f2; padding: 15px; border-radius: 6px;"></p>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <h4 style="color: #d97706; font-size: 18px; margin-bottom: 8px;">💰 Stima Indicativa di Costo (Componenti + Cablaggio):</h4>
+                <p id="ai-output-costo" style="color: #1e293b; font-weight: bold; font-size: 18px; background: #fffbeb; padding: 15px; border-radius: 6px;"></p>
+            </div>
+
+            <div style="text-align: center; border-top: 1px solid #e2e8f0; padding-top: 25px;">
+                <p style="font-size: 14px; color: #64748b; margin-bottom: 15px;">* Nota: Questa è una stima generata automaticamente dall'IA a scopo illustrativo. Per una validazione tecnica reale e un preventivo vincolante, invia i dati a Davide.</p>
+                <a href="#preventivo" class="btn" style="padding: 15px 30px; font-size: 16px;">Invia questa analisi a Caccin Cablaggi per Conferma Ufficiale</a>
+            </div>
+        </div>
+    </div>
+</section>
