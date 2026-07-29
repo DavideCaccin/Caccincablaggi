@@ -286,14 +286,27 @@ document.getElementById('btn-avvia-analisi').addEventListener('click', async fun
           "ore_uomo": 28
         }
         `;
+        let response;
+        let tentativi = 0;
+        const maxTentativi = 3;
 
-        const response = await ai.models.generateContent({
-            model: 'gemini-3.5-flash',
-            contents: [promptText, filePart],
-            config: {
-                responseMimeType: "application/json"
+        while (tentativi < maxTentativi) {
+            try {
+                response = await ai.models.generateContent({
+                    model: 'gemini-2.5-flash',
+                    contents: [promptText, filePart],
+                    config: {
+                        responseMimeType: "application/json"
+                    }
+                });
+                break;
+            } catch (err) {
+                tentativi++;
+                if (tentativi >= maxTentativi) throw err;
+                await new Promise(resolve => setTimeout(resolve, 2000));
             }
-        });
+        }
+
 
         const dataJson = JSON.parse(response.text);
 
