@@ -1,8 +1,8 @@
 <section class="section" id="prototipi-ai" style="background: #f8fafc; padding: 40px 0;">
-    <div class="container" style="max-width: 800px; width: 92%; margin: auto;">
+    <div class="container" style="max-width: 900px; width: 92%; margin: auto;">
         <h2 style="color: #006666; text-align: center; font-size: 32px; font-weight: 800; margin-bottom: 15px;">Laboratorio Prototipi & Pre-Analisi IA</h2>
         <p class="section-intro" style="text-align: center; margin-bottom: 30px; font-size: 16px; color: #475569;">
-            Hai un nuovo progetto o uno schema in fase di sviluppo? Inserisci i dati dei componenti o carica la distinta base: la nostra intelligenza artificiale effettuerà un controllo preliminare di fattibilità.
+            Hai un nuovo progetto o uno schema in fase di sviluppo? Inserisci il principio di funzionamento e la distinta componenti: la nostra intelligenza artificiale effettuerà un controllo preliminare di fattibilità.
         </p>
 
         <!-- Box di Avviso / Sicurezza NDA -->
@@ -19,17 +19,44 @@
             <form id="form-prototipo-ai">
                 <div style="margin-bottom: 20px; text-align: left;">
                     <label style="display: block; margin-bottom: 6px; font-weight: 600; color: #334155; font-size: 14px;">🏷️ Nome del Prototipo / Progetto</label>
-                    <input type="text" id="proto-nome" placeholder="Es. Scheda controllo motore passo-passo v1" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 15px; background: #f8fafc;">
+                    <input type="text" id="proto-nome" placeholder="Es. Quadro controllo motore v1" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 15px; background: #f8fafc;">
                 </div>
 
                 <div style="margin-bottom: 20px; text-align: left;">
-                    <label style="display: block; margin-bottom: 6px; font-weight: 600; color: #334155; font-size: 14px;">📋 Elenco Componenti / Schema</label>
-                    <textarea id="proto-componenti" rows="5" placeholder="Es. - 1x Alimentatore 24V 10A&#10;- 3x Rele Finder&#10;- 1x PLC Siemens..." required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 15px; background: #f8fafc; resize: vertical;"></textarea>
+                    <label style="display: block; margin-bottom: 6px; font-weight: 600; color: #334155; font-size: 14px;">⚙️ Principio di funzionamento quadro / impianto</label>
+                    <textarea id="proto-principio" rows="4" placeholder="Descrivi brevemente cosa deve fare il quadro, le tensioni in gioco o la logica di funzionamento..." required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 15px; background: #f8fafc; resize: vertical;"></textarea>
                 </div>
 
                 <div style="margin-bottom: 20px; text-align: left;">
-                    <label style="display: block; margin-bottom: 6px; font-weight: 600; color: #334155; font-size: 14px;">⚡ Specifiche di Funzionamento o Tensione</label>
-                    <input type="text" id="proto-specifiche" placeholder="Es. Ingresso 230Vac, uscite in 24Vdc" style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 15px; background: #f8fafc;">
+                    <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #334155; font-size: 15px;">📋 Elenco Componenti</label>
+                    
+                    <!-- Tabella Componenti -->
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; min-width: 600px;">
+                            <thead>
+                                <tr style="background: #f1f5f9; text-align: left; font-size: 13.5px; color: #334155;">
+                                    <th style="padding: 10px; border: 1px solid #cbd5e1; width: 30%;">Etichetta / Componente</th>
+                                    <th style="padding: 10px; border: 1px solid #cbd5e1; width: 20%;">Marca</th>
+                                    <th style="padding: 10px; border: 1px solid #cbd5e1; width: 25%;">Codice</th>
+                                    <th style="padding: 10px; border: 1px solid #cbd5e1; width: 25%;">Note Specifiche</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabella-componenti-body">
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #cbd5e1;"><input type="text" placeholder="Es. Alimentatore" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 14px;"></td>
+                                    <td style="padding: 8px; border: 1px solid #cbd5e1;"><input type="text" placeholder="Es. Siemens" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 14px;"></td>
+                                    <td style="padding: 8px; border: 1px solid #cbd5e1;"><input type="text" placeholder="Es. 6EP1334..." style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 14px;"></td>
+                                    <td style="padding: 8px; border: 1px solid #cbd5e1;"><input type="text" placeholder="Es. 24V 10A" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 14px;"></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #cbd5e1;"><input type="text" placeholder="Es. PLC" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 14px;"></td>
+                                    <td style="padding: 8px; border: 1px solid #cbd5e1;"><input type="text" placeholder="Es. Schneider" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 14px;"></td>
+                                    <td style="padding: 8px; border: 1px solid #cbd5e1;"><input type="text" placeholder="Codice articolo" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 14px;"></td>
+                                    <td style="padding: 8px; border: 1px solid #cbd5e1;"><input type="text" placeholder="Note extra" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 14px;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div style="margin-bottom: 25px; text-align: left;">
@@ -64,7 +91,7 @@
 
             <div style="text-align: center; border-top: 1px solid #e2e8f0; padding-top: 20px;">
                 <p style="font-size: 13px; color: #64748b; margin-bottom: 15px;">* Stima automatica a scopo illustrativo. Per una validazione tecnica reale, invia i dati a Davide.</p>
-                <a href="#preventivo" class="btn" style="padding: 14px 20px; font-size: 15px; display: inline-block; width: 100%;">Invia a Caccin Cablaggi per Conferma Ufficiale</a>
+                <a href="#preventivo" class="btn" style="padding: 14px 20px; font-size: 15px; display: inline-block; width: 100%;">Invia a Caccin Cablaggi per Conferma Ufficiale[span_1](start_span)[span_1](end_span)</a>
             </div>
         </div>
     </div>
