@@ -3,58 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prodotti Pronti & Richieste - Caccin Cablaggi</title>
-    <!-- Inserisci qui lo stesso stile CSS dell'index o collega il tuo foglio di stile -->
+    <title>Catalogo Prodotti & Richieste - Caccin Cablaggi</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        /* Stili generali ripresi dal tema del sito */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; scroll-behavior: smooth; }
         body { background: #f8fafc; color: #1e293b; line-height: 1.6; }
-        .container { width: 92%; max-width: 1200px; margin: auto; padding: 40px 0; }
+        .container { width: 92%; max-width: 1200px; margin: auto; }
+
+        /* Header / Navbar */
+        header { position: sticky; top: 0; background: #ffffff; box-shadow: 0 4px 20px rgba(0,0,0,.05); z-index: 999; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
+        .logo h2 { color: #006666; font-size: 24px; font-weight: 800; letter-spacing: -0.5px; }
+        .logo a { text-decoration: none; color: inherit; }
+        nav a { text-decoration: none; color: #475569; font-weight: 600; transition: color 0.2s; }
+        nav a:hover { color: #006666; }
+
+        /* Layout Shop */
+        .shop-section { padding: 40px 0; }
+        .shop-layout { display: flex; gap: 30px; flex-wrap: wrap; margin-top: 30px; }
+        .products-grid { flex: 2; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
         
-        /* Layout Prodotti & Carrello */
-        .shop-layout { display: flex; gap: 30px; flex-wrap: wrap; }
-        .products-grid { flex: 2; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .prod-card { background: white; border: 1px solid #e2e8f0; padding: 20px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
-        .prod-card h3 { color: #006666; margin-bottom: 10px; font-size: 18px; }
-        .prod-card p { font-size: 14px; color: #475569; margin-bottom: 10px; }
-        .price { font-weight: bold; color: #ff6b35; font-size: 16px; margin-bottom: 15px; display: block; }
-        
-        /* Box Carrello */
-        .carrello-box { flex: 1; min-width: 300px; background: white; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); position: sticky; top: 20px; height: fit-content; }
-        .carrello-box h2 { color: #006666; font-size: 22px; margin-bottom: 15px; }
-        #lista-carrello { list-style: none; margin-bottom: 15px; max-height: 150px; overflow-y: auto; text-align: left; font-size: 14px; }
-        #lista-carrello li { padding: 5px 0; border-bottom: 1px solid #f1f5f9; }
-        
-        /* Form Dati */
+        /* Card Prodotto */
+        .prod-card { background: white; border: 1px solid #e2e8f0; padding: 25px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s; }
+        .prod-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,102,102,0.1); }
+        .prod-card h3 { color: #006666; margin-bottom: 10px; font-size: 19px; }
+        .prod-card p { font-size: 14px; color: #475569; margin-bottom: 15px; }
+        .price { font-weight: bold; color: #ff6b35; font-size: 17px; margin-bottom: 15px; display: block; }
+
+        /* Form Controls */
         .form-group { margin-bottom: 12px; text-align: left; }
         .form-group label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 4px; color: #334155; }
-        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; }
-        
+        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; background: #f8fafc; }
+        .form-group input:focus, .form-group textarea:focus { border-color: #006666; background: #fff; outline: none; }
+
+        /* Box Carrello */
+        .carrello-box { flex: 1; min-width: 320px; background: white; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); position: sticky; top: 90px; height: fit-content; }
+        .carrello-box h2 { color: #006666; font-size: 22px; margin-bottom: 10px; }
+        #lista-carrello { list-style: none; margin-bottom: 15px; max-height: 180px; overflow-y: auto; text-align: left; font-size: 14px; }
+        #lista-carrello li { padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; }
+
         /* Bottoni */
-        .btn { background: #ff6b35; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s; margin-top: 10px; }
-        .btn:hover { background: #e55a2b; }
+        .btn { background: #ff6b35; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s; margin-top: 10px; text-align: center; text-decoration: none; display: inline-block; }
+        .btn:hover { background: #e55a2b; transform: translateY(-2px); }
         .btn-wa { background: #25d366; }
         .btn-wa:hover { background: #128c7e; }
         .btn-mail { background: #006666; }
         .btn-mail:hover { background: #004d4d; }
-        
+
         /* Sezione Richieste Personalizzate */
-        .custom-request-section { background: #e0f2fe; border: 1px solid #bae6fd; padding: 25px; border-radius: 12px; margin-top: 40px; text-align: center; }
-        .custom-request-section h3 { color: #0369a1; margin-bottom: 10px; }
-        .custom-request-section p { color: #0369a1; font-size: 15px; margin-bottom: 15px; }
+        .custom-request-section { background: #e0f2fe; border: 1px solid #bae6fd; padding: 30px; border-radius: 12px; margin-top: 40px; text-align: center; }
+        .custom-request-section h3 { color: #0369a1; margin-bottom: 10px; font-size: 20px; }
+        .custom-request-section p { color: #0369a1; font-size: 15px; margin-bottom: 20px; max-width: 700px; margin-left: auto; margin-right: auto; }
+
+        /* Footer */
+        footer { background: #003333; color: white; padding: 30px 0; text-align: center; border-top: 5px solid #ff6b35; margin-top: 50px; }
+        footer p { margin-bottom: 8px; opacity: 0.9; font-size: 14px; }
+        footer a { color: #ff6b35; text-decoration: none; font-weight: bold; }
+        footer a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
 
-<header style="background: white; padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-    <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 0;">
-        <h2 style="color: #006666;"><a href="index.html" style="text-decoration:none; color:inherit;">Caccin Cablaggi</a></h2>
-        <a href="index.html" style="text-decoration:none; font-weight:bold; color:#475569;">⬅ Torna alla Home</a>
+<header>
+    <div class="navbar container">
+        <div class="logo">
+            <h2><a href="index.html">Caccin Cablaggi</a></h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">⬅ Torna alla Home</a></li>
+            </ul>
+        </nav>
     </div>
 </header>
 
-<div class="container">
-    <h1 style="color: #006666; text-align: center; margin-bottom: 10px;">Catalogo Prodotti Pronti & Standard</h1>
-    <p style="text-align: center; color: #475569; margin-bottom: 40px;">Scegli i prodotti, inseriscili nel carrello e invia l'ordine direttamente via WhatsApp o Email.</p>
+<div class="container shop-section">
+    <h1 style="color: #006666; text-align: center; margin-bottom: 10px; font-size: 34px;">Catalogo Prodotti Pronti & Standard</h1>
+    <p style="text-align: center; color: #475569; margin-bottom: 40px; font-size: 17px;">Seleziona i prodotti, inseriscili nel carrello e invia l'ordine direttamente via WhatsApp o Email.</p>
 
     <div class="shop-layout">
         <!-- Lista Prodotti a Catalogo -->
@@ -96,15 +121,19 @@
         <!-- Box Carrello e Spedizione -->
         <div class="carrello-box">
             <h2>Carrello Ordine</h2>
-            <div style="font-size: 13px; color: #64748b; margin-bottom: 10px;">N. Ordine generato: <b id="num-ordine-txt"></b></div>
+            <div style="font-size: 13px; color: #64748b; margin-bottom: 15px;">N. Ordine Progressivo: <b id="num-ordine-txt" style="color:#006666;"></b></div>
+            
             <ul id="lista-carrello">
-                <p style="color: #94a3b8; text-align: center; padding: 10px 0;">Il carrello è vuoto</p>
+                <p style="color: #94a3b8; text-align: center; padding: 15px 0;">Il carrello è vuoto</p>
             </ul>
-            <p style="font-weight: bold; font-size: 18px; margin-bottom: 20px; text-align: right;">Totale: <span id="totale">0,00</span> €</p>
             
-            <hr style="border: 0; border-top: 1px solid #e2e8f0; margin-bottom: 20px;">
+            <p style="font-weight: bold; font-size: 18px; margin: 15px 0; text-align: right; border-top: 2px solid #e2e8f0; padding-top: 10px;">
+                Totale: <span id="totale">0,00</span> € <span style="font-size:12px; font-weight:normal; color:#64748b;">(IVA incl.)</span>
+            </p>
             
-            <h3 style="font-size: 16px; color: #006666; margin-bottom: 15px;">Dati per la Spedizione</h3>
+            <hr style="border: 0; border-top: 1px solid #e2e8f0; margin-bottom: 15px;">
+            
+            <h3 style="font-size: 15px; color: #006666; margin-bottom: 12px;">Dati per la Spedizione</h3>
             <div class="form-group">
                 <label>Nome e Cognome / Azienda *</label>
                 <input type="text" id="nome" placeholder="Mario Rossi">
@@ -138,24 +167,36 @@
         <h3>🔍 Non trovi quello che cerchi o ti serve una misura particolare?</h3>
         <p>Se hai bisogno di un cablaggio con specifiche differenti o di un assemblaggio su misura, descrivici la tua richiesta: ti risponderemo rapidamente con un preventivo dedicato.</p>
         <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-            <a href="https://wa.me/393392859037?text=Buongiorno%2C%20avrei%20bisogno%20di%20una%20richiesta%20personalizzata%20fuori%20catalogo%3A" class="btn btn-wa" style="max-width: 280px; text-decoration: none; display: inline-block;" target="_blank">Richiedi su WhatsApp</a>
-            <a href="mailto:caccin.cablaggi@gmail.com?subject=Richiesta personalizzata fuori catalogo&body=Buongiorno,%20vorrei richiedere un preventivo per il seguente materiale personalizzato:" class="btn btn-mail" style="max-width: 280px; text-decoration: none; display: inline-block;">Richiedi via Email</a>
+            <a href="https://wa.me/393392859037?text=Buongiorno%2C%20avrei%20bisogno%20di%20una%20richiesta%20personalizzata%20fuori%20catalogo%3A" class="btn btn-wa" style="max-width: 280px;" target="_blank">Richiedi su WhatsApp</a>
+            <a href="mailto:caccin.cablaggi@gmail.com?subject=Richiesta personalizzata fuori catalogo&body=Buongiorno,%20vorrei richiedere un preventivo per il seguente materiale personalizzato:" class="btn btn-mail" style="max-width: 280px;">Richiedi via Email</a>
         </div>
     </div>
 </div>
 
+<footer>
+    <div class="container">
+        <p>&copy; 2026 Caccin Cablaggi di Caccin Davide - Via Pianiga, Pianiga (VE). P.IVA: 04875640277</p>
+        <p>Specialisti in Cablaggi Industriali, Quadri Elettrici ed Impiantistica Civile.</p>
+    </div>
+</footer>
+
 <script>
     let carrello = [];
     
-    // Genera un numero d'ordine univoco basato sull'orario o casuale e lo mostra
-    let numeroOrdine = Math.floor(1000 + Math.random() * 9000);
+    // Gestione del numero d'ordine progressivo a partire da 826001
+    let numeroOrdine = localStorage.getItem('caccin_ultimo_ordine');
+    if (!numeroOrdine) {
+        numeroOrdine = 826001;
+    } else {
+        numeroOrdine = parseInt(numeroOrdine) + 1;
+    }
+    localStorage.setItem('caccin_ultimo_ordine', numeroOrdine);
     document.getElementById('num-ordine-txt').innerText = "#" + numeroOrdine;
 
     function aggiungiAlCarrello(nome, prezzo, idInput) {
         let qta = parseInt(document.getElementById(idInput).value);
         if (qta < 1) return;
 
-        // Controlla se il prodotto è già nel carrello per aggiornare la quantità
         let esistente = carrello.find(item => item.nome === nome);
         if (esistente) {
             esistente.qta += qta;
@@ -170,7 +211,7 @@
         let totale = 0;
         
         if (carrello.length === 0) {
-            lista.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 10px 0;">Il carrello è vuoto</p>';
+            lista.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 15px 0;">Il carrello è vuoto</p>';
             document.getElementById('totale').innerText = '0,00';
             return;
         }
@@ -179,8 +220,7 @@
         carrello.forEach((item, index) => {
             let subtotal = item.prezzo * item.qta;
             totale += subtotal;
-            lista.innerHTML += `<li><b>${item.nome}</b> x${item.qta} - ${subtotal.toFixed(2)}€ 
-                <span style="color:red; cursor:pointer; float:right;" onclick="rimuoviItem(${index})">❌</span></li>`;
+            lista.innerHTML += `<li><span><b>${item.nome}</b> (x${item.qta})</span> <span><b>${subtotal.toFixed(2)}€</b> <span style="color:red; cursor:pointer; margin-left:8px;" onclick="rimuoviItem(${index})" title="Rimuovi">❌</span></span></li>`;
         });
         document.getElementById('totale').innerText = totale.toFixed(2);
     }
@@ -208,7 +248,6 @@
 
         let totaleGenerale = document.getElementById('totale').innerText;
 
-        // Costruzione del testo strutturato
         let msg = `📦 *NUOVO ORDINE #${numeroOrdine}*%0A%0A`;
         msg += `*Prodotti scelti:*%0A`;
         carrello.forEach(i => {
