@@ -56,7 +56,7 @@
         .totali-box div { display: flex; justify-content: space-between; margin-bottom: 5px; }
         .totali-box .finale { font-weight: bold; font-size: 16px; color: var(--primary); border-top: 1px solid #cbd5e1; padding-top: 5px; margin-top: 5px; }
 
-        .btn { background: var(--accent); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s; margin-top: 8px; text-align: center; text-decoration: none; display: inline-block; font-size: 14px; }
+        .btn { background: var(--accent); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: background 0.3s; margin-top: 8px; text-align: center; text-decoration: none; display: inline-block; font-size: 14px; }
         .btn:hover { background: #e55a2b; }
         .btn-wa { background: #25d366; }
         .btn-wa:hover { background: #128c7e; }
@@ -200,7 +200,9 @@
         { id: 'pro10', cat: 'prolunghe', name: 'Prolunga 16A (10m)', price: 36.00, desc: 'Cavo marrone 3g2,5 FS18, Spina e Presa Vimar 16A', img: 'img/prolunga.jpeg', len: '10 m', con: 'Vimar 16A' }
     ];
 
-    let carrello = JSON.parse(localStorage.getItem('caccin_carrello')) || [];
+    // Al caricamento della pagina, puliamo il carrello per creare un nuovo ordine
+    let carrello = [];
+    localStorage.removeItem('caccin_carrello');
 
     let numeroOrdine = localStorage.getItem('caccin_ultimo_ordine');
     if (!numeroOrdine) { numeroOrdine = 826001; } else { numeroOrdine = parseInt(numeroOrdine) + 1; }
@@ -245,7 +247,7 @@
                                     <label>Quantità:</label>
                                     <input type="number" id="q-${p.id}" value="1" min="1" style="text-align: center;">
                                 </div>
-                                <button class="btn" onclick="aggiungiAlCarrello('${p.name}', ${p.price}, 'q-${p.id}')">Aggiungi</button>
+                                <button class="btn" id="btn-add-${p.id}" onclick="aggiungiAlCarrello('${p.name}', ${p.price}, 'q-${p.id}', '${p.id}')">Aggiungi</button>
                             </div>
                         </div>`;
                 });
@@ -274,7 +276,7 @@
         document.getElementById('modal-details').style.display = 'none';
     }
 
-    function aggiungiAlCarrello(nome, prezzo, idInput) {
+    function aggiungiAlCarrello(nome, prezzo, idInput, idProdotto) {
         let qta = parseInt(document.getElementById(idInput).value);
         if (qta < 1) return;
 
@@ -284,12 +286,20 @@
         } else {
             carrello.push({ nome, prezzo, qta });
         }
-        salvaCarrello();
         calcolaTotali();
-    }
 
-    function salvaCarrello() {
-        localStorage.setItem('caccin_carrello', JSON.stringify(carrello));
+        // Feedback visivo immediato sul pulsante
+        let btn = document.getElementById(`btn-add-${idProdotto}`);
+        let testoOriginale = btn.innerText;
+        let coloreOriginale = btn.style.backgroundColor;
+
+        btn.innerText = "Aggiunto! ✓";
+        btn.style.backgroundColor = "#25d366";
+
+        setTimeout(() => {
+            btn.innerText = testoOriginale;
+            btn.style.backgroundColor = coloreOriginale;
+        }, 1200);
     }
 
     function aggiornaCarrelloUI() {
@@ -307,7 +317,6 @@
 
     function rimuoviItem(index) {
         carrello.splice(index, 1);
-        salvaCarrello();
         calcolaTotali();
     }
 
@@ -318,7 +327,7 @@
 
         if (tipo === 'ritiro') {
             containerCampi.style.display = 'none';
-            notaTempi.innerText = "📍 Ritiro gratuito presso: Via Cavin Maggiore 5, Mellaredo di Pianiga, 30030[span_1](start_span)[span_1](end_span)";
+            notaTempi.innerText = "📍 Ritiro gratuito presso: Via Cavin Maggiore 5, Mellaredo di Pianiga, 30030";
         } else {
             containerCampi.style.display = 'block';
             notaTempi.innerText = "⚡ Evasione e spedizione standard in 24/48h lavorative";
@@ -397,7 +406,7 @@
             }
             indirizzoCompleto = `${indirizzo}, ${cap} ${citta}`;
         } else {
-            indirizzoCompleto = "Via Cavin Maggiore 5, Mellaredo di Pianiga, 30030 (Ritiro in Sede)[span_2](start_span)[span_2](end_span)";
+            indirizzoCompleto = "Via Cavin Maggiore 5, Mellaredo di Pianiga, 30030 (Ritiro in Sede)";
         }
 
         let subtotaleVal = document.getElementById('subtotale').innerText;
