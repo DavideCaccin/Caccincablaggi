@@ -116,7 +116,15 @@
                 <p style="color: #94a3b8; text-align: center; padding: 10px 0;">Il carrello è vuoto</p>
             </ul>
 
-            <h3 style="font-size: 14px; color: var(--primary); margin: 15px 0 8px 0;">Dati Spedizione & Fatturazione</h3>
+            <h3 style="font-size: 14px; color: var(--primary); margin: 15px 0 8px 0;">Modalità di Consegna</h3>
+            <div class="form-group">
+                <select id="tipo-consegna" onchange="gestisciTipoConsegna()">
+                    <option value="spedizione">🚚 Spedizione a domicilio</option>
+                    <option value="ritiro">📍 Ritiro in Sede</option>
+                </select>
+            </div>
+
+            <h3 style="font-size: 14px; color: var(--primary); margin: 15px 0 8px 0;">Dati Cliente & Fatturazione</h3>
             <div class="form-group">
                 <label>Nome e Cognome / Azienda *</label>
                 <input type="text" id="nome" placeholder="Mario Rossi o Nome Azienda Srl">
@@ -131,20 +139,25 @@
                     <input type="text" id="sdi" placeholder="M5UXCR1 / pec@...">
                 </div>
             </div>
-            <div class="form-group">
-                <label>Indirizzo e Civico *</label>
-                <input type="text" id="indirizzo" placeholder="Via Roma 10">
-            </div>
-            <div style="display: flex; gap: 8px;">
-                <div class="form-group" style="flex: 1;">
-                    <label>CAP *</label>
-                    <input type="text" id="cap" placeholder="30030">
+
+            <!-- Sezione Indirizzo dinamica in base alla scelta -->
+            <div id="campi-indirizzo-container">
+                <div class="form-group">
+                    <label>Indirizzo e Civico *</label>
+                    <input type="text" id="indirizzo" placeholder="Via Roma 10">
                 </div>
-                <div class="form-group" style="flex: 2;">
-                    <label>Città e Prov (VE, PD, TV) *</label>
-                    <input type="text" id="citta" placeholder="Pianiga (VE)" oninput="calcolaTotali()">
+                <div style="display: flex; gap: 8px;">
+                    <div class="form-group" style="flex: 1;">
+                        <label>CAP *</label>
+                        <input type="text" id="cap" placeholder="30030">
+                    </div>
+                    <div class="form-group" style="flex: 2;">
+                        <label>Città e Prov (VE, PD, TV) *</label>
+                        <input type="text" id="citta" placeholder="Pianiga (VE)" oninput="calcolaTotali()">
+                    </div>
                 </div>
             </div>
+
             <div class="form-group">
                 <label>Telefono / Contatto *</label>
                 <input type="text" id="telefono" placeholder="3390000000">
@@ -158,7 +171,7 @@
 
             <button class="btn btn-wa" onclick="inviaOrdine('whatsapp')">💬 Invia Ordine via WhatsApp</button>
             <button class="btn btn-mail" onclick="inviaOrdine('mail')">📧 Invia Ordine via Email</button>
-            <p style="font-size: 11px; color: #64748b; text-align: center; margin-top: 10px;">⚡ Evasione e spedizione standard in 24/48h lavorative</p>
+            <p id="nota-tempi" style="font-size: 11px; color: #64748b; text-align: center; margin-top: 10px;">⚡ Evasione e spedizione standard in 24/48h lavorative</p>
         </div>
     </div>
 </div>
@@ -187,7 +200,6 @@
         { id: 'pro10', cat: 'prolunghe', name: 'Prolunga 16A (10m)', price: 36.00, desc: 'Cavo marrone 3g2,5 FS18, Spina e Presa Vimar 16A', img: 'img/prolunga.jpeg', len: '10 m', con: 'Vimar 16A' }
     ];
 
-    // Recupero carrello salvato da localStorage se esiste
     let carrello = JSON.parse(localStorage.getItem('caccin_carrello')) || [];
 
     let numeroOrdine = localStorage.getItem('caccin_ultimo_ordine');
@@ -299,15 +311,30 @@
         calcolaTotali();
     }
 
+    function gestisciTipoConsegna() {
+        let tipo = document.getElementById('tipo-consegna').value;
+        let containerCampi = document.getElementById('campi-indirizzo-container');
+        let notaTempi = document.getElementById('nota-tempi');
+
+        if (tipo === 'ritiro') {
+            containerCampi.style.display = 'none';
+            notaTempi.innerText = "📍 Ritiro gratuito presso: Via Cavin Maggiore 5, Mellaredo di Pianiga, 30030[span_1](start_span)[span_1](end_span)";
+        } else {
+            containerCampi.style.display = 'block';
+            notaTempi.innerText = "⚡ Evasione e spedizione standard in 24/48h lavorative";
+        }
+        calcolaTotali();
+    }
+
     function calcolaTotali() {
         aggiornaCarrelloUI();
         
         let subtotale = 0;
         carrello.forEach(item => { subtotale += item.prezzo * item.qta; });
 
-        let cittaInput = document.getElementById('citta').value.toUpperCase();
+        let tipoConsegna = document.getElementById('tipo-consegna').value;
         let costoSpedizione = 0;
-        let tipoSpedizioneTesto = "Seleziona zona";
+        let tipoSpedizioneTesto = "Ritiro in Sede";
 
         if (subtotale === 0) {
             document.getElementById('subtotale').innerText = '0,00';
@@ -317,16 +344,22 @@
             return;
         }
 
-        if (cittaInput.includes('VE') || cittaInput.includes('PD') || cittaInput.includes('TV') || 
-            cittaInput.includes('VENEZIA') || cittaInput.includes('PADOVA') || cittaInput.includes('TREVISO')) {
-            costoSpedizione = 10.00; 
-            tipoSpedizioneTesto = "Consegna Locale (VE/PD/TV)";
-        } else if (cittaInput.length > 2) {
-            costoSpedizione = 5.99; 
-            tipoSpedizioneTesto = "Corriere InPost";
+        if (tipoConsegna === 'spedizione') {
+            let cittaInput = document.getElementById('citta').value.toUpperCase();
+            if (cittaInput.includes('VE') || cittaInput.includes('PD') || cittaInput.includes('TV') || 
+                cittaInput.includes('VENEZIA') || cittaInput.includes('PADOVA') || cittaInput.includes('TREVISO')) {
+                costoSpedizione = 10.00; 
+                tipoSpedizioneTesto = "Consegna Locale (VE/PD/TV)";
+            } else if (cittaInput.length > 2) {
+                costoSpedizione = 5.99; 
+                tipoSpedizioneTesto = "Corriere InPost";
+            } else {
+                costoSpedizione = 0.00;
+                tipoSpedizioneTesto = "Inserisci città/provincia";
+            }
         } else {
             costoSpedizione = 0.00;
-            tipoSpedizioneTesto = "Inserisci città/provincia";
+            tipoSpedizioneTesto = "Ritiro in Sede";
         }
 
         let totaleGenerale = subtotale + costoSpedizione;
@@ -341,18 +374,30 @@
         let nome = document.getElementById('nome').value.trim();
         let piva = document.getElementById('piva').value.trim();
         let sdi = document.getElementById('sdi').value.trim();
-        let indirizzo = document.getElementById('indirizzo').value.trim();
-        let cap = document.getElementById('cap').value.trim();
-        let citta = document.getElementById('citta').value.trim();
         let telefono = document.getElementById('telefono').value.trim();
+        let tipoConsegna = document.getElementById('tipo-consegna').value;
 
         if (carrello.length === 0) {
             alert("Il carrello è vuoto! Aggiungi almeno un prodotto.");
             return;
         }
-        if (!nome || !indirizzo || !cap || !citta || !telefono) {
-            alert("Per favore, compila tutti i campi obbligatori dei dati di spedizione.");
+        if (!nome || !telefono) {
+            alert("Per favore, compila nome e telefono.");
             return;
+        }
+
+        let indirizzoCompleto = "";
+        if (tipoConsegna === 'spedizione') {
+            let indirizzo = document.getElementById('indirizzo').value.trim();
+            let cap = document.getElementById('cap').value.trim();
+            let citta = document.getElementById('citta').value.trim();
+            if (!indirizzo || !cap || !citta) {
+                alert("Per favore, compila tutti i campi dell'indirizzo di spedizione.");
+                return;
+            }
+            indirizzoCompleto = `${indirizzo}, ${cap} ${citta}`;
+        } else {
+            indirizzoCompleto = "Via Cavin Maggiore 5, Mellaredo di Pianiga, 30030 (Ritiro in Sede)[span_2](start_span)[span_2](end_span)";
         }
 
         let subtotaleVal = document.getElementById('subtotale').innerText;
@@ -361,6 +406,7 @@
         let totaleGenerale = document.getElementById('totale').innerText;
 
         let msg = `📦 *NUOVO ORDINE #${numeroOrdine}*%0A%0A`;
+        msg += `*Modalità:* ${tipoConsegna === 'ritiro' ? 'Ritiro in Sede' : 'Spedizione'}%0A%0A`;
         msg += `*Prodotti:*%0A`;
         carrello.forEach(i => {
             msg += `- ${i.nome} (Qt: ${i.qta}) - ${(i.prezzo * i.qta).toFixed(2)}€%0A`;
@@ -368,11 +414,11 @@
         msg += `%0ASubtotale: ${subtotaleVal} €`;
         msg += `%0ASpedizione (${tipoSpedVal}): ${spedizioneVal} €`;
         msg += `%0A*Totale Complessivo (IVA incl.):* ${totaleGenerale} €%0A%0A`;
-        msg += `*Dati di Spedizione e Fatturazione:*%0A`;
+        msg += `*Dati Cliente & Riferimenti:*%0A`;
         msg += `👤 Intestatario: ${nome}%0A`;
         if(piva) msg += `🏢 P.IVA: ${piva}%0A`;
         if(sdi) msg += `📄 SDI/PEC: ${sdi}%0A`;
-        msg += `📍 Indirizzo: ${indirizzo}, ${cap} ${citta}%0A`;
+        msg += `📍 Indirizzo / Luogo: ${indirizzoCompleto}%0A`;
         msg += `📞 Telefono: ${telefono}%0A`;
 
         if (metodo === 'whatsapp') {
