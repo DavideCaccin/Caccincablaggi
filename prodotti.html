@@ -2,157 +2,186 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catalogo | Caccin Cablaggi</title>
     <style>
-        :root { --primary: #006666; --accent: #ff6b35; --bg: #f8fafc; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background: var(--bg); color: #1e293b; line-height: 1.6; }
-        .container { width: 92%; max-width: 1200px; margin: auto; }
-
-        /* Banner Vantaggi */
-        .vantaggi-bar { background: var(--primary); color: white; padding: 15px; display: flex; justify-content: space-around; font-size: 14px; margin-bottom: 30px; border-radius: 0 0 12px 12px; flex-wrap: wrap; gap: 10px; }
-
-        /* Filtri */
-        .tools { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-        .filter-btn { padding: 10px 20px; border: 2px solid var(--primary); border-radius: 20px; cursor: pointer; background: transparent; color: var(--primary); font-weight: bold; }
-        .filter-btn.active { background: var(--primary); color: white; }
-        #search { padding: 10px; flex: 1; border: 1px solid #cbd5e1; border-radius: 8px; min-width: 200px; }
-
-        /* Grid */
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
-        .prod-card { background: white; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; }
-        .prod-img { width: 100%; height: 160px; object-fit: contain; cursor: pointer; border-radius: 8px; margin-bottom: 10px; }
-        .price { font-size: 18px; font-weight: bold; color: var(--accent); margin: 10px 0; display: block; }
-        .btn { background: var(--primary); color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; width: 100%; font-weight: bold; }
-
-        /* Carrello */
-        .cart-sticky { position: sticky; top: 20px; background: white; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; }
-        .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 14px; }
-        .qta-ctrl { display: flex; gap: 5px; }
-        
-        /* Modale */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center; }
-        .modal-content { background: white; padding: 30px; border-radius: 12px; max-width: 400px; }
+        :root { --primary: #006666; --accent: #ff6b35; }
+        body { font-family: sans-serif; background: #f8fafc; padding-bottom: 100px; }
+        .container { max-width: 1000px; margin: auto; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .card { background: white; padding: 15px; border-radius: 8px; border: 1px solid #ddd; }
+        .btn { background: var(--primary); color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; width: 100%; margin-top: 5px; }
+        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-content { background: white; padding: 25px; border-radius: 8px; width: 90%; max-width: 500px; }
+        .cart-row { display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 5px; }
     </style>
 </head>
 <body>
 
-<div class="vantaggi-bar">
-    <span>✓ Testati singolarmente</span><span>✓ Assemblati in Italia</span><span>✓ IVA inclusa</span><span>✓ Personalizzabili</span>
-</div>
-
 <div class="container">
+    <h1>Prodotti e cablaggi pronti</h1>
     <div class="tools">
-        <button class="filter-btn active" onclick="filtra('tutti', this)">Tutti</button>
-        <button class="filter-btn" onclick="filtra('lan', this)">Cavi LAN</button>
-        <button class="filter-btn" onclick="filtra('prolunghe', this)">Prolunghe</button>
-        <button class="filter-btn" onclick="filtra('alimentazione', this)">Alimentazione</button>
-        <input type="text" id="search" placeholder="🔎 Cerca prodotto..." oninput="cerca()">
+        <input type="text" id="search" placeholder="🔎 Cerca prodotto..." oninput="renderGrid()">
+        <select id="filter" onchange="renderGrid()">
+            <option value="tutti">Tutti</option>
+            <option value="lan">Cavi LAN</option>
+            <option value="prolunghe">Prolunghe</option>
+        </select>
     </div>
 
-    <div style="display: flex; gap: 30px; flex-wrap: wrap;">
-        <div id="grid" class="products-grid" style="flex: 2;">
-            <!-- Prodotti LAN -->
-            <div class="prod-card" data-cat="lan" data-nome="Cavo LAN Cat6">
-                <img src="img/cavo-cat6.jpeg" class="prod-img" onclick="mostraDettagli('Cavo LAN Cat6', '5m', 'RJ45', 'Rete/PC')">
-                <h3>Cavo LAN Cat6 (5m)</h3>
-                <span class="price">12,50 €</span>
-                <button class="btn" onclick="aggiungi('Cavo LAN Cat6 5m', 12.50)">Aggiungi</button>
-            </div>
-            <!-- Prodotti Prolunghe -->
-            <div class="prod-card" data-cat="prolunghe" data-nome="Prolunga 16A">
-                <img src="img/prolunga.jpeg" class="prod-img" onclick="mostraDettagli('Prolunga 16A', '2m', 'Vimar 16A', 'Civile/Industriale')">
-                <h3>Prolunga 16A (2m)</h3>
-                <span class="price">17,50 €</span>
-                <button class="btn" onclick="aggiungi('Prolunga 16A 2m', 17.50)">Aggiungi</button>
-            </div>
-            <!-- Prodotti Alimentazione -->
-            <div class="prod-card" data-cat="alimentazione" data-nome="Cavo IEC">
-                <img src="img/cavo-iec.jpeg" class="prod-img" onclick="mostraDettagli('Cavo IEC', '2m', 'C13/Schuko', 'PC/Monitor')">
-                <h3>Cavo IEC (2m)</h3>
-                <span class="price">12,00 €</span>
-                <button class="btn" onclick="aggiungi('Cavo IEC 2m', 12.00)">Aggiungi</button>
-            </div>
+    <div class="grid" id="grid">
+        <div class="card" data-cat="lan" data-name="cavo lan cat6 5m">
+            <img src="img/cavo-cat6.jpeg" style="width:100%; cursor:pointer;" onclick="openModal('Cavo LAN Cat6 5m', 12.50, 'Cat 6', '5 m', 'RJ45', 'Rete/PC')">
+            <h3>Cavo LAN Cat6 5m</h3>
+            <p>12,50 €</p>
+            <button class="btn" onclick="addToCart('Cavo LAN Cat6 5m', 12.50)">Aggiungi</button>
         </div>
+    </div>
 
-        <div class="cart-sticky" style="flex: 1; min-width: 300px;">
-            <h3>🛒 Carrello (<span id="cart-count">0</span>)</h3>
-            <div id="cart-list" style="margin: 15px 0;"></div>
-            <hr>
-            <label><b>Zona Spedizione:</b></label>
-            <select id="sped" onchange="render()" style="width:100%; padding: 8px; margin: 10px 0;">
-                <option value="10">VE/PD/TV - 10,00 €</option>
-                <option value="5.99">Italia - 5,99 €</option>
-                <option value="0">Ritiro in sede - 0,00 €</option>
-            </select>
-            <h4>Totale: <span id="totale">0,00</span> €</h4>
-            <button class="btn" style="background:var(--accent); margin-top:10px;" onclick="invia()">Invia Ordine</button>
-            <button class="btn" style="background:#64748b; margin-top:5px;" onclick="svuota()">Svuota</button>
-        </div>
+    <div id="cart" style="background:white; padding:20px; margin-top:30px; border-radius:8px;">
+        <h3>🛒 Il tuo carrello</h3>
+        <div id="cart-items"></div>
+        <div id="shipping-info" style="font-weight:bold; color:var(--accent); margin: 10px 0;"></div>
+        <h4>Totale: <span id="total">0,00</span> €</h4>
+        <button class="btn" onclick="openCheckout()">Procedi con l'ordine</button>
     </div>
 </div>
 
-<div id="modal" class="modal" onclick="this.style.display='none'">
-    <div class="modal-content" onclick="event.stopPropagation()">
-        <h2 id="m-nome"></h2>
-        <ul id="m-spec" style="margin: 15px 0; padding-left: 20px;"></ul>
-        <button class="btn" onclick="document.getElementById('modal').style.display='none'">Chiudi</button>
+<!-- Modali -->
+<div id="modal-details" class="modal">
+    <div class="modal-content">
+        <h2 id="m-name"></h2>
+        <ul id="m-specs"></ul>
+        <b id="m-price" style="font-size:1.2em;"></b>
+        <button class="btn" onclick="confirmAdd()">Aggiungi al carrello</button>
+    </div>
+</div>
+
+<div id="modal-checkout" class="modal">
+    <div class="modal-content">
+        <h3>📦 Dati per l'ordine</h3>
+        <input type="text" id="c-name" placeholder="Nome e Cognome / Azienda*" style="width:100%; margin-bottom:10px; padding:8px;">
+        <input type="text" id="c-phone" placeholder="Telefono*" style="width:100%; margin-bottom:10px; padding:8px;">
+        <label>Zona di spedizione:</label>
+        <select id="c-zone" onchange="renderCart()" style="width:100%; margin-bottom:15px; padding:8px;">
+            <option value="10.00">Consegna Locale (VE/PD/TV) - 10,00 €</option>
+            <option value="5.99">Italia - 5,99 €</option>
+            <option value="0.00">Ritiro in sede - 0,00 €</option>
+        </select>
+        <button class="btn" onclick="sendOrder()">🟢 Invia ordine via WhatsApp</button>
+<button class="btn" onclick="sendOrderEmail()">📧 Invia ordine via Email</button>
     </div>
 </div>
 
 <script>
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let currentProd = {};
 
-    function aggiungi(nome, prezzo) {
-        let item = cart.find(i => i.nome === nome);
-        item ? item.qta++ : cart.push({nome, prezzo, qta: 1});
-        save(); alert("✓ Prodotto aggiunto");
+    function openModal(name, price, cat, len, con, use) {
+        currentProd = {name, price};
+        document.getElementById('m-name').innerText = name;
+        document.getElementById('m-specs').innerHTML = `<li>Categoria: ${cat}</li><li>Lunghezza: ${len}</li><li>Connettori: ${con}</li><li>Utilizzo: ${use}</li><li>Testato: ✓</li>`;
+        document.getElementById('m-price').innerText = price + " €";
+        document.getElementById('modal-details').style.display = 'flex';
     }
 
-    function save() { localStorage.setItem('cart', JSON.stringify(cart)); render(); }
-    function svuota() { cart = []; save(); }
-
-    function render() {
-        let list = document.getElementById('cart-list');
-        list.innerHTML = '';
-        let subtot = 0;
-        cart.forEach((i, idx) => {
-            subtot += i.prezzo * i.qta;
-            list.innerHTML += `<div class="cart-item">
-                ${i.nome} (x${i.qta})
-                <div class="qta-ctrl"><button onclick="mod(${idx}, -1)">-</button><button onclick="mod(${idx}, 1)">+</button></div>
-            </div>`;
-        });
-        document.getElementById('cart-count').innerText = cart.reduce((a,b) => a+b.qta, 0);
-        let sped = parseFloat(document.getElementById('sped').value);
-        document.getElementById('totale').innerText = (subtot + sped).toFixed(2);
+    function confirmAdd() { addToCart(currentProd.name, currentProd.price); document.getElementById('modal-details').style.display = 'none'; }
+    function addToCart(name, price) {
+        let item = cart.find(i => i.name === name);
+        item ? item.qta++ : cart.push({name, price, qta: 1});
+        save();
     }
 
-    function mod(idx, d) {
-        cart[idx].qta += d;
+    function mod(idx, delta) {
+        cart[idx].qta += delta;
         if(cart[idx].qta <= 0) cart.splice(idx, 1);
         save();
     }
 
-    function mostraDettagli(n, l, c, u) {
-        document.getElementById('m-nome').innerText = n;
-        document.getElementById('m-spec').innerHTML = `<li>Lunghezza: ${l}</li><li>Connettori: ${c}</li><li>Utilizzo: ${u}</li><li>Testato: Sì</li>`;
-        document.getElementById('modal').style.display = 'flex';
+    function save() { localStorage.setItem('cart', JSON.stringify(cart)); renderCart(); }
+
+    function renderCart() {
+        let list = document.getElementById('cart-items'), subtot = 0;
+        list.innerHTML = '';
+        cart.forEach((i, idx) => {
+            subtot += i.price * i.qta;
+            list.innerHTML += `<div class="cart-row">${i.name} (${i.qta}x) - ${(i.price*i.qta).toFixed(2)}€ 
+                <button onclick="mod(${idx}, -1)">-</button><button onclick="mod(${idx}, 1)">+</button>
+                <button onclick="cart.splice(${idx},1); save()" style="color:red; border:none; background:none;">❌</button></div>`;
+        });
+        
+        let ship = parseFloat(document.getElementById('c-zone').value);
+        if(subtot > 80) { ship = 0; document.getElementById('shipping-info').innerText = "🚚 Spedizione Gratuita!"; }
+        else document.getElementById('shipping-info').innerText = `Ti mancano ${(80-subtot).toFixed(2)}€ per la spedizione gratuita`;
+        
+        document.getElementById('total').innerText = (subtot + ship).toFixed(2);
     }
 
-    function filtra(c, el) {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        el.classList.add('active');
-        document.querySelectorAll('.prod-card').forEach(p => p.style.display = (c==='tutti' || p.dataset.cat===c) ? 'flex' : 'none');
+    function openCheckout() { document.getElementById('modal-checkout').style.display = 'flex'; }
+
+    function sendOrder() {
+        let orderId = 'ORD-' + Math.floor(Math.random()*900000);
+        let subtot = cart.reduce((a, b) => a + (b.price * b.qta), 0);
+        let ship = parseFloat(document.getElementById('c-zone').value);
+        let total = (subtot + ship).toFixed(2);
+        
+        let msg = `🛒 NUOVO ORDINE\n\nOrdine: ${orderId}\nCliente: ${document.getElementById('c-name').value}\nTelefono: ${document.getElementById('c-phone').value}\n\nPRODOTTI\n`;
+        cart.forEach(i => msg += `• ${i.name}\n  ${i.qta} × ${i.price.toFixed(2)} € = ${(i.price*i.qta).toFixed(2)} €\n`);
+        msg += `\n-------------------\nSubtotale: ${subtot.toFixed(2)} €\nSpedizione: ${ship.toFixed(2)} €\nTOTALE: ${total} €\n\nL'ordine verrà verificato da Caccin Cablaggi.`;
+        
+        window.open(`https://wa.me/393392859037/?text=${encodeURIComponent(msg)}`);
+    }
+function sendOrderEmail() {
+    let orderId = 'ORD-' + Math.floor(Math.random()*900000);
+    let name = document.getElementById('c-name').value;
+    let phone = document.getElementById('c-phone').value;
+
+    if (!name || !phone) {
+        alert("Inserisci nome e numero di telefono.");
+        return;
     }
 
-    function cerca() {
-        let v = document.getElementById('search').value.toLowerCase();
-        document.querySelectorAll('.prod-card').forEach(p => p.style.display = p.dataset.nome.toLowerCase().includes(v) ? 'flex' : 'none');
+    let subtot = cart.reduce((a, b) => a + (b.price * b.qta), 0);
+    let ship = parseFloat(document.getElementById('c-zone').value);
+
+    if (subtot > 80) ship = 0;
+
+    let total = (subtot + ship).toFixed(2);
+
+    let body = `NUOVO ORDINE
+
+Ordine: ${orderId}
+Cliente: ${name}
+Telefono: ${phone}
+
+PRODOTTI
+`;
+
+    cart.forEach(i => {
+        body += `• ${i.name}
+  ${i.qta} × ${i.price.toFixed(2)} € = ${(i.price*i.qta).toFixed(2)} €
+`;
+    });
+
+    body += `
+-------------------
+Subtotale: ${subtot.toFixed(2)} €
+Spedizione: ${ship.toFixed(2)} €
+TOTALE: ${total} €
+
+L'ordine verrà verificato da Caccin Cablaggi.`;
+
+    window.location.href =
+        `mailto:caccin.cablaggi@gmail.com?subject=Nuovo ordine ${orderId}&body=${encodeURIComponent(body)}`;
+}
+    function renderGrid() {
+        const query = document.getElementById('search').value.toLowerCase();
+        const cat = document.getElementById('filter').value;
+        document.querySelectorAll('.card').forEach(c => {
+            c.style.display = (cat === 'tutti' || c.dataset.cat === cat) && c.dataset.name.includes(query) ? 'block' : 'none';
+        });
     }
 
-    render();
+    renderCart();
 </script>
 </body>
 </html>
