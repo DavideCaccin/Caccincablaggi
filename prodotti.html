@@ -5,65 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catalogo Prodotti & Richieste - Caccin Cablaggi</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; scroll-behavior: smooth; }
-        body { background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        :root { --primary: #006666; --accent: #ff6b35; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: #f8fafc; color: #1e293b; line-height: 1.6; padding-bottom: 60px; }
         .container { width: 92%; max-width: 1200px; margin: auto; }
 
         header { position: sticky; top: 0; background: #ffffff; box-shadow: 0 4px 20px rgba(0,0,0,.05); z-index: 999; }
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
-        .logo h2 { color: #006666; font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+        .logo h2 { color: var(--primary); font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
         .logo a { text-decoration: none; color: inherit; }
         nav a { text-decoration: none; color: #475569; font-weight: 600; transition: color 0.2s; }
-        nav a:hover { color: #006666; }
+        nav a:hover { color: var(--primary); }
 
-        .shop-section { padding: 20px 0; }
-        .shop-layout { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
+        .shop-section { padding: 30px 0; }
+        
+        /* Struttura Ricerca e Filtri ottimizzata per smartphone */
+        .tools { display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; background: white; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        .tools input, .tools select { padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; flex: 1; font-size: 15px; background: #f8fafc; }
+        .tools input:focus, .tools select:focus { border-color: var(--primary); background: #fff; outline: none; }
+
+        .shop-layout { display: flex; gap: 30px; flex-wrap: wrap; }
         .products-container { flex: 2; min-width: 280px; }
         
-        .category-title { color: #006666; font-size: 20px; margin-bottom: 15px; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px; }
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .category-title { color: var(--primary); font-size: 20px; margin: 25px 0 15px 0; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
         
-        .prod-card { background: white; border: 1px solid #e2e8f0; padding: 15px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); display: flex; flex-direction: column; justify-content: space-between; }
+        .prod-card { background: white; border: 1px solid #e2e8f0; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.3s; }
+        .prod-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,102,102,0.1); }
         
-        .prod-img { width: 100%; height: 130px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; background: #e2e8f0; }
-        .prod-card h3 { color: #006666; margin-bottom: 6px; font-size: 16px; }
-        .prod-card p { font-size: 13px; color: #475569; margin-bottom: 10px; text-align: left; }
-        .price { font-weight: bold; color: #ff6b35; font-size: 15px; margin-bottom: 10px; display: block; text-align: left; }
+        .prod-img { width: 100%; height: 140px; object-fit: cover; border-radius: 8px; margin-bottom: 12px; background: #e2e8f0; cursor: pointer; }
+        .prod-card h3 { color: var(--primary); margin-bottom: 8px; font-size: 17px; }
+        .prod-card p { font-size: 13px; color: #475569; margin-bottom: 12px; text-align: left; }
+        .price { font-weight: bold; color: var(--accent); font-size: 16px; margin-bottom: 12px; display: block; text-align: left; }
 
-        .form-group { margin-bottom: 10px; text-align: left; }
-        .form-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 3px; color: #334155; }
-        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; background: #f8fafc; }
-        .form-group input:focus, .form-group textarea:focus { border-color: #006666; background: #fff; outline: none; }
+        .form-group { margin-bottom: 12px; text-align: left; }
+        .form-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 4px; color: #334155; }
+        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; background: #f8fafc; }
 
-        .carrello-box { flex: 1; min-width: 280px; background: white; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); height: fit-content; }
-        .carrello-box h2 { color: #006666; font-size: 20px; margin-bottom: 10px; }
-        #lista-carrello { list-style: none; margin-bottom: 15px; max-height: 200px; overflow-y: auto; text-align: left; font-size: 13px; }
+        /* Box Carrello Responsive */
+        .carrello-box { flex: 1; min-width: 300px; background: white; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); height: fit-content; position: sticky; top: 90px; }
+        .carrello-box h2 { color: var(--primary); font-size: 20px; margin-bottom: 10px; }
+        #lista-carrello { list-style: none; margin-bottom: 15px; max-height: 220px; overflow-y: auto; text-align: left; font-size: 14px; }
         #lista-carrello li { padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; }
 
-        .totali-box { background: #f8fafc; padding: 12px; border-radius: 8px; margin: 15px 0; font-size: 13px; }
+        .totali-box { background: #f8fafc; padding: 12px; border-radius: 8px; margin: 15px 0; font-size: 14px; }
         .totali-box div { display: flex; justify-content: space-between; margin-bottom: 5px; }
-        .totali-box .finale { font-weight: bold; font-size: 15px; color: #006666; border-top: 1px solid #cbd5e1; padding-top: 5px; margin-top: 5px; }
+        .totali-box .finale { font-weight: bold; font-size: 16px; color: var(--primary); border-top: 1px solid #cbd5e1; padding-top: 5px; margin-top: 5px; }
 
-        .btn { background: #ff6b35; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s; margin-top: 8px; text-align: center; text-decoration: none; display: inline-block; font-size: 14px; }
+        .btn { background: var(--accent); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s; margin-top: 8px; text-align: center; text-decoration: none; display: inline-block; font-size: 14px; }
         .btn:hover { background: #e55a2b; }
         .btn-wa { background: #25d366; }
         .btn-wa:hover { background: #128c7e; }
-        .btn-mail { background: #006666; }
+        .btn-mail { background: var(--primary); }
         .btn-mail:hover { background: #004d4d; }
 
-        .custom-request-section { background: #e0f2fe; border: 1px solid #bae6fd; padding: 20px; border-radius: 12px; margin-top: 30px; text-align: center; }
-        .custom-request-section h3 { color: #0369a1; margin-bottom: 8px; font-size: 18px; }
-        .custom-request-section p { color: #0369a1; font-size: 14px; margin-bottom: 15px; }
+        /* Modale Dettagli */
+        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; padding: 15px; }
+        .modal-content { background: white; padding: 25px; border-radius: 12px; width: 100%; max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .modal-content ul { margin: 15px 0; padding-left: 20px; font-size: 14px; color: #475569; }
 
-        footer { background: #003333; color: white; padding: 20px 0; text-align: center; border-top: 5px solid #ff6b35; margin-top: 40px; font-size: 13px; }
-        footer p { margin-bottom: 6px; opacity: 0.9; }
-
-        /* Ottimizzazioni specifiche per smartphone */
+        /* Adattamento smartphone estremo */
         @media (max-width: 768px) {
-            .container { width: 96%; }
             .shop-layout { flex-direction: column; }
             .carrello-box { position: static; width: 100%; }
-            h1 { font-size: 26px !important; }
+            .tools { flex-direction: column; padding: 15px; }
         }
     </style>
 </head>
@@ -72,7 +77,7 @@
 <header>
     <div class="navbar container">
         <div class="logo">
-            <h2><a href="index.html">Caccin Cablaggi</a></h2>
+            <h2><a href="#">Caccin Cablaggi</a></h2>
         </div>
         <nav>
             <ul>
@@ -83,172 +88,38 @@
 </header>
 
 <div class="container shop-section">
-    <h1 style="color: #006666; text-align: center; margin-bottom: 8px; font-size: 28px;">Catalogo Prodotti Pronti & Standard</h1>
-    <p style="text-align: center; color: #475569; margin-bottom: 30px; font-size: 15px;">Seleziona i prodotti, inseriscili nel carrello e compila i dati di spedizione.</p>
+    <h1 style="color: var(--primary); text-align: center; margin-bottom: 8px; font-size: 28px;">Catalogo Prodotti Pronti & Standard</h1>
+    <p style="text-align: center; color: #475569; margin-bottom: 25px; font-size: 15px;">Cerca, filtra e gestisci i tuoi cablaggi direttamente da qualsiasi dispositivo.</p>
+
+    <!-- Barra di Ricerca e Filtri -->
+    <div class="tools">
+        <input type="text" id="search" placeholder="🔎 Cerca prodotto per nome..." oninput="renderCatalogo()">
+        <select id="filter" onchange="renderCatalogo()">
+            <option value="tutti">Tutte le categorie</option>
+            <option value="lan">Cavi Ethernet Cat 6</option>
+            <option value="prolunghe">Prolunghe Elettriche 16A</option>
+        </select>
+    </div>
 
     <div class="shop-layout">
         
-        <!-- Area Prodotti -->
-        <div class="products-container">
-            
-            <!-- Categoria 1: Cavi Ethernet -->
-            <h2 class="category-title">🌐 Cavi Ethernet Cat 6</h2>
-            <div class="products-grid">
-                <!-- 1m -->
-                <div class="prod-card">
-                    <div>
-                        <img src="img/cavo-cat6.jpeg" alt="Cavo LAN 1m" class="prod-img">
-                        <h3>Cavo LAN Cat6 (1m)</h3>
-                        <p>Cavo ethernet cat6 con prese rj45 cablato e testato!</p>
-                    </div>
-                    <div>
-                        <span class="price">6,00 € (IVA incl.)</span>
-                        <div class="form-group">
-                            <label>Quantità:</label>
-                            <input type="number" id="q-lan1" value="1" min="1" style="text-align: center;">
-                        </div>
-                        <button class="btn" onclick="aggiungiAlCarrello('Cavo LAN Cat6 1m', 6.00, 'q-lan1')">Aggiungi</button>
-                    </div>
-                </div>
-
-                <!-- 2m -->
-                <div class="prod-card">
-                    <div>
-                        <img src="img/cavo-cat6.jpeg" alt="Cavo LAN 2m" class="prod-img">
-                        <h3>Cavo LAN Cat6 (2m)</h3>
-                        <p>Cavo ethernet cat6 con prese rj45 cablato e testato!</p>
-                    </div>
-                    <div>
-                        <span class="price">8,50 € (IVA incl.)</span>
-                        <div class="form-group">
-                            <label>Quantità:</label>
-                            <input type="number" id="q-lan2" value="1" min="1" style="text-align: center;">
-                        </div>
-                        <button class="btn" onclick="aggiungiAlCarrello('Cavo LAN Cat6 2m', 8.50, 'q-lan2')">Aggiungi</button>
-                    </div>
-                </div>
-
-                <!-- 5m -->
-                <div class="prod-card">
-                    <div>
-                        <img src="img/cavo-cat6.jpeg" alt="Cavo LAN 5m" class="prod-img">
-                        <h3>Cavo LAN Cat6 (5m)</h3>
-                        <p>Cavo ethernet cat6 con prese rj45 cablato e testato!</p>
-                    </div>
-                    <div>
-                        <span class="price">12,50 € (IVA incl.)</span>
-                        <div class="form-group">
-                            <label>Quantità:</label>
-                            <input type="number" id="q-lan5" value="1" min="1" style="text-align: center;">
-                        </div>
-                        <button class="btn" onclick="aggiungiAlCarrello('Cavo LAN Cat6 5m', 12.50, 'q-lan5')">Aggiungi</button>
-                    </div>
-                </div>
-
-                <!-- 10m -->
-                <div class="prod-card">
-                    <div>
-                        <img src="img/cavo-cat6.jpeg" alt="Cavo LAN 10m" class="prod-img">
-                        <h3>Cavo LAN Cat6 (10m)</h3>
-                        <p>Cavo ethernet cat6 con prese rj45 cablato e testato!</p>
-                    </div>
-                    <div>
-                        <span class="price">18,50 € (IVA incl.)</span>
-                        <div class="form-group">
-                            <label>Quantità:</label>
-                            <input type="number" id="q-lan10" value="1" min="1" style="text-align: center;">
-                        </div>
-                        <button class="btn" onclick="aggiungiAlCarrello('Cavo LAN Cat6 10m', 18.50, 'q-lan10')">Aggiungi</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Categoria 2: Prolunghe Vimar -->
-            <h2 class="category-title">⚡ Prolunghe Elettriche 16A</h2>
-            <div class="products-grid">
-                <!-- 1m -->
-                <div class="prod-card">
-                    <div>
-                        <img src="img/prolunga.jpeg" alt="Prolunga 1m" class="prod-img">
-                        <h3>Prolunga 16A (1m)</h3>
-                        <p>Cavo marrone 3g2,5 FS18, Spina e Presa Vimar 16A</p>
-                    </div>
-                    <div>
-                        <span class="price">14,00 € (IVA incl.)</span>
-                        <div class="form-group">
-                            <label>Quantità:</label>
-                            <input type="number" id="q-pro1" value="1" min="1" style="text-align: center;">
-                        </div>
-                        <button class="btn" onclick="aggiungiAlCarrello('Prolunga 16A Vimar 3G2.5 1m', 14.00, 'q-pro1')">Aggiungi</button>
-                    </div>
-                </div>
-
-                <!-- 2m -->
-                <div class="prod-card">
-                    <div>
-                        <img src="img/prolunga.jpeg" alt="Prolunga 2m" class="prod-img">
-                        <h3>Prolunga 16A (2m)</h3>
-                        <p>Cavo marrone 3g2,5 FS18, Spina e Presa Vimar 16A</p>
-                    </div>
-                    <div>
-                        <span class="price">17,50 € (IVA incl.)</span>
-                        <div class="form-group">
-                            <label>Quantità:</label>
-                            <input type="number" id="q-pro2" value="1" min="1" style="text-align: center;">
-                        </div>
-                        <button class="btn" onclick="aggiungiAlCarrello('Prolunga 16A Vimar 3G2.5 2m', 17.50, 'q-pro2')">Aggiungi</button>
-                    </div>
-                </div>
-
-                <!-- 5m -->
-                <div class="prod-card">
-                    <div>
-                        <img src="img/prolunga.jpeg" alt="Prolunga 5m" class="prod-img">
-                        <h3>Prolunga 16A (5m)</h3>
-                        <p>Cavo marrone 3g2,5 FS18, Spina e Presa Vimar 16A</p>
-                    </div>
-                    <div>
-                        <span class="price">24,00 € (IVA incl.)</span>
-                        <div class="form-group">
-                            <label>Quantità:</label>
-                            <input type="number" id="q-pro5" value="1" min="1" style="text-align: center;">
-                        </div>
-                        <button class="btn" onclick="aggiungiAlCarrello('Prolunga 16A Vimar 3G2.5 5m', 24.00, 'q-pro5')">Aggiungi</button>
-                    </div>
-                </div>
-
-                <!-- 10m -->
-                <div class="prod-card">
-                    <div>
-                        <img src="img/prolunga.jpeg" alt="Prolunga 10m" class="prod-img">
-                        <h3>Prolunga 16A (10m)</h3>
-                        <p>Cavo marrone 3g2,5 FS18, Spina e Presa Vimar 16A</p>
-                    </div>
-                    <div>
-                        <span class="price">36,00 € (IVA incl.)</span>
-                        <div class="form-group">
-                            <label>Quantità:</label>
-                            <input type="number" id="q-pro10" value="1" min="1" style="text-align: center;">
-                        </div>
-                        <button class="btn" onclick="aggiungiAlCarrello('Prolunga 16A Vimar 3G2.5 10m', 36.00, 'q-pro10')">Aggiungi</button>
-                    </div>
-                </div>
-            </div>
-
+        <!-- Area Prodotti Dinamica -->
+        <div class="products-container" id="prodotti-container-dinamico">
+            <!-- Generato via JavaScript -->
         </div>
 
         <!-- Box Carrello e Spedizione -->
         <div class="carrello-box">
             <h2>Carrello Ordine</h2>
-            <div style="font-size: 12px; color: #64748b; margin-bottom: 10px;">N. Ordine: <b id="num-ordine-txt" style="color:#006666;"></b></div>
+            <div style="font-size: 12px; color: #64748b; margin-bottom: 10px;">N. Ordine: <b id="num-ordine-txt" style="color:var(--primary);"></b></div>
             
             <ul id="lista-carrello">
                 <p style="color: #94a3b8; text-align: center; padding: 10px 0;">Il carrello è vuoto</p>
             </ul>
 
-            <h3 style="font-size: 14px; color: #006666; margin: 15px 0 8px 0;">Dati Spedizione</h3>
+            <h3 style="font-size: 14px; color: var(--primary); margin: 15px 0 8px 0;">Dati Spedizione</h3>
             <div class="form-group">
-                <label>Nome / Azienda *</label>
+                <label>Nome e Cognome / Azienda *</label>
                 <input type="text" id="nome" placeholder="Mario Rossi">
             </div>
             <div class="form-group">
@@ -266,50 +137,124 @@
                 </div>
             </div>
             <div class="form-group">
-                <label>Telefono *</label>
+                <label>Telefono / Contatto *</label>
                 <input type="text" id="telefono" placeholder="3390000000">
             </div>
 
             <!-- Riepilogo Costi -->
             <div class="totali-box">
-                <div><span>Subtotale:</span> <span id="subtotale">0,00</span> €</div>
+                <div><span>Subtotale prodotti:</span> <span id="subtotale">0,00</span> €</div>
                 <div><span>Spedizione (<span id="tipo-spedizione">Da calcolare</span>):</span> <span id="costo-spedizione">0,00</span> €</div>
-                <div class="finale"><span>Totale:</span> <span id="totale">0,00</span> €</div>
+                <div class="finale"><span>Totale Complessivo:</span> <span id="totale">0,00</span> €</div>
             </div>
 
-            <button class="btn btn-wa" onclick="inviaOrdine('whatsapp')">💬 Invia Ordine WhatsApp</button>
-            <button class="btn btn-mail" onclick="inviaOrdine('mail')">📧 Invia Ordine Email</button>
-        </div>
-    </div>
-
-    <!-- Sezione Richieste Personalizzate -->
-    <div class="custom-request-section">
-        <h3>🔍 Ti serve una misura particolare?</h3>
-        <p>Contattaci per un preventivo personalizzato fuori catalogo.</p>
-        <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
-            <a href="https://wa.me/393392859037?text=Buongiorno%2C%20avrei%20bisogno%20di%20una%20richiesta%20personalizzata%3A" class="btn btn-wa" style="max-width: 250px;" target="_blank">WhatsApp</a>
-            <a href="mailto:caccin.cablaggi@gmail.com?subject=Richiesta personalizzata" class="btn btn-mail" style="max-width: 250px;">Email</a>
+            <button class="btn btn-wa" onclick="inviaOrdine('whatsapp')">💬 Invia Ordine via WhatsApp</button>
+            <button class="btn btn-mail" onclick="inviaOrdine('mail')">📧 Invia Ordine via Email</button>
         </div>
     </div>
 </div>
 
-<footer>
-    <div class="container">
-        <p>&copy; 2026 Caccin Cablaggi - Via Cavin Maggiore 5, Pianiga (VE). P.IVA: 04875640277</p>
+<!-- Modale Dettagli Prodotto -->
+<div id="modal-details" class="modal">
+    <div class="modal-content">
+        <h2 id="m-name" style="color: var(--primary); font-size: 20px; margin-bottom: 10px;"></h2>
+        <ul id="m-specs"></ul>
+        <div style="text-align: right; margin-bottom: 15px;">
+            <b id="m-price" style="font-size: 1.3em; color: var(--accent);"></b>
+        </div>
+        <button class="btn" onclick="chiudiModale()">Chiudi</button>
     </div>
-</footer>
+</div>
 
 <script>
+    // Database completo dei prodotti con estensione .jpeg corretta
+    const databaseProdotti = [
+        { id: 'lan1', cat: 'lan', name: 'Cavo LAN Cat6 (1m)', price: 6.00, desc: 'Cavo ethernet cat6 con prese rj45 cablato e testato!', img: 'img/cavo-cat6.jpeg', len: '1 m', con: 'RJ45' },
+        { id: 'lan2', cat: 'lan', name: 'Cavo LAN Cat6 (2m)', price: 8.50, desc: 'Cavo ethernet cat6 con prese rj45 cablato e testato!', img: 'img/cavo-cat6.jpeg', len: '2 m', con: 'RJ45' },
+        { id: 'lan5', cat: 'lan', name: 'Cavo LAN Cat6 (5m)', price: 12.50, desc: 'Cavo ethernet cat6 con prese rj45 cablato e testato!', img: 'img/cavo-cat6.jpeg', len: '5 m', con: 'RJ45' },
+        { id: 'lan10', cat: 'lan', name: 'Cavo LAN Cat6 (10m)', price: 18.50, desc: 'Cavo ethernet cat6 con prese rj45 cablato e testato!', img: 'img/cavo-cat6.jpeg', len: '10 m', con: 'RJ45' },
+        
+        { id: 'pro1', cat: 'prolunghe', name: 'Prolunga 16A (1m)', price: 14.00, desc: 'Cavo marrone 3g2,5 FS18, Spina e Presa Vimar 16A', img: 'img/prolunga.jpeg', len: '1 m', con: 'Vimar 16A' },
+        { id: 'pro2', cat: 'prolunghe', name: 'Prolunga 16A (2m)', price: 17.50, desc: 'Cavo marrone 3g2,5 FS18, Spina e Presa Vimar 16A', img: 'img/prolunga.jpeg', len: '2 m', con: 'Vimar 16A' },
+        { id: 'pro5', cat: 'prolunghe', name: 'Prolunga 16A (5m)', price: 24.00, desc: 'Cavo marrone 3g2,5 FS18, Spina e Presa Vimar 16A', img: 'img/prolunga.jpeg', len: '5 m', con: 'Vimar 16A' },
+        { id: 'pro10', cat: 'prolunghe', name: 'Prolunga 16A (10m)', price: 36.00, desc: 'Cavo marrone 3g2,5 FS18, Spina e Presa Vimar 16A', img: 'img/prolunga.jpeg', len: '10 m', con: 'Vimar 16A' }
+    ];
+
     let carrello = [];
-    
+
+    // Generazione ID Ordine Progressivo
     let numeroOrdine = localStorage.getItem('caccin_ultimo_ordine');
-    if (!numeroOrdine) {
-        numeroOrdine = 826001;
-    } else {
-        numeroOrdine = parseInt(numeroOrdine) + 1;
-    }
+    if (!numeroOrdine) { numeroOrdine = 826001; } else { numeroOrdine = parseInt(numeroOrdine) + 1; }
     localStorage.setItem('caccin_ultimo_ordine', numeroOrdine);
     document.getElementById('num-ordine-txt').innerText = "#" + numeroOrdine;
+
+    // Render dinamico del catalogo con supporto ricerca e filtri
+    function renderCatalogo() {
+        const query = document.getElementById('search').value.toLowerCase();
+        const categoriaFiltro = document.getElementById('filter').value;
+        const container = document.getElementById('prodotti-container-dinamico');
+        container.innerHTML = '';
+
+        let categorieDaMostrare = [];
+        if (categoriaFiltro === 'tutti') {
+            categorieDaMostrare = [
+                { key: 'lan', title: '🌐 Cavi Ethernet Cat 6' },
+                { key: 'prolunghe', title: '⚡ Prolunghe Elettriche 16A' }
+            ];
+        } else if (categoriaFiltro === 'lan') {
+            categorieDaMostrare = [{ key: 'lan', title: '🌐 Cavi Ethernet Cat 6' }];
+        } else if (categoriaFiltro === 'prolunghe') {
+            categorieDaMostrare = [{ key: 'prolunghe', title: '⚡ Prolunghe Elettriche 16A' }];
+        }
+
+        categorieDaMostrare.forEach(catObj => {
+            let prodottiFiltrati = databaseProdotti.filter(p => p.cat === catObj.key && p.name.toLowerCase().includes(query));
+            
+            if (prodottiFiltrati.length > 0) {
+                let htmlCat = `<h2 class="category-title">${catObj.title}</h2><div class="products-grid">`;
+                
+                prodottiFiltrati.forEach(p => {
+                    htmlCat += `
+                        <div class="prod-card">
+                            <div>
+                                <img src="${p.img}" alt="${p.name}" class="prod-img" onclick="apriDettagli('${p.name}', '${p.desc}', ${p.price}, '${p.len}', '${p.con}')">
+                                <h3>${p.name}</h3>
+                                <p>${p.desc}</p>
+                            </div>
+                            <div>
+                                <span class="price">${p.price.toFixed(2)} € (IVA incl.)</span>
+                                <div class="form-group">
+                                    <label>Quantità:</label>
+                                    <input type="number" id="q-${p.id}" value="1" min="1" style="text-align: center;">
+                                </div>
+                                <button class="btn" onclick="aggiungiAlCarrello('${p.name}', ${p.price}, 'q-${p.id}')">Aggiungi</button>
+                            </div>
+                        </div>`;
+                });
+                htmlCat += `</div>`;
+                container.innerHTML += htmlCat;
+            }
+        });
+
+        if (container.innerHTML === '') {
+            container.innerHTML = `<p style="text-align:center; color:#64748b; padding:40px 0;">Nessun prodotto trovato con i filtri attuali.</p>`;
+        }
+    }
+
+    function apriDettagli(name, desc, price, len, con) {
+        document.getElementById('m-name').innerText = name;
+        document.getElementById('m-specs').innerHTML = `
+            <li><b>Descrizione:</b> ${desc}</li>
+            <li><b>Lunghezza:</b> ${len}</li>
+            <li><b>Connettori:</b> ${con}</li>
+            <li><b>Stato test:</b> Cablato e testato in laboratorio ✓</li>`;
+        document.getElementById('m-price').innerText = price.toFixed(2) + " € (IVA incl.)";
+        document.getElementById('modal-details').style.display = 'flex';
+    }
+
+    function chiudiModale() {
+        document.getElementById('modal-details').style.display = 'none';
+    }
 
     function aggiungiAlCarrello(nome, prezzo, idInput) {
         let qta = parseInt(document.getElementById(idInput).value);
@@ -346,9 +291,7 @@
         aggiornaCarrelloUI();
         
         let subtotale = 0;
-        carrello.forEach(item => {
-            subtotale += item.prezzo * item.qta;
-        });
+        carrello.forEach(item => { subtotale += item.prezzo * item.qta; });
 
         let cittaInput = document.getElementById('citta').value.toUpperCase();
         let costoSpedizione = 0;
@@ -424,6 +367,9 @@
             window.location.href = `mailto:caccin.cablaggi@gmail.com?subject=${subject}&body=${body}`;
         }
     }
+
+    // Inizializzazione iniziale al caricamento della pagina
+    renderCatalogo();
 </script>
 
 </body>
