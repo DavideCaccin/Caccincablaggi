@@ -20,8 +20,10 @@
         .shop-layout { display: flex; gap: 30px; flex-wrap: wrap; margin-top: 30px; }
         .products-container { flex: 2; }
         
-        .category-title { color: #006666; font-size: 22px; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px; }
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .category-title { color: #006666; font-size: 22px; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px; margin-top: 30px; }
+        .category-title:first-child { margin-top: 0; }
+        
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 20px; }
         
         .prod-card { background: white; border: 1px solid #e2e8f0; padding: 20px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
         .prod-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,102,102,0.1); }
@@ -87,7 +89,6 @@
             <!-- Categoria 1: Cavi Ethernet -->
             <h2 class="category-title">🌐 Cavi Ethernet Cat 6</h2>
             <div class="products-grid">
-                <!-- 1m -->
                 <div class="prod-card">
                     <div>
                         <img src="img/cavo-cat6.jpeg" alt="Cavo LAN 1m" class="prod-img">
@@ -104,7 +105,6 @@
                     </div>
                 </div>
 
-                <!-- 2m -->
                 <div class="prod-card">
                     <div>
                         <img src="img/cavo-cat6.jpeg" alt="Cavo LAN 2m" class="prod-img">
@@ -121,7 +121,6 @@
                     </div>
                 </div>
 
-                <!-- 5m -->
                 <div class="prod-card">
                     <div>
                         <img src="img/cavo-cat6.jpeg" alt="Cavo LAN 5m" class="prod-img">
@@ -138,7 +137,6 @@
                     </div>
                 </div>
 
-                <!-- 10m -->
                 <div class="prod-card">
                     <div>
                         <img src="img/cavo-cat6.jpeg" alt="Cavo LAN 10m" class="prod-img">
@@ -159,7 +157,6 @@
             <!-- Categoria 2: Prolunghe Vimar -->
             <h2 class="category-title">⚡ Prolunghe Elettriche 16A</h2>
             <div class="products-grid">
-                <!-- 1m -->
                 <div class="prod-card">
                     <div>
                         <img src="img/prolunga.jpeg" alt="Prolunga 1m" class="prod-img">
@@ -176,7 +173,6 @@
                     </div>
                 </div>
 
-                <!-- 2m -->
                 <div class="prod-card">
                     <div>
                         <img src="img/prolunga.jpeg" alt="Prolunga 2m" class="prod-img">
@@ -193,7 +189,6 @@
                     </div>
                 </div>
 
-                <!-- 5m -->
                 <div class="prod-card">
                     <div>
                         <img src="img/prolunga.jpeg" alt="Prolunga 5m" class="prod-img">
@@ -210,7 +205,6 @@
                     </div>
                 </div>
 
-                <!-- 10m -->
                 <div class="prod-card">
                     <div>
                         <img src="img/prolunga.jpeg" alt="Prolunga 10m" class="prod-img">
@@ -224,6 +218,58 @@
                             <input type="number" id="q-pro10" value="1" min="1" style="text-align: center;">
                         </div>
                         <button class="btn" onclick="aggiungiAlCarrello('Prolunga 16A Vimar 3G2.5 10m', 36.00, 'q-pro10')">Aggiungi</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categoria 3: Cavi Alimentazione Schuko / IEC -->
+            <h2 class="category-title">🔌 Cavi Alimentazione Schuko / IEC</h2>
+            <div class="products-grid">
+                <div class="prod-card">
+                    <div>
+                        <img src="img/cavo-iec.jpeg" alt="Cavo IEC 1m" class="prod-img">
+                        <h3>Cavo Alimentazione IEC (1m)</h3>
+                        <p>Cavo flessibile idoneo, Spina Schuko Vimar e Presa IEC C13 volante</p>
+                    </div>
+                    <div>
+                        <span class="price">9,00 € (IVA incl.)</span>
+                        <div class="form-group">
+                            <label>Quantità:</label>
+                            <input type="number" id="q-iec1" value="1" min="1" style="text-align: center;">
+                        </div>
+                        <button class="btn" onclick="aggiungiAlCarrello('Cavo Alimentazione Schuko/IEC 1m', 9.00, 'q-iec1')">Aggiungi</button>
+                    </div>
+                </div>
+
+                <div class="prod-card">
+                    <div>
+                        <img src="img/cavo-iec.jpeg" alt="Cavo IEC 2m" class="prod-img">
+                        <h3>Cavo Alimentazione IEC (2m)</h3>
+                        <p>Cavo flessibile idoneo, Spina Schuko Vimar e Presa IEC C13 volante</p>
+                    </div>
+                    <div>
+                        <span class="price">12,00 € (IVA incl.)</span>
+                        <div class="form-group">
+                            <label>Quantità:</label>
+                            <input type="number" id="q-iec2" value="1" min="1" style="text-align: center;">
+                        </div>
+                        <button class="btn" onclick="aggiungiAlCarrello('Cavo Alimentazione Schuko/IEC 2m', 12.00, 'q-iec2')">Aggiungi</button>
+                    </div>
+                </div>
+
+                <div class="prod-card">
+                    <div>
+                        <img src="img/cavo-iec.jpeg" alt="Cavo IEC 5m" class="prod-img">
+                        <h3>Cavo Alimentazione IEC (5m)</h3>
+                        <p>Cavo flessibile idoneo, Spina Schuko Vimar e Presa IEC C13 volante</p>
+                    </div>
+                    <div>
+                        <span class="price">16,50 € (IVA incl.)</span>
+                        <div class="form-group">
+                            <label>Quantità:</label>
+                            <input type="number" id="q-iec5" value="1" min="1" style="text-align: center;">
+                        </div>
+                        <button class="btn" onclick="aggiungiAlCarrello('Cavo Alimentazione Schuko/IEC 5m', 16.50, 'q-iec5')">Aggiungi</button>
                     </div>
                 </div>
             </div>
@@ -358,7 +404,7 @@
 
         if (cittaInput.includes('VE') || cittaInput.includes('PD') || cittaInput.includes('TV') || 
             cittaInput.includes('VENEZIA') || cittaInput.includes('PADOVA') || cittaInput.includes('TREVISO')) {
-            costoSpedizione = 10.00; 
+            costoSpedizione = 5.00; 
             tipoSpedizioneTesto = "Consegna Locale (VE/PD/TV)";
         } else if (cittaInput.length > 2) {
             costoSpedizione = 5.99; 
