@@ -18,29 +18,34 @@
 
         .shop-section { padding: 40px 0; }
         .shop-layout { display: flex; gap: 30px; flex-wrap: wrap; margin-top: 30px; }
-        .products-grid { flex: 2; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+        .products-container { flex: 2; }
         
-        .prod-card { background: white; border: 1px solid #e2e8f0; padding: 25px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s; }
+        .category-title { color: #006666; font-size: 22px; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        
+        .prod-card { background: white; border: 1px solid #e2e8f0; padding: 20px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
         .prod-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,102,102,0.1); }
-        .prod-card h3 { color: #006666; margin-bottom: 10px; font-size: 19px; }
-        .prod-card p { font-size: 14px; color: #475569; margin-bottom: 15px; }
-        .price { font-weight: bold; color: #ff6b35; font-size: 17px; margin-bottom: 15px; display: block; }
+        
+        .prod-img { width: 100%; height: 140px; object-fit: cover; border-radius: 8px; margin-bottom: 12px; background: #e2e8f0; }
+        .prod-card h3 { color: #006666; margin-bottom: 8px; font-size: 17px; }
+        .prod-card p { font-size: 13px; color: #475569; margin-bottom: 12px; text-align: left; }
+        .price { font-weight: bold; color: #ff6b35; font-size: 16px; margin-bottom: 12px; display: block; text-align: left; }
 
-        .form-group { margin-bottom: 12px; text-align: left; }
-        .form-group label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 4px; color: #334155; }
-        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; background: #f8fafc; }
+        .form-group { margin-bottom: 10px; text-align: left; }
+        .form-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 3px; color: #334155; }
+        .form-group input, .form-group textarea { width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; background: #f8fafc; }
         .form-group input:focus, .form-group textarea:focus { border-color: #006666; background: #fff; outline: none; }
 
         .carrello-box { flex: 1; min-width: 320px; background: white; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); position: sticky; top: 90px; height: fit-content; }
         .carrello-box h2 { color: #006666; font-size: 22px; margin-bottom: 10px; }
-        #lista-carrello { list-style: none; margin-bottom: 15px; max-height: 150px; overflow-y: auto; text-align: left; font-size: 14px; }
+        #lista-carrello { list-style: none; margin-bottom: 15px; max-height: 180px; overflow-y: auto; text-align: left; font-size: 14px; }
         #lista-carrello li { padding: 6px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; }
 
         .totali-box { background: #f8fafc; padding: 12px; border-radius: 8px; margin: 15px 0; font-size: 14px; }
         .totali-box div { display: flex; justify-content: space-between; margin-bottom: 5px; }
         .totali-box .finale { font-weight: bold; font-size: 16px; color: #006666; border-top: 1px solid #cbd5e1; padding-top: 5px; margin-top: 5px; }
 
-        .btn { background: #ff6b35; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s; margin-top: 10px; text-align: center; text-decoration: none; display: inline-block; }
+        .btn { background: #ff6b35; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s; margin-top: 8px; text-align: center; text-decoration: none; display: inline-block; }
         .btn:hover { background: #e55a2b; transform: translateY(-2px); }
         .btn-wa { background: #25d366; }
         .btn-wa:hover { background: #128c7e; }
@@ -75,40 +80,154 @@
     <p style="text-align: center; color: #475569; margin-bottom: 40px; font-size: 17px;">Seleziona i prodotti, inseriscili nel carrello e calcola la spedizione in base alla tua zona.</p>
 
     <div class="shop-layout">
-        <!-- Griglia Prodotti -->
-        <div class="products-grid">
-            <div class="prod-card">
-                <h3>Cavo LAN Cat6 RJ45 (2m)</h3>
-                <p>Crimpato professionalmente e testato singolarmente.</p>
-                <span class="price">12,00 € (IVA inclusa)</span>
-                <div class="form-group">
-                    <label>Quantità:</label>
-                    <input type="number" id="q-lan2" value="1" min="1" style="text-align: center;">
+        
+        <!-- Area Prodotti -->
+        <div class="products-container">
+            
+            <!-- Categoria 1: Cavi Ethernet -->
+            <h2 class="category-title">🌐 Cavi Ethernet Cat 6 (Rame Puro)</h2>
+            <div class="products-grid">
+                <!-- 1m -->
+                <div class="prod-card">
+                    <div>
+                        <img src="img/cavo-cat6.jpg" alt="Cavo LAN 1m" class="prod-img">
+                        <h3>Cavo LAN Cat6 (1m)</h3>
+                        <p>Crimpato professionalmente, connettori RJ45 schermati e testato singolarmente.</p>
+                    </div>
+                    <div>
+                        <span class="price">6,00 € (IVA incl.)</span>
+                        <div class="form-group">
+                            <label>Quantità:</label>
+                            <input type="number" id="q-lan1" value="1" min="1" style="text-align: center;">
+                        </div>
+                        <button class="btn" onclick="aggiungiAlCarrello('Cavo LAN Cat6 1m', 6.00, 'q-lan1')">Aggiungi</button>
+                    </div>
                 </div>
-                <button class="btn" onclick="aggiungiAlCarrello('Cavo LAN Cat6 2m', 12.00, 'q-lan2')">Aggiungi al Carrello</button>
+
+                <!-- 2m -->
+                <div class="prod-card">
+                    <div>
+                        <img src="img/cavo-cat6.jpg" alt="Cavo LAN 2m" class="prod-img">
+                        <h3>Cavo LAN Cat6 (2m)</h3>
+                        <p>Ideale per collegamenti di rete stabili, alta velocità e schermatura ottimale.</p>
+                    </div>
+                    <div>
+                        <span class="price">8,50 € (IVA incl.)</span>
+                        <div class="form-group">
+                            <label>Quantità:</label>
+                            <input type="number" id="q-lan2" value="1" min="1" style="text-align: center;">
+                        </div>
+                        <button class="btn" onclick="aggiungiAlCarrello('Cavo LAN Cat6 2m', 8.50, 'q-lan2')">Aggiungi</button>
+                    </div>
+                </div>
+
+                <!-- 5m -->
+                <div class="prod-card">
+                    <div>
+                        <img src="img/cavo-cat6.jpg" alt="Cavo LAN 5m" class="prod-img">
+                        <h3>Cavo LAN Cat6 (5m)</h3>
+                        <p>Lunghezza versatile per uffici e postazioni domestiche, testato in laboratorio.</p>
+                    </div>
+                    <div>
+                        <span class="price">12,50 € (IVA incl.)</span>
+                        <div class="form-group">
+                            <label>Quantità:</label>
+                            <input type="number" id="q-lan5" value="1" min="1" style="text-align: center;">
+                        </div>
+                        <button class="btn" onclick="aggiungiAlCarrello('Cavo LAN Cat6 5m', 12.50, 'q-lan5')">Aggiungi</button>
+                    </div>
+                </div>
+
+                <!-- 10m -->
+                <div class="prod-card">
+                    <div>
+                        <img src="img/cavo-cat6.jpg" alt="Cavo LAN 10m" class="prod-img">
+                        <h3>Cavo LAN Cat6 (10m)</h3>
+                        <p>Soluzione ideale per tratte lunghe senza perdita di pacchetti o cali di segnale.</p>
+                    </div>
+                    <div>
+                        <span class="price">18,50 € (IVA incl.)</span>
+                        <div class="form-group">
+                            <label>Quantità:</label>
+                            <input type="number" id="q-lan10" value="1" min="1" style="text-align: center;">
+                        </div>
+                        <button class="btn" onclick="aggiungiAlCarrello('Cavo LAN Cat6 10m', 18.50, 'q-lan10')">Aggiungi</button>
+                    </div>
+                </div>
             </div>
 
-            <div class="prod-card">
-                <h3>Cavo LAN Cat6 RJ45 (5m)</h3>
-                <p>Lunghezza maggiore per cablaggi di rete domestici o ufficio.</p>
-                <span class="price">18,50 € (IVA inclusa)</span>
-                <div class="form-group">
-                    <label>Quantità:</label>
-                    <input type="number" id="q-lan5" value="1" min="1" style="text-align: center;">
+            <!-- Categoria 2: Prolunghe Vimar -->
+            <h2 class="category-title">⚡ Prolunghe Elettriche 16A (Componenti Vimar & Cavo 3G2.5)</h2>
+            <div class="products-grid">
+                <!-- 1m -->
+                <div class="prod-card">
+                    <div>
+                        <img src="img/prolunga.jpg" alt="Prolunga 1m" class="prod-img">
+                        <h3>Prolunga 16A (1m)</h3>
+                        <p>Cavo gommato 3G2.5 in vero rame, spina e presa volante Vimar di alta qualità.</p>
+                    </div>
+                    <div>
+                        <span class="price">14,00 € (IVA incl.)</span>
+                        <div class="form-group">
+                            <label>Quantità:</label>
+                            <input type="number" id="q-pro1" value="1" min="1" style="text-align: center;">
+                        </div>
+                        <button class="btn" onclick="aggiungiAlCarrello('Prolunga 16A Vimar 3G2.5 1m', 14.00, 'q-pro1')">Aggiungi</button>
+                    </div>
                 </div>
-                <button class="btn" onclick="aggiungiAlCarrello('Cavo LAN Cat6 5m', 18.50, 'q-lan5')">Aggiungi al Carrello</button>
+
+                <!-- 2m -->
+                <div class="prod-card">
+                    <div>
+                        <img src="img/prolunga.jpg" alt="Prolunga 2m" class="prod-img">
+                        <h3>Prolunga 16A (2m)</h3>
+                        <p>Assemblata professionalmente per garantire massima sicurezza e resistenza meccanica.</p>
+                    </div>
+                    <div>
+                        <span class="price">17,50 € (IVA incl.)</span>
+                        <div class="form-group">
+                            <label>Quantità:</label>
+                            <input type="number" id="q-pro2" value="1" min="1" style="text-align: center;">
+                        </div>
+                        <button class="btn" onclick="aggiungiAlCarrello('Prolunga 16A Vimar 3G2.5 2m', 17.50, 'q-pro2')">Aggiungi</button>
+                    </div>
+                </div>
+
+                <!-- 5m -->
+                <div class="prod-card">
+                    <div>
+                        <img src="img/prolunga.jpg" alt="Prolunga 5m" class="prod-img">
+                        <h3>Prolunga 16A (5m)</h3>
+                        <p>Sezione 3G2.5 adatta anche per carichi gravosi, cantieri o laboratori.</p>
+                    </div>
+                    <div>
+                        <span class="price">24,00 € (IVA incl.)</span>
+                        <div class="form-group">
+                            <label>Quantità:</label>
+                            <input type="number" id="q-pro5" value="1" min="1" style="text-align: center;">
+                        </div>
+                        <button class="btn" onclick="aggiungiAlCarrello('Prolunga 16A Vimar 3G2.5 5m', 24.00, 'q-pro5')">Aggiungi</button>
+                    </div>
+                </div>
+
+                <!-- 10m -->
+                <div class="prod-card">
+                    <div>
+                        <img src="img/prolunga.jpg" alt="Prolunga 10m" class="prod-img">
+                        <h3>Prolunga 16A (10m)</h3>
+                        <p>Massima affidabilità e sicurezza per impieghi professionali e domestici prolungati.</p>
+                    </div>
+                    <div>
+                        <span class="price">36,00 € (IVA incl.)</span>
+                        <div class="form-group">
+                            <label>Quantità:</label>
+                            <input type="number" id="q-pro10" value="1" min="1" style="text-align: center;">
+                        </div>
+                        <button class="btn" onclick="aggiungiAlCarrello('Prolunga 16A Vimar 3G2.5 10m', 36.00, 'q-pro10')">Aggiungi</button>
+                    </div>
+                </div>
             </div>
 
-            <div class="prod-card">
-                <h3>Prolunga Elettrica Industriale</h3>
-                <p>3 poli, cavo gommato H07RN-F, con prese industriali.</p>
-                <span class="price">35,00 € (IVA inclusa)</span>
-                <div class="form-group">
-                    <label>Quantità:</label>
-                    <input type="number" id="q-prolunga" value="1" min="1" style="text-align: center;">
-                </div>
-                <button class="btn" onclick="aggiungiAlCarrello('Prolunga Elettrica Industriale', 35.00, 'q-prolunga')">Aggiungi al Carrello</button>
-            </div>
         </div>
 
         <!-- Box Carrello e Spedizione -->
@@ -135,7 +254,7 @@
                     <input type="text" id="cap" placeholder="30030">
                 </div>
                 <div class="form-group" style="flex: 2;">
-                    <label>Città e Provincia (es. VE, PD, TV) *</label>
+                    <label>Città e Provincia (VE, PD, TV) *</label>
                     <input type="text" id="citta" placeholder="Pianiga (VE)" oninput="calcolaTotali()">
                 </div>
             </div>
@@ -177,7 +296,6 @@
 <script>
     let carrello = [];
     
-    // Gestione numero ordine progressivo
     let numeroOrdine = localStorage.getItem('caccin_ultimo_ordine');
     if (!numeroOrdine) {
         numeroOrdine = 826001;
@@ -238,17 +356,12 @@
             return;
         }
 
-        // Verifica se la destinazione è Venezia (VE), Padova (PD) o Treviso (TV)
         if (cittaInput.includes('VE') || cittaInput.includes('PD') || cittaInput.includes('TV') || 
             cittaInput.includes('VENEZIA') || cittaInput.includes('PADOVA') || cittaInput.includes('TREVISO')) {
-            
-            // Tariffa locale basata su stima chilometrica da Via Cavin Maggiore 5 (es. fissa di partenza o simulazione km vicini, es. 15 km medi a 0,5€ = 7,50€ minimi o calcolo base)
-            // Per renderlo dinamico semplice, impostiamo una stima di base locale o tariffa fissa di zona a 10,00€ (oppure personalizzabile)
-            costoSpedizione = 10.00; // Esempio stimato per consegna locale a 0.5€/km medio nel raggio provinciale
+            costoSpedizione = 10.00; 
             tipoSpedizioneTesto = "Consegna Locale (VE/PD/TV)";
         } else if (cittaInput.length > 2) {
-            // Fuori zona: usa InPost (es. tariffa standard pacco S/M)
-            costoSpedizione = 5.99; // Tariffa standard InPost
+            costoSpedizione = 5.99; 
             tipoSpedizioneTesto = "Corriere InPost";
         } else {
             costoSpedizione = 0.00;
