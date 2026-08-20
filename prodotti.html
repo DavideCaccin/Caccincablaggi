@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catalogo Prodotti & Richieste - Caccin Cablaggi</title>
+    <meta name="description" content="Catalogo online di cablaggi elettrici, cavi LAN Cat6 e prolunghe 16A pronti e testati. Ordina direttamente via WhatsApp o Email.">
+    <!-- Open Graph per condivisione social -->
+    <meta property="og:title" content="Catalogo Prodotti & Richieste - Caccin Cablaggi">
+    <meta property="og:description" content="Cavi Ethernet Cat6 e Prolunghe Elettriche 16A cablati e testati in laboratorio.">
+    <meta property="og:type" content="website">
+    
     <style>
         :root { --primary: #006666; --accent: #ff6b35; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
@@ -19,7 +25,6 @@
 
         .shop-section { padding: 30px 0; }
         
-        /* Struttura Ricerca e Filtri ottimizzata per smartphone */
         .tools { display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; background: white; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
         .tools input, .tools select { padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; flex: 1; font-size: 15px; background: #f8fafc; }
         .tools input:focus, .tools select:focus { border-color: var(--primary); background: #fff; outline: none; }
@@ -42,7 +47,6 @@
         .form-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 4px; color: #334155; }
         .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; background: #f8fafc; }
 
-        /* Box Carrello Responsive */
         .carrello-box { flex: 1; min-width: 300px; background: white; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); height: fit-content; position: sticky; top: 90px; }
         .carrello-box h2 { color: var(--primary); font-size: 20px; margin-bottom: 10px; }
         #lista-carrello { list-style: none; margin-bottom: 15px; max-height: 220px; overflow-y: auto; text-align: left; font-size: 14px; }
@@ -59,12 +63,10 @@
         .btn-mail { background: var(--primary); }
         .btn-mail:hover { background: #004d4d; }
 
-        /* Modale Dettagli */
         .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; padding: 15px; }
         .modal-content { background: white; padding: 25px; border-radius: 12px; width: 100%; max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
         .modal-content ul { margin: 15px 0; padding-left: 20px; font-size: 14px; color: #475569; }
 
-        /* Adattamento smartphone estremo */
         @media (max-width: 768px) {
             .shop-layout { flex-direction: column; }
             .carrello-box { position: static; width: 100%; }
@@ -91,7 +93,6 @@
     <h1 style="color: var(--primary); text-align: center; margin-bottom: 8px; font-size: 28px;">Catalogo Prodotti Pronti & Standard</h1>
     <p style="text-align: center; color: #475569; margin-bottom: 25px; font-size: 15px;">Cerca, filtra e gestisci i tuoi cablaggi direttamente da qualsiasi dispositivo.</p>
 
-    <!-- Barra di Ricerca e Filtri -->
     <div class="tools">
         <input type="text" id="search" placeholder="🔎 Cerca prodotto per nome..." oninput="renderCatalogo()">
         <select id="filter" onchange="renderCatalogo()">
@@ -103,12 +104,10 @@
 
     <div class="shop-layout">
         
-        <!-- Area Prodotti Dinamica -->
         <div class="products-container" id="prodotti-container-dinamico">
             <!-- Generato via JavaScript -->
         </div>
 
-        <!-- Box Carrello e Spedizione -->
         <div class="carrello-box">
             <h2>Carrello Ordine</h2>
             <div style="font-size: 12px; color: #64748b; margin-bottom: 10px;">N. Ordine: <b id="num-ordine-txt" style="color:var(--primary);"></b></div>
@@ -117,10 +116,20 @@
                 <p style="color: #94a3b8; text-align: center; padding: 10px 0;">Il carrello è vuoto</p>
             </ul>
 
-            <h3 style="font-size: 14px; color: var(--primary); margin: 15px 0 8px 0;">Dati Spedizione</h3>
+            <h3 style="font-size: 14px; color: var(--primary); margin: 15px 0 8px 0;">Dati Spedizione & Fatturazione</h3>
             <div class="form-group">
                 <label>Nome e Cognome / Azienda *</label>
-                <input type="text" id="nome" placeholder="Mario Rossi">
+                <input type="text" id="nome" placeholder="Mario Rossi o Nome Azienda Srl">
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <div class="form-group" style="flex: 1;">
+                    <label>P. IVA (Opzionale)</label>
+                    <input type="text" id="piva" placeholder="01234567890">
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label>SDI / PEC (Opz.)</label>
+                    <input type="text" id="sdi" placeholder="M5UXCR1 / pec@...">
+                </div>
             </div>
             <div class="form-group">
                 <label>Indirizzo e Civico *</label>
@@ -141,7 +150,6 @@
                 <input type="text" id="telefono" placeholder="3390000000">
             </div>
 
-            <!-- Riepilogo Costi -->
             <div class="totali-box">
                 <div><span>Subtotale prodotti:</span> <span id="subtotale">0,00</span> €</div>
                 <div><span>Spedizione (<span id="tipo-spedizione">Da calcolare</span>):</span> <span id="costo-spedizione">0,00</span> €</div>
@@ -150,11 +158,11 @@
 
             <button class="btn btn-wa" onclick="inviaOrdine('whatsapp')">💬 Invia Ordine via WhatsApp</button>
             <button class="btn btn-mail" onclick="inviaOrdine('mail')">📧 Invia Ordine via Email</button>
+            <p style="font-size: 11px; color: #64748b; text-align: center; margin-top: 10px;">⚡ Evasione e spedizione standard in 24/48h lavorative</p>
         </div>
     </div>
 </div>
 
-<!-- Modale Dettagli Prodotto -->
 <div id="modal-details" class="modal">
     <div class="modal-content">
         <h2 id="m-name" style="color: var(--primary); font-size: 20px; margin-bottom: 10px;"></h2>
@@ -167,7 +175,6 @@
 </div>
 
 <script>
-    // Database completo dei prodotti con estensione .jpeg corretta
     const databaseProdotti = [
         { id: 'lan1', cat: 'lan', name: 'Cavo LAN Cat6 (1m)', price: 6.00, desc: 'Cavo ethernet cat6 con prese rj45 cablato e testato!', img: 'img/cavo-cat6.jpeg', len: '1 m', con: 'RJ45' },
         { id: 'lan2', cat: 'lan', name: 'Cavo LAN Cat6 (2m)', price: 8.50, desc: 'Cavo ethernet cat6 con prese rj45 cablato e testato!', img: 'img/cavo-cat6.jpeg', len: '2 m', con: 'RJ45' },
@@ -180,15 +187,14 @@
         { id: 'pro10', cat: 'prolunghe', name: 'Prolunga 16A (10m)', price: 36.00, desc: 'Cavo marrone 3g2,5 FS18, Spina e Presa Vimar 16A', img: 'img/prolunga.jpeg', len: '10 m', con: 'Vimar 16A' }
     ];
 
-    let carrello = [];
+    // Recupero carrello salvato da localStorage se esiste
+    let carrello = JSON.parse(localStorage.getItem('caccin_carrello')) || [];
 
-    // Generazione ID Ordine Progressivo
     let numeroOrdine = localStorage.getItem('caccin_ultimo_ordine');
     if (!numeroOrdine) { numeroOrdine = 826001; } else { numeroOrdine = parseInt(numeroOrdine) + 1; }
     localStorage.setItem('caccin_ultimo_ordine', numeroOrdine);
     document.getElementById('num-ordine-txt').innerText = "#" + numeroOrdine;
 
-    // Render dinamico del catalogo con supporto ricerca e filtri
     function renderCatalogo() {
         const query = document.getElementById('search').value.toLowerCase();
         const categoriaFiltro = document.getElementById('filter').value;
@@ -217,7 +223,7 @@
                     htmlCat += `
                         <div class="prod-card">
                             <div>
-                                <img src="${p.img}" alt="${p.name}" class="prod-img" onclick="apriDettagli('${p.name}', '${p.desc}', ${p.price}, '${p.len}', '${p.con}')">
+                                <img src="${p.img}" alt="${p.name} - Caccin Cablaggi" class="prod-img" onerror="this.src='https://via.placeholder.com/300x140?text=Caccin+Cablaggi'" onclick="apriDettagli('${p.name}', '${p.desc}', ${p.price}, '${p.len}', '${p.con}')">
                                 <h3>${p.name}</h3>
                                 <p>${p.desc}</p>
                             </div>
@@ -266,7 +272,12 @@
         } else {
             carrello.push({ nome, prezzo, qta });
         }
+        salvaCarrello();
         calcolaTotali();
+    }
+
+    function salvaCarrello() {
+        localStorage.setItem('caccin_carrello', JSON.stringify(carrello));
     }
 
     function aggiornaCarrelloUI() {
@@ -284,6 +295,7 @@
 
     function rimuoviItem(index) {
         carrello.splice(index, 1);
+        salvaCarrello();
         calcolaTotali();
     }
 
@@ -327,6 +339,8 @@
 
     function inviaOrdine(metodo) {
         let nome = document.getElementById('nome').value.trim();
+        let piva = document.getElementById('piva').value.trim();
+        let sdi = document.getElementById('sdi').value.trim();
         let indirizzo = document.getElementById('indirizzo').value.trim();
         let cap = document.getElementById('cap').value.trim();
         let citta = document.getElementById('citta').value.trim();
@@ -337,7 +351,7 @@
             return;
         }
         if (!nome || !indirizzo || !cap || !citta || !telefono) {
-            alert("Per favore, compila tutti i campi dei dati di spedizione.");
+            alert("Per favore, compila tutti i campi obbligatori dei dati di spedizione.");
             return;
         }
 
@@ -354,8 +368,10 @@
         msg += `%0ASubtotale: ${subtotaleVal} €`;
         msg += `%0ASpedizione (${tipoSpedVal}): ${spedizioneVal} €`;
         msg += `%0A*Totale Complessivo (IVA incl.):* ${totaleGenerale} €%0A%0A`;
-        msg += `*Dati di Spedizione:*%0A`;
-        msg += `👤 Nome: ${nome}%0A`;
+        msg += `*Dati di Spedizione e Fatturazione:*%0A`;
+        msg += `👤 Intestatario: ${nome}%0A`;
+        if(piva) msg += `🏢 P.IVA: ${piva}%0A`;
+        if(sdi) msg += `📄 SDI/PEC: ${sdi}%0A`;
         msg += `📍 Indirizzo: ${indirizzo}, ${cap} ${citta}%0A`;
         msg += `📞 Telefono: ${telefono}%0A`;
 
@@ -368,8 +384,9 @@
         }
     }
 
-    // Inizializzazione iniziale al caricamento della pagina
+    // Inizializzazione pagina
     renderCatalogo();
+    calcolaTotali();
 </script>
 
 </body>
