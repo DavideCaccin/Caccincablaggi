@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catalogo Prodotti & Richieste - Caccin Cablaggi</title>
     <style>
-        /* Stili generali ripresi dal tema del sito */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; scroll-behavior: smooth; }
         body { background: #f8fafc; color: #1e293b; line-height: 1.6; }
         .container { width: 92%; max-width: 1200px; margin: auto; }
 
-        /* Header / Navbar */
         header { position: sticky; top: 0; background: #ffffff; box-shadow: 0 4px 20px rgba(0,0,0,.05); z-index: 999; }
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
         .logo h2 { color: #006666; font-size: 24px; font-weight: 800; letter-spacing: -0.5px; }
@@ -18,31 +16,30 @@
         nav a { text-decoration: none; color: #475569; font-weight: 600; transition: color 0.2s; }
         nav a:hover { color: #006666; }
 
-        /* Layout Shop */
         .shop-section { padding: 40px 0; }
         .shop-layout { display: flex; gap: 30px; flex-wrap: wrap; margin-top: 30px; }
         .products-grid { flex: 2; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
         
-        /* Card Prodotto */
         .prod-card { background: white; border: 1px solid #e2e8f0; padding: 25px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s; }
         .prod-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,102,102,0.1); }
         .prod-card h3 { color: #006666; margin-bottom: 10px; font-size: 19px; }
         .prod-card p { font-size: 14px; color: #475569; margin-bottom: 15px; }
         .price { font-weight: bold; color: #ff6b35; font-size: 17px; margin-bottom: 15px; display: block; }
 
-        /* Form Controls */
         .form-group { margin-bottom: 12px; text-align: left; }
         .form-group label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 4px; color: #334155; }
         .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; background: #f8fafc; }
         .form-group input:focus, .form-group textarea:focus { border-color: #006666; background: #fff; outline: none; }
 
-        /* Box Carrello */
         .carrello-box { flex: 1; min-width: 320px; background: white; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); position: sticky; top: 90px; height: fit-content; }
         .carrello-box h2 { color: #006666; font-size: 22px; margin-bottom: 10px; }
-        #lista-carrello { list-style: none; margin-bottom: 15px; max-height: 180px; overflow-y: auto; text-align: left; font-size: 14px; }
-        #lista-carrello li { padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; }
+        #lista-carrello { list-style: none; margin-bottom: 15px; max-height: 150px; overflow-y: auto; text-align: left; font-size: 14px; }
+        #lista-carrello li { padding: 6px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; }
 
-        /* Bottoni */
+        .totali-box { background: #f8fafc; padding: 12px; border-radius: 8px; margin: 15px 0; font-size: 14px; }
+        .totali-box div { display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .totali-box .finale { font-weight: bold; font-size: 16px; color: #006666; border-top: 1px solid #cbd5e1; padding-top: 5px; margin-top: 5px; }
+
         .btn { background: #ff6b35; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s; margin-top: 10px; text-align: center; text-decoration: none; display: inline-block; }
         .btn:hover { background: #e55a2b; transform: translateY(-2px); }
         .btn-wa { background: #25d366; }
@@ -50,16 +47,12 @@
         .btn-mail { background: #006666; }
         .btn-mail:hover { background: #004d4d; }
 
-        /* Sezione Richieste Personalizzate */
         .custom-request-section { background: #e0f2fe; border: 1px solid #bae6fd; padding: 30px; border-radius: 12px; margin-top: 40px; text-align: center; }
         .custom-request-section h3 { color: #0369a1; margin-bottom: 10px; font-size: 20px; }
         .custom-request-section p { color: #0369a1; font-size: 15px; margin-bottom: 20px; max-width: 700px; margin-left: auto; margin-right: auto; }
 
-        /* Footer */
         footer { background: #003333; color: white; padding: 30px 0; text-align: center; border-top: 5px solid #ff6b35; margin-top: 50px; }
         footer p { margin-bottom: 8px; opacity: 0.9; font-size: 14px; }
-        footer a { color: #ff6b35; text-decoration: none; font-weight: bold; }
-        footer a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -79,10 +72,10 @@
 
 <div class="container shop-section">
     <h1 style="color: #006666; text-align: center; margin-bottom: 10px; font-size: 34px;">Catalogo Prodotti Pronti & Standard</h1>
-    <p style="text-align: center; color: #475569; margin-bottom: 40px; font-size: 17px;">Seleziona i prodotti, inseriscili nel carrello e invia l'ordine direttamente via WhatsApp o Email.</p>
+    <p style="text-align: center; color: #475569; margin-bottom: 40px; font-size: 17px;">Seleziona i prodotti, inseriscili nel carrello e calcola la spedizione in base alla tua zona.</p>
 
     <div class="shop-layout">
-        <!-- Lista Prodotti a Catalogo -->
+        <!-- Griglia Prodotti -->
         <div class="products-grid">
             <div class="prod-card">
                 <h3>Cavo LAN Cat6 RJ45 (2m)</h3>
@@ -121,19 +114,13 @@
         <!-- Box Carrello e Spedizione -->
         <div class="carrello-box">
             <h2>Carrello Ordine</h2>
-            <div style="font-size: 13px; color: #64748b; margin-bottom: 15px;">N. Ordine Progressivo: <b id="num-ordine-txt" style="color:#006666;"></b></div>
+            <div style="font-size: 13px; color: #64748b; margin-bottom: 10px;">N. Ordine Progressivo: <b id="num-ordine-txt" style="color:#006666;"></b></div>
             
             <ul id="lista-carrello">
-                <p style="color: #94a3b8; text-align: center; padding: 15px 0;">Il carrello è vuoto</p>
+                <p style="color: #94a3b8; text-align: center; padding: 10px 0;">Il carrello è vuoto</p>
             </ul>
-            
-            <p style="font-weight: bold; font-size: 18px; margin: 15px 0; text-align: right; border-top: 2px solid #e2e8f0; padding-top: 10px;">
-                Totale: <span id="totale">0,00</span> € <span style="font-size:12px; font-weight:normal; color:#64748b;">(IVA incl.)</span>
-            </p>
-            
-            <hr style="border: 0; border-top: 1px solid #e2e8f0; margin-bottom: 15px;">
-            
-            <h3 style="font-size: 15px; color: #006666; margin-bottom: 12px;">Dati per la Spedizione</h3>
+
+            <h3 style="font-size: 15px; color: #006666; margin: 15px 0 10px 0;">Dati per la Spedizione</h3>
             <div class="form-group">
                 <label>Nome e Cognome / Azienda *</label>
                 <input type="text" id="nome" placeholder="Mario Rossi">
@@ -148,8 +135,8 @@
                     <input type="text" id="cap" placeholder="30030">
                 </div>
                 <div class="form-group" style="flex: 2;">
-                    <label>Città e Provincia *</label>
-                    <input type="text" id="citta" placeholder="Pianiga (VE)">
+                    <label>Città e Provincia (es. VE, PD, TV) *</label>
+                    <input type="text" id="citta" placeholder="Pianiga (VE)" oninput="calcolaTotali()">
                 </div>
             </div>
             <div class="form-group">
@@ -157,12 +144,19 @@
                 <input type="text" id="telefono" placeholder="3390000000">
             </div>
 
+            <!-- Riepilogo Costi -->
+            <div class="totali-box">
+                <div><span>Subtotale prodotti:</span> <span id="subtotale">0,00</span> €</div>
+                <div><span>Spedizione (<span id="tipo-spedizione">Da calcolare</span>):</span> <span id="costo-spedizione">0,00</span> €</div>
+                <div class="finale"><span>Totale Complessivo:</span> <span id="totale">0,00</span> €</div>
+            </div>
+
             <button class="btn btn-wa" onclick="inviaOrdine('whatsapp')">💬 Invia Ordine via WhatsApp</button>
             <button class="btn btn-mail" onclick="inviaOrdine('mail')">📧 Invia Ordine via Email</button>
         </div>
     </div>
 
-    <!-- Sezione Richieste Personalizzate / Fuori Catalogo -->
+    <!-- Sezione Richieste Personalizzate -->
     <div class="custom-request-section">
         <h3>🔍 Non trovi quello che cerchi o ti serve una misura particolare?</h3>
         <p>Se hai bisogno di un cablaggio con specifiche differenti o di un assemblaggio su misura, descrivici la tua richiesta: ti risponderemo rapidamente con un preventivo dedicato.</p>
@@ -175,7 +169,7 @@
 
 <footer>
     <div class="container">
-        <p>&copy; 2026 Caccin Cablaggi di Caccin Davide - Via Pianiga, Pianiga (VE). P.IVA: 04875640277</p>
+        <p>&copy; 2026 Caccin Cablaggi di Caccin Davide - Via Cavin Maggiore 5, Pianiga (VE). P.IVA: 04875640277</p>
         <p>Specialisti in Cablaggi Industriali, Quadri Elettrici ed Impiantistica Civile.</p>
     </div>
 </footer>
@@ -183,7 +177,7 @@
 <script>
     let carrello = [];
     
-    // Gestione del numero d'ordine progressivo a partire da 826001
+    // Gestione numero ordine progressivo
     let numeroOrdine = localStorage.getItem('caccin_ultimo_ordine');
     if (!numeroOrdine) {
         numeroOrdine = 826001;
@@ -203,31 +197,70 @@
         } else {
             carrello.push({ nome, prezzo, qta });
         }
-        aggiornaCarrello();
+        calcolaTotali();
     }
 
-    function aggiornaCarrello() {
+    function aggiornaCarrelloUI() {
         let lista = document.getElementById('lista-carrello');
-        let totale = 0;
-        
         if (carrello.length === 0) {
-            lista.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 15px 0;">Il carrello è vuoto</p>';
-            document.getElementById('totale').innerText = '0,00';
+            lista.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 10px 0;">Il carrello è vuoto</p>';
             return;
         }
-
         lista.innerHTML = '';
         carrello.forEach((item, index) => {
             let subtotal = item.prezzo * item.qta;
-            totale += subtotal;
-            lista.innerHTML += `<li><span><b>${item.nome}</b> (x${item.qta})</span> <span><b>${subtotal.toFixed(2)}€</b> <span style="color:red; cursor:pointer; margin-left:8px;" onclick="rimuoviItem(${index})" title="Rimuovi">❌</span></span></li>`;
+            lista.innerHTML += `<li><span><b>${item.nome}</b> (x${item.qta})</span> <span><b>${subtotal.toFixed(2)}€</b> <span style="color:red; cursor:pointer; margin-left:6px;" onclick="rimuoviItem(${index})">❌</span></span></li>`;
         });
-        document.getElementById('totale').innerText = totale.toFixed(2);
     }
 
     function rimuoviItem(index) {
         carrello.splice(index, 1);
-        aggiornaCarrello();
+        calcolaTotali();
+    }
+
+    function calcolaTotali() {
+        aggiornaCarrelloUI();
+        
+        let subtotale = 0;
+        carrello.forEach(item => {
+            subtotale += item.prezzo * item.qta;
+        });
+
+        let cittaInput = document.getElementById('citta').value.toUpperCase();
+        let costoSpedizione = 0;
+        let tipoSpedizioneTesto = "Seleziona zona";
+
+        if (subtotale === 0) {
+            document.getElementById('subtotale').innerText = '0,00';
+            document.getElementById('costo-spedizione').innerText = '0,00';
+            document.getElementById('totale').innerText = '0,00';
+            document.getElementById('tipo-spedizione').innerText = 'Da calcolare';
+            return;
+        }
+
+        // Verifica se la destinazione è Venezia (VE), Padova (PD) o Treviso (TV)
+        if (cittaInput.includes('VE') || cittaInput.includes('PD') || cittaInput.includes('TV') || 
+            cittaInput.includes('VENEZIA') || cittaInput.includes('PADOVA') || cittaInput.includes('TREVISO')) {
+            
+            // Tariffa locale basata su stima chilometrica da Via Cavin Maggiore 5 (es. fissa di partenza o simulazione km vicini, es. 15 km medi a 0,5€ = 7,50€ minimi o calcolo base)
+            // Per renderlo dinamico semplice, impostiamo una stima di base locale o tariffa fissa di zona a 10,00€ (oppure personalizzabile)
+            costoSpedizione = 10.00; // Esempio stimato per consegna locale a 0.5€/km medio nel raggio provinciale
+            tipoSpedizioneTesto = "Consegna Locale (VE/PD/TV)";
+        } else if (cittaInput.length > 2) {
+            // Fuori zona: usa InPost (es. tariffa standard pacco S/M)
+            costoSpedizione = 5.99; // Tariffa standard InPost
+            tipoSpedizioneTesto = "Corriere InPost";
+        } else {
+            costoSpedizione = 0.00;
+            tipoSpedizioneTesto = "Inserisci città/provincia";
+        }
+
+        let totaleGenerale = subtotale + costoSpedizione;
+
+        document.getElementById('subtotale').innerText = subtotale.toFixed(2);
+        document.getElementById('costo-spedizione').innerText = costoSpedizione.toFixed(2);
+        document.getElementById('totale').innerText = totaleGenerale.toFixed(2);
+        document.getElementById('tipo-spedizione').innerText = tipoSpedizioneTesto;
     }
 
     function inviaOrdine(metodo) {
@@ -242,19 +275,24 @@
             return;
         }
         if (!nome || !indirizzo || !cap || !citta || !telefono) {
-            alert("Per favore, compila tutti i campi dei dati di spedizione prima di inviare l'ordine.");
+            alert("Per favore, compila tutti i campi dei dati di spedizione.");
             return;
         }
 
+        let subtotaleVal = document.getElementById('subtotale').innerText;
+        let spedizioneVal = document.getElementById('costo-spedizione').innerText;
+        let tipoSpedVal = document.getElementById('tipo-spedizione').innerText;
         let totaleGenerale = document.getElementById('totale').innerText;
 
         let msg = `📦 *NUOVO ORDINE #${numeroOrdine}*%0A%0A`;
-        msg += `*Prodotti scelti:*%0A`;
+        msg += `*Prodotti:*%0A`;
         carrello.forEach(i => {
             msg += `- ${i.nome} (Qt: ${i.qta}) - ${(i.prezzo * i.qta).toFixed(2)}€%0A`;
         });
-        msg += `%0A*Totale (IVA inclusa):* ${totaleGenerale} €%0A%0A`;
-        msg += `*Dati di Spedizione e Fatturazione:*%0A`;
+        msg += `%0ASubtotale: ${subtotaleVal} €`;
+        msg += `%0ASpedizione (${tipoSpedVal}): ${spedizioneVal} €`;
+        msg += `%0A*Totale Complessivo (IVA incl.):* ${totaleGenerale} €%0A%0A`;
+        msg += `*Dati di Spedizione:*%0A`;
         msg += `👤 Nome: ${nome}%0A`;
         msg += `📍 Indirizzo: ${indirizzo}, ${cap} ${citta}%0A`;
         msg += `📞 Telefono: ${telefono}%0A`;
