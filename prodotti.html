@@ -122,6 +122,19 @@
                 </div>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+                    <div class="form-group" id="box-tipo-unipolare" style="display: none; grid-column: 1 / -1;">
+                        <label>Specificifica Tipo Cavo Unipolare:</label>
+                        <select id="param-tipo-unipolare" onchange="aggiornaSezioniUnipolari()">
+                            <option value="fs17">FS17 (Interno Civile/Industriale standard)</option>
+                            <option value="fg17">FG17 (Ecologico LS0H privo di alogeni)</option>
+                            <option value="fg16r16">FG16R16 (Esterno / Interramento)</option>
+                            <option value="fg16m16">FG16M16 (Esterno luoghi affollati LS0H)</option>
+                            <option value="h07vk">H07V-K (Quadri elettrici standard)</option>
+                            <option value="h07zk">H07Z-K (Quadri alte temperature)</option>
+                            <option value="h1z2z2k">H1Z2Z2-K (Cavo Solare Fotovoltaico)</option>
+                        </select>
+                    </div>
+
                     <div class="form-group" id="box-conduttori">
                         <label>Numero Conduttori interni:</label>
                         <select id="param-conduttori" onchange="aggiornaConfigurazione()"></select>
@@ -159,67 +172,67 @@
                             <label>Tipo Terminale A:</label>
                             <select id="terminale-a-tipo" onchange="gestisciTerminaleA()">
                                 <option value="libero">Libero / Senza terminale</option>
-                                <option value="puntale">Terminale a Puntale[span_0](start_span)[span_0](end_span)</option>
-                                <option value="occhiello">Terminale a Occhiello[span_1](start_span)[span_1](end_span)</option>
-                                <option value="forcella">Terminale a Forcella[span_2](start_span)[span_2](end_span)</option>
-                                <option value="faston">Terminale a Faston[span_3](start_span)[span_3](end_span)</option>
-                                <option value="spina">Terminale a Spina[span_4](start_span)[span_4](end_span)</option>
+                                <option value="puntale">Terminale a Puntale</option>
+                                <option value="occhiello">Terminale a Occhiello</option>
+                                <option value="forcella">Terminale a Forcella</option>
+                                <option value="faston">Terminale a Faston</option>
+                                <option value="spina">Terminale a Spina</option>
                             </select>
                         </div>
 
                         <!-- Sotto-opzione: Puntale A -->
                         <div class="form-group sub-term-a" id="sub-puntale-a" style="display: none;">
-                            <label>Lunghezza Puntale (mm)[span_5](start_span)[span_5](end_span):</label>
+                            <label>Lunghezza Puntale (mm):</label>
                             <input type="text" id="term-puntale-a-lunghezza" placeholder="es. 8mm, 10mm..." oninput="aggiornaConfigurazione()">
                         </div>
 
                         <!-- Sotto-opzione: Occhiello A -->
                         <div class="form-group sub-term-a" id="sub-occhiello-a" style="display: none;">
-                            <label>Grandezza Occhiello[span_6](start_span)[span_6](end_span):</label>
+                            <label>Grandezza Occhiello:</label>
                             <select id="term-occhiello-a-misura" onchange="aggiornaConfigurazione()">
-                                <option value="m3">M3[span_7](start_span)[span_7](end_span)</option>
-                                <option value="m4">M4[span_8](start_span)[span_8](end_span)</option>
-                                <option value="m5">M5[span_9](start_span)[span_9](end_span)</option>
-                                <option value="m6">M6[span_10](start_span)[span_10](end_span)</option>
-                                <option value="m8">M8[span_11](start_span)[span_11](end_span)</option>
-                                <option value="m10">M10[span_12](start_span)[span_12](end_span)</option>
-                                <option value="m12">M12[span_13](start_span)[span_13](end_span)</option>
+                                <option value="m3">M3</option>
+                                <option value="m4">M4</option>
+                                <option value="m5">M5</option>
+                                <option value="m6">M6</option>
+                                <option value="m8">M8</option>
+                                <option value="m10">M10</option>
+                                <option value="m12">M12</option>
                             </select>
                         </div>
 
                         <!-- Sotto-opzione: Forcella A -->
                         <div class="form-group sub-term-a" id="sub-forcella-a" style="display: none;">
-                            <label>Grandezza Forcella[span_14](start_span)[span_14](end_span):</label>
+                            <label>Grandezza Forcella:</label>
                             <select id="term-forcella-a-misura" onchange="aggiornaConfigurazione()">
-                                <option value="u3">U3[span_15](start_span)[span_15](end_span)</option>
-                                <option value="u4">U4[span_16](start_span)[span_16](end_span)</option>
-                                <option value="u5">U5[span_17](start_span)[span_17](end_span)</option>
+                                <option value="u3">U3</option>
+                                <option value="u4">U4</option>
+                                <option value="u5">U5</option>
                             </select>
                         </div>
 
                         <!-- Sotto-opzione: Faston A -->
                         <div class="form-group sub-term-a" id="sub-faston-a" style="display: none;">
-                            <label>Tipo Faston[span_18](start_span)[span_18](end_span):</label>
+                            <label>Tipo Faston:</label>
                             <select id="term-faston-a-tipo" onchange="aggiornaConfigurazione()">
-                                <option value="maschio">Maschio[span_19](start_span)[span_19](end_span)</option>
-                                <option value="femmina">Femmina[span_20](start_span)[span_20](end_span)</option>
+                                <option value="maschio">Maschio</option>
+                                <option value="femmina">Femmina</option>
                             </select>
                         </div>
 
                         <div class="form-group sub-term-a" id="sub-faston-a-larghezza" style="display: none;">
-                            <label>Larghezza Faston[span_21](start_span)[span_21](end_span):</label>
+                            <label>Larghezza Faston:</label>
                             <select id="term-faston-a-largh" onchange="aggiornaConfigurazione()">
-                                <option value="4.8mm">4,8 mm[span_22](start_span)[span_22](end_span)</option>
-                                <option value="6.3mm">6,3 mm[span_23](start_span)[span_23](end_span)</option>
+                                <option value="4.8mm">4,8 mm</option>
+                                <option value="6.3mm">6,3 mm</option>
                             </select>
                         </div>
 
                         <!-- Sotto-opzione: Spina A -->
                         <div class="form-group sub-term-a" id="sub-spina-a" style="display: none;">
-                            <label>Tipo Spina[span_24](start_span)[span_24](end_span):</label>
+                            <label>Tipo Spina:</label>
                             <select id="term-spina-a-tipo" onchange="aggiornaConfigurazione()">
-                                <option value="maschio">Maschio[span_25](start_span)[span_25](end_span)</option>
-                                <option value="femmina">Femmina[span_26](start_span)[span_26](end_span)</option>
+                                <option value="maschio">Maschio</option>
+                                <option value="femmina">Femmina</option>
                             </select>
                         </div>
                     </div>
@@ -234,67 +247,67 @@
                             <label>Tipo Terminale B:</label>
                             <select id="terminale-b-tipo" onchange="gestisciTerminaleB()">
                                 <option value="libero">Libero / Senza terminale</option>
-                                <option value="puntale">Terminale a Puntale[span_27](start_span)[span_27](end_span)</option>
-                                <option value="occhiello">Terminale a Occhiello[span_28](start_span)[span_28](end_span)</option>
-                                <option value="forcella">Terminale a Forcella[span_29](start_span)[span_29](end_span)</option>
-                                <option value="faston">Terminale a Faston[span_30](start_span)[span_30](end_span)</option>
-                                <option value="spina">Terminale a Spina[span_31](start_span)[span_31](end_span)</option>
+                                <option value="puntale">Terminale a Puntale</option>
+                                <option value="occhiello">Terminale a Occhiello</option>
+                                <option value="forcella">Terminale a Forcella</option>
+                                <option value="faston">Terminale a Faston</option>
+                                <option value="spina">Terminale a Spina</option>
                             </select>
                         </div>
 
                         <!-- Sotto-opzione: Puntale B -->
                         <div class="form-group sub-term-b" id="sub-puntale-b" style="display: none;">
-                            <label>Lunghezza Puntale (mm)[span_32](start_span)[span_32](end_span):</label>
+                            <label>Lunghezza Puntale (mm):</label>
                             <input type="text" id="term-puntale-b-lunghezza" placeholder="es. 8mm, 10mm..." oninput="aggiornaConfigurazione()">
                         </div>
 
                         <!-- Sotto-opzione: Occhiello B -->
                         <div class="form-group sub-term-b" id="sub-occhiello-b" style="display: none;">
-                            <label>Grandezza Occhiello[span_33](start_span)[span_33](end_span):</label>
+                            <label>Grandezza Occhiello:</label>
                             <select id="term-occhiello-b-misura" onchange="aggiornaConfigurazione()">
-                                <option value="m3">M3[span_34](start_span)[span_34](end_span)</option>
-                                <option value="m4">M4[span_35](start_span)[span_35](end_span)</option>
-                                <option value="m5">M5[span_36](start_span)[span_36](end_span)</option>
-                                <option value="m6">M6[span_37](start_span)[span_37](end_span)</option>
-                                <option value="m8">M8[span_38](start_span)[span_38](end_span)</option>
-                                <option value="m10">M10[span_39](start_span)[span_39](end_span)</option>
-                                <option value="m12">M12[span_40](start_span)[span_40](end_span)</option>
+                                <option value="m3">M3</option>
+                                <option value="m4">M4</option>
+                                <option value="m5">M5</option>
+                                <option value="m6">M6</option>
+                                <option value="m8">M8</option>
+                                <option value="m10">M10</option>
+                                <option value="m12">M12</option>
                             </select>
                         </div>
 
                         <!-- Sotto-opzione: Forcella B -->
                         <div class="form-group sub-term-b" id="sub-forcella-b" style="display: none;">
-                            <label>Grandezza Forcella[span_41](start_span)[span_41](end_span):</label>
+                            <label>Grandezza Forcella:</label>
                             <select id="term-forcella-b-misura" onchange="aggiornaConfigurazione()">
-                                <option value="u3">U3[span_42](start_span)[span_42](end_span)</option>
-                                <option value="u4">U4[span_43](start_span)[span_43](end_span)</option>
-                                <option value="u5">U5[span_44](start_span)[span_44](end_span)</option>
+                                <option value="u3">U3</option>
+                                <option value="u4">U4</option>
+                                <option value="u5">U5</option>
                             </select>
                         </div>
 
                         <!-- Sotto-opzione: Faston B -->
                         <div class="form-group sub-term-b" id="sub-faston-b" style="display: none;">
-                            <label>Tipo Faston[span_45](start_span)[span_45](end_span):</label>
+                            <label>Tipo Faston:</label>
                             <select id="term-faston-b-tipo" onchange="aggiornaConfigurazione()">
-                                <option value="maschio">Maschio[span_46](start_span)[span_46](end_span)</option>
-                                <option value="femmina">Femmina[span_47](start_span)[span_47](end_span)</option>
+                                <option value="maschio">Maschio</option>
+                                <option value="femmina">Femmina</option>
                             </select>
                         </div>
 
                         <div class="form-group sub-term-b" id="sub-faston-b-larghezza" style="display: none;">
-                            <label>Larghezza Faston[span_48](start_span)[span_48](end_span):</label>
+                            <label>Larghezza Faston:</label>
                             <select id="term-faston-b-largh" onchange="aggiornaConfigurazione()">
-                                <option value="4.8mm">4,8 mm[span_49](start_span)[span_49](end_span)</option>
-                                <option value="6.3mm">6,3 mm[span_50](start_span)[span_50](end_span)</option>
+                                <option value="4.8mm">4,8 mm</option>
+                                <option value="6.3mm">6,3 mm</option>
                             </select>
                         </div>
 
                         <!-- Sotto-opzione: Spina B -->
                         <div class="form-group sub-term-b" id="sub-spina-b" style="display: none;">
-                            <label>Tipo Spina[span_51](start_span)[span_51](end_span):</label>
+                            <label>Tipo Spina:</label>
                             <select id="term-spina-b-tipo" onchange="aggiornaConfigurazione()">
-                                <option value="maschio">Maschio[span_52](start_span)[span_52](end_span)</option>
-                                <option value="femmina">Femmina[span_53](start_span)[span_53](end_span)</option>
+                                <option value="maschio">Maschio</option>
+                                <option value="femmina">Femmina</option>
                             </select>
                         </div>
                     </div>
@@ -436,16 +449,22 @@
         "unipolare": {
             titolo: "Cavo Unipolare",
             conduttoriList: [1],
-            sezioniList: ["1.5 mm²", "2.5 mm²", "4.0 mm²", "6.0 mm²"],
-            prezziBase: { "1.5 mm²": 0.45, "2.5 mm²": 0.70, "4.0 mm²": 1.10, "6.0 mm²": 1.65 },
-            img: "img/cavo-unipolare.jpeg",
-            desc: "Cavo flessibile N07V-K per impianti elettrici e quadri."
+            sottocategorie: {
+                "fs17": { nome: "FS17 (Interno Civile/Industriale)", desc: "Cavo standard in PVC antifiamma per tubi e canaline interne.", sezioni: ["1.5 mm²", "2.5 mm²", "4.0 mm²", "6.0 mm²"], prezzi: { "1.5 mm²": 0.385, "2.5 mm²": 0.385, "4.0 mm²": 0.385, "6.0 mm²": 0.385 } },
+                "fg17": { nome: "FG17 (Ecologico LS0H)", desc: "Cavo ecologico privo di alogeni, a bassa emissione di fumi opachi.", sezioni: ["1.5 mm²", "2.5 mm²", "4.0 mm²", "6.0 mm²"], prezzi: { "1.5 mm²": 0.495, "2.5 mm²": 0.495, "4.0 mm²": 0.495, "6.0 mm²": 0.495 } },
+                "fg16r16": { nome: "FG16R16 (Esterno / Interramento)", desc: "Cavo con isolamento in gomma HEPR e guaina in PVC, per posa interrata.", sezioni: ["1.5 mm²", "2.5 mm²", "4.0 mm²", "6.0 mm²"], prezzi: { "1.5 mm²": 0.770, "2.5 mm²": 0.770, "4.0 mm²": 0.770, "6.0 mm²": 0.770 } },
+                "fg16m16": { nome: "FG16M16 (Esterno luoghi affollati LS0H)", desc: "Versione FG16R16 con guaina speciale priva di alogeni per luoghi affollati.", sezioni: ["1.5 mm²", "2.5 mm²", "4.0 mm²", "6.0 mm²"], prezzi: { "1.5 mm²": 0.990, "2.5 mm²": 0.990, "4.0 mm²": 0.990, "6.0 mm²": 0.990 } },
+                "h07vk": { nome: "H07V-K (Quadri elettrici standard)", desc: "Filo flessibile comune in PVC per l'interno di quadri di comando.", sezioni: ["1.5 mm²", "2.5 mm²", "4.0 mm²", "6.0 mm²"], prezzi: { "1.5 mm²": 0.385, "2.5 mm²": 0.385, "4.0 mm²": 0.385, "6.0 mm²": 0.385 } },
+                "h07zk": { nome: "H07Z-K (Quadri alte temperature)", desc: "Cavo flessibile per quadri con isolamento privo di alogeni fino a 90°C.", sezioni: ["1.5 mm²", "2.5 mm²", "4.0 mm²", "6.0 mm²"], prezzi: { "1.5 mm²": 0.605, "2.5 mm²": 0.605, "4.0 mm²": 0.605, "6.0 mm²": 0.605 } },
+                "h1z2z2k": { nome: "H1Z2Z2-K (Cavo Solare Fotovoltaico)", desc: "Cavo specifico per impianti fotovoltaici, resistente a UV e intemperie.", sezioni: ["4 mm²", "6 mm²", "10 mm²"], prezzi: { "4 mm²": 1.320, "6 mm²": 1.650, "10 mm²": 2.200 } }
+            },
+            img: "img/cavo-unipolare.jpeg"
         },
         "multipolare": {
             titolo: "Cavo Multipolare",
             conduttoriList: [2, 3, 4, 5],
             sezioniList: ["1.5 mm²", "2.5 mm²", "4.0 mm²"],
-            prezziBase: { "2_1.5 mm²": 1.20, "3_1.5 mm²": 1.55, "4_1.5 mm²": 1.95, "5_1.5 mm²": 2.40, "2_2.5 mm²": 1.70, "3_2.5 mm²": 2.20, "4_2.5 mm²": 2.85, "5_2.5 mm²": 3.50, "2_4.0 mm²": 2.60, "3_4.0 mm²": 3.40, "4_4.0 mm²": 4.40, "5_4.0 mm²": 5.50 },
+            prezziBase: { "2_1.5 mm²": 1.32, "3_1.5 mm²": 1.70, "4_1.5 mm²": 2.15, "5_1.5 mm²": 2.64, "2_2.5 mm²": 1.87, "3_2.5 mm²": 2.42, "4_2.5 mm²": 3.14, "5_2.5 mm²": 3.85, "2_4.0 mm²": 2.86, "3_4.0 mm²": 3.74, "4_4.0 mm²": 4.84, "5_4.0 mm²": 6.05 },
             img: "img/cavo-multipolare.jpeg",
             desc: "Cavo multipolare flessibile FROR / H05VV-F."
         },
@@ -453,7 +472,7 @@
             titolo: "Cavo Ethernet",
             conduttoriList: [8],
             sezioniList: ["Cat 6 UTP", "Cat 6A Schermato"],
-            prezziBase: { "Cat 6 UTP": 0.85, "Cat 6A Schermato": 1.40 },
+            prezziBase: { "Cat 6 UTP": 0.94, "Cat 6A Schermato": 1.54 },
             img: "img/cavo-cat6.jpeg",
             desc: "Cavo di rete LAN ad alte prestazioni per connessioni dati."
         },
@@ -461,7 +480,7 @@
             titolo: "Cavo Coassiale",
             conduttoriList: [1],
             sezioniList: ["RG58 (50 Ohm)", "RG6 (75 Ohm TV)"],
-            prezziBase: { "RG58 (50 Ohm)": 0.65, "RG6 (75 Ohm TV)": 0.55 },
+            prezziBase: { "RG58 (50 Ohm)": 0.72, "RG6 (75 Ohm TV)": 0.61 },
             img: "img/cavo-coassiale.jpeg",
             desc: "Cavo coassiale schermato per segnali antenna e radiofrequenza."
         }
@@ -483,25 +502,42 @@
         document.getElementById('step-parametri').style.display = 'block';
         document.getElementById('titolo-categoria-scelta').innerText = `Configura: ${data.titolo}`;
 
-        let selectCond = document.getElementById('param-conduttori');
-        selectCond.innerHTML = '';
-        data.conduttoriList.forEach(c => {
-            selectCond.innerHTML += `<option value="${c}">${c} Conduttore/i</option>`;
-        });
-        document.getElementById('box-conduttori').style.display = (catKey === 'ethernet') ? 'none' : 'block';
+        let boxTipoUnipolare = document.getElementById('box-tipo-unipolare');
+        let boxConduttori = document.getElementById('box-conduttori');
+        let boxColore = document.getElementById('box-colore');
+        let containerTermA = document.getElementById('box-terminale-a-container');
+        let containerTermB = document.getElementById('box-terminale-b-container');
 
-        document.getElementById('box-colore').style.display = (catKey === 'unipolare') ? 'block' : 'none';
-        
-        // Mostra o nasconde i terminali A e B (visibili solo per unipolare)
-        let mostraTerminazioni = (catKey === 'unipolare') ? 'block' : 'none';
-        document.getElementById('box-terminale-a-container').style.display = mostraTerminazioni;
-        document.getElementById('box-terminale-b-container').style.display = mostraTerminazioni;
+        if (catKey === 'unipolare') {
+            boxTipoUnipolare.style.display = 'block';
+            boxConduttori.style.display = 'none';
+            boxColore.style.display = 'block';
+            containerTermA.style.display = 'block';
+            containerTermB.style.display = 'block';
+            popolaSceltaUnipolare();
+        } else {
+            boxTipoUnipolare.style.display = 'none';
+            boxConduttori.style.display = (catKey === 'ethernet') ? 'none' : 'block';
+            boxColore.style.display = 'none';
+            containerTermA.style.display = 'none';
+            containerTermB.style.display = 'none';
 
-        let selectSez = document.getElementById('param-sezione');
-        selectSez.innerHTML = '';
-        data.sezioniList.forEach(s => {
-            selectSez.innerHTML += `<option value="${s}">${s}</option>`;
-        });
+            let selectCond = document.getElementById('param-conduttori');
+            selectCond.innerHTML = '';
+            if (data.conduttoriList) {
+                data.conduttoriList.forEach(c => {
+                    selectCond.innerHTML += `<option value="${c}">${c} Conduttore/i</option>`;
+                });
+            }
+
+            let selectSez = document.getElementById('param-sezione');
+            selectSez.innerHTML = '';
+            if (data.sezioniList) {
+                data.sezioniList.forEach(s => {
+                    selectSez.innerHTML += `<option value="${s}">${s}</option>`;
+                });
+            }
+        }
 
         // Reset terminali
         document.getElementById('terminale-a-tipo').value = "libero";
@@ -509,6 +545,29 @@
         gestisciTerminaleA();
         gestisciTerminaleB();
 
+        aggiornaConfigurazione();
+    }
+
+    function popolaSceltaUnipolare() {
+        let selectTipo = document.getElementById('param-tipo-unipolare');
+        selectTipo.innerHTML = '';
+        let sottocategorie = databaseCaviSpecifici['unipolare'].sottocategorie;
+        for (let chiave in sottocategorie) {
+            selectTipo.innerHTML += `<option value="${chiave}">${sottocategorie[chiave].nome}</option>`;
+        }
+        aggiornaSezioniUnipolari();
+    }
+
+    function aggiornaSezioniUnipolari() {
+        if (categoriaCorrente !== 'unipolare') return;
+        let tipoSelezionato = document.getElementById('param-tipo-unipolare').value;
+        let subData = databaseCaviSpecifici['unipolare'].sottocategorie[tipoSelezionato];
+
+        let selectSez = document.getElementById('param-sezione');
+        selectSez.innerHTML = '';
+        subData.sezioni.forEach(s => {
+            selectSez.innerHTML += `<option value="${s}">${s}</option>`;
+        });
         aggiornaConfigurazione();
     }
 
@@ -592,29 +651,31 @@
         
         let metri = parseFloat(document.getElementById('param-metri').value) || 1;
         let sezione = document.getElementById('param-sezione').value;
-        let conduttori = document.getElementById('param-conduttori').value;
-        let colore = document.getElementById('param-colore').value;
-
         let prezzoMetro = 0;
-        if (categoriaCorrente === 'multipolare') {
-            let chiavePrezzo = `${conduttori}_${sezione}`;
-            prezzoMetro = data.prezziBase[chiavePrezzo] || 1.50;
-        } else {
-            prezzoMetro = data.prezziBase[sezione] || 1.00;
-        }
+        let dettagliTesto = "";
 
-        let prezzoTotale = prezzoMetro * metri;
-
-        let dettagliTesto = `${data.desc} <br>Sezione: <b>${sezione}</b> | Lunghezza: <b>${metri}m</b>`;
-        
         if (categoriaCorrente === 'unipolare') {
-            dettagliTesto += ` | Colore: <b style="color:var(--primary);">${colore}</b>`;
+            let tipoUnipolare = document.getElementById('param-tipo-unipolare').value;
+            let subData = data.sottocategorie[tipoUnipolare];
+            let colore = document.getElementById('param-colore').value;
+
+            prezzoMetro = subData.prezzi[sezione] || 0.40;
+            dettagliTesto = `${subData.desc} <br>Tipo: <b>${subData.nome}</b> | Sezione: <b>${sezione}</b> | Lunghezza: <b>${metri}m</b> | Colore: <b style="color:var(--primary);">${colore}</b>`;
+            
             let termA = raccogliDettagliTerminale('a');
             let termB = raccogliDettagliTerminale('b');
             dettagliTesto += `<br>Terminale A: <b>${termA}</b> | Terminale B: <b>${termB}</b>`;
-        } else if (categoriaCorrente !== 'ethernet' && categoriaCorrente !== 'coassiale') {
-            dettagliTesto += ` | Conduttori: <b>${conduttori}</b>`;
+        } else if (categoriaCorrente === 'multipolare') {
+            let conduttori = document.getElementById('param-conduttori').value;
+            let chiavePrezzo = `${conduttori}_${sezione}`;
+            prezzoMetro = data.prezziBase[chiavePrezzo] || 1.50;
+            dettagliTesto = `${data.desc} <br>Conduttori: <b>${conduttori}</b> | Sezione: <b>${sezione}</b> | Lunghezza: <b>${metri}m</b>`;
+        } else {
+            prezzoMetro = data.prezziBase[sezione] || 1.00;
+            dettagliTesto = `${data.desc} <br>Sezione: <b>${sezione}</b> | Lunghezza: <b>${metri}m</b>`;
         }
+
+        let prezzoTotale = prezzoMetro * metri;
 
         document.getElementById('risultato-nome').innerText = data.titolo;
         document.getElementById('risultato-dettagli').innerHTML = dettagliTesto;
@@ -638,10 +699,12 @@
         
         let extraInfo = `L: ${metri}m - Sez: ${sezione}`;
         if (categoriaCorrente === 'unipolare') {
+            let tipoUnipolare = document.getElementById('param-tipo-unipolare').value;
+            let subData = data.sottocategorie[tipoUnipolare];
             let colore = document.getElementById('param-colore').value;
             let termA = raccogliDettagliTerminale('a');
             let termB = raccogliDettagliTerminale('b');
-            extraInfo += ` - Colore: ${colore} - Term.A: ${termA} - Term.B: ${termB}`;
+            extraInfo = `${subData.nome} - L: ${metri}m - Sez: ${sezione} - Colore: ${colore} - Term.A: ${termA} - Term.B: ${termB}`;
         }
 
         carrello.push({
