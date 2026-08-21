@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalogo Prodotti & Configuratore Avanzato - Caccin Cablaggi</title>
-    <meta name="description" content="Catalogo online di cablaggi e configuratore professionale per cavi, fili, conduttori e connettori industriali con codici e prezzi. Ordina via WhatsApp o Email.">
-    
+    <title>Catalogo e Configuratore - Caccin Cablaggi</title>
     <style>
         :root { --primary: #006666; --accent: #ff6b35; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
@@ -14,72 +12,64 @@
 
         header { position: sticky; top: 0; background: #ffffff; box-shadow: 0 4px 20px rgba(0,0,0,.05); z-index: 999; }
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
-        .logo h2 { color: var(--primary); font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+        .logo h2 { color: var(--primary); font-size: 22px; font-weight: 800; }
         .logo a { text-decoration: none; color: inherit; }
-        nav a { text-decoration: none; color: #475569; font-weight: 600; transition: color 0.2s; }
-        nav a:hover { color: var(--primary); }
+        nav a { text-decoration: none; color: #475569; font-weight: 600; }
 
         .shop-section { padding: 30px 0; }
         
-        .tools { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; background: white; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
-        .tools input, .tools select { padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; flex: 1; font-size: 15px; background: #f8fafc; }
-        .tools input:focus, .tools select:focus { border-color: var(--primary); background: #fff; outline: none; }
-
-        /* Stili per il Box Configuratore Visivo a Prova di Neofita */
+        /* Sezione Titoli e Box */
+        .section-title { color: var(--primary); font-size: 22px; margin: 30px 0 15px 0; padding-bottom: 5px; border-bottom: 2px solid #e2e8f0; }
         .configurator-box { background: white; border: 1px solid #e2e8f0; padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 30px; text-align: left; }
         .configurator-box h2 { color: var(--primary); font-size: 22px; margin-bottom: 5px; }
-        .configurator-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 15px; }
         
+        /* Card Scelta Stile App */
+        .card-scelta { display: flex; align-items: center; background: #ffffff; border: 1px solid #e2e8f0; padding: 15px 20px; border-radius: 12px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+        .card-scelta:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,102,102,0.08); }
+        .card-scelta img { width: 50px; height: 50px; object-fit: contain; margin-right: 20px; background: #f8fafc; border-radius: 8px; padding: 4px; border: 1px solid #f1f5f9; }
+        .card-scelta span { font-size: 16px; font-weight: 600; color: #1e293b; flex: 1; }
+        .card-scelta .arrow { font-size: 18px; color: #94a3b8; font-weight: bold; }
+
+        /* Griglia Prodotti Preassemblati */
+        .grid-prodotti { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .product-card { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+        .product-card img { width: 100%; height: 140px; object-fit: contain; background: #f8fafc; border-radius: 8px; margin-bottom: 10px; padding: 5px; border: 1px solid #f1f5f9; }
+        .product-card h3 { font-size: 16px; color: var(--primary); margin-bottom: 5px; }
+        .product-card p { font-size: 13px; color: #64748b; margin-bottom: 10px; }
+        .product-card .price { font-size: 18px; font-weight: bold; color: var(--accent); margin-bottom: 10px; }
+
+        .form-group { margin-bottom: 15px; text-align: left; }
+        .form-group label { display: block; font-size: 14px; font-weight: bold; margin-bottom: 6px; color: #334155; }
+        .form-group select, .form-group input { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 15px; background: #f8fafc; }
+
         .shop-layout { display: flex; gap: 30px; flex-wrap: wrap; }
         .products-container { flex: 2; min-width: 280px; }
         
-        .category-title { color: var(--primary); font-size: 20px; margin: 25px 0 15px 0; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px; }
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-        
-        .prod-card { background: white; border: 1px solid #e2e8f0; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.3s; }
-        .prod-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,102,102,0.1); }
-        
-        .prod-img { width: 100%; height: 140px; object-fit: contain; background: #ffffff; border: 1px solid #f1f5f9; border-radius: 8px; margin-bottom: 12px; cursor: pointer; }
-        .prod-card h3 { color: var(--primary); margin-bottom: 8px; font-size: 17px; }
-        .prod-card p { font-size: 13px; color: #475569; margin-bottom: 12px; text-align: left; }
-        .price { font-weight: bold; color: var(--accent); font-size: 16px; margin-bottom: 12px; display: block; text-align: left; }
-
-        .form-group { margin-bottom: 12px; text-align: left; }
-        .form-group label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 6px; color: #334155; }
-        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; background: #f8fafc; }
-
-        .carrello-box { flex: 1; min-width: 300px; background: white; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); height: fit-content; position: sticky; top: 90px; }
+        .carrello-box { flex: 1; min-width: 300px; background: white; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); height: fit-content; position: sticky; top: 90px; text-align: left; }
         .carrello-box h2 { color: var(--primary); font-size: 20px; margin-bottom: 10px; }
-        #lista-carrello { list-style: none; margin-bottom: 15px; max-height: 220px; overflow-y: auto; text-align: left; font-size: 14px; }
+        #lista-carrello { list-style: none; margin-bottom: 15px; max-height: 220px; overflow-y: auto; font-size: 14px; }
         #lista-carrello li { padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; }
 
         .totali-box { background: #f8fafc; padding: 12px; border-radius: 8px; margin: 15px 0; font-size: 14px; }
         .totali-box div { display: flex; justify-content: space-between; margin-bottom: 5px; }
         .totali-box .finale { font-weight: bold; font-size: 16px; color: var(--primary); border-top: 1px solid #cbd5e1; padding-top: 5px; margin-top: 5px; }
 
-        .legal-box { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; margin: 15px 0; text-align: left; font-size: 12px; color: #475569; }
+        .legal-box { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; margin: 15px 0; font-size: 12px; color: #475569; }
         .legal-box label { display: flex; align-items: flex-start; gap: 8px; cursor: pointer; margin-bottom: 8px; font-weight: normal; }
-        .legal-box input[type="checkbox"] { margin-top: 2px; cursor: pointer; }
         .legal-links { text-align: center; font-size: 11px; margin-top: 8px; color: #64748b; margin-bottom: 8px; }
         .legal-links a { color: var(--primary); text-decoration: underline; }
 
-        .btn { background: var(--accent); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: background 0.3s; margin-top: 8px; text-align: center; text-decoration: none; display: inline-block; font-size: 14px; }
+        .btn { background: var(--accent); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: background 0.3s; margin-top: 8px; text-align: center; display: inline-block; font-size: 14px; }
         .btn:hover { background: #e55a2b; }
         .btn-wa { background: #25d366; }
         .btn-wa:hover { background: #128c7e; }
         .btn-mail { background: var(--primary); }
         .btn-mail:hover { background: #004d4d; }
         .btn-secondary { background: #64748b; font-size: 12px; padding: 6px 10px; width: auto; }
-        .btn-secondary:hover { background: #475569; }
-
-        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; padding: 15px; }
-        .modal-content { background: white; padding: 25px; border-radius: 12px; width: 100%; max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
-        .modal-content ul { margin: 15px 0; padding-left: 20px; font-size: 14px; color: #475569; }
 
         @media (max-width: 768px) {
             .shop-layout { flex-direction: column; }
             .carrello-box { position: static; width: 100%; }
-            .tools { flex-direction: column; padding: 15px; }
         }
     </style>
 </head>
@@ -87,95 +77,130 @@
 
 <header>
     <div class="navbar container">
-        <div class="logo">
-            <h2><a href="#">Caccin Cablaggi</a></h2>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">⬅ Home</a></li>
-            </ul>
-        </nav>
+        <div class="logo"><h2><a href="#">Caccin Cablaggi</a></h2></div>
+        <nav><ul><li><a href="index.html">⬅ Home</a></li></ul></nav>
     </div>
 </header>
 
 <div class="container shop-section">
-    <h1 style="color: var(--primary); text-align: center; margin-bottom: 8px; font-size: 28px;">Catalogo & Configuratore Guidato</h1>
-    <p style="text-align: center; color: #475569; margin-bottom: 25px; font-size: 15px;">Crea il tuo cablaggio su misura passo dopo passo con immagini e anteprima istantanea.</p>
-
-    <!-- CONFIGURATORE VISIVO A PROVA DI NEOFITA CON FOTO -->
-    <div class="configurator-box">
-        <h2>🛠️ Configura il tuo Cablaggio</h2>
-        <p style="font-size: 13px; color: #64748b; margin-bottom: 15px;">Seleziona i componenti: vedrai foto e prezzo aggiornarsi in tempo reale.</p>
-
-        <!-- STEP 1: SCELTA DEL CAVO -->
-        <div class="form-group">
-            <label>1️⃣ Scegli il Tipo di Cavo *</label>
-            <select id="vis-cavo" onchange="aggiornaConfiguratoreVisivo()">
-                <option value="">-- Seleziona un cavo di base --</option>
-            </select>
-            <div style="margin-top: 10px; text-align: center;">
-                <img id="img-anteprima-cavo" src="" alt="Anteprima Cavo" style="max-height: 120px; display: none; border-radius: 8px; border: 1px solid #cbd5e1; padding: 4px;" />
-            </div>
-        </div>
-
-        <!-- GRIGLIA LUNGHEZZA E CONNETTORI -->
-        <div class="configurator-grid">
-            
-            <!-- STEP 2: LUNGHEZZA -->
-            <div id="step-l" class="form-group" style="display: none;">
-                <label>2️⃣ Lunghezza (Metri) *</label>
-                <input type="number" id="vis-metri" value="1.0" min="0.2" step="0.1" oninput="calcolaTotaleVisivo()">
-            </div>
-
-            <!-- STEP 3: CONNETTORE LATO A -->
-            <div id="step-a" class="form-group" style="display: none;">
-                <label>3️⃣ Connettore Lato A *</label>
-                <select id="vis-connettore-a" onchange="aggiornaFotoConnettore('A')"></select>
-                <div style="margin-top: 10px; text-align: center;">
-                    <img id="img-anteprima-a" src="" alt="Connettore A" style="max-height: 90px; display: none; border-radius: 8px; border: 1px solid #cbd5e1; padding: 4px;" />
-                </div>
-            </div>
-
-            <!-- STEP 4: CONNETTORE LATO B -->
-            <div id="step-b" class="form-group" style="display: none;">
-                <label>4️⃣ Connettore Lato B *</label>
-                <select id="vis-connettore-b" onchange="aggiornaFotoConnettore('B')"></select>
-                <div style="margin-top: 10px; text-align: center;">
-                    <img id="img-anteprima-b" src="" alt="Connettore B" style="max-height: 90px; display: none; border-radius: 8px; border: 1px solid #cbd5e1; padding: 4px;" />
-                </div>
-            </div>
-
-        </div>
-
-        <!-- BOX RIEPILOGO FINALE -->
-        <div id="box-riepilogo-visivo" style="display: none; background: #f1f5f9; padding: 20px; border-radius: 12px; border: 1px solid #cbd5e1; margin-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-            <div>
-                <h4 style="color: var(--primary); font-size: 16px; margin-bottom: 4px;">Riepilogo Assemblaggio</h4>
-                <p id="testo-riepilogo-dinamico" style="font-size: 13px; color: #475569;"></p>
-            </div>
-            <div style="text-align: right;">
-                <div style="font-size: 12px; color: #64748b;">Prezzo Totale Configurazione:</div>
-                <div id="prezzo-visivo-finale" style="font-size: 24px; font-weight: bold; color: var(--accent);">0,00 €</div>
-                <button class="btn" onclick="aggiungiConfigurazioneAlCarrelloPrincipale()" style="margin-top: 8px; padding: 10px 20px;">Aggiungi al Carrello 🛒</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="tools">
-        <input type="text" id="search" placeholder="🔎 Cerca prodotto pronto per nome..." oninput="renderCatalogo()">
-        <select id="filter" onchange="renderCatalogo()">
-            <option value="tutti">Tutte le categorie</option>
-            <option value="lan">Cavi Ethernet Cat 6</option>
-            <option value="prolunghe">Prolunghe Elettriche 16A</option>
-        </select>
-    </div>
+    <h1 style="color: var(--primary); text-align: center; margin-bottom: 8px; font-size: 28px;">Catalogo e Configuratore Cavi</h1>
+    <p style="text-align: center; color: #475569; margin-bottom: 25px; font-size: 15px;">Scegli un cavo preassemblato pronto all'uso oppure configura un cavo su misura.</p>
 
     <div class="shop-layout">
-        
-        <div class="products-container" id="prodotti-container-dinamico">
-            <!-- Generato via JavaScript -->
+        <!-- COLONNA SINISTRA: PRODOTTI PREASSEMBLED + CONFIGURATORE -->
+        <div class="products-container">
+            
+            <!-- SEZIONE 1: CONFIGURATORE GUIDATO CAVI A METRO -->
+            <div id="step-categoria" class="configurator-box">
+                <h2>1️⃣ Configuratore Cavi su Misura</h2>
+                <p style="font-size: 13px; color: #64748b; margin-bottom: 20px;">Tocca una categoria per calcolare il prezzo al metro:</p>
+                
+                <div class="card-scelta" onclick="selezionaCategoria('unipolare')">
+                    <img src="img/cavo-unipolare.jpeg" alt="Unipolare" onerror="this.src='https://via.placeholder.com/50?text=Cavo'">
+                    <span>Cavo Unipolare</span>
+                    <span class="arrow">›</span>
+                </div>
+                <div class="card-scelta" onclick="selezionaCategoria('multipolare')">
+                    <img src="img/cavo-multipolare.jpeg" alt="Multipolare" onerror="this.src='https://via.placeholder.com/50?text=Cavo'">
+                    <span>Cavo Multipolare</span>
+                    <span class="arrow">›</span>
+                </div>
+                <div class="card-scelta" onclick="selezionaCategoria('ethernet')">
+                    <img src="img/cavo-cat6.jpeg" alt="Ethernet" onerror="this.src='https://via.placeholder.com/50?text=LAN'">
+                    <span>Cavo Ethernet</span>
+                    <span class="arrow">›</span>
+                </div>
+                <div class="card-scelta" onclick="selezionaCategoria('coassiale')">
+                    <img src="img/cavo-coassiale.jpeg" alt="Coassiale" onerror="this.src='https://via.placeholder.com/50?text=Coaxial'">
+                    <span>Cavo Coassiale</span>
+                    <span class="arrow">›</span>
+                </div>
+            </div>
+
+            <!-- STEP 2: PARAMETRI SPECIFICI (Nascosto finché non si sceglie la categoria) -->
+            <div id="step-parametri" class="configurator-box" style="display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h2 id="titolo-categoria-scelta" style="margin-bottom:0;">Configurazione</h2>
+                    <button class="btn btn-secondary" onclick="tornaIndietroCategorie()">⬅ Cambia Categoria</button>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+                    <div class="form-group" id="box-conduttori">
+                        <label>Numero Conduttori interni:</label>
+                        <select id="param-conduttori" onchange="aggiornaConfigurazione()"></select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Sezione (mm² / Categoria):</label>
+                        <select id="param-sezione" onchange="aggiornaConfigurazione()"></select>
+                    </div>
+
+                    <div class="form-group" id="box-colore" style="display: none;">
+                        <label>Colore Filo:</label>
+                        <select id="param-colore" onchange="aggiornaConfigurazione()">
+                            <option value="Rosso">Rosso</option>
+                            <option value="Blu">Blu</option>
+                            <option value="Nero">Nero</option>
+                            <option value="Marrone">Marrone</option>
+                            <option value="Giallo/Verde">Giallo/Verde</option>
+                            <option value="Grigio">Grigio</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Lunghezza (Metri):</label>
+                        <input type="number" id="param-metri" value="1.0" min="0.5" step="0.5" oninput="aggiornaConfigurazione()">
+                    </div>
+                </div>
+
+                <!-- RISULTATO INDIVIDUATO DAL SISTEMA -->
+                <div style="margin-top: 25px; background: #f1f5f9; padding: 20px; border-radius: 12px; border: 1px solid #cbd5e1; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <img id="risultato-img" src="" alt="Cavo Specifico" style="width: 70px; height: 70px; object-fit: contain; background: white; border-radius: 8px; border: 1px solid #cbd5e1; padding: 4px; display: none;">
+                        <div>
+                            <h4 id="risultato-nome" style="color: var(--primary); font-size: 16px; margin-bottom: 4px;">Seleziona i parametri</h4>
+                            <p id="risultato-dettagli" style="font-size: 13px; color: #475569;"></p>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 12px; color: #64748b;">Prezzo Stimato (Ivato +10%):</div>
+                        <div id="risultato-prezzo" style="font-size: 24px; font-weight: bold; color: var(--accent);">0,00 €</div>
+                        <button class="btn" onclick="aggiungiCavoAlCarrello()" style="margin-top: 8px; padding: 10px 20px;">Aggiungi al Carrello 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEZIONE 2: PRODOTTI PREASSEMBLED / STANDARD -->
+            <h3 class="section-title">📦 Prodotti Preassemblati e Accessori</h3>
+            <div class="grid-prodotti">
+                <div class="product-card">
+                    <div>
+                        <img src="img/cavo-cat6.jpeg" alt="Cavo LAN" onerror="this.src='https://via.placeholder.com/150?text=Cavo+LAN'">
+                        <h3>Cavo LAN Cat6 Preassemblato (1m)</h3>
+                        <p>Cavo patch di rete schermato con connettori RJ45 intestati.</p>
+                    </div>
+                    <div>
+                        <div class="price">6,50 €</div>
+                        <button class="btn" onclick="aggiungiProdottoFisso('Cavo LAN Cat6 Preassemblato (1m)', 6.50)">Aggiungi 🛒</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div>
+                        <img src="img/vimar-spina.jpeg" alt="Prolunga" onerror="this.src='https://via.placeholder.com/150?text=Prolunga'">
+                        <h3>Prolunga Elettrica 16A (3m)</h3>
+                        <p>Cavo FS18 con spina e presa volante di qualità superiore.</p>
+                    </div>
+                    <div>
+                        <div class="price">14,90 €</div>
+                        <button class="btn" onclick="aggiungiProdottoFisso('Prolunga Elettrica 16A (3m)', 14.90)">Aggiungi 🛒</button>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
+        <!-- COLONNA DESTRA: CARRELLO E CHECKOUT -->
         <div class="carrello-box">
             <h2>Carrello Ordine</h2>
             <div style="font-size: 12px; color: #64748b; margin-bottom: 10px;">N. Ordine: <b id="num-ordine-txt" style="color:var(--primary);"></b></div>
@@ -197,16 +222,16 @@
             <h3 style="font-size: 14px; color: var(--primary); margin: 15px 0 8px 0;">Dati Cliente & Fatturazione</h3>
             <div class="form-group">
                 <label>Nome e Cognome / Azienda *</label>
-                <input type="text" id="nome" placeholder="Mario Rossi o Nome Azienda Srl">
+                <input type="text" id="nome" placeholder="Mario Rossi">
             </div>
             <div style="display: flex; gap: 8px;">
                 <div class="form-group" style="flex: 1;">
-                    <label>P. IVA (Opzionale)</label>
+                    <label>P. IVA (Opz.)</label>
                     <input type="text" id="piva" placeholder="01234567890">
                 </div>
                 <div class="form-group" style="flex: 1;">
                     <label>SDI / PEC (Opz.)</label>
-                    <input type="text" id="sdi" placeholder="M5UXCR1 / pec@...">
+                    <input type="text" id="sdi" placeholder="M5UXCR1">
                 </div>
             </div>
 
@@ -221,7 +246,7 @@
                         <input type="text" id="cap" placeholder="30030">
                     </div>
                     <div class="form-group" style="flex: 2;">
-                        <label>Città e Prov (VE, PD, TV) *</label>
+                        <label>Città e Prov *</label>
                         <input type="text" id="citta" placeholder="Pianiga (VE)" oninput="calcolaTotali()">
                     </div>
                 </div>
@@ -241,75 +266,62 @@
             <div class="legal-box">
                 <label>
                     <input type="checkbox" id="accetto-privacy">
-                    <span>Acconsento al trattamento dei dati personali per la gestione della richiesta d'ordine (GDPR) *</span>
+                    <span>Acconsento al trattamento dei dati personali (GDPR) *</span>
                 </label>
                 <label style="margin-bottom: 0;">
                     <input type="checkbox" id="accetto-termini">
-                    <span>Dichiaro di aver preso visione e di accettare i Termini e Condizioni di Vendita *</span>
+                    <span>Accetto i Termini e Condizioni di Vendita *</span>
                 </label>
             </div>
 
             <div class="legal-links">
-                <a href="privacy.html" target="_blank">Informativa Privacy</a> | 
-                <a href="#" onclick="alert('Puoi collegare qui la pagina dei Termini di Vendita se ce l hai.'); return false;">Termini di Vendita</a>
+                <a href="#" onclick="return false;">Informativa Privacy</a> | <a href="#" onclick="return false;">Termini di Vendita</a>
             </div>
 
             <button class="btn btn-wa" onclick="inviaOrdine('whatsapp')">💬 Invia Ordine via WhatsApp</button>
             <button class="btn btn-mail" onclick="inviaOrdine('mail')">📧 Invia Ordine via Email</button>
-            <p id="nota-tempi" style="font-size: 11px; color: #64748b; text-align: center; margin-top: 10px;">⚡ Evasione e spedizione standard in 24/48h lavorative</p>
         </div>
-    </div>
-</div>
-
-<div id="modal-details" class="modal">
-    <div class="modal-content">
-        <h2 id="m-name" style="color: var(--primary); font-size: 20px; margin-bottom: 10px;"></h2>
-        <ul id="m-specs"></ul>
-        <div style="text-align: right; margin-bottom: 15px;">
-            <b id="m-price" style="font-size: 1.3em; color: var(--accent);"></b>
-        </div>
-        <button class="btn" onclick="chiudiModale()">Chiudi</button>
     </div>
 </div>
 
 <script>
-    // Database prodotti standard a catalogo
-    const databaseProdotti = [
-        { id: 'lan1', cat: 'lan', name: 'Cavo LAN Cat6 (1m)', price: 6.00, desc: 'Cavo ethernet cat6 con prese rj45 cablato e testato!', img: 'img/cavo-cat6.jpeg', len: '1 m', con: 'RJ45' },
-        { id: 'lan2', cat: 'lan', name: 'Cavo LAN Cat6 (2m)', price: 8.50, desc: 'Cavo ethernet cat6 con prese rj45 cablato e testato!', img: 'img/cavo-cat6.jpeg', len: '2 m', con: 'RJ45' },
-        { id: 'lan5', cat: 'lan', name: 'Cavo LAN Cat6 (5m)', price: 12.50, desc: 'Cavo ethernet cat6 con prese rj45 cablato e testato!', img: 'img/cavo-cat6.jpeg', len: '5 m', con: 'RJ45' },
-        { id: 'lan10', cat: 'lan', name: 'Cavo LAN Cat6 (10m)', price: 18.50, desc: 'Cavo ethernet cat6 con prese rj45 cablato e testato!', img: 'img/cavo-cat6.jpeg', len: '10 m', con: 'RJ45' },
-        
-        { id: 'pro1', cat: 'prolunghe', name: 'Prolunga 16A (1m)', price: 14.00, desc: 'Cavo marrone 3g2,5 FS18, Spina e Presa Vimar 16A', img: 'img/prolunga.jpeg', len: '1 m', con: 'Vimar 16A' },
-        { id: 'pro2', cat: 'prolunghe', name: 'Prolunga 16A (2m)', price: 17.50, desc: 'Cavo marrone 3g2,5 FS18, Spina e Presa Vimar 16A', img: 'img/prolunga.jpeg', len: '2 m', con: 'Vimar 16A' },
-        { id: 'pro5', cat: 'prolunghe', name: 'Prolunga 16A (5m)', price: 24.00, desc: 'Cavo marrone 3g2,5 FS18, Spina e Presa Vimar 16A', img: 'img/prolunga.jpeg', len: '5 m', con: 'Vimar 16A' },
-        { id: 'pro10', cat: 'prolunghe', name: 'Prolunga 16A (10m)', price: 36.00, desc: 'Cavo marrone 3g2,5 FS18, Spina e Presa Vimar 16A', img: 'img/prolunga.jpeg', len: '10 m', con: 'Vimar 16A' }
-    ];
-
-    // Master database universale con supporto alle immagini (proprietà img)
-    const masterCatalogoConfiguratore = {
-        "cavo_fs18_3g25": {
-            nome: "Cavo Flessibile FS18 3G2.5",
-            prezzoMetro: 1.80,
-            img: "img/cavo-fs18.jpeg",
-            connettori: [
-                { id: "nessuno", nomeModello: "Senza connettore", marca: "-", codice: "-", prezzo: 0.00, img: "" },
-                { id: "vimar_spina", nomeModello: "Spina Volante 16A", marca: "Vimar", codice: "VIM-00216", prezzo: 3.50, img: "img/vimar-spina.jpeg" },
-                { id: "vimar_presa", nomeModello: "Presa Volante 16A", marca: "Vimar", codice: "VIM-00217", prezzo: 3.80, img: "img/vimar-presa.jpeg" }
-            ]
+    // Database dei prodotti su misura con prezzi di mercato ivati + 10%
+    const databaseCaviSpecifici = {
+        "unipolare": {
+            titolo: "Cavo Unipolare",
+            conduttoriList: [1],
+            sezioniList: ["1.5 mm²", "2.5 mm²", "4.0 mm²", "6.0 mm²"],
+            prezziBase: { "1.5 mm²": 0.45, "2.5 mm²": 0.70, "4.0 mm²": 1.10, "6.0 mm²": 1.65 },
+            img: "img/cavo-unipolare.jpeg",
+            desc: "Cavo flessibile N07V-K per impianti elettrici e quadri."
         },
-        "cavo_cat6_utp": {
-            nome: "Cavo Ethernet LAN Cat6 UTP",
-            prezzoMetro: 0.75,
+        "multipolare": {
+            titolo: "Cavo Multipolare",
+            conduttoriList: [2, 3, 4, 5],
+            sezioniList: ["1.5 mm²", "2.5 mm²", "4.0 mm²"],
+            prezziBase: { "2_1.5 mm²": 1.20, "3_1.5 mm²": 1.55, "4_1.5 mm²": 1.95, "5_1.5 mm²": 2.40, "2_2.5 mm²": 1.70, "3_2.5 mm²": 2.20, "4_2.5 mm²": 2.85, "5_2.5 mm²": 3.50, "2_4.0 mm²": 2.60, "3_4.0 mm²": 3.40, "4_4.0 mm²": 4.40, "5_4.0 mm²": 5.50 },
+            img: "img/cavo-multipolare.jpeg",
+            desc: "Cavo multipolare flessibile FROR / H05VV-F."
+        },
+        "ethernet": {
+            titolo: "Cavo Ethernet",
+            conduttoriList: [8],
+            sezioniList: ["Cat 6 UTP", "Cat 6A Schermato"],
+            prezziBase: { "Cat 6 UTP": 0.85, "Cat 6A Schermato": 1.40 },
             img: "img/cavo-cat6.jpeg",
-            connettori: [
-                { id: "nessuno", nomeModello: "Senza connettore", marca: "-", codice: "-", prezzo: 0.00, img: "" },
-                { id: "rj45_std", nomeModello: "Plug RJ45 Cat6 Unshielded", marca: "Tyco", codice: "5-569252-3", prezzo: 0.40, img: "img/rj45.jpeg" },
-                { id: "rj45_sch", nomeModello: "Plug RJ45 Cat6A Schermato", marca: "Telegärtner", codice: "J00026A", prezzo: 1.60, img: "img/rj45-schermato.jpeg" }
-            ]
+            desc: "Cavo di rete LAN ad alte prestazioni per connessioni dati."
+        },
+        "coassiale": {
+            titolo: "Cavo Coassiale",
+            conduttoriList: [1],
+            sezioniList: ["RG58 (50 Ohm)", "RG6 (75 Ohm TV)"],
+            prezziBase: { "RG58 (50 Ohm)": 0.65, "RG6 (75 Ohm TV)": 0.55 },
+            img: "img/cavo-coassiale.jpeg",
+            desc: "Cavo coassiale schermato per segnali antenna e radiofrequenza."
         }
     };
 
+    let categoriaCorrente = null;
     let carrello = [];
 
     let numeroOrdine = localStorage.getItem('caccin_ultimo_ordine');
@@ -317,213 +329,110 @@
     localStorage.setItem('caccin_ultimo_ordine', numeroOrdine);
     document.getElementById('num-ordine-txt').innerText = "#" + numeroOrdine;
 
-    // Inizializzazione del configuratore visivo
-    window.addEventListener('DOMContentLoaded', () => {
-        const selectCavoVisivo = document.getElementById('vis-cavo');
-        for (let key in masterCatalogoConfiguratore) {
-            let cavo = masterCatalogoConfiguratore[key];
-            let opt = document.createElement('option');
-            opt.value = key;
-            opt.text = `${cavo.nome} - ${cavo.prezzoMetro.toFixed(2)}€/m`;
-            selectCavoVisivo.appendChild(opt);
-        }
-        renderCatalogo();
-        calcolaTotali();
-    });
+    function selezionaCategoria(catKey) {
+        categoriaCorrente = catKey;
+        let data = databaseCaviSpecifici[catKey];
 
-    function aggiornaConfiguratoreVisivo() {
-        let idCavo = document.getElementById('vis-cavo').value;
-        let imgCavoElem = document.getElementById('img-anteprima-cavo');
+        document.getElementById('step-categoria').style.display = 'none';
+        document.getElementById('step-parametri').style.display = 'block';
+        document.getElementById('titolo-categoria-scelta').innerText = `Configura: ${data.titolo}`;
 
-        if (!idCavo) {
-            document.getElementById('step-l').style.display = 'none';
-            document.getElementById('step-a').style.display = 'none';
-            document.getElementById('step-b').style.display = 'none';
-            document.getElementById('box-riepilogo-visivo').style.display = 'none';
-            imgCavoElem.style.display = 'none';
-            return;
-        }
+        let selectCond = document.getElementById('param-conduttori');
+        selectCond.innerHTML = '';
+        data.conduttoriList.forEach(c => {
+            selectCond.innerHTML += `<option value="${c}">${c} Conduttore/i</option>`;
+        });
+        document.getElementById('box-conduttori').style.display = (catKey === 'ethernet') ? 'none' : 'block';
 
-        document.getElementById('step-l').style.display = 'block';
-        document.getElementById('step-a').style.display = 'block';
-        document.getElementById('step-b').style.display = 'block';
-        document.getElementById('box-riepilogo-visivo').style.display = 'flex';
+        document.getElementById('box-colore').style.display = (catKey === 'unipolare') ? 'block' : 'none';
 
-        let cavo = masterCatalogoConfiguratore[idCavo];
-
-        if (cavo.img) {
-            imgCavoElem.src = cavo.img;
-            imgCavoElem.style.display = 'inline-block';
-        } else {
-            imgCavoElem.style.display = 'none';
-        }
-
-        let optionsHTML = '';
-        cavo.connettori.forEach(conn => {
-            optionsHTML += `<option value="${conn.id}" data-prezzo="${conn.prezzo}" data-nome="${conn.nomeModello}" data-img="${conn.img}">${conn.nomeModello} (+${conn.prezzo.toFixed(2)}€)</option>`;
+        let selectSez = document.getElementById('param-sezione');
+        selectSez.innerHTML = '';
+        data.sezioniList.forEach(s => {
+            selectSez.innerHTML += `<option value="${s}">${s}</option>`;
         });
 
-        document.getElementById('vis-connettore-a').innerHTML = optionsHTML;
-        document.getElementById('vis-connettore-b').innerHTML = optionsHTML;
-
-        aggiornaFotoConnettore('A');
-        aggiornaFotoConnettore('B');
-        calcolaTotaleVisivo();
+        aggiornaConfigurazione();
     }
 
-    function aggiornaFotoConnettore(lato) {
-        let select = document.getElementById(`vis-connettore-${lato.toLowerCase()}`);
-        let opt = select.options[select.selectedIndex];
-        let imgElem = document.getElementById(`img-anteprima-${lato.toLowerCase()}`);
-        let imgPath = opt ? opt.getAttribute('data-img') : '';
+    function tornaIndietroCategorie() {
+        document.getElementById('step-parametri').style.display = 'none';
+        document.getElementById('step-categoria').style.display = 'block';
+        categoriaCorrente = null;
+    }
 
-        if (imgPath) {
-            imgElem.src = imgPath;
+    function aggiornaConfigurazione() {
+        if (!categoriaCorrente) return;
+        let data = databaseCaviSpecifici[categoriaCorrente];
+        
+        let metri = parseFloat(document.getElementById('param-metri').value) || 1;
+        let sezione = document.getElementById('param-sezione').value;
+        let conduttori = document.getElementById('param-conduttori').value;
+        let colore = document.getElementById('param-colore').value;
+
+        let prezzoMetro = 0;
+        if (categoriaCorrente === 'multipolare') {
+            let chiavePrezzo = `${conduttori}_${sezione}`;
+            prezzoMetro = data.prezziBase[chiavePrezzo] || 1.50;
+        } else {
+            prezzoMetro = data.prezziBase[sezione] || 1.00;
+        }
+
+        let prezzoTotale = prezzoMetro * metri;
+
+        let dettagliTesto = `${data.desc} <br>Sezione: <b>${sezione}</b> | Lunghezza: <b>${metri}m</b>`;
+        if (categoriaCorrente === 'unipolare') {
+            dettagliTesto += ` | Colore: <b style="color:var(--primary);">${colore}</b>`;
+        } else if (categoriaCorrente !== 'ethernet' && categoriaCorrente !== 'coassiale') {
+            dettagliTesto += ` | Conduttori: <b>${conduttori}</b>`;
+        }
+
+        document.getElementById('risultato-nome').innerText = data.titolo;
+        document.getElementById('risultato-dettagli').innerHTML = dettagliTesto;
+        document.getElementById('risultato-prezzo').innerText = prezzoTotale.toFixed(2) + " €";
+        
+        let imgElem = document.getElementById('risultato-img');
+        if (data.img) {
+            imgElem.src = data.img;
             imgElem.style.display = 'inline-block';
         } else {
             imgElem.style.display = 'none';
         }
-        calcolaTotaleVisivo();
     }
 
-    function calcolaTotaleVisivo() {
-        let idCavo = document.getElementById('vis-cavo').value;
-        if (!idCavo) return;
-
-        let cavo = masterCatalogoConfiguratore[idCavo];
-        let metri = parseFloat(document.getElementById('vis-metri').value) || 1;
+    function aggiungiCavoAlCarrello() {
+        if (!categoriaCorrente) return;
+        let data = databaseCaviSpecifici[categoriaCorrente];
+        let metri = document.getElementById('param-metri').value;
+        let sezione = document.getElementById('param-sezione').value;
+        let prezzoTotale = parseFloat(document.getElementById('risultato-prezzo').innerText);
         
-        let selA = document.getElementById('vis-connettore-a');
-        let optA = selA.options[selA.selectedIndex];
-        let prezzoA = optA ? parseFloat(optA.getAttribute('data-prezzo')) || 0 : 0;
-        let nomeA = optA ? optA.getAttribute('data-nome') : '';
-
-        let selB = document.getElementById('vis-connettore-b');
-        let optB = selB.options[selB.selectedIndex];
-        let prezzoB = optB ? parseFloat(optB.getAttribute('data-prezzo')) || 0 : 0;
-        let nomeB = optB ? optB.getAttribute('data-nome') : '';
-
-        let costoTotale = (cavo.prezzoMetro * metri) + prezzoA + prezzoB;
-
-        document.getElementById('testo-riepilogo-dinamico').innerHTML = 
-            `Cavo: <b>${cavo.nome}</b> (${metri}m) <br>Testa A: ${nomeA} | Testa B: ${nomeB}`;
-        document.getElementById('prezzo-visivo-finale').innerText = costoTotale.toFixed(2) + " €";
-    }
-
-    function aggiungiConfigurazioneAlCarrelloPrincipale() {
-        let idCavo = document.getElementById('vis-cavo').value;
-        let cavo = masterCatalogoConfiguratore[idCavo];
-        let metri = document.getElementById('vis-metri').value;
-        
-        let selA = document.getElementById('vis-connettore-a');
-        let nomeA = selA.options[selA.selectedIndex].getAttribute('data-nome');
-        
-        let selB = document.getElementById('vis-connettore-b');
-        let nomeB = selB.options[selB.selectedIndex].getAttribute('data-nome');
-        
-        let prezzoFinale = parseFloat(document.getElementById('prezzo-visivo-finale').innerText);
+        let extraInfo = `L: ${metri}m - Sez: ${sezione}`;
+        if (categoriaCorrente === 'unipolare') {
+            let colore = document.getElementById('param-colore').value;
+            extraInfo += ` - Colore: ${colore}`;
+        }
 
         carrello.push({
-            nome: `Cablaggio Custom: ${cavo.nome} (${metri}m)`,
-            prezzo: prezzoFinale,
+            nome: `${data.titolo} Custom`,
+            prezzo: prezzoTotale,
             qta: 1,
-            dettagliExtra: `Lato A: ${nomeA} | Lato B: ${nomeB}`
+            dettagliExtra: extraInfo
         });
 
         calcolaTotali();
-        alert("Cablaggio aggiunto al carrello con successo!");
+        alert("Cavo aggiunto al carrello con successo!");
     }
 
-    function renderCatalogo() {
-        const query = document.getElementById('search').value.toLowerCase();
-        const categoriaFiltro = document.getElementById('filter').value;
-        const container = document.getElementById('prodotti-container-dinamico');
-        container.innerHTML = '';
-
-        let categorieDaMostrare = [];
-        if (categoriaFiltro === 'tutti') {
-            categorieDaMostrare = [
-                { key: 'lan', title: '🌐 Cavi Ethernet Cat 6' },
-                { key: 'prolunghe', title: '⚡ Prolunghe Elettriche 16A' }
-            ];
-        } else if (categoriaFiltro === 'lan') {
-            categorieDaMostrare = [{ key: 'lan', title: '🌐 Cavi Ethernet Cat 6' }];
-        } else if (categoriaFiltro === 'prolunghe') {
-            categorieDaMostrare = [{ key: 'prolunghe', title: '⚡ Prolunghe Elettriche 16A' }];
-        }
-
-        categorieDaMostrare.forEach(catObj => {
-            let prodottiFiltrati = databaseProdotti.filter(p => p.cat === catObj.key && p.name.toLowerCase().includes(query));
-            
-            if (prodottiFiltrati.length > 0) {
-                let htmlCat = `<h2 class="category-title">${catObj.title}</h2><div class="products-grid">`;
-                
-                prodottiFiltrati.forEach(p => {
-                    htmlCat += `
-                        <div class="prod-card">
-                            <div>
-                                <img src="${p.img}" alt="${p.name} - Caccin Cablaggi" class="prod-img" onerror="this.src='https://via.placeholder.com/300x140?text=Caccin+Cablaggi'" onclick="apriDettagli('${p.name}', '${p.desc}', ${p.price}, '${p.len}', '${p.con}')">
-                                <h3>${p.name}</h3>
-                                <p>${p.desc}</p>
-                            </div>
-                            <div>
-                                <span class="price">${p.price.toFixed(2)} € (IVA incl.)</span>
-                                <div class="form-group">
-                                    <label>Quantità:</label>
-                                    <input type="number" id="q-${p.id}" value="1" min="1" style="text-align: center;">
-                                </div>
-                                <button class="btn" id="btn-add-${p.id}" onclick="aggiungiAlCarrelloCatalog('${p.name}', ${p.price}, 'q-${p.id}', '${p.id}')">Aggiungi</button>
-                            </div>
-                        </div>`;
-                });
-                htmlCat += `</div>`;
-                container.innerHTML += htmlCat;
-            }
+    function aggiungiProdottoFisso(nome, prezzo) {
+        carrello.push({
+            nome: nome,
+            prezzo: prezzo,
+            qta: 1,
+            dettagliExtra: "Preassemblato standard"
         });
-
-        if (container.innerHTML === '') {
-            container.innerHTML = `<p style="text-align:center; color:#64748b; padding:40px 0;">Nessun prodotto trovato con i filtri attuali.</p>`;
-        }
-    }
-
-    function apriDettagli(name, desc, price, len, con) {
-        document.getElementById('m-name').innerText = name;
-        document.getElementById('m-specs').innerHTML = `
-            <li><b>Descrizione:</b> ${desc}</li>
-            <li><b>Lunghezza:</b> ${len}</li>
-            <li><b>Connettori:</b> ${con}</li>
-            <li><b>Stato test:</b> Cablato e testato in laboratorio ✓</li>`;
-        document.getElementById('m-price').innerText = price.toFixed(2) + " € (IVA incl.)";
-        document.getElementById('modal-details').style.display = 'flex';
-    }
-
-    function chiudiModale() {
-        document.getElementById('modal-details').style.display = 'none';
-    }
-
-    function aggiungiAlCarrelloCatalog(nome, prezzo, idInput, idProdotto) {
-        let qta = parseInt(document.getElementById(idInput).value);
-        if (qta < 1) return;
-
-        let esistente = carrello.find(item => item.nome === nome && !item.dettagliExtra);
-        if (esistente) {
-            esistente.qta += qta;
-        } else {
-            carrello.push({ nome, prezzo, qta });
-        }
         calcolaTotali();
-
-        let btn = document.getElementById(`btn-add-${idProdotto}`);
-        let testoOriginale = btn.innerText;
-        let coloreOriginale = btn.style.backgroundColor;
-
-        btn.innerText = "Aggiunto! ✓";
-        btn.style.backgroundColor = "#25d366";
-
-        setTimeout(() => {
-            btn.innerText = testoOriginale;
-            btn.style.backgroundColor = coloreOriginale;
-        }, 1200);
+        alert(nome + " aggiunto al carrello!");
     }
 
     function aggiornaCarrelloUI() {
@@ -536,8 +445,7 @@
         carrello.forEach((item, index) => {
             let subtotal = item.prezzo * item.qta;
             let extraInfo = item.dettagliExtra ? `<br><span style="font-size:11px; color:#64748b;">${item.dettagliExtra}</span>` : '';
-            
-            lista.innerHTML += `<li><span><b>${item.nome}</b> (x${item.qta})${extraInfo}</span> <span><b>${subtotal.toFixed(2)}€</b> <span style="color:red; cursor:pointer; margin-left:6px;" onclick="rimuoviItem(${index})">❌</span></span></li>`;
+            lista.innerHTML += `<li><span><b>${item.nome}</b>${extraInfo}</span> <span><b>${subtotal.toFixed(2)}€</b> <span style="color:red; cursor:pointer; margin-left:6px;" onclick="rimuoviItem(${index})">❌</span></span></li>`;
         });
     }
 
@@ -554,21 +462,12 @@
     function gestisciTipoConsegna() {
         let tipo = document.getElementById('tipo-consegna').value;
         let containerCampi = document.getElementById('campi-indirizzo-container');
-        let notaTempi = document.getElementById('nota-tempi');
-
-        if (tipo === 'ritiro') {
-            containerCampi.style.display = 'none';
-            notaTempi.innerText = "📍 Ritiro gratuito presso: Via Cavin Maggiore 5, Mellaredo di Pianiga, 30030";
-        } else {
-            containerCampi.style.display = 'block';
-            notaTempi.innerText = "⚡ Evasione e spedizione standard in 24/48h lavorative";
-        }
+        containerCampi.style.display = (tipo === 'ritiro') ? 'none' : 'block';
         calcolaTotali();
     }
 
     function calcolaTotali() {
         aggiornaCarrelloUI();
-        
         let subtotale = 0;
         carrello.forEach(item => { subtotale += item.prezzo * item.qta; });
 
@@ -592,18 +491,14 @@
                 tipoSpedizioneTesto = "Consegna Locale (VE/PD/TV)";
             } else if (cittaInput.length > 2) {
                 costoSpedizione = 5.99; 
-                tipoSpedizioneTesto = "Corriere InPost";
+                tipoSpedizioneTesto = "Corriere Espresso";
             } else {
                 costoSpedizione = 0.00;
                 tipoSpedizioneTesto = "Inserisci città/provincia";
             }
-        } else {
-            costoSpedizione = 0.00;
-            tipoSpedizioneTesto = "Ritiro in Sede";
         }
 
         let totaleGenerale = subtotale + costoSpedizione;
-
         document.getElementById('subtotale').innerText = subtotale.toFixed(2);
         document.getElementById('costo-spedizione').innerText = costoSpedizione.toFixed(2);
         document.getElementById('totale').innerText = totaleGenerale.toFixed(2);
@@ -612,67 +507,38 @@
 
     function inviaOrdine(metodo) {
         let nome = document.getElementById('nome').value.trim();
-        let piva = document.getElementById('piva').value.trim();
-        let sdi = document.getElementById('sdi').value.trim();
         let telefono = document.getElementById('telefono').value.trim();
         let tipoConsegna = document.getElementById('tipo-consegna').value;
-        
         let accettoPrivacy = document.getElementById('accetto-privacy').checked;
         let accettoTermini = document.getElementById('accetto-termini').checked;
 
-        if (carrello.length === 0) {
-            alert("Il carrello è vuoto! Aggiungi almeno un prodotto.");
-            return;
-        }
-        if (!nome || !telefono) {
-            alert("Per favore, compila nome e telefono.");
-            return;
-        }
+        if (carrello.length === 0) { alert("Il carrello è vuoto!"); return; }
+        if (!nome || !telefono) { alert("Inserisci nome e telefono."); return; }
 
         let indirizzoCompleto = "";
         if (tipoConsegna === 'spedizione') {
             let indirizzo = document.getElementById('indirizzo').value.trim();
             let cap = document.getElementById('cap').value.trim();
             let citta = document.getElementById('citta').value.trim();
-            if (!indirizzo || !cap || !citta) {
-                alert("Per favore, compila tutti i campi dell'indirizzo di spedizione.");
-                return;
-            }
+            if (!indirizzo || !cap || !citta) { alert("Compila i campi di spedizione."); return; }
             indirizzoCompleto = `${indirizzo}, ${cap} ${citta}`;
         } else {
-            indirizzoCompleto = "Via Cavin Maggiore 5, Mellaredo di Pianiga, 30030 (Ritiro in Sede)";
+            indirizzoCompleto = "Via Cavin Maggiore 5, Mellaredo di Pianiga (Ritiro in Sede)";
         }
 
-        if (!accettoPrivacy || !accettoTermini) {
-            alert("Per favore, accetta l'informativa sulla privacy e i termini di vendita prima di inviare l'ordine.");
-            return;
-        }
+        if (!accettoPrivacy || !accettoTermini) { alert("Accetta privacy e termini di vendita."); return; }
 
-        let subtotaleVal = document.getElementById('subtotale').innerText;
-        let spedizioneVal = document.getElementById('costo-spedizione').innerText;
-        let tipoSpedVal = document.getElementById('tipo-spedizione').innerText;
-        let totaleGenerale = document.getElementById('totale').innerText;
-
-        let msg = `📦 *NUOVO ORDINE / RICHIESTA #${numeroOrdine}*%0A%0A`;
-        msg += `*Modalità:* ${tipoConsegna === 'ritiro' ? 'Ritiro in Sede' : 'Spedizione'}%0A%0A`;
-        msg += `*Articoli:*%0A`;
+        let msg = `📦 *ORDINE E-COMMERCE #${numeroOrdine}*%0A%0A`;
         carrello.forEach(i => {
-            msg += `- ${i.nome} (Qt: ${i.qta})${i.dettagliExtra ? ' - ' + i.dettagliExtra : ''} - ${(i.prezzo * i.qta).toFixed(2)}€%0A`;
+            msg += `- ${i.nome} (${i.dettagliExtra}) - ${(i.prezzo * i.qta).toFixed(2)}€%0A`;
         });
-        msg += `%0ASubtotale: ${subtotaleVal} €`;
-        msg += `%0ASpedizione (${tipoSpedVal}): ${spedizioneVal} €`;
-        msg += `%0A*Totale Complessivo:* ${totaleGenerale} €%0A%0A`;
-        msg += `*Dati Cliente & Riferimenti:*%0A`;
-        msg += `👤 Intestatario: ${nome}%0A`;
-        if(piva) msg += `🏢 P.IVA: ${piva}%0A`;
-        if(sdi) msg += `📄 SDI/PEC: ${sdi}%0A`;
-        msg += `📍 Indirizzo / Luogo: ${indirizzoCompleto}%0A`;
-        msg += `📞 Telefono: ${telefono}%0A`;
+        msg += `%0A*Totale Complessivo:* ${document.getElementById('totale').innerText} €%0A%0A`;
+        msg += `👤 Cliente: ${nome}%0A📍 Indirizzo: ${indirizzoCompleto}%0A📞 Tel: ${telefono}%0A`;
 
         if (metodo === 'whatsapp') {
             window.open(`https://wa.me/393392859037?text=${msg}`, '_blank');
         } else {
-            let subject = encodeURIComponent(`Ordine / Richiesta #${numeroOrdine} - Caccin Cablaggi`);
+            let subject = encodeURIComponent(`Ordine #${numeroOrdine} - Caccin Cablaggi`);
             let body = encodeURIComponent(msg.replace(/\*/g, '').replace(/%0A/g, '\n'));
             window.location.href = `mailto:caccin.cablaggi@gmail.com?subject=${subject}&body=${body}`;
         }
