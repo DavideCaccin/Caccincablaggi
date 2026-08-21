@@ -18,19 +18,16 @@
 
         .shop-section { padding: 30px 0; }
         
-        /* Sezione Titoli e Box */
         .section-title { color: var(--primary); font-size: 22px; margin: 30px 0 15px 0; padding-bottom: 5px; border-bottom: 2px solid #e2e8f0; }
         .configurator-box { background: white; border: 1px solid #e2e8f0; padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 30px; text-align: left; }
         .configurator-box h2 { color: var(--primary); font-size: 22px; margin-bottom: 5px; }
         
-        /* Card Scelta Stile App */
         .card-scelta { display: flex; align-items: center; background: #ffffff; border: 1px solid #e2e8f0; padding: 15px 20px; border-radius: 12px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
         .card-scelta:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,102,102,0.08); }
         .card-scelta img { width: 50px; height: 50px; object-fit: contain; margin-right: 20px; background: #f8fafc; border-radius: 8px; padding: 4px; border: 1px solid #f1f5f9; }
         .card-scelta span { font-size: 16px; font-weight: 600; color: #1e293b; flex: 1; }
         .card-scelta .arrow { font-size: 18px; color: #94a3b8; font-weight: bold; }
 
-        /* Griglia Prodotti Preassemblati */
         .grid-prodotti { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
         .product-card { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
         .product-card img { width: 100%; height: 140px; object-fit: contain; background: #f8fafc; border-radius: 8px; margin-bottom: 10px; padding: 5px; border: 1px solid #f1f5f9; }
@@ -150,6 +147,156 @@
                     <div class="form-group">
                         <label>Lunghezza (Metri):</label>
                         <input type="number" id="param-metri" value="1.0" min="0.5" step="0.5" oninput="aggiornaConfigurazione()">
+                    </div>
+                </div>
+
+                <!-- SEZIONE AGGIUNTIVA SPECIFICA PER TERMINALE A (Solo Cavo Unipolare) -->
+                <div id="box-terminale-a-container" style="display: none; margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <h3 style="font-size: 16px; color: var(--primary); margin-bottom: 12px;">Configurazione Terminale A</h3>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+                        <div class="form-group">
+                            <label>Tipo Terminale A:</label>
+                            <select id="terminale-a-tipo" onchange="gestisciTerminaleA()">
+                                <option value="libero">Libero / Senza terminale</option>
+                                <option value="puntale">Terminale a Puntale[span_0](start_span)[span_0](end_span)</option>
+                                <option value="occhiello">Terminale a Occhiello[span_1](start_span)[span_1](end_span)</option>
+                                <option value="forcella">Terminale a Forcella[span_2](start_span)[span_2](end_span)</option>
+                                <option value="faston">Terminale a Faston[span_3](start_span)[span_3](end_span)</option>
+                                <option value="spina">Terminale a Spina[span_4](start_span)[span_4](end_span)</option>
+                            </select>
+                        </div>
+
+                        <!-- Sotto-opzione: Puntale A -->
+                        <div class="form-group sub-term-a" id="sub-puntale-a" style="display: none;">
+                            <label>Lunghezza Puntale (mm)[span_5](start_span)[span_5](end_span):</label>
+                            <input type="text" id="term-puntale-a-lunghezza" placeholder="es. 8mm, 10mm..." oninput="aggiornaConfigurazione()">
+                        </div>
+
+                        <!-- Sotto-opzione: Occhiello A -->
+                        <div class="form-group sub-term-a" id="sub-occhiello-a" style="display: none;">
+                            <label>Grandezza Occhiello[span_6](start_span)[span_6](end_span):</label>
+                            <select id="term-occhiello-a-misura" onchange="aggiornaConfigurazione()">
+                                <option value="m3">M3[span_7](start_span)[span_7](end_span)</option>
+                                <option value="m4">M4[span_8](start_span)[span_8](end_span)</option>
+                                <option value="m5">M5[span_9](start_span)[span_9](end_span)</option>
+                                <option value="m6">M6[span_10](start_span)[span_10](end_span)</option>
+                                <option value="m8">M8[span_11](start_span)[span_11](end_span)</option>
+                                <option value="m10">M10[span_12](start_span)[span_12](end_span)</option>
+                                <option value="m12">M12[span_13](start_span)[span_13](end_span)</option>
+                            </select>
+                        </div>
+
+                        <!-- Sotto-opzione: Forcella A -->
+                        <div class="form-group sub-term-a" id="sub-forcella-a" style="display: none;">
+                            <label>Grandezza Forcella[span_14](start_span)[span_14](end_span):</label>
+                            <select id="term-forcella-a-misura" onchange="aggiornaConfigurazione()">
+                                <option value="u3">U3[span_15](start_span)[span_15](end_span)</option>
+                                <option value="u4">U4[span_16](start_span)[span_16](end_span)</option>
+                                <option value="u5">U5[span_17](start_span)[span_17](end_span)</option>
+                            </select>
+                        </div>
+
+                        <!-- Sotto-opzione: Faston A -->
+                        <div class="form-group sub-term-a" id="sub-faston-a" style="display: none;">
+                            <label>Tipo Faston[span_18](start_span)[span_18](end_span):</label>
+                            <select id="term-faston-a-tipo" onchange="aggiornaConfigurazione()">
+                                <option value="maschio">Maschio[span_19](start_span)[span_19](end_span)</option>
+                                <option value="femmina">Femmina[span_20](start_span)[span_20](end_span)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group sub-term-a" id="sub-faston-a-larghezza" style="display: none;">
+                            <label>Larghezza Faston[span_21](start_span)[span_21](end_span):</label>
+                            <select id="term-faston-a-largh" onchange="aggiornaConfigurazione()">
+                                <option value="4.8mm">4,8 mm[span_22](start_span)[span_22](end_span)</option>
+                                <option value="6.3mm">6,3 mm[span_23](start_span)[span_23](end_span)</option>
+                            </select>
+                        </div>
+
+                        <!-- Sotto-opzione: Spina A -->
+                        <div class="form-group sub-term-a" id="sub-spina-a" style="display: none;">
+                            <label>Tipo Spina[span_24](start_span)[span_24](end_span):</label>
+                            <select id="term-spina-a-tipo" onchange="aggiornaConfigurazione()">
+                                <option value="maschio">Maschio[span_25](start_span)[span_25](end_span)</option>
+                                <option value="femmina">Femmina[span_26](start_span)[span_26](end_span)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEZIONE AGGIUNTIVA SPECIFICA PER TERMINALE B (Solo Cavo Unipolare) -->
+                <div id="box-terminale-b-container" style="display: none; margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <h3 style="font-size: 16px; color: var(--primary); margin-bottom: 12px;">Configurazione Terminale B</h3>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+                        <div class="form-group">
+                            <label>Tipo Terminale B:</label>
+                            <select id="terminale-b-tipo" onchange="gestisciTerminaleB()">
+                                <option value="libero">Libero / Senza terminale</option>
+                                <option value="puntale">Terminale a Puntale[span_27](start_span)[span_27](end_span)</option>
+                                <option value="occhiello">Terminale a Occhiello[span_28](start_span)[span_28](end_span)</option>
+                                <option value="forcella">Terminale a Forcella[span_29](start_span)[span_29](end_span)</option>
+                                <option value="faston">Terminale a Faston[span_30](start_span)[span_30](end_span)</option>
+                                <option value="spina">Terminale a Spina[span_31](start_span)[span_31](end_span)</option>
+                            </select>
+                        </div>
+
+                        <!-- Sotto-opzione: Puntale B -->
+                        <div class="form-group sub-term-b" id="sub-puntale-b" style="display: none;">
+                            <label>Lunghezza Puntale (mm)[span_32](start_span)[span_32](end_span):</label>
+                            <input type="text" id="term-puntale-b-lunghezza" placeholder="es. 8mm, 10mm..." oninput="aggiornaConfigurazione()">
+                        </div>
+
+                        <!-- Sotto-opzione: Occhiello B -->
+                        <div class="form-group sub-term-b" id="sub-occhiello-b" style="display: none;">
+                            <label>Grandezza Occhiello[span_33](start_span)[span_33](end_span):</label>
+                            <select id="term-occhiello-b-misura" onchange="aggiornaConfigurazione()">
+                                <option value="m3">M3[span_34](start_span)[span_34](end_span)</option>
+                                <option value="m4">M4[span_35](start_span)[span_35](end_span)</option>
+                                <option value="m5">M5[span_36](start_span)[span_36](end_span)</option>
+                                <option value="m6">M6[span_37](start_span)[span_37](end_span)</option>
+                                <option value="m8">M8[span_38](start_span)[span_38](end_span)</option>
+                                <option value="m10">M10[span_39](start_span)[span_39](end_span)</option>
+                                <option value="m12">M12[span_40](start_span)[span_40](end_span)</option>
+                            </select>
+                        </div>
+
+                        <!-- Sotto-opzione: Forcella B -->
+                        <div class="form-group sub-term-b" id="sub-forcella-b" style="display: none;">
+                            <label>Grandezza Forcella[span_41](start_span)[span_41](end_span):</label>
+                            <select id="term-forcella-b-misura" onchange="aggiornaConfigurazione()">
+                                <option value="u3">U3[span_42](start_span)[span_42](end_span)</option>
+                                <option value="u4">U4[span_43](start_span)[span_43](end_span)</option>
+                                <option value="u5">U5[span_44](start_span)[span_44](end_span)</option>
+                            </select>
+                        </div>
+
+                        <!-- Sotto-opzione: Faston B -->
+                        <div class="form-group sub-term-b" id="sub-faston-b" style="display: none;">
+                            <label>Tipo Faston[span_45](start_span)[span_45](end_span):</label>
+                            <select id="term-faston-b-tipo" onchange="aggiornaConfigurazione()">
+                                <option value="maschio">Maschio[span_46](start_span)[span_46](end_span)</option>
+                                <option value="femmina">Femmina[span_47](start_span)[span_47](end_span)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group sub-term-b" id="sub-faston-b-larghezza" style="display: none;">
+                            <label>Larghezza Faston[span_48](start_span)[span_48](end_span):</label>
+                            <select id="term-faston-b-largh" onchange="aggiornaConfigurazione()">
+                                <option value="4.8mm">4,8 mm[span_49](start_span)[span_49](end_span)</option>
+                                <option value="6.3mm">6,3 mm[span_50](start_span)[span_50](end_span)</option>
+                            </select>
+                        </div>
+
+                        <!-- Sotto-opzione: Spina B -->
+                        <div class="form-group sub-term-b" id="sub-spina-b" style="display: none;">
+                            <label>Tipo Spina[span_51](start_span)[span_51](end_span):</label>
+                            <select id="term-spina-b-tipo" onchange="aggiornaConfigurazione()">
+                                <option value="maschio">Maschio[span_52](start_span)[span_52](end_span)</option>
+                                <option value="femmina">Femmina[span_53](start_span)[span_53](end_span)</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
@@ -285,7 +432,6 @@
 </div>
 
 <script>
-    // Database dei prodotti su misura con prezzi di mercato ivati + 10%
     const databaseCaviSpecifici = {
         "unipolare": {
             titolo: "Cavo Unipolare",
@@ -345,12 +491,65 @@
         document.getElementById('box-conduttori').style.display = (catKey === 'ethernet') ? 'none' : 'block';
 
         document.getElementById('box-colore').style.display = (catKey === 'unipolare') ? 'block' : 'none';
+        
+        // Mostra o nasconde i terminali A e B (visibili solo per unipolare)
+        let mostraTerminazioni = (catKey === 'unipolare') ? 'block' : 'none';
+        document.getElementById('box-terminale-a-container').style.display = mostraTerminazioni;
+        document.getElementById('box-terminale-b-container').style.display = mostraTerminazioni;
 
         let selectSez = document.getElementById('param-sezione');
         selectSez.innerHTML = '';
         data.sezioniList.forEach(s => {
             selectSez.innerHTML += `<option value="${s}">${s}</option>`;
         });
+
+        // Reset terminali
+        document.getElementById('terminale-a-tipo').value = "libero";
+        document.getElementById('terminale-b-tipo').value = "libero";
+        gestisciTerminaleA();
+        gestisciTerminaleB();
+
+        aggiornaConfigurazione();
+    }
+
+    function gestisciTerminaleA() {
+        let tipo = document.getElementById('terminale-a-tipo').value;
+        let subElements = document.querySelectorAll('.sub-term-a');
+        subElements.forEach(el => el.style.display = 'none');
+
+        if (tipo === 'puntale') {
+            document.getElementById('sub-puntale-a').style.display = 'block';
+        } else if (tipo === 'occhiello') {
+            document.getElementById('sub-occhiello-a').style.display = 'block';
+        } else if (tipo === 'forcella') {
+            document.getElementById('sub-forcella-a').style.display = 'block';
+        } else if (tipo === 'faston') {
+            document.getElementById('sub-faston-a').style.display = 'block';
+            document.getElementById('sub-faston-a-larghezza').style.display = 'block';
+        } else if (tipo === 'spina') {
+            document.getElementById('sub-spina-a').style.display = 'block';
+        }
+
+        aggiornaConfigurazione();
+    }
+
+    function gestisciTerminaleB() {
+        let tipo = document.getElementById('terminale-b-tipo').value;
+        let subElements = document.querySelectorAll('.sub-term-b');
+        subElements.forEach(el => el.style.display = 'none');
+
+        if (tipo === 'puntale') {
+            document.getElementById('sub-puntale-b').style.display = 'block';
+        } else if (tipo === 'occhiello') {
+            document.getElementById('sub-occhiello-b').style.display = 'block';
+        } else if (tipo === 'forcella') {
+            document.getElementById('sub-forcella-b').style.display = 'block';
+        } else if (tipo === 'faston') {
+            document.getElementById('sub-faston-b').style.display = 'block';
+            document.getElementById('sub-faston-b-larghezza').style.display = 'block';
+        } else if (tipo === 'spina') {
+            document.getElementById('sub-spina-b').style.display = 'block';
+        }
 
         aggiornaConfigurazione();
     }
@@ -359,6 +558,32 @@
         document.getElementById('step-parametri').style.display = 'none';
         document.getElementById('step-categoria').style.display = 'block';
         categoriaCorrente = null;
+    }
+
+    function raccogliDettagliTerminale(lato) {
+        let prefisso = lato === 'a' ? 'a' : 'b';
+        let tipo = document.getElementById(`terminale-${prefisso}-tipo`).value;
+        if (tipo === 'libero') return 'Libero';
+
+        let testo = tipo.toUpperCase();
+        if (tipo === 'puntale') {
+            let lung = document.getElementById(`term-puntale-${prefisso}-lunghezza`).value.trim();
+            if (lung) testo += ` (${lung})`;
+        } else if (tipo === 'occhiello') {
+            let mis = document.getElementById(`term-occhiello-${prefisso}-misura`).value.toUpperCase();
+            testo += ` (${mis})`;
+        } else if (tipo === 'forcella') {
+            let mis = document.getElementById(`term-forcella-${prefisso}-misura`).value.toUpperCase();
+            testo += ` (${mis})`;
+        } else if (tipo === 'faston') {
+            let tFaston = document.getElementById(`term-faston-${prefisso}-tipo`).value;
+            let lFaston = document.getElementById(`term-faston-${prefisso}-largh`).value;
+            testo += ` (${tFaston}, ${lFaston})`;
+        } else if (tipo === 'spina') {
+            let tSpina = document.getElementById(`term-spina-${prefisso}-tipo`).value;
+            testo += ` (${tSpina})`;
+        }
+        return testo;
     }
 
     function aggiornaConfigurazione() {
@@ -381,8 +606,12 @@
         let prezzoTotale = prezzoMetro * metri;
 
         let dettagliTesto = `${data.desc} <br>Sezione: <b>${sezione}</b> | Lunghezza: <b>${metri}m</b>`;
+        
         if (categoriaCorrente === 'unipolare') {
             dettagliTesto += ` | Colore: <b style="color:var(--primary);">${colore}</b>`;
+            let termA = raccogliDettagliTerminale('a');
+            let termB = raccogliDettagliTerminale('b');
+            dettagliTesto += `<br>Terminale A: <b>${termA}</b> | Terminale B: <b>${termB}</b>`;
         } else if (categoriaCorrente !== 'ethernet' && categoriaCorrente !== 'coassiale') {
             dettagliTesto += ` | Conduttori: <b>${conduttori}</b>`;
         }
@@ -410,7 +639,9 @@
         let extraInfo = `L: ${metri}m - Sez: ${sezione}`;
         if (categoriaCorrente === 'unipolare') {
             let colore = document.getElementById('param-colore').value;
-            extraInfo += ` - Colore: ${colore}`;
+            let termA = raccogliDettagliTerminale('a');
+            let termB = raccogliDettagliTerminale('b');
+            extraInfo += ` - Colore: ${colore} - Term.A: ${termA} - Term.B: ${termB}`;
         }
 
         carrello.push({
