@@ -56,6 +56,13 @@
         .totali-box div { display: flex; justify-content: space-between; margin-bottom: 5px; }
         .totali-box .finale { font-weight: bold; font-size: 16px; color: var(--primary); border-top: 1px solid #cbd5e1; padding-top: 5px; margin-top: 5px; }
 
+        /* Stili per le checkbox legali e link */
+        .legal-box { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; margin: 15px 0; text-align: left; font-size: 12px; color: #475569; }
+        .legal-box label { display: flex; align-items: flex-start; gap: 8px; cursor: pointer; margin-bottom: 8px; font-weight: normal; }
+        .legal-box input[type="checkbox"] { margin-top: 2px; cursor: pointer; }
+        .legal-links { text-align: center; font-size: 11px; margin-top: 8px; color: #64748b; margin-bottom: 8px; }
+        .legal-links a { color: var(--primary); text-decoration: underline; }
+
         .btn { background: var(--accent); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; transition: background 0.3s; margin-top: 8px; text-align: center; text-decoration: none; display: inline-block; font-size: 14px; }
         .btn:hover { background: #e55a2b; }
         .btn-wa { background: #25d366; }
@@ -167,6 +174,23 @@
                 <div><span>Subtotale prodotti:</span> <span id="subtotale">0,00</span> €</div>
                 <div><span>Spedizione (<span id="tipo-spedizione">Da calcolare</span>):</span> <span id="costo-spedizione">0,00</span> €</div>
                 <div class="finale"><span>Totale Complessivo:</span> <span id="totale">0,00</span> €</div>
+            </div>
+
+            <!-- Blocco Privacy e Termini obbligatori -->
+            <div class="legal-box">
+                <label>
+                    <input type="checkbox" id="accetto-privacy">
+                    <span>Acconsento al trattamento dei dati personali per la gestione della richiesta d'ordine (GDPR) *</span>
+                </label>
+                <label style="margin-bottom: 0;">
+                    <input type="checkbox" id="accetto-termini">
+                    <span>Dichiaro di aver preso visione e di accettare i Termini e Condizioni di Vendita *</span>
+                </label>
+            </div>
+
+            <div class="legal-links">
+                <a href="privacy.html" target="_blank">Informativa Privacy</a> | 
+                <a href="#" onclick="alert('Puoi collegare qui la pagina dei Termini di Vendita se ce l hai.'); return false;">Termini di Vendita</a>
             </div>
 
             <button class="btn btn-wa" onclick="inviaOrdine('whatsapp')">💬 Invia Ordine via WhatsApp</button>
@@ -385,6 +409,10 @@
         let sdi = document.getElementById('sdi').value.trim();
         let telefono = document.getElementById('telefono').value.trim();
         let tipoConsegna = document.getElementById('tipo-consegna').value;
+        
+        // Lettura stato checkbox legali
+        let accettoPrivacy = document.getElementById('accetto-privacy').checked;
+        let accettoTermini = document.getElementById('accetto-termini').checked;
 
         if (carrello.length === 0) {
             alert("Il carrello è vuoto! Aggiungi almeno un prodotto.");
@@ -407,6 +435,12 @@
             indirizzoCompleto = `${indirizzo}, ${cap} ${citta}`;
         } else {
             indirizzoCompleto = "Via Cavin Maggiore 5, Mellaredo di Pianiga, 30030 (Ritiro in Sede)";
+        }
+
+        // Controllo validazione obbligatoria privacy e termini
+        if (!accettoPrivacy || !accettoTermini) {
+            alert("Per favore, accetta l'informativa sulla privacy e i termini di vendita prima di inviare l'ordine.");
+            return;
         }
 
         let subtotaleVal = document.getElementById('subtotale').innerText;
