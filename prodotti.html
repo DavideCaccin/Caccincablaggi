@@ -114,7 +114,7 @@
                 </div>
             </div>
 
-            <!-- STEP 2: PARAMETRI SPECIFICI (Nascosto finché non si sceglie la categoria) -->
+            <!-- STEP 2: PARAMETRI SPECIFICI -->
             <div id="step-parametri" class="configurator-box" style="display: none;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                     <h2 id="titolo-categoria-scelta" style="margin-bottom:0;">Configurazione</h2>
@@ -125,12 +125,12 @@
                     <div class="form-group" id="box-tipo-unipolare" style="display: none; grid-column: 1 / -1;">
                         <label>Specificifica Tipo Cavo Unipolare:</label>
                         <select id="param-tipo-unipolare" onchange="aggiornaSezioniUnipolari()">
-                            <option value="fs17">FS17 (Interno Civile/Industriale standard)</option>
-                            <option value="fg17">FG17 (Ecologico LS0H privo di alogeni)</option>
-                            <option value="fg16r16">FG16R16 (Esterno / Interramento)</option>
-                            <option value="fg16m16">FG16M16 (Esterno luoghi affollati LS0H)</option>
-                            <option value="h07vk">H07V-K (Quadri elettrici standard)</option>
-                            <option value="h07zk">H07Z-K (Quadri alte temperature)</option>
+                            <option value="fs17">FS17 (PVC standard)</option>
+                            <option value="h07vk">H07V-K (Flessibile quadri)</option>
+                            <option value="fg17">FG17 (Edilizia CPR)</option>
+                            <option value="h07zk">H07Z-K (Quadristica 90°C)</option>
+                            <option value="fg16r16">FG16R16 (Guaina PVC)</option>
+                            <option value="fg16m16">FG16M16 (Privo di alogeni LS0H)</option>
                             <option value="h1z2z2k">H1Z2Z2-K (Cavo Solare Fotovoltaico)</option>
                         </select>
                     </div>
@@ -141,7 +141,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label>Sezione (mm² / Categoria):</label>
+                        <label>Sezione (mm²):</label>
                         <select id="param-sezione" onchange="aggiornaConfigurazione()"></select>
                     </div>
 
@@ -163,10 +163,9 @@
                     </div>
                 </div>
 
-                <!-- SEZIONE AGGIUNTIVA SPECIFICA PER TERMINALE A (Solo Cavo Unipolare) -->
+                <!-- SEZIONE TERMINALE A -->
                 <div id="box-terminale-a-container" style="display: none; margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
                     <h3 style="font-size: 16px; color: var(--primary); margin-bottom: 12px;">Configurazione Terminale A</h3>
-                    
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
                         <div class="form-group">
                             <label>Tipo Terminale A:</label>
@@ -179,69 +178,46 @@
                                 <option value="spina">Terminale a Spina</option>
                             </select>
                         </div>
-
-                        <!-- Sotto-opzione: Puntale A -->
                         <div class="form-group sub-term-a" id="sub-puntale-a" style="display: none;">
                             <label>Lunghezza Puntale (mm):</label>
                             <input type="text" id="term-puntale-a-lunghezza" placeholder="es. 8mm, 10mm..." oninput="aggiornaConfigurazione()">
                         </div>
-
-                        <!-- Sotto-opzione: Occhiello A -->
                         <div class="form-group sub-term-a" id="sub-occhiello-a" style="display: none;">
                             <label>Grandezza Occhiello:</label>
                             <select id="term-occhiello-a-misura" onchange="aggiornaConfigurazione()">
-                                <option value="m3">M3</option>
-                                <option value="m4">M4</option>
-                                <option value="m5">M5</option>
-                                <option value="m6">M6</option>
-                                <option value="m8">M8</option>
-                                <option value="m10">M10</option>
-                                <option value="m12">M12</option>
+                                <option value="m3">M3</option><option value="m4">M4</option><option value="m5">M5</option><option value="m6">M6</option><option value="m8">M8</option><option value="m10">M10</option><option value="m12">M12</option>
                             </select>
                         </div>
-
-                        <!-- Sotto-opzione: Forcella A -->
                         <div class="form-group sub-term-a" id="sub-forcella-a" style="display: none;">
                             <label>Grandezza Forcella:</label>
                             <select id="term-forcella-a-misura" onchange="aggiornaConfigurazione()">
-                                <option value="u3">U3</option>
-                                <option value="u4">U4</option>
-                                <option value="u5">U5</option>
+                                <option value="u3">U3</option><option value="u4">U4</option><option value="u5">U5</option>
                             </select>
                         </div>
-
-                        <!-- Sotto-opzione: Faston A -->
                         <div class="form-group sub-term-a" id="sub-faston-a" style="display: none;">
                             <label>Tipo Faston:</label>
                             <select id="term-faston-a-tipo" onchange="aggiornaConfigurazione()">
-                                <option value="maschio">Maschio</option>
-                                <option value="femmina">Femmina</option>
+                                <option value="maschio">Maschio</option><option value="femmina">Femmina</option>
                             </select>
                         </div>
-
                         <div class="form-group sub-term-a" id="sub-faston-a-larghezza" style="display: none;">
                             <label>Larghezza Faston:</label>
                             <select id="term-faston-a-largh" onchange="aggiornaConfigurazione()">
-                                <option value="4.8mm">4,8 mm</option>
-                                <option value="6.3mm">6,3 mm</option>
+                                <option value="4.8mm">4,8 mm</option><option value="6.3mm">6,3 mm</option>
                             </select>
                         </div>
-
-                        <!-- Sotto-opzione: Spina A -->
                         <div class="form-group sub-term-a" id="sub-spina-a" style="display: none;">
                             <label>Tipo Spina:</label>
                             <select id="term-spina-a-tipo" onchange="aggiornaConfigurazione()">
-                                <option value="maschio">Maschio</option>
-                                <option value="femmina">Femmina</option>
+                                <option value="maschio">Maschio</option><option value="femmina">Femmina</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
-                <!-- SEZIONE AGGIUNTIVA SPECIFICA PER TERMINALE B (Solo Cavo Unipolare) -->
+                <!-- SEZIONE TERMINALE B -->
                 <div id="box-terminale-b-container" style="display: none; margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
                     <h3 style="font-size: 16px; color: var(--primary); margin-bottom: 12px;">Configurazione Terminale B</h3>
-                    
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
                         <div class="form-group">
                             <label>Tipo Terminale B:</label>
@@ -254,66 +230,44 @@
                                 <option value="spina">Terminale a Spina</option>
                             </select>
                         </div>
-
-                        <!-- Sotto-opzione: Puntale B -->
                         <div class="form-group sub-term-b" id="sub-puntale-b" style="display: none;">
                             <label>Lunghezza Puntale (mm):</label>
                             <input type="text" id="term-puntale-b-lunghezza" placeholder="es. 8mm, 10mm..." oninput="aggiornaConfigurazione()">
                         </div>
-
-                        <!-- Sotto-opzione: Occhiello B -->
                         <div class="form-group sub-term-b" id="sub-occhiello-b" style="display: none;">
                             <label>Grandezza Occhiello:</label>
                             <select id="term-occhiello-b-misura" onchange="aggiornaConfigurazione()">
-                                <option value="m3">M3</option>
-                                <option value="m4">M4</option>
-                                <option value="m5">M5</option>
-                                <option value="m6">M6</option>
-                                <option value="m8">M8</option>
-                                <option value="m10">M10</option>
-                                <option value="m12">M12</option>
+                                <option value="m3">M3</option><option value="m4">M4</option><option value="m5">M5</option><option value="m6">M6</option><option value="m8">M8</option><option value="m10">M10</option><option value="m12">M12</option>
                             </select>
                         </div>
-
-                        <!-- Sotto-opzione: Forcella B -->
                         <div class="form-group sub-term-b" id="sub-forcella-b" style="display: none;">
                             <label>Grandezza Forcella:</label>
                             <select id="term-forcella-b-misura" onchange="aggiornaConfigurazione()">
-                                <option value="u3">U3</option>
-                                <option value="u4">U4</option>
-                                <option value="u5">U5</option>
+                                <option value="u3">U3</option><option value="u4">U4</option><option value="u5">U5</option>
                             </select>
                         </div>
-
-                        <!-- Sotto-opzione: Faston B -->
                         <div class="form-group sub-term-b" id="sub-faston-b" style="display: none;">
                             <label>Tipo Faston:</label>
                             <select id="term-faston-b-tipo" onchange="aggiornaConfigurazione()">
-                                <option value="maschio">Maschio</option>
-                                <option value="femmina">Femmina</option>
+                                <option value="maschio">Maschio</option><option value="femmina">Femmina</option>
                             </select>
                         </div>
-
                         <div class="form-group sub-term-b" id="sub-faston-b-larghezza" style="display: none;">
                             <label>Larghezza Faston:</label>
                             <select id="term-faston-b-largh" onchange="aggiornaConfigurazione()">
-                                <option value="4.8mm">4,8 mm</option>
-                                <option value="6.3mm">6,3 mm</option>
+                                <option value="4.8mm">4,8 mm</option><option value="6.3mm">6,3 mm</option>
                             </select>
                         </div>
-
-                        <!-- Sotto-opzione: Spina B -->
                         <div class="form-group sub-term-b" id="sub-spina-b" style="display: none;">
                             <label>Tipo Spina:</label>
                             <select id="term-spina-b-tipo" onchange="aggiornaConfigurazione()">
-                                <option value="maschio">Maschio</option>
-                                <option value="femmina">Femmina</option>
+                                <option value="maschio">Maschio</option><option value="femmina">Femmina</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
-                <!-- RISULTATO INDIVIDUATO DAL SISTEMA -->
+                <!-- RISULTATO -->
                 <div style="margin-top: 25px; background: #f1f5f9; padding: 20px; border-radius: 12px; border: 1px solid #cbd5e1; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
                     <div style="display: flex; align-items: center; gap: 15px;">
                         <img id="risultato-img" src="" alt="Cavo Specifico" style="width: 70px; height: 70px; object-fit: contain; background: white; border-radius: 8px; border: 1px solid #cbd5e1; padding: 4px; display: none;">
@@ -330,7 +284,7 @@
                 </div>
             </div>
 
-            <!-- SEZIONE 2: PRODOTTI PREASSEMBLED / STANDARD -->
+            <!-- PRODOTTI PREASSEMBLED -->
             <h3 class="section-title">📦 Prodotti Preassemblati e Accessori</h3>
             <div class="grid-prodotti">
                 <div class="product-card">
@@ -344,7 +298,6 @@
                         <button class="btn" onclick="aggiungiProdottoFisso('Cavo LAN Cat6 Preassemblato (1m)', 6.50)">Aggiungi 🛒</button>
                     </div>
                 </div>
-
                 <div class="product-card">
                     <div>
                         <img src="img/vimar-spina.jpeg" alt="Prolunga" onerror="this.src='https://via.placeholder.com/150?text=Prolunga'">
@@ -360,7 +313,7 @@
 
         </div>
 
-        <!-- COLONNA DESTRA: CARRELLO E CHECKOUT -->
+        <!-- COLONNA DESTRA: CARRELLO -->
         <div class="carrello-box">
             <h2>Carrello Ordine</h2>
             <div style="font-size: 12px; color: #64748b; margin-bottom: 10px;">N. Ordine: <b id="num-ordine-txt" style="color:var(--primary);"></b></div>
@@ -445,18 +398,54 @@
 </div>
 
 <script>
+    // Prezzi calcolati con il prezzo massimo + 10% di maggiorazione
     const databaseCaviSpecifici = {
         "unipolare": {
             titolo: "Cavo Unipolare",
             conduttoriList: [1],
             sottocategorie: {
-                "fs17": { nome: "FS17 (Interno Civile/Industriale)", desc: "Cavo standard in PVC antifiamma per tubi e canaline interne.", sezioni: ["1.5 mm²", "2.5 mm²", "4.0 mm²", "6.0 mm²"], prezzi: { "1.5 mm²": 0.385, "2.5 mm²": 0.385, "4.0 mm²": 0.385, "6.0 mm²": 0.385 } },
-                "fg17": { nome: "FG17 (Ecologico LS0H)", desc: "Cavo ecologico privo di alogeni, a bassa emissione di fumi opachi.", sezioni: ["1.5 mm²", "2.5 mm²", "4.0 mm²", "6.0 mm²"], prezzi: { "1.5 mm²": 0.495, "2.5 mm²": 0.495, "4.0 mm²": 0.495, "6.0 mm²": 0.495 } },
-                "fg16r16": { nome: "FG16R16 (Esterno / Interramento)", desc: "Cavo con isolamento in gomma HEPR e guaina in PVC, per posa interrata.", sezioni: ["1.5 mm²", "2.5 mm²", "4.0 mm²", "6.0 mm²"], prezzi: { "1.5 mm²": 0.770, "2.5 mm²": 0.770, "4.0 mm²": 0.770, "6.0 mm²": 0.770 } },
-                "fg16m16": { nome: "FG16M16 (Esterno luoghi affollati LS0H)", desc: "Versione FG16R16 con guaina speciale priva di alogeni per luoghi affollati.", sezioni: ["1.5 mm²", "2.5 mm²", "4.0 mm²", "6.0 mm²"], prezzi: { "1.5 mm²": 0.990, "2.5 mm²": 0.990, "4.0 mm²": 0.990, "6.0 mm²": 0.990 } },
-                "h07vk": { nome: "H07V-K (Quadri elettrici standard)", desc: "Filo flessibile comune in PVC per l'interno di quadri di comando.", sezioni: ["1.5 mm²", "2.5 mm²", "4.0 mm²", "6.0 mm²"], prezzi: { "1.5 mm²": 0.385, "2.5 mm²": 0.385, "4.0 mm²": 0.385, "6.0 mm²": 0.385 } },
-                "h07zk": { nome: "H07Z-K (Quadri alte temperature)", desc: "Cavo flessibile per quadri con isolamento privo di alogeni fino a 90°C.", sezioni: ["1.5 mm²", "2.5 mm²", "4.0 mm²", "6.0 mm²"], prezzi: { "1.5 mm²": 0.605, "2.5 mm²": 0.605, "4.0 mm²": 0.605, "6.0 mm²": 0.605 } },
-                "h1z2z2k": { nome: "H1Z2Z2-K (Cavo Solare Fotovoltaico)", desc: "Cavo specifico per impianti fotovoltaici, resistente a UV e intemperie.", sezioni: ["4 mm²", "6 mm²", "10 mm²"], prezzi: { "4 mm²": 1.320, "6 mm²": 1.650, "10 mm²": 2.200 } }
+                "fs17": { 
+                    nome: "FS17 (PVC standard)", 
+                    desc: "Cavo standard in PVC antifiamma per tubi e canaline interne.", 
+                    sezioni: ["1 mm²", "1.5 mm²", "2.5 mm²", "4 mm²", "6 mm²", "10 mm²", "16 mm²", "25 mm²", "35 mm²", "50 mm²", "70 mm²"], 
+                    prezzi: { "1 mm²": 0.22, "1.5 mm²": 0.275, "2.5 mm²": 0.385, "4 mm²": 0.605, "6 mm²": 0.935, "10 mm²": 1.54, "16 mm²": 2.42, "25 mm²": 3.74, "35 mm²": 5.28, "50 mm²": 7.48, "70 mm²": 10.45 } 
+                },
+                "h07vk": { 
+                    nome: "H07V-K (Flessibile quadri)", 
+                    desc: "Filo flessibile comune in PVC per l'interno di quadri di comando e automazione.", 
+                    sezioni: ["0.5 mm²", "0.75 mm²", "1 mm²", "1.5 mm²", "2.5 mm²", "4 mm²", "6 mm²", "10 mm²", "16 mm²", "25 mm²", "35 mm²", "50 mm²", "70 mm²"], 
+                    prezzi: { "0.5 mm²": 0.165, "0.75 mm²": 0.198, "1 mm²": 0.22, "1.5 mm²": 0.275, "2.5 mm²": 0.385, "4 mm²": 0.605, "6 mm²": 0.935, "10 mm²": 1.485, "16 mm²": 2.365, "25 mm²": 3.63, "35 mm²": 5.06, "50 mm²": 7.15, "70 mm²": 10.01 } 
+                },
+                "fg17": { 
+                    nome: "FG17 (Edilizia CPR)", 
+                    desc: "Cavo ecologico LS0H (privo di alogeni), a bassa emissione di fumi opachi.", 
+                    sezioni: ["1.5 mm²", "2.5 mm²", "4 mm²", "6 mm²", "10 mm²", "16 mm²", "25 mm²"], 
+                    prezzi: { "1.5 mm²": 0.385, "2.5 mm²": 0.528, "4 mm²": 0.792, "6 mm²": 1.21, "10 mm²": 1.925, "16 mm²": 2.97, "25 mm²": 4.51 } 
+                },
+                "h07zk": { 
+                    nome: "H07Z-K (Quadristica 90°C)", 
+                    desc: "Cavo flessibile per quadri con isolamento privo di alogeni per alte temperature (fino a 90°C).", 
+                    sezioni: ["1.5 mm²", "2.5 mm²", "4 mm²", "6 mm²", "10 mm²", "16 mm²", "25 mm²"], 
+                    prezzi: { "1.5 mm²": 0.44, "2.5 mm²": 0.605, "4 mm²": 0.88, "6 mm²": 1.32, "10 mm²": 2.09, "16 mm²": 3.19, "25 mm²": 4.84 } 
+                },
+                "fg16r16": { 
+                    nome: "FG16R16 (Guaina PVC)", 
+                    desc: "Cavo con isolamento in gomma HEPR e guaina in PVC, resistente all'umidità e idoneo per posa interrata.", 
+                    sezioni: ["1.5 mm²", "2.5 mm²", "4 mm²", "6 mm²", "10 mm²", "16 mm²", "25 mm²", "35 mm²", "50 mm²", "70 mm²", "95 mm²", "120 mm²"], 
+                    prezzi: { "1.5 mm²": 0.605, "2.5 mm²": 0.77, "4 mm²": 1.045, "6 mm²": 1.54, "10 mm²": 2.42, "16 mm²": 3.85, "25 mm²": 5.72, "35 mm²": 7.81, "50 mm²": 11.22, "70 mm²": 15.18, "95 mm²": 20.79, "120 mm²": 26.4 } 
+                },
+                "fg16m16": { 
+                    nome: "FG16M16 (Privo di alogeni LS0H)", 
+                    desc: "Versione dell'FG16R16 con guaina speciale priva di alogeni per la massima sicurezza in luoghi affollati.", 
+                    sezioni: ["1.5 mm²", "2.5 mm²", "4 mm²", "6 mm²", "10 mm²", "16 mm²", "25 mm²", "35 mm²", "50 mm²", "70 mm²", "95 mm²", "120 mm²"], 
+                    prezzi: { "1.5 mm²": 0.77, "2.5 mm²": 0.99, "4 mm²": 1.375, "6 mm²": 1.925, "10 mm²": 2.97, "16 mm²": 4.62, "25 mm²": 6.93, "35 mm²": 9.35, "50 mm²": 13.2, "70 mm²": 18.15, "95 mm²": 24.2, "120 mm²": 30.8 } 
+                },
+                "h1z2z2k": { 
+                    nome: "H1Z2Z2-K (Cavo Solare Fotovoltaico)", 
+                    desc: "Cavo specifico per impianti fotovoltaici, resistente a UV e intemperie.", 
+                    sezioni: ["4 mm²", "6 mm²", "10 mm²"], 
+                    prezzi: { "4 mm²": 1.21, "6 mm²": 1.65, "10 mm²": 2.64 } 
+                }
             },
             img: "img/cavo-unipolare.jpeg"
         },
@@ -539,7 +528,6 @@
             }
         }
 
-        // Reset terminali
         document.getElementById('terminale-a-tipo').value = "libero";
         document.getElementById('terminale-b-tipo').value = "libero";
         gestisciTerminaleA();
@@ -576,18 +564,13 @@
         let subElements = document.querySelectorAll('.sub-term-a');
         subElements.forEach(el => el.style.display = 'none');
 
-        if (tipo === 'puntale') {
-            document.getElementById('sub-puntale-a').style.display = 'block';
-        } else if (tipo === 'occhiello') {
-            document.getElementById('sub-occhiello-a').style.display = 'block';
-        } else if (tipo === 'forcella') {
-            document.getElementById('sub-forcella-a').style.display = 'block';
-        } else if (tipo === 'faston') {
+        if (tipo === 'puntale') document.getElementById('sub-puntale-a').style.display = 'block';
+        else if (tipo === 'occhiello') document.getElementById('sub-occhiello-a').style.display = 'block';
+        else if (tipo === 'forcella') document.getElementById('sub-forcella-a').style.display = 'block';
+        else if (tipo === 'faston') {
             document.getElementById('sub-faston-a').style.display = 'block';
             document.getElementById('sub-faston-a-larghezza').style.display = 'block';
-        } else if (tipo === 'spina') {
-            document.getElementById('sub-spina-a').style.display = 'block';
-        }
+        } else if (tipo === 'spina') document.getElementById('sub-spina-a').style.display = 'block';
 
         aggiornaConfigurazione();
     }
@@ -597,18 +580,13 @@
         let subElements = document.querySelectorAll('.sub-term-b');
         subElements.forEach(el => el.style.display = 'none');
 
-        if (tipo === 'puntale') {
-            document.getElementById('sub-puntale-b').style.display = 'block';
-        } else if (tipo === 'occhiello') {
-            document.getElementById('sub-occhiello-b').style.display = 'block';
-        } else if (tipo === 'forcella') {
-            document.getElementById('sub-forcella-b').style.display = 'block';
-        } else if (tipo === 'faston') {
+        if (tipo === 'puntale') document.getElementById('sub-puntale-b').style.display = 'block';
+        else if (tipo === 'occhiello') document.getElementById('sub-occhiello-b').style.display = 'block';
+        else if (tipo === 'forcella') document.getElementById('sub-forcella-b').style.display = 'block';
+        else if (tipo === 'faston') {
             document.getElementById('sub-faston-b').style.display = 'block';
             document.getElementById('sub-faston-b-larghezza').style.display = 'block';
-        } else if (tipo === 'spina') {
-            document.getElementById('sub-spina-b').style.display = 'block';
-        }
+        } else if (tipo === 'spina') document.getElementById('sub-spina-b').style.display = 'block';
 
         aggiornaConfigurazione();
     }
