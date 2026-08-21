@@ -3,12 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalogo Prodotti & Richieste - Caccin Cablaggi</title>
-    <meta name="description" content="Catalogo online di cablaggi elettrici, cavi LAN Cat6 e prolunghe 16A pronti e testati. Ordina direttamente via WhatsApp o Email.">
-    <!-- Open Graph per condivisione social -->
-    <meta property="og:title" content="Catalogo Prodotti & Richieste - Caccin Cablaggi">
-    <meta property="og:description" content="Cavi Ethernet Cat6 e Prolunghe Elettriche 16A cablati e testati in laboratorio.">
-    <meta property="og:type" content="website">
+    <title>Catalogo Prodotti & Configuratore - Caccin Cablaggi</title>
+    <meta name="description" content="Catalogo online di cablaggi elettrici, cavi LAN Cat6 e prolunghe 16A, oppure crea il tuo cablaggio personalizzato su misura. Ordina via WhatsApp o Email.">
     
     <style>
         :root { --primary: #006666; --accent: #ff6b35; }
@@ -25,9 +21,18 @@
 
         .shop-section { padding: 30px 0; }
         
-        .tools { display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; background: white; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        .tools { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; background: white; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
         .tools input, .tools select { padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; flex: 1; font-size: 15px; background: #f8fafc; }
         .tools input:focus, .tools select:focus { border-color: var(--primary); background: #fff; outline: none; }
+
+        /* Stili per il Box Configuratore */
+        .configurator-box { background: white; border: 1px solid #e2e8f0; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 30px; text-align: left; }
+        .configurator-box h2 { color: var(--primary); font-size: 20px; margin-bottom: 5px; }
+        .configurator-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px; }
+        
+        table.numerazione-table { width: 100%; margin-top: 15px; border-collapse: collapse; font-size: 14px; }
+        table.numerazione-table th, table.numerazione-table td { border: 1px solid #cbd5e1; padding: 8px; text-align: left; }
+        table.numerazione-table th { background: #f1f5f9; color: var(--primary); }
 
         .shop-layout { display: flex; gap: 30px; flex-wrap: wrap; }
         .products-container { flex: 2; min-width: 280px; }
@@ -56,7 +61,6 @@
         .totali-box div { display: flex; justify-content: space-between; margin-bottom: 5px; }
         .totali-box .finale { font-weight: bold; font-size: 16px; color: var(--primary); border-top: 1px solid #cbd5e1; padding-top: 5px; margin-top: 5px; }
 
-        /* Stili per le checkbox legali e link */
         .legal-box { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; margin: 15px 0; text-align: left; font-size: 12px; color: #475569; }
         .legal-box label { display: flex; align-items: flex-start; gap: 8px; cursor: pointer; margin-bottom: 8px; font-weight: normal; }
         .legal-box input[type="checkbox"] { margin-top: 2px; cursor: pointer; }
@@ -69,6 +73,8 @@
         .btn-wa:hover { background: #128c7e; }
         .btn-mail { background: var(--primary); }
         .btn-mail:hover { background: #004d4d; }
+        .btn-secondary { background: #64748b; font-size: 12px; padding: 6px 10px; width: auto; }
+        .btn-secondary:hover { background: #475569; }
 
         .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; padding: 15px; }
         .modal-content { background: white; padding: 25px; border-radius: 12px; width: 100%; max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
@@ -97,11 +103,74 @@
 </header>
 
 <div class="container shop-section">
-    <h1 style="color: var(--primary); text-align: center; margin-bottom: 8px; font-size: 28px;">Catalogo Prodotti Pronti & Standard</h1>
-    <p style="text-align: center; color: #475569; margin-bottom: 25px; font-size: 15px;">Cerca, filtra e gestisci i tuoi cablaggi direttamente da qualsiasi dispositivo.</p>
+    <h1 style="color: var(--primary); text-align: center; margin-bottom: 8px; font-size: 28px;">Catalogo & Configuratore Cablaggi</h1>
+    <p style="text-align: center; color: #475569; margin-bottom: 25px; font-size: 15px;">Scegli un prodotto pronto oppure crea un cablaggio su misura in base alle tue specifiche tecniche.</p>
+
+    <!-- SEZIONE CONFIGURATORE PERSONALIZZATO -->
+    <div class="configurator-box">
+        <h2>⚙️ Crea il tuo cablaggio personalizzato</h2>
+        <p style="font-size: 13px; color: #64748b; margin-bottom: 10px;">Configura i dettagli tecnici e aggiungilo direttamente al carrello.</p>
+        
+        <div class="configurator-grid">
+            <div class="form-group">
+                <label>Tipologia di Cavo / Filo *</label>
+                <select id="conf-cavo" onchange="aggiornaConnettoriDisponibili()">
+                    <option value="FS18 3G2.5">Cavo FS18 3G2.5 (Marrone)</option>
+                    <option value="FROR 4G1.5">Cavo FROR 4G1.5 (Multifilare)</option>
+                    <option value="Cat6 UTP">Cavo Ethernet LAN Cat6 UTP</option>
+                    <option value="N07V-K 1.5mmq">Filo Singolo N07V-K 1.5mmq</option>
+                    <option value="N07V-K 2.5mmq">Filo Singolo N07V-K 2.5mmq</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Lunghezza Esatta (in Metri) *</label>
+                <input type="number" id="conf-metri" value="2.5" min="0.2" step="0.1">
+            </div>
+            <div class="form-group">
+                <label>Connettore Testa *</label>
+                <select id="conf-testa">
+                    <!-- Popolato via JS -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Connettore Coda *</label>
+                <select id="conf-coda">
+                    <!-- Popolato via JS -->
+                </select>
+            </div>
+        </div>
+
+        <div style="margin-top: 15px;">
+            <label style="font-size: 13px; font-weight: bold; color: var(--primary); display: block; margin-bottom: 5px;">Numerazione Fili del Connettore (Opzionale)</label>
+            <table class="numerazione-table" id="tabella-numerazione">
+                <thead>
+                    <tr>
+                        <th>Etichetta Filo (es. 10.01)</th>
+                        <th>Descrizione / Posizione (es. filo nero)</th>
+                        <th style="width: 60px; text-align: center;">Azioni</th>
+                    </tr>
+                </thead>
+                <tbody id="corpo-tabella-num">
+                    <tr>
+                        <td><input type="text" class="num-etichetta" placeholder="es. 10.01"></td>
+                        <td><input type="text" class="num-desc" placeholder="es. filo nero / fase"></td>
+                        <td style="text-align: center;"><button type="button" class="btn btn-secondary" onclick="rimuoviRigaNum(this)">X</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-secondary" style="margin-top: 8px;" onclick="aggiungiRigaNum()">+ Aggiungi riga numerazione</button>
+        </div>
+
+        <div class="form-group" style="margin-top: 20px; max-width: 250px;">
+            <label>Quantità da Produrre *</label>
+            <input type="number" id="conf-qta" value="1" min="1">
+        </div>
+
+        <button class="btn" onclick="aggiungiCustomAlCarrello()" style="max-width: 300px; margin-top: 10px;">Aggiungi Cablaggio Personalizzato al Carrello</button>
+    </div>
 
     <div class="tools">
-        <input type="text" id="search" placeholder="🔎 Cerca prodotto per nome..." oninput="renderCatalogo()">
+        <input type="text" id="search" placeholder="🔎 Cerca prodotto pronto per nome..." oninput="renderCatalogo()">
         <select id="filter" onchange="renderCatalogo()">
             <option value="tutti">Tutte le categorie</option>
             <option value="lan">Cavi Ethernet Cat 6</option>
@@ -122,6 +191,8 @@
             <ul id="lista-carrello">
                 <p style="color: #94a3b8; text-align: center; padding: 10px 0;">Il carrello è vuoto</p>
             </ul>
+
+            <button class="btn btn-secondary" onclick="svuotaCarrello()" style="width: 100%; margin-bottom: 10px;">🗑️ Svuota Carrello</button>
 
             <h3 style="font-size: 14px; color: var(--primary); margin: 15px 0 8px 0;">Modalità di Consegna</h3>
             <div class="form-group">
@@ -147,7 +218,6 @@
                 </div>
             </div>
 
-            <!-- Sezione Indirizzo dinamica in base alla scelta -->
             <div id="campi-indirizzo-container">
                 <div class="form-group">
                     <label>Indirizzo e Civico *</label>
@@ -173,10 +243,9 @@
             <div class="totali-box">
                 <div><span>Subtotale prodotti:</span> <span id="subtotale">0,00</span> €</div>
                 <div><span>Spedizione (<span id="tipo-spedizione">Da calcolare</span>):</span> <span id="costo-spedizione">0,00</span> €</div>
-                <div class="finale"><span>Totale Complessivo:</span> <span id="totale">0,00</span> €</div>
+                <div class="finale"><span>Totale Complessivo:</span> <span id="totale">0,00</span> € <span style="font-size:10px; font-weight:normal; display:block;">(I cablaggi personalizzati hanno preventivo su misura)</span></div>
             </div>
 
-            <!-- Blocco Privacy e Termini obbligatori -->
             <div class="legal-box">
                 <label>
                     <input type="checkbox" id="accetto-privacy">
@@ -224,14 +293,94 @@
         { id: 'pro10', cat: 'prolunghe', name: 'Prolunga 16A (10m)', price: 36.00, desc: 'Cavo marrone 3g2,5 FS18, Spina e Presa Vimar 16A', img: 'img/prolunga.jpeg', len: '10 m', con: 'Vimar 16A' }
     ];
 
-    // Al caricamento della pagina, puliamo il carrello per creare un nuovo ordine
+    // Mappa dei connettori compatibili per tipologia di cavo
+    const connettoriPerCavo = {
+        "FS18 3G2.5": ["Senza connettore", "Spina Vimar 16A", "Presa Vimar 16A", "Capocorda a puntale", "Faston femmina"],
+        "FROR 4G1.5": ["Senza connettore", "Capocorda a puntale", "Connettore Molex", "Connettore Industriale M12", "Faston femmina"],
+        "Cat6 UTP": ["Senza connettore", "Plug RJ45 Schermato", "Plug RJ45 Standard", "Keystone Jack femmina"],
+        "N07V-K 1.5mmq": ["Senza connettore", "Capocorda a puntale isolato", "Capocorda ad occhiello", "Faston femmina"],
+        "N07V-K 2.5mmq": ["Senza connettore", "Capocorda a puntale isolato", "Capocorda ad occhiello", "Faston femmina"]
+    };
+
     let carrello = [];
-    localStorage.removeItem('caccin_carrello');
 
     let numeroOrdine = localStorage.getItem('caccin_ultimo_ordine');
     if (!numeroOrdine) { numeroOrdine = 826001; } else { numeroOrdine = parseInt(numeroOrdine) + 1; }
     localStorage.setItem('caccin_ultimo_ordine', numeroOrdine);
     document.getElementById('num-ordine-txt').innerText = "#" + numeroOrdine;
+
+    function aggiornaConnettoriDisponibili() {
+        let tipoCavo = document.getElementById('conf-cavo').value;
+        let listaConn = connettoriPerCavo[tipoCavo] || ["Senza connettore"];
+        
+        let htmlOptions = "";
+        listaConn.forEach(c => {
+            htmlOptions += `<option value="${c}">${c}</option>`;
+        });
+
+        document.getElementById('conf-testa').innerHTML = htmlOptions;
+        document.getElementById('conf-coda').innerHTML = htmlOptions;
+    }
+
+    function aggiungiRigaNum() {
+        let tbody = document.getElementById('corpo-tabella-num');
+        let nuovaRiga = document.createElement('tr');
+        nuovaRiga.innerHTML = `
+            <td><input type="text" class="num-etichetta" placeholder="es. 10.02"></td>
+            <td><input type="text" class="num-desc" placeholder="es. filo blu / neutro"></td>
+            <td style="text-align: center;"><button type="button" class="btn btn-secondary" onclick="rimuoviRigaNum(this)">X</button></td>
+        `;
+        tbody.appendChild(nuovaRiga);
+    }
+
+    function rimuoviRigaNum(btn) {
+        let row = btn.closest('tr');
+        if (document.querySelectorAll('#corpo-tabella-num tr').length > 1) {
+            row.remove();
+        } else {
+            row.querySelector('.num-etichetta').value = '';
+            row.querySelector('.num-desc').value = '';
+        }
+    }
+
+    function aggiungiCustomAlCarrello() {
+        let cavo = document.getElementById('conf-cavo').value;
+        let metri = document.getElementById('conf-metri').value;
+        let testa = document.getElementById('conf-testa').value;
+        let coda = document.getElementById('conf-coda').value;
+        let qta = parseInt(document.getElementById('conf-qta').value);
+
+        if (!metri || metri <= 0 || isNaN(qta) || qta < 1) {
+            alert("Inserisci una lunghezza e una quantità valide.");
+            return;
+        }
+
+        // Raccogli tabella numerazione
+        let numerazioni = [];
+        document.querySelectorAll('#corpo-tabella-num tr').forEach(row => {
+            let etichetta = row.querySelector('.num-etichetta').value.trim();
+            let desc = row.querySelector('.num-desc').value.trim();
+            if (etichetta || desc) {
+                numerazioni.push(`${etichetta} - ${desc}`);
+            }
+        });
+
+        let nomeCustom = `[PERSONALIZZATO] Cavo ${cavo} (${metri}m)`;
+        let descCustom = `Testa: ${testa} | Coda: ${coda}`;
+        if (numerazioni.length > 0) {
+            descCustom += ` | Num. fili: [${numerazioni.join('; ')}]`;
+        }
+
+        carrello.push({
+            nome: nomeCustom,
+            prezzo: 0.00, // Prezzo su misura da preventivare
+            qta: qta,
+            dettagliExtra: descCustom
+        });
+
+        calcolaTotali();
+        alert("Cablaggio personalizzato aggiunto al carrello!");
+    }
 
     function renderCatalogo() {
         const query = document.getElementById('search').value.toLowerCase();
@@ -271,7 +420,7 @@
                                     <label>Quantità:</label>
                                     <input type="number" id="q-${p.id}" value="1" min="1" style="text-align: center;">
                                 </div>
-                                <button class="btn" id="btn-add-${p.id}" onclick="aggiungiAlCarrello('${p.name}', ${p.price}, 'q-${p.id}', '${p.id}')">Aggiungi</button>
+                                <button class="btn" id="btn-add-${p.id}" onclick="aggiungiAlCarrelloCatalog('${p.name}', ${p.price}, 'q-${p.id}', '${p.id}')">Aggiungi</button>
                             </div>
                         </div>`;
                 });
@@ -300,11 +449,11 @@
         document.getElementById('modal-details').style.display = 'none';
     }
 
-    function aggiungiAlCarrello(nome, prezzo, idInput, idProdotto) {
+    function aggiungiAlCarrelloCatalog(nome, prezzo, idInput, idProdotto) {
         let qta = parseInt(document.getElementById(idInput).value);
         if (qta < 1) return;
 
-        let esistente = carrello.find(item => item.nome === nome);
+        let esistente = carrello.find(item => item.nome === nome && !item.dettagliExtra);
         if (esistente) {
             esistente.qta += qta;
         } else {
@@ -312,7 +461,6 @@
         }
         calcolaTotali();
 
-        // Feedback visivo immediato sul pulsante
         let btn = document.getElementById(`btn-add-${idProdotto}`);
         let testoOriginale = btn.innerText;
         let coloreOriginale = btn.style.backgroundColor;
@@ -335,12 +483,20 @@
         lista.innerHTML = '';
         carrello.forEach((item, index) => {
             let subtotal = item.prezzo * item.qta;
-            lista.innerHTML += `<li><span><b>${item.nome}</b> (x${item.qta})</span> <span><b>${subtotal.toFixed(2)}€</b> <span style="color:red; cursor:pointer; margin-left:6px;" onclick="rimuoviItem(${index})">❌</span></span></li>`;
+            let subtext = item.prezzo > 0 ? `<b>${subtotal.toFixed(2)}€</b>` : '<b style="color:var(--accent);">Su misura</b>';
+            let extraInfo = item.dettagliExtra ? `<br><span style="font-size:11px; color:#64748b;">${item.dettagliExtra}</span>` : '';
+            
+            lista.innerHTML += `<li><span><b>${item.nome}</b> (x${item.qta})${extraInfo}</span> <span>${subtext} <span style="color:red; cursor:pointer; margin-left:6px;" onclick="rimuoviItem(${index})">❌</span></span></li>`;
         });
     }
 
     function rimuoviItem(index) {
         carrello.splice(index, 1);
+        calcolaTotali();
+    }
+
+    function svuotaCarrello() {
+        carrello = [];
         calcolaTotali();
     }
 
@@ -369,7 +525,7 @@
         let costoSpedizione = 0;
         let tipoSpedizioneTesto = "Ritiro in Sede";
 
-        if (subtotale === 0) {
+        if (carrello.length === 0) {
             document.getElementById('subtotale').innerText = '0,00';
             document.getElementById('costo-spedizione').innerText = '0,00';
             document.getElementById('totale').innerText = '0,00';
@@ -410,7 +566,6 @@
         let telefono = document.getElementById('telefono').value.trim();
         let tipoConsegna = document.getElementById('tipo-consegna').value;
         
-        // Lettura stato checkbox legali
         let accettoPrivacy = document.getElementById('accetto-privacy').checked;
         let accettoTermini = document.getElementById('accetto-termini').checked;
 
@@ -437,7 +592,6 @@
             indirizzoCompleto = "Via Cavin Maggiore 5, Mellaredo di Pianiga, 30030 (Ritiro in Sede)";
         }
 
-        // Controllo validazione obbligatoria privacy e termini
         if (!accettoPrivacy || !accettoTermini) {
             alert("Per favore, accetta l'informativa sulla privacy e i termini di vendita prima di inviare l'ordine.");
             return;
@@ -448,15 +602,15 @@
         let tipoSpedVal = document.getElementById('tipo-spedizione').innerText;
         let totaleGenerale = document.getElementById('totale').innerText;
 
-        let msg = `📦 *NUOVO ORDINE #${numeroOrdine}*%0A%0A`;
+        let msg = `📦 *NUOVO ORDINE / RICHIESTA #${numeroOrdine}*%0A%0A`;
         msg += `*Modalità:* ${tipoConsegna === 'ritiro' ? 'Ritiro in Sede' : 'Spedizione'}%0A%0A`;
-        msg += `*Prodotti:*%0A`;
+        msg += `*Articoli:*%0A`;
         carrello.forEach(i => {
-            msg += `- ${i.nome} (Qt: ${i.qta}) - ${(i.prezzo * i.qta).toFixed(2)}€%0A`;
+            msg += `- ${i.nome} (Qt: ${i.qta})${i.dettagliExtra ? ' - ' + i.dettagliExtra : ''} - ${(i.prezzo * i.qta).toFixed(2)}€%0A`;
         });
         msg += `%0ASubtotale: ${subtotaleVal} €`;
         msg += `%0ASpedizione (${tipoSpedVal}): ${spedizioneVal} €`;
-        msg += `%0A*Totale Complessivo (IVA incl.):* ${totaleGenerale} €%0A%0A`;
+        msg += `%0A*Totale Complessivo:* ${totaleGenerale} €%0A%0A`;
         msg += `*Dati Cliente & Riferimenti:*%0A`;
         msg += `👤 Intestatario: ${nome}%0A`;
         if(piva) msg += `🏢 P.IVA: ${piva}%0A`;
@@ -467,13 +621,14 @@
         if (metodo === 'whatsapp') {
             window.open(`https://wa.me/393392859037?text=${msg}`, '_blank');
         } else {
-            let subject = encodeURIComponent(`Ordine #${numeroOrdine} - Caccin Cablaggi`);
+            let subject = encodeURIComponent(`Ordine / Richiesta #${numeroOrdine} - Caccin Cablaggi`);
             let body = encodeURIComponent(msg.replace(/\*/g, '').replace(/%0A/g, '\n'));
             window.location.href = `mailto:caccin.cablaggi@gmail.com?subject=${subject}&body=${body}`;
         }
     }
 
-    // Inizializzazione pagina
+    // Inizializzazione iniziale
+    aggiornaConnettoriDisponibili();
     renderCatalogo();
     calcolaTotali();
 </script>
