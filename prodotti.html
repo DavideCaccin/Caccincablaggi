@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalogo Prodotti & Configuratore - Caccin Cablaggi</title>
-    <meta name="description" content="Catalogo online di cablaggi elettrici, cavi LAN Cat6 e prolunghe 16A, oppure crea il tuo cablaggio personalizzato su misura. Ordina via WhatsApp o Email.">
+    <title>Catalogo Prodotti & Configuratore Avanzato - Caccin Cablaggi</title>
+    <meta name="description" content="Catalogo online di cablaggi e configuratore professionale per cavi, fili, conduttori e connettori industriali con codici e prezzi. Ordina via WhatsApp o Email.">
     
     <style>
         :root { --primary: #006666; --accent: #ff6b35; }
@@ -25,11 +25,13 @@
         .tools input, .tools select { padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; flex: 1; font-size: 15px; background: #f8fafc; }
         .tools input:focus, .tools select:focus { border-color: var(--primary); background: #fff; outline: none; }
 
-        /* Stili per il Box Configuratore */
+        /* Stili per il Box Configuratore Avanzato */
         .configurator-box { background: white; border: 1px solid #e2e8f0; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 30px; text-align: left; }
         .configurator-box h2 { color: var(--primary); font-size: 20px; margin-bottom: 5px; }
-        .configurator-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px; }
+        .configurator-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin-top: 15px; }
         
+        .item-specs-info { font-size: 11px; color: #64748b; margin-top: 2px; display: block; background: #f1f5f9; padding: 4px 8px; border-radius: 4px; }
+
         table.numerazione-table { width: 100%; margin-top: 15px; border-collapse: collapse; font-size: 14px; }
         table.numerazione-table th, table.numerazione-table td { border: 1px solid #cbd5e1; padding: 8px; text-align: left; }
         table.numerazione-table th { background: #f1f5f9; color: var(--primary); }
@@ -103,40 +105,42 @@
 </header>
 
 <div class="container shop-section">
-    <h1 style="color: var(--primary); text-align: center; margin-bottom: 8px; font-size: 28px;">Catalogo & Configuratore Cablaggi</h1>
-    <p style="text-align: center; color: #475569; margin-bottom: 25px; font-size: 15px;">Scegli un prodotto pronto oppure crea un cablaggio su misura in base alle tue specifiche tecniche.</p>
+    <h1 style="color: var(--primary); text-align: center; margin-bottom: 8px; font-size: 28px;">Catalogo & Configuratore Professionale</h1>
+    <p style="text-align: center; color: #475569; margin-bottom: 25px; font-size: 15px;">Seleziona qualsiasi conduttore, cavo o filo di mercato e configura i connettori con marca, modello e prezzi unitari in tempo reale.</p>
 
-    <!-- SEZIONE CONFIGURATORE PERSONALIZZATO -->
+    <!-- SEZIONE CONFIGURATORE AVANZATO -->
     <div class="configurator-box">
-        <h2>⚙️ Crea il tuo cablaggio personalizzato</h2>
-        <p style="font-size: 13px; color: #64748b; margin-bottom: 10px;">Configura i dettagli tecnici e aggiungilo direttamente al carrello.</p>
+        <h2>⚙️ Configuratore Universale Cablaggi su Misura</h2>
+        <p style="font-size: 13px; color: #64748b; margin-bottom: 10px;">Componi il cablaggio scegliendo conduttori e connettori certificati con codici e prezzi.</p>
         
         <div class="configurator-grid">
             <div class="form-group">
-                <label>Tipologia di Cavo / Filo *</label>
-                <select id="conf-cavo" onchange="aggiornaConnettoriDisponibili()">
-                    <option value="FS18 3G2.5">Cavo FS18 3G2.5 (Marrone)</option>
-                    <option value="FROR 4G1.5">Cavo FROR 4G1.5 (Multifilare)</option>
-                    <option value="Cat6 UTP">Cavo Ethernet LAN Cat6 UTP</option>
-                    <option value="N07V-K 1.5mmq">Filo Singolo N07V-K 1.5mmq</option>
-                    <option value="N07V-K 2.5mmq">Filo Singolo N07V-K 2.5mmq</option>
+                <label>Tipologia di Cavo / Conduttore *</label>
+                <select id="conf-cavo" onchange="aggiornaDatiCavoEConnettori()">
+                    <!-- Popolato via JS con tutti i cavi di mercato -->
                 </select>
+                <span id="info-cavo-prezzo" class="item-specs-info">Prezzo al metro: 0,00 €</span>
             </div>
+            
             <div class="form-group">
                 <label>Lunghezza Esatta (in Metri) *</label>
-                <input type="number" id="conf-metri" value="2.5" min="0.2" step="0.1">
+                <input type="number" id="conf-metri" value="2.0" min="0.1" step="0.1" oninput="calcolaPrezzoConfiguratore()">
             </div>
+
             <div class="form-group">
                 <label>Connettore Testa *</label>
-                <select id="conf-testa">
-                    <!-- Popolato via JS -->
+                <select id="conf-testa" onchange="calcolaPrezzoConfiguratore()">
+                    <!-- Popolato dinamicamente in base al cavo -->
                 </select>
+                <span id="info-testa-prezzo" class="item-specs-info">Prezzo testa: 0,00 €</span>
             </div>
+
             <div class="form-group">
                 <label>Connettore Coda *</label>
-                <select id="conf-coda">
-                    <!-- Popolato via JS -->
+                <select id="conf-coda" onchange="calcolaPrezzoConfiguratore()">
+                    <!-- Popolato dinamicamente in base al cavo -->
                 </select>
+                <span id="info-coda-prezzo" class="item-specs-info">Prezzo coda: 0,00 €</span>
             </div>
         </div>
 
@@ -146,14 +150,14 @@
                 <thead>
                     <tr>
                         <th>Etichetta Filo (es. 10.01)</th>
-                        <th>Descrizione / Posizione (es. filo nero)</th>
+                        <th>Descrizione / Posizione (es. filo nero / fase)</th>
                         <th style="width: 60px; text-align: center;">Azioni</th>
                     </tr>
                 </thead>
                 <tbody id="corpo-tabella-num">
                     <tr>
                         <td><input type="text" class="num-etichetta" placeholder="es. 10.01"></td>
-                        <td><input type="text" class="num-desc" placeholder="es. filo nero / fase"></td>
+                        <td><input type="text" class="num-desc" placeholder="es. filo nero"></td>
                         <td style="text-align: center;"><button type="button" class="btn btn-secondary" onclick="rimuoviRigaNum(this)">X</button></td>
                     </tr>
                 </tbody>
@@ -161,12 +165,18 @@
             <button type="button" class="btn btn-secondary" style="margin-top: 8px;" onclick="aggiungiRigaNum()">+ Aggiungi riga numerazione</button>
         </div>
 
-        <div class="form-group" style="margin-top: 20px; max-width: 250px;">
-            <label>Quantità da Produrre *</label>
-            <input type="number" id="conf-qta" value="1" min="1">
+        <div style="display: flex; gap: 15px; margin-top: 20px; align-items: center; flex-wrap: wrap;">
+            <div class="form-group" style="flex: 1; min-width: 150px; margin-bottom: 0;">
+                <label>Quantità da Produrre *</label>
+                <input type="number" id="conf-qta" value="1" min="1" oninput="calcolaPrezzoConfiguratore()">
+            </div>
+            <div style="flex: 2; text-align: right;">
+                <div style="font-size: 13px; color: #475569;">Totale Parziale Configurazione:</div>
+                <div id="conf-totale-anteprima" style="font-size: 22px; font-weight: bold; color: var(--accent);">0,00 €</div>
+            </div>
         </div>
 
-        <button class="btn" onclick="aggiungiCustomAlCarrello()" style="max-width: 300px; margin-top: 10px;">Aggiungi Cablaggio Personalizzato al Carrello</button>
+        <button class="btn" onclick="aggiungiCustomAlCarrello()" style="margin-top: 15px;">Aggiungi Cablaggio Personalizzato al Carrello</button>
     </div>
 
     <div class="tools">
@@ -243,7 +253,7 @@
             <div class="totali-box">
                 <div><span>Subtotale prodotti:</span> <span id="subtotale">0,00</span> €</div>
                 <div><span>Spedizione (<span id="tipo-spedizione">Da calcolare</span>):</span> <span id="costo-spedizione">0,00</span> €</div>
-                <div class="finale"><span>Totale Complessivo:</span> <span id="totale">0,00</span> € <span style="font-size:10px; font-weight:normal; display:block;">(I cablaggi personalizzati hanno preventivo su misura)</span></div>
+                <div class="finale"><span>Totale Complessivo:</span> <span id="totale">0,00</span> €</div>
             </div>
 
             <div class="legal-box">
@@ -281,6 +291,7 @@
 </div>
 
 <script>
+    // Database prodotti standard a catalogo
     const databaseProdotti = [
         { id: 'lan1', cat: 'lan', name: 'Cavo LAN Cat6 (1m)', price: 6.00, desc: 'Cavo ethernet cat6 con prese rj45 cablato e testato!', img: 'img/cavo-cat6.jpeg', len: '1 m', con: 'RJ45' },
         { id: 'lan2', cat: 'lan', name: 'Cavo LAN Cat6 (2m)', price: 8.50, desc: 'Cavo ethernet cat6 con prese rj45 cablato e testato!', img: 'img/cavo-cat6.jpeg', len: '2 m', con: 'RJ45' },
@@ -293,13 +304,59 @@
         { id: 'pro10', cat: 'prolunghe', name: 'Prolunga 16A (10m)', price: 36.00, desc: 'Cavo marrone 3g2,5 FS18, Spina e Presa Vimar 16A', img: 'img/prolunga.jpeg', len: '10 m', con: 'Vimar 16A' }
     ];
 
-    // Mappa dei connettori compatibili per tipologia di cavo
-    const connettoriPerCavo = {
-        "FS18 3G2.5": ["Senza connettore", "Spina Vimar 16A", "Presa Vimar 16A", "Capocorda a puntale", "Faston femmina"],
-        "FROR 4G1.5": ["Senza connettore", "Capocorda a puntale", "Connettore Molex", "Connettore Industriale M12", "Faston femmina"],
-        "Cat6 UTP": ["Senza connettore", "Plug RJ45 Schermato", "Plug RJ45 Standard", "Keystone Jack femmina"],
-        "N07V-K 1.5mmq": ["Senza connettore", "Capocorda a puntale isolato", "Capocorda ad occhiello", "Faston femmina"],
-        "N07V-K 2.5mmq": ["Senza connettore", "Capocorda a puntale isolato", "Capocorda ad occhiello", "Faston femmina"]
+    // Master database universale: Cavi, Fili, Conduttori con relativi connettori compatibili, marchi, codici e prezzi
+    const masterCatalogoConfiguratore = {
+        "cavo_fs18_3g25": {
+            nome: "Cavo Flessibile FS18 3G2.5",
+            prezzoMetro: 1.80,
+            connettori: [
+                { id: "nessuno", nomeModello: "Senza connettore", marca: "-", codice: "-", prezzo: 0.00 },
+                { id: "vimar_spina", nomeModello: "Spina Volante 16A", marca: "Vimar", codice: "VIM-00216", prezzo: 3.50 },
+                { id: "vimar_presa", nomeModello: "Presa Volante 16A", marca: "Vimar", codice: "VIM-00217", prezzo: 3.80 },
+                { id: "gewiss_schuko", nomeModello: "Spina Schuko Dritto", marca: "Gewiss", codice: "GW-63022", prezzo: 4.20 },
+                { id: "puntale_1", nomeModello: "Capocorda a Puntale 2.5mmq", marca: "Cembre", codice: "PK2512", prezzo: 0.25 }
+            ]
+        },
+        "cavo_fror_4g15": {
+            nome: "Cavo Multipolare FROR 4G1.5",
+            prezzoMetro: 2.10,
+            connettori: [
+                { id: "nessuno", nomeModello: "Senza connettore", marca: "-", codice: "-", prezzo: 0.00 },
+                { id: "harting_6b", nomeModello: "Inserto Han 6B + Custodia", marca: "Harting", codice: "09300060301", prezzo: 24.50 },
+                { id: "molex_kk", nomeModello: "Connettore serie KK 4 poli", marca: "Molex", codice: "22-01-2045", prezzo: 1.20 },
+                { id: "puntale_2", nomeModello: "Capocorda a Puntale 1.5mmq", marca: "Cembre", codice: "PK1508", prezzo: 0.20 }
+            ]
+        },
+        "cavo_cat6_utp": {
+            nome: "Cavo Ethernet LAN Cat6 UTP AWG24",
+            prezzoMetro: 0.75,
+            connettori: [
+                { id: "nessuno", nomeModello: "Senza connettore", marca: "-", codice: "-", prezzo: 0.00 },
+                { id: "rj45_std", nomeModello: "Plug RJ45 Cat6 Unshielded", marca: "Tyco Electronics", codice: "5-569252-3", prezzo: 0.40 },
+                { id: "rj45_sch", nomeModello: "Plug RJ45 Cat6A Schermato Metallico", marca: "Telegärtner", codice: "J00026A0111", prezzo: 1.60 },
+                { id: "keystone_f", nomeModello: "Frutto Keystone Jack RJ45 Femmina", marca: "Vimar", codice: "03050", prezzo: 3.20 }
+            ]
+        },
+        "filo_n07vk_15": {
+            nome: "Filo Unipolare N07V-K 1.5mmq",
+            prezzoMetro: 0.35,
+            connettori: [
+                { id: "nessuno", nomeModello: "Senza connettore", marca: "-", codice: "-", prezzo: 0.00 },
+                { id: "puntale_15", nomeModello: "Puntale isolato 1.5mmq", marca: "Cembre", codice: "RN-P1508", prezzo: 0.15 },
+                { id: "faston_f", nomeModello: "Faston Femmina preisolato 6.3mm", marca: "Erg", codice: "F63-15", prezzo: 0.22 },
+                { id: "occhiello_m4", nomeModello: "Capocorda ad Occhiello M4", marca: "Cembre", codice: "A-M4-15", prezzo: 0.30 }
+            ]
+        },
+        "filo_n07vk_25": {
+            nome: "Filo Unipolare N07V-K 2.5mmq",
+            prezzoMetro: 0.50,
+            connettori: [
+                { id: "nessuno", nomeModello: "Senza connettore", marca: "-", codice: "-", prezzo: 0.00 },
+                { id: "puntale_25", nomeModello: "Puntale isolato 2.5mmq", marca: "Cembre", codice: "RN-P2508", prezzo: 0.18 },
+                { id: "faston_f2", nomeModello: "Faston Femmina preisolato 6.3mm", marca: "Erg", codice: "F63-25", prezzo: 0.25 },
+                { id: "occhiello_m5", nomeModello: "Capocorda ad Occhiello M5", marca: "Cembre", codice: "A-M5-25", prezzo: 0.35 }
+            ]
+        }
     };
 
     let carrello = [];
@@ -309,17 +366,63 @@
     localStorage.setItem('caccin_ultimo_ordine', numeroOrdine);
     document.getElementById('num-ordine-txt').innerText = "#" + numeroOrdine;
 
-    function aggiornaConnettoriDisponibili() {
-        let tipoCavo = document.getElementById('conf-cavo').value;
-        let listaConn = connettoriPerCavo[tipoCavo] || ["Senza connettore"];
-        
-        let htmlOptions = "";
-        listaConn.forEach(c => {
-            htmlOptions += `<option value="${c}">${c}</option>`;
+    function inizializzaConfiguratore() {
+        let selectCavo = document.getElementById('conf-cavo');
+        selectCavo.innerHTML = '';
+        for (let key in masterCatalogoConfiguratore) {
+            let cavoObj = masterCatalogoConfiguratore[key];
+            selectCavo.innerHTML += `<option value="${key}">${cavoObj.nome}</option>`;
+        }
+        aggiornaDatiCavoEConnettori();
+    }
+
+    function aggiornaDatiCavoEConnettori() {
+        let chiaveCavo = document.getElementById('conf-cavo').value;
+        let datiCavo = masterCatalogoConfiguratore[chiaveCavo];
+
+        // Mostra prezzo al metro del cavo scelto
+        document.getElementById('info-cavo-prezzo').innerText = `Prezzo al metro: ${datiCavo.prezzoMetro.toFixed(2)} €`;
+
+        // Popola i connettori di testa e coda compatibili con quel cavo
+        let optionsHTML = '';
+        datiCavo.connettori.forEach(conn => {
+            optionsHTML += `<option value="${conn.id}" data-prezzo="${conn.prezzo}" data-marca="${conn.marca}" data-modello="${conn.nomeModello}" data-codice="${conn.codice}">${conn.nomeModello} (${conn.marca} - ${conn.codice}) [+${conn.prezzo.toFixed(2)}€]</option>`;
         });
 
-        document.getElementById('conf-testa').innerHTML = htmlOptions;
-        document.getElementById('conf-coda').innerHTML = htmlOptions;
+        document.getElementById('conf-testa').innerHTML = optionsHTML;
+        document.getElementById('conf-coda').innerHTML = optionsHTML;
+
+        calcolaPrezzoConfiguratore();
+    }
+
+    function calcolaPrezzoConfiguratore() {
+        let chiaveCavo = document.getElementById('conf-cavo').value;
+        let datiCavo = masterCatalogoConfiguratore[chiaveCavo];
+        let metri = parseFloat(document.getElementById('conf-metri').value) || 0;
+        let qta = parseInt(document.getElementById('conf-qta').value) || 1;
+
+        let selectTesta = document.getElementById('conf-testa');
+        let optTesta = selectTesta.options[selectTesta.selectedIndex];
+        let prezzoTesta = optTesta ? parseFloat(optTesta.getAttribute('data-prezzo')) || 0 : 0;
+        let marcaTesta = optTesta ? optTesta.getAttribute('data-marca') : '-';
+        let codiceTesta = optTesta ? optTesta.getAttribute('data-codice') : '-';
+
+        let selectCoda = document.getElementById('conf-coda');
+        let optCoda = selectCoda.options[selectCoda.selectedIndex];
+        let prezzoCoda = optCoda ? parseFloat(optCoda.getAttribute('data-prezzo')) || 0 : 0;
+        let marcaCoda = optCoda ? optCoda.getAttribute('data-marca') : '-';
+        let codiceCoda = optCoda ? optCoda.getAttribute('data-codice') : '-';
+
+        // Aggiorna etichette informative sotto i menu
+        document.getElementById('info-testa-prezzo').innerText = `Marca: ${marcaTesta} | Cod: ${codiceTesta} | Prezzo: ${prezzoTesta.toFixed(2)} €`;
+        document.getElementById('info-coda-prezzo').innerText = `Marca: ${marcaCoda} | Cod: ${codiceCoda} | Prezzo: ${prezzoCoda.toFixed(2)} €`;
+
+        // Calcolo: (Costo Metro * Metri) + Prezzo Testa + Prezzo Coda * Quantità
+        let costoUnitario = (datiCavo.prezzoMetro * metri) + prezzoTesta + prezzoCoda;
+        let totaleComplessivo = costoUnitario * qta;
+
+        document.getElementById('conf-totale-anteprima').innerText = totaleComplessivo.toFixed(2) + " €";
+        return totaleComplessivo;
     }
 
     function aggiungiRigaNum() {
@@ -344,42 +447,48 @@
     }
 
     function aggiungiCustomAlCarrello() {
-        let cavo = document.getElementById('conf-cavo').value;
-        let metri = document.getElementById('conf-metri').value;
-        let testa = document.getElementById('conf-testa').value;
-        let coda = document.getElementById('conf-coda').value;
+        let chiaveCavo = document.getElementById('conf-cavo').value;
+        let datiCavo = masterCatalogoConfiguratore[chiaveCavo];
+        let metri = parseFloat(document.getElementById('conf-metri').value);
         let qta = parseInt(document.getElementById('conf-qta').value);
+
+        let selectTesta = document.getElementById('conf-testa');
+        let optTesta = selectTesta.options[selectTesta.selectedIndex];
+        let selectCoda = document.getElementById('conf-coda');
+        let optCoda = selectCoda.options[selectCoda.selectedIndex];
 
         if (!metri || metri <= 0 || isNaN(qta) || qta < 1) {
             alert("Inserisci una lunghezza e una quantità valide.");
             return;
         }
 
-        // Raccogli tabella numerazione
+        // Raccogli tabella numerazione fili
         let numerazioni = [];
         document.querySelectorAll('#corpo-tabella-num tr').forEach(row => {
             let etichetta = row.querySelector('.num-etichetta').value.trim();
             let desc = row.querySelector('.num-desc').value.trim();
             if (etichetta || desc) {
-                numerazioni.push(`${etichetta} - ${desc}`);
+                numerazioni.push(`${etichetta} (${desc})`);
             }
         });
 
-        let nomeCustom = `[PERSONALIZZATO] Cavo ${cavo} (${metri}m)`;
-        let descCustom = `Testa: ${testa} | Coda: ${coda}`;
+        let prezzoTotaleUnitario = calcolaPrezzoConfiguratore() / qta;
+
+        let nomeCustom = `[PERSONALIZZATO] ${datiCavo.nome} (${metri}m)`;
+        let descCustom = `Testa: ${optTesta.text} | Coda: ${optTesta.text}`;
         if (numerazioni.length > 0) {
-            descCustom += ` | Num. fili: [${numerazioni.join('; ')}]`;
+            descCustom += ` | Num. fili: [${numerazioni.join(', ')}]`;
         }
 
         carrello.push({
             nome: nomeCustom,
-            prezzo: 0.00, // Prezzo su misura da preventivare
+            prezzo: prezzoTotaleUnitario,
             qta: qta,
             dettagliExtra: descCustom
         });
 
         calcolaTotali();
-        alert("Cablaggio personalizzato aggiunto al carrello!");
+        alert("Cablaggio personalizzato aggiunto al carrello con successo!");
     }
 
     function renderCatalogo() {
@@ -483,10 +592,9 @@
         lista.innerHTML = '';
         carrello.forEach((item, index) => {
             let subtotal = item.prezzo * item.qta;
-            let subtext = item.prezzo > 0 ? `<b>${subtotal.toFixed(2)}€</b>` : '<b style="color:var(--accent);">Su misura</b>';
             let extraInfo = item.dettagliExtra ? `<br><span style="font-size:11px; color:#64748b;">${item.dettagliExtra}</span>` : '';
             
-            lista.innerHTML += `<li><span><b>${item.nome}</b> (x${item.qta})${extraInfo}</span> <span>${subtext} <span style="color:red; cursor:pointer; margin-left:6px;" onclick="rimuoviItem(${index})">❌</span></span></li>`;
+            lista.innerHTML += `<li><span><b>${item.nome}</b> (x${item.qta})${extraInfo}</span> <span><b>${subtotal.toFixed(2)}€</b> <span style="color:red; cursor:pointer; margin-left:6px;" onclick="rimuoviItem(${index})">❌</span></span></li>`;
         });
     }
 
@@ -627,8 +735,8 @@
         }
     }
 
-    // Inizializzazione iniziale
-    aggiornaConnettoriDisponibili();
+    // Inizializzazione della pagina
+    inizializzaConfiguratore();
     renderCatalogo();
     calcolaTotali();
 </script>
