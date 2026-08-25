@@ -187,6 +187,14 @@
                         <label>Etichetta / Numerazione Filo:</label>
                         <input type="text" id="param-etichetta" placeholder="es. W1, Morsetto X1, Cavo Alimentazione..." oninput="aggiornaConfigurazione()">
                     </div>
+
+                    <!-- SPUNTA OPZIONE TARGHETTE E TUBETTI CEMBRE -->
+                    <div class="form-group" style="grid-column: 1 / -1; background: #f8fafc; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: normal; margin-bottom: 0;">
+                            <input type="checkbox" id="param-targhette" onchange="aggiornaConfigurazione()" style="width: auto;">
+                            <span>Desideri le targhette nei fili con l'utilizzo dei tubetti Cembre? (<b>+0,01€ per terminale</b>)</span>
+                        </label>
+                    </div>
                 </div>
 
                 <!-- SEZIONE TERMINALE A -->
@@ -204,55 +212,20 @@
                             </select>
                         </div>
                         <div class="form-group sub-term-a" id="sub-puntale-a" style="display: none;">
-                            <label>Modello Puntale 1mmq:</label>
-                            <select id="term-puntale-a-modello" onchange="aggiornaConfigurazione()">
-                                <option value="CEMPKE108">CEMPKE108 - P=8mm ROSSO (0,01€)</option>
-                                <option value="CEMPKC108">CEMPKC108 - P=8mm GIALLO (0,01€)</option>
-                                <option value="CEMPKC112">CEMPKC112 - P=12mm GIALLO (0,06€)</option>
-                                <option value="CEMPKD106">CEMPKD106 - P=6mm ROSSO (0,04€)</option>
-                                <option value="CEMPKD108">CEMPKD108 - P=8mm ROSSO (0,01€)</option>
-                                <option value="CEMPKD110">CEMPKD110 - P=10mm ROSSO (0,04€)</option>
-                                <option value="CEMPKD112">CEMPKD112 - P=12mm ROSSO (0,06€)</option>
-                            </select>
+                            <label>Modello Puntale:</label>
+                            <select id="term-puntale-a-modello" onchange="aggiornaConfigurazione()"></select>
                         </div>
                         <div class="form-group sub-term-a" id="sub-occhiello-a" style="display: none;">
-                            <label>Modello Occhiello 1mmq:</label>
-                            <select id="term-occhiello-a-modello" onchange="aggiornaConfigurazione()">
-                                <option value="CEMRF-M2">CEMRF-M2 - Vite 2mm ROSSO (0,15€)</option>
-                                <option value="CEMRF-M3">CEMRF-M3 - Vite 3mm ROSSO (0,09€)</option>
-                                <option value="CEMRF-M3.5">CEMRF-M3.5 - Vite 3.5mm ROSSO (0,09€)</option>
-                                <option value="CEMRF-M4">CEMRF-M4 - Vite 4mm ROSSO (0,08€)</option>
-                                <option value="CEMRF-M5">CEMRF-M5 - Vite 5mm ROSSO (0,08€)</option>
-                                <option value="CEMRF-M6">CEMRF-M6 - Vite 6mm ROSSO (0,10€)</option>
-                                <option value="CEMRF-M8">CEMRF-M8 - Vite 8mm ROSSO (0,19€)</option>
-                            </select>
+                            <label>Modello Occhiello:</label>
+                            <select id="term-occhiello-a-modello" onchange="aggiornaConfigurazione()"></select>
                         </div>
                         <div class="form-group sub-term-a" id="sub-forcella-a" style="display: none;">
-                            <label>Modello Forcella 1mmq:</label>
-                            <select id="term-forcella-a-modello" onchange="aggiornaConfigurazione()">
-                                <option value="CEMRF-U3">CEMRF-U3 - Vite 3mm ROSSO (0,08€)</option>
-                                <option value="CEMRF-U3.5">CEMRF-U3.5 - Vite 3.5mm ROSSO (0,08€)</option>
-                                <option value="CEMRF-U4">CEMRF-U4 - Vite 4mm ROSSO (0,08€)</option>
-                                <option value="CEMRF-U5">CEMRF-U5 - Vite 5mm ROSSO (0,09€)</option>
-                                <option value="CEMRF-U6">CEMRF-U6 - Vite 6mm ROSSO (0,13€)</option>
-                            </select>
+                            <label>Modello Forcella:</label>
+                            <select id="term-forcella-a-modello" onchange="aggiornaConfigurazione()"></select>
                         </div>
                         <div class="form-group sub-term-a" id="sub-faston-a" style="display: none;">
-                            <label>Modello Faston 1mmq:</label>
-                            <select id="term-faston-a-modello" onchange="aggiornaConfigurazione()">
-                                <option value="CEMRF-F305P">CEMRF-F305P - Femmina 2,8x0,5 isolato (0,24€)</option>
-                                <option value="CEMRF-F308P">CEMRF-F308P - Femmina 2,8x0,8 isolato (0,16€)</option>
-                                <option value="CEMRF-F408P">CEMRF-F408P - Femmina 4,8x0,8 isolato (0,24€)</option>
-                                <option value="CEMRF-F405P">CEMRF-F405P - Femmina 4,8x0,5 isolato (0,25€)</option>
-                                <option value="CEMRF-F608P">CEMRF-F608P - Femmina 6,35x0,8 isolato (0,18€)</option>
-                                <option value="CEMRF-F305">CEMRF-F305 - Femmina 2,8x0,5 (0,16€)</option>
-                                <option value="CEMRF-F308">CEMRF-F308 - Femmina 2,8x0,8 (0,16€)</option>
-                                <option value="CEMRF-F408">CEMRF-F408 - Femmina 4,8x0,8 (0,17€)</option>
-                                <option value="CEMRF-F405">CEMRF-F405 - Femmina 4,8x0,5 (0,17€)</option>
-                                <option value="CEMRF-F608">CEMRF-F608 - Femmina 6,3x0,8 (0,16€)</option>
-                                <option value="CEMRF-M608P">CEMRF-M608P - Maschio 6,3x0,8 isolato (0,30€)</option>
-                                <option value="CEMRF-M608">CEMRF-M608 - Maschio 6,35x0,8 (0,16€)</option>
-                            </select>
+                            <label>Modello Faston:</label>
+                            <select id="term-faston-a-modello" onchange="aggiornaConfigurazione()"></select>
                         </div>
                     </div>
                 </div>
@@ -272,55 +245,20 @@
                             </select>
                         </div>
                         <div class="form-group sub-term-b" id="sub-puntale-b" style="display: none;">
-                            <label>Modello Puntale 1mmq:</label>
-                            <select id="term-puntale-b-modello" onchange="aggiornaConfigurazione()">
-                                <option value="CEMPKE108">CEMPKE108 - P=8mm ROSSO (0,01€)</option>
-                                <option value="CEMPKC108">CEMPKC108 - P=8mm GIALLO (0,01€)</option>
-                                <option value="CEMPKC112">CEMPKC112 - P=12mm GIALLO (0,06€)</option>
-                                <option value="CEMPKD106">CEMPKD106 - P=6mm ROSSO (0,04€)</option>
-                                <option value="CEMPKD108">CEMPKD108 - P=8mm ROSSO (0,01€)</option>
-                                <option value="CEMPKD110">CEMPKD110 - P=10mm ROSSO (0,04€)</option>
-                                <option value="CEMPKD112">CEMPKD112 - P=12mm ROSSO (0,06€)</option>
-                            </select>
+                            <label>Modello Puntale:</label>
+                            <select id="term-puntale-b-modello" onchange="aggiornaConfigurazione()"></select>
                         </div>
                         <div class="form-group sub-term-b" id="sub-occhiello-b" style="display: none;">
-                            <label>Modello Occhiello 1mmq:</label>
-                            <select id="term-occhiello-b-modello" onchange="aggiornaConfigurazione()">
-                                <option value="CEMRF-M2">CEMRF-M2 - Vite 2mm ROSSO (0,15€)</option>
-                                <option value="CEMRF-M3">CEMRF-M3 - Vite 3mm ROSSO (0,09€)</option>
-                                <option value="CEMRF-M3.5">CEMRF-M3.5 - Vite 3.5mm ROSSO (0,09€)</option>
-                                <option value="CEMRF-M4">CEMRF-M4 - Vite 4mm ROSSO (0,08€)</option>
-                                <option value="CEMRF-M5">CEMRF-M5 - Vite 5mm ROSSO (0,08€)</option>
-                                <option value="CEMRF-M6">CEMRF-M6 - Vite 6mm ROSSO (0,10€)</option>
-                                <option value="CEMRF-M8">CEMRF-M8 - Vite 8mm ROSSO (0,19€)</option>
-                            </select>
+                            <label>Modello Occhiello:</label>
+                            <select id="term-occhiello-b-modello" onchange="aggiornaConfigurazione()"></select>
                         </div>
                         <div class="form-group sub-term-b" id="sub-forcella-b" style="display: none;">
-                            <label>Modello Forcella 1mmq:</label>
-                            <select id="term-forcella-b-modello" onchange="aggiornaConfigurazione()">
-                                <option value="CEMRF-U3">CEMRF-U3 - Vite 3mm ROSSO (0,08€)</option>
-                                <option value="CEMRF-U3.5">CEMRF-U3.5 - Vite 3.5mm ROSSO (0,08€)</option>
-                                <option value="CEMRF-U4">CEMRF-U4 - Vite 4mm ROSSO (0,08€)</option>
-                                <option value="CEMRF-U5">CEMRF-U5 - Vite 5mm ROSSO (0,09€)</option>
-                                <option value="CEMRF-U6">CEMRF-U6 - Vite 6mm ROSSO (0,13€)</option>
-                            </select>
+                            <label>Modello Forcella:</label>
+                            <select id="term-forcella-b-modello" onchange="aggiornaConfigurazione()"></select>
                         </div>
                         <div class="form-group sub-term-b" id="sub-faston-b" style="display: none;">
-                            <label>Modello Faston 1mmq:</label>
-                            <select id="term-faston-b-modello" onchange="aggiornaConfigurazione()">
-                                <option value="CEMRF-F305P">CEMRF-F305P - Femmina 2,8x0,5 isolato (0,24€)</option>
-                                <option value="CEMRF-F308P">CEMRF-F308P - Femmina 2,8x0,8 isolato (0,16€)</option>
-                                <option value="CEMRF-F408P">CEMRF-F408P - Femmina 4,8x0,8 isolato (0,24€)</option>
-                                <option value="CEMRF-F405P">CEMRF-F405P - Femmina 4,8x0,5 isolato (0,25€)</option>
-                                <option value="CEMRF-F608P">CEMRF-F608P - Femmina 6,35x0,8 isolato (0,18€)</option>
-                                <option value="CEMRF-F305">CEMRF-F305 - Femmina 2,8x0,5 (0,16€)</option>
-                                <option value="CEMRF-F308">CEMRF-F308 - Femmina 2,8x0,8 (0,16€)</option>
-                                <option value="CEMRF-F408">CEMRF-F408 - Femmina 4,8x0,8 (0,17€)</option>
-                                <option value="CEMRF-F405">CEMRF-F405 - Femmina 4,8x0,5 (0,17€)</option>
-                                <option value="CEMRF-F608">CEMRF-F608 - Femmina 6,3x0,8 (0,16€)</option>
-                                <option value="CEMRF-M608P">CEMRF-M608P - Maschio 6,3x0,8 isolato (0,30€)</option>
-                                <option value="CEMRF-M608">CEMRF-M608 - Maschio 6,35x0,8 (0,16€)</option>
-                            </select>
+                            <label>Modello Faston:</label>
+                            <select id="term-faston-b-modello" onchange="aggiornaConfigurazione()"></select>
                         </div>
                     </div>
                 </div>
@@ -456,39 +394,282 @@
 </div>
 
 <script>
-    // Tabella prezzi terminali aggiornata (prezzo base + 0,10€ di lavorazione se non libero)
+    // Tabella listino completa dei terminali con i rispettivi prezzi forniti
     const listinoTerminali = {
-        "CEMPKE108": 0.01 + 0.10,
-        "CEMPKC108": 0.01 + 0.10,
-        "CEMPKC112": 0.06 + 0.10,
-        "CEMPKD106": 0.04 + 0.10,
-        "CEMPKD108": 0.01 + 0.10,
-        "CEMPKD110": 0.04 + 0.10,
-        "CEMPKD112": 0.06 + 0.10,
-        "CEMRF-M2": 0.15 + 0.10,
-        "CEMRF-M3": 0.09 + 0.10,
-        "CEMRF-M3.5": 0.09 + 0.10,
-        "CEMRF-M4": 0.08 + 0.10,
-        "CEMRF-M5": 0.08 + 0.10,
-        "CEMRF-M6": 0.10 + 0.10,
-        "CEMRF-M8": 0.19 + 0.10,
-        "CEMRF-U3": 0.08 + 0.10,
-        "CEMRF-U3.5": 0.08 + 0.10,
-        "CEMRF-U4": 0.08 + 0.10,
-        "CEMRF-U5": 0.09 + 0.10,
-        "CEMRF-U6": 0.13 + 0.10,
-        "CEMRF-F305P": 0.24 + 0.10,
-        "CEMRF-F308P": 0.16 + 0.10,
-        "CEMRF-F408P": 0.24 + 0.10,
-        "CEMRF-F405P": 0.25 + 0.10,
-        "CEMRF-F608P": 0.18 + 0.10,
-        "CEMRF-F305": 0.16 + 0.10,
-        "CEMRF-F308": 0.16 + 0.10,
-        "CEMRF-F408": 0.17 + 0.10,
-        "CEMRF-F405": 0.17 + 0.10,
-        "CEMRF-F608": 0.16 + 0.10,
-        "CEMRF-M608P": 0.30 + 0.10,
-        "CEMRF-M608": 0.16 + 0.10
+        // 1.5 mmq Puntali
+        "CEMPKE1508": 0.01, "CEMPKE1510": 0.04, "CEMPKE1518": 0.07,
+        "CEMPKC1508": 0.01, "CEMPKC1510": 0.04, "CEMPKC1518": 0.07,
+        "CEMPKD1508": 0.01, "CEMPKD1510": 0.03, "CEMPKD1512": 0.06, "CEMPKD1518": 0.07,
+        // 1.5 mmq Occhiello
+        "CEMRF-M2": 0.09, "CEMRF-M3": 0.09, "CEMRF-M3.5": 0.09, "CEMRF-M4": 0.08, "CEMRF-M5": 0.08, "CEMRF-M6": 0.10, "CEMRF-M8": 0.19,
+        // 1.5 mmq Forcella
+        "CEMRF-U3": 0.08, "CEMRF-U3.5": 0.08, "CEMRF-U4": 0.08, "CEMRF-U5": 0.09, "CEMRF-U6": 0.13,
+        // 1.5 mmq Faston
+        "CEMRF-F305P": 0.24, "CEMRF-F308P": 0.16, "CEMRF-F408P": 0.24, "CEMRF-F405P": 0.25, "CEMRF-F608P": 0.18,
+        "CEMRF-F305": 0.16, "CEMRF-F308": 0.16, "CEMRF-F408": 0.17, "CEMRF-F405": 0.17, "CEMRF-F608": 0.16,
+        "CEMRF-M608P": 0.30, "CEMRF-M608": 0.16,
+        
+        // 2.5 mmq Puntali
+        "CEMPKE2508": 0.02, "CEMPKE2512": 0.06, "CEMPKE2518": 0.08,
+        "CEMPKC2508": 0.02, "CEMPKC2512": 0.06, "CEMPKC2518": 0.09,
+        "CEMPKD2508": 0.02, "CEMPKD2512": 0.06, "CEMPKD2518": 0.08,
+        // 2.5 mmq Occhiello
+        "CEMBF-M2": 0.22, "CEMBF-M3": 0.11, "CEMBF-M3.5": 0.11, "CEMBF-M4": 0.09, "CEMBF-M5": 0.09, "CEMBF-M6": 0.11, "CEMBF-M8": 0.15,
+        // 2.5 mmq Forcella
+        "CEMBF-U3": 0.10, "CEMBF-U3.5": 0.10, "CEMBF-U4": 0.09, "CEMBF-U5": 0.10, "CEMBF-U6": 0.12,
+        // 2.5 mmq Faston
+        "CEMBF-F408P": 0.24, "CEMBF-F405P": 0.24, "CEMBF-F608P": 0.23,
+        "CEMBF-F408": 0.17, "CEMBF-F405": 0.17, "CEMBF-F608": 0.17,
+        "CEMBF-M608P": 0.32, "CEMBF-M608": 0.18,
+
+        // 4 mmq Puntali
+        "CEMPKE410": 0.03, "CEMPKE412": 0.06, "CEMPKE418": 0.09,
+        "CEMPKC410": 0.03, "CEMPKC412": 0.06, "CEMPKC418": 0.09,
+        "CEMPKD410": 0.03, "CEMPKD412": 0.06, "CEMPKD418": 0.09,
+
+        // 6 mmq Puntali
+        "CEMPKE612": 0.05, "CEMPKE618": 0.12,
+        "CEMPKC612": 0.04, "CEMPKC618": 0.12,
+        "CEMPKD612": 0.05, "CEMPKD618": 0.12,
+
+        // 4 e 6 mmq Occhiello, Forcella, Faston
+        "CEMGF-M3": 0.19, "CEMGF-M3.5": 0.19, "CEMGF-M4": 0.17, "CEMGF-M5": 0.17, "CEMGF-M6": 0.15, "CEMGF-M8": 0.21,
+        "CEMGF-U3.5": 0.18, "CEMGF-U4": 0.16, "CEMGF-U5": 0.17, "CEMGF-U6": 0.19,
+        "CEMGF-F608P": 0.29, "CEMGF-F608": 0.29, "CEMGF-M608": 0.23,
+
+        // 10 mmq Puntali, Occhiello, Forcella
+        "CEMPKE1012": 0.08, "CEMPKE1018": 0.08,
+        "CEMPKC1012": 0.08, "CEMPKC1018": 0.14,
+        "CEMPKD1012": 0.08, "CEMPKD1018": 0.14,
+        "CEMANE2-M4": 0.85, "CEMANE2-M5": 0.83, "CEMANE2-M6": 0.85, "CEMANE2-M8": 0.30, "CEMANE2-M10": 0.98, "CEMANE2-M12": 0.98,
+        "CEMA2-M4": 0.53, "CEMA2-M5": 0.50, "CEMA2-M6": 0.46, "CEMA2-M8": 0.55, "CEMA2-M10": 0.62, "CEMA2-M12": 0.83,
+        "CEMANE2-U4": 0.83, "CEMANE2-U5": 0.85,
+        "CEMA2-U4": 0.55, "CEMA2-U5": 0.55,
+        "CEMA2P12": 0.65
+    };
+
+    // Configurazione dei modelli suddivisi per sezione e tipologia di terminale
+    const terminaliPerSezione = {
+        "1 mm²": {
+            puntale: [
+                {id: "CEMPKE1508", nome: "CEMPKE1508 - P=8mm NERO (0,01€)"},
+                {id: "CEMPKE1510", nome: "CEMPKE1510 - P=10mm NERO (0,04€)"},
+                {id: "CEMPKE1518", nome: "CEMPKE1518 - P=18mm NERO (0,07€)"},
+                {id: "CEMPKC1508", nome: "CEMPKC1508 - P=8mm ROSSO (0,01€)"},
+                {id: "CEMPKC1510", nome: "CEMPKC1510 - P=10mm ROSSO (0,04€)"},
+                {id: "CEMPKC1518", nome: "CEMPKC1518 - P=18mm ROSSO (0,07€)"},
+                {id: "CEMPKD1508", nome: "CEMPKD1508 - P=8mm NERO (0,01€)"},
+                {id: "CEMPKD1510", nome: "CEMPKD1510 - P=10mm NERO (0,03€)"},
+                {id: "CEMPKD1512", nome: "CEMPKD1512 - P=12mm NERO (0,06€)"},
+                {id: "CEMPKD1518", nome: "CEMPKD1518 - P=18mm NERO (0,07€)"}
+            ],
+            occhiello: [
+                {id: "CEMRF-M2", nome: "CEMRF-M2 - Vite 2mm ROSSO (0,09€)"},
+                {id: "CEMRF-M3", nome: "CEMRF-M3 - Vite 3mm ROSSO (0,09€)"},
+                {id: "CEMRF-M3.5", nome: "CEMRF-M3.5 - Vite 3.5mm ROSSO (0,09€)"},
+                {id: "CEMRF-M4", nome: "CEMRF-M4 - Vite 4mm ROSSO (0,08€)"},
+                {id: "CEMRF-M5", nome: "CEMRF-M5 - Vite 5mm ROSSO (0,08€)"},
+                {id: "CEMRF-M6", nome: "CEMRF-M6 - Vite 6mm ROSSO (0,10€)"},
+                {id: "CEMRF-M8", nome: "CEMRF-M8 - Vite 8mm ROSSO (0,19€)"}
+            ],
+            forcella: [
+                {id: "CEMRF-U3", nome: "CEMRF-U3 - Vite 3mm ROSSO (0,08€)"},
+                {id: "CEMRF-U3.5", nome: "CEMRF-U3.5 - Vite 3.5mm ROSSO (0,08€)"},
+                {id: "CEMRF-U4", nome: "CEMRF-U4 - Vite 4mm ROSSO (0,08€)"},
+                {id: "CEMRF-U5", nome: "CEMRF-U5 - Vite 5mm ROSSO (0,09€)"},
+                {id: "CEMRF-U6", nome: "CEMRF-U6 - Vite 6mm ROSSO (0,13€)"}
+            ],
+            faston: [
+                {id: "CEMRF-F305P", nome: "CEMRF-F305P - Femmina 2.8x0.8 tutto isolato (0,24€)"},
+                {id: "CEMRF-F308P", nome: "CEMRF-F308P - Femmina 2.8x0.8 tutto isolato (0,16€)"},
+                {id: "CEMRF-F408P", nome: "CEMRF-F408P - Femmina 4.8x0.8 tutto isolato (0,24€)"},
+                {id: "CEMRF-F405P", nome: "CEMRF-F405P - Femmina 4.8x0.5 tutto isolato (0,25€)"},
+                {id: "CEMRF-F608P", nome: "CEMRF-F608P - Femmina 6.35x0.8 tutto isolato (0,18€)"},
+                {id: "CEMRF-F305", nome: "CEMRF-F305 - Femmina 2.8x0.8 (0,16€)"},
+                {id: "CEMRF-F308", nome: "CEMRF-F308 - Femmina 2.8x0.8 (0,16€)"},
+                {id: "CEMRF-F408", nome: "CEMRF-F408 - Femmina 4.8x0.8 (0,17€)"},
+                {id: "CEMRF-F405", nome: "CEMRF-F405 - Femmina 4.8x0.5 (0,17€)"},
+                {id: "CEMRF-F608", nome: "CEMRF-F608 - Femmina 6.3x0.8 (0,16€)"},
+                {id: "CEMRF-M608P", nome: "CEMRF-M608P - Maschio 6.35x0.8 tutto isolato (0,30€)"},
+                {id: "CEMRF-M608", nome: "CEMRF-M608 - Maschio 6.35x0.8 (0,16€)"}
+            ]
+        },
+        "1.5 mm²": {
+            puntale: [
+                {id: "CEMPKE1508", nome: "CEMPKE1508 - P=8mm NERO (0,01€)"},
+                {id: "CEMPKE1510", nome: "CEMPKE1510 - P=10mm NERO (0,04€)"},
+                {id: "CEMPKE1518", nome: "CEMPKE1518 - P=18mm NERO (0,07€)"},
+                {id: "CEMPKC1508", nome: "CEMPKC1508 - P=8mm ROSSO (0,01€)"},
+                {id: "CEMPKC1510", nome: "CEMPKC1510 - P=10mm ROSSO (0,04€)"},
+                {id: "CEMPKC1518", nome: "CEMPKC1518 - P=18mm ROSSO (0,07€)"},
+                {id: "CEMPKD1508", nome: "CEMPKD1508 - P=8mm NERO (0,01€)"},
+                {id: "CEMPKD1510", nome: "CEMPKD1510 - P=10mm NERO (0,03€)"},
+                {id: "CEMPKD1512", nome: "CEMPKD1512 - P=12mm NERO (0,06€)"},
+                {id: "CEMPKD1518", nome: "CEMPKD1518 - P=18mm NERO (0,07€)"}
+            ],
+            occhiello: [
+                {id: "CEMRF-M2", nome: "CEMRF-M2 - Vite 2mm ROSSO (0,09€)"},
+                {id: "CEMRF-M3", nome: "CEMRF-M3 - Vite 3mm ROSSO (0,09€)"},
+                {id: "CEMRF-M3.5", nome: "CEMRF-M3.5 - Vite 3.5mm ROSSO (0,09€)"},
+                {id: "CEMRF-M4", nome: "CEMRF-M4 - Vite 4mm ROSSO (0,08€)"},
+                {id: "CEMRF-M5", nome: "CEMRF-M5 - Vite 5mm ROSSO (0,08€)"},
+                {id: "CEMRF-M6", nome: "CEMRF-M6 - Vite 6mm ROSSO (0,10€)"},
+                {id: "CEMRF-M8", nome: "CEMRF-M8 - Vite 8mm ROSSO (0,19€)"}
+            ],
+            forcella: [
+                {id: "CEMRF-U3", nome: "CEMRF-U3 - Vite 3mm ROSSO (0,08€)"},
+                {id: "CEMRF-U3.5", nome: "CEMRF-U3.5 - Vite 3.5mm ROSSO (0,08€)"},
+                {id: "CEMRF-U4", nome: "CEMRF-U4 - Vite 4mm ROSSO (0,08€)"},
+                {id: "CEMRF-U5", nome: "CEMRF-U5 - Vite 5mm ROSSO (0,09€)"},
+                {id: "CEMRF-U6", nome: "CEMRF-U6 - Vite 6mm ROSSO (0,13€)"}
+            ],
+            faston: [
+                {id: "CEMRF-F305P", nome: "CEMRF-F305P - Femmina 2.8x0.8 tutto isolato (0,24€)"},
+                {id: "CEMRF-F308P", nome: "CEMRF-F308P - Femmina 2.8x0.8 tutto isolato (0,16€)"},
+                {id: "CEMRF-F408P", nome: "CEMRF-F408P - Femmina 4.8x0.8 tutto isolato (0,24€)"},
+                {id: "CEMRF-F405P", nome: "CEMRF-F405P - Femmina 4.8x0.5 tutto isolato (0,25€)"},
+                {id: "CEMRF-F608P", nome: "CEMRF-F608P - Femmina 6.35x0.8 tutto isolato (0,18€)"},
+                {id: "CEMRF-F305", nome: "CEMRF-F305 - Femmina 2.8x0.8 (0,16€)"},
+                {id: "CEMRF-F308", nome: "CEMRF-F308 - Femmina 2.8x0.8 (0,16€)"},
+                {id: "CEMRF-F408", nome: "CEMRF-F408 - Femmina 4.8x0.8 (0,17€)"},
+                {id: "CEMRF-F405", nome: "CEMRF-F405 - Femmina 4.8x0.5 (0,17€)"},
+                {id: "CEMRF-F608", nome: "CEMRF-F608 - Femmina 6.3x0.8 (0,16€)"},
+                {id: "CEMRF-M608P", nome: "CEMRF-M608P - Maschio 6.35x0.8 tutto isolato (0,30€)"},
+                {id: "CEMRF-M608", nome: "CEMRF-M608 - Maschio 6.35x0.8 (0,16€)"}
+            ]
+        },
+        "2.5 mm²": {
+            puntale: [
+                {id: "CEMPKE2508", nome: "CEMPKE2508 - P=8mm GRIGIO (0,02€)"},
+                {id: "CEMPKE2512", nome: "CEMPKE2512 - P=12mm GRIGIO (0,06€)"},
+                {id: "CEMPKE2518", nome: "CEMPKE2518 - P=18mm GRIGIO (0,08€)"},
+                {id: "CEMPKC2508", nome: "CEMPKC2508 - P=8mm BLU (0,02€)"},
+                {id: "CEMPKC2512", nome: "CEMPKC2512 - P=12mm BLU (0,06€)"},
+                {id: "CEMPKC2518", nome: "CEMPKC2518 - P=18mm BLU (0,09€)"},
+                {id: "CEMPKD2508", nome: "CEMPKD2508 - P=8mm BLU (0,02€)"},
+                {id: "CEMPKD2512", nome: "CEMPKD2512 - P=12mm BLU (0,06€)"},
+                {id: "CEMPKD2518", nome: "CEMPKD2518 - P=18mm BLU (0,08€)"}
+            ],
+            occhiello: [
+                {id: "CEMBF-M2", nome: "CEMBF-M2 - Vite 2mm BLU (0,22€)"},
+                {id: "CEMBF-M3", nome: "CEMBF-M3 - Vite 3mm BLU (0,11€)"},
+                {id: "CEMBF-M3.5", nome: "CEMBF-M3.5 - Vite 3.5mm BLU (0,11€)"},
+                {id: "CEMBF-M4", nome: "CEMBF-M4 - Vite 4mm BLU (0,09€)"},
+                {id: "CEMBF-M5", nome: "CEMBF-M5 - Vite 5mm BLU (0,09€)"},
+                {id: "CEMBF-M6", nome: "CEMBF-M6 - Vite 6mm BLU (0,11€)"},
+                {id: "CEMBF-M8", nome: "CEMBF-M8 - Vite 8mm BLU (0,15€)"}
+            ],
+            forcella: [
+                {id: "CEMBF-U3", nome: "CEMBF-U3 - Vite 3mm BLU (0,10€)"},
+                {id: "CEMBF-U3.5", nome: "CEMBF-U3.5 - Vite 3.5mm BLU (0,10€)"},
+                {id: "CEMBF-U4", nome: "CEMBF-U4 - Vite 4mm BLU (0,09€)"},
+                {id: "CEMBF-U5", nome: "CEMBF-U5 - Vite 5mm BLU (0,10€)"},
+                {id: "CEMBF-U6", nome: "CEMBF-U6 - Vite 6mm BLU (0,12€)"}
+            ],
+            faston: [
+                {id: "CEMBF-F408P", nome: "CEMBF-F408P - Femmina 4.8x0.8 tutto isolato (0,24€)"},
+                {id: "CEMBF-F405P", nome: "CEMBF-F405P - Femmina 4.8x0.5 tutto isolato (0,24€)"},
+                {id: "CEMBF-F608P", nome: "CEMBF-F608P - Femmina 6.35x0.8 tutto isolato (0,23€)"},
+                {id: "CEMBF-F408", nome: "CEMBF-F408 - Femmina 4.8x0.8 (0,17€)"},
+                {id: "CEMBF-F405", nome: "CEMBF-F405 - Femmina 4.8x0.5 (0,17€)"},
+                {id: "CEMBF-F608", nome: "CEMBF-F608 - Femmina 6.3x0.8 (0,17€)"},
+                {id: "CEMBF-M608P", nome: "CEMBF-M608P - Maschio 6.35x0.8 tutto isolato (0,32€)"},
+                {id: "CEMBF-M608", nome: "CEMBF-M608 - Maschio 6.35x0.8 (0,18€)"}
+            ]
+        },
+        "4 mm²": {
+            puntale: [
+                {id: "CEMPKE410", nome: "CEMPKE410 - P=10mm ARANCIONE (0,03€)"},
+                {id: "CEMPKE412", nome: "CEMPKE412 - P=12mm ARANCIONE (0,06€)"},
+                {id: "CEMPKE418", nome: "CEMPKE418 - P=18mm ARANCIONE (0,09€)"},
+                {id: "CEMPKC410", nome: "CEMPKC410 - P=10mm GRIGIO (0,03€)"},
+                {id: "CEMPKC412", nome: "CEMPKC412 - P=12mm GRIGIO (0,06€)"},
+                {id: "CEMPKC418", nome: "CEMPKC418 - P=18mm GRIGIO (0,09€)"},
+                {id: "CEMPKD410", nome: "CEMPKD410 - P=10mm GRIGIO (0,03€)"},
+                {id: "CEMPKD412", nome: "CEMPKD412 - P=12mm GRIGIO (0,06€)"},
+                {id: "CEMPKD418", nome: "CEMPKD418 - P=12mm GRIGIO (0,09€)"}
+            ],
+            occhiello: [
+                {id: "CEMGF-M3", nome: "CEMGF-M3 - Vite 3mm GIALLO (0,19€)"},
+                {id: "CEMGF-M3.5", nome: "CEMGF-M3.5 - Vite 3.5mm GIALLO (0,19€)"},
+                {id: "CEMGF-M4", nome: "CEMGF-M4 - Vite 4mm GIALLO (0,17€)"},
+                {id: "CEMGF-M5", nome: "CEMGF-M5 - Vite 5mm GIALLO (0,17€)"},
+                {id: "CEMGF-M6", nome: "CEMGF-M6 - Vite 6mm GIALLO (0,15€)"},
+                {id: "CEMGF-M8", nome: "CEMGF-M8 - Vite 8mm GIALLO (0,21€)"}
+            ],
+            forcella: [
+                {id: "CEMGF-U3.5", nome: "CEMGF-U3.5 - Vite 3.5mm GIALLO (0,18€)"},
+                {id: "CEMGF-U4", nome: "CEMGF-U4 - Vite 4mm GIALLO (0,16€)"},
+                {id: "CEMGF-U5", nome: "CEMGF-U5 - Vite 5mm GIALLO (0,17€)"},
+                {id: "CEMGF-U6", nome: "CEMGF-U6 - Vite 6mm GIALLO (0,19€)"}
+            ],
+            faston: [
+                {id: "CEMGF-F608P", nome: "CEMGF-F608P - Femmina 6.35x0.8 tutto isolato (0,29€)"},
+                {id: "CEMGF-F608", nome: "CEMGF-F608 - Femmina 6.3x0.8 (0,29€)"},
+                {id: "CEMGF-M608", nome: "CEMGF-M608 - Maschio 6.35x0.8 (0,23€)"}
+            ]
+        },
+        "6 mm²": {
+            puntale: [
+                {id: "CEMPKE612", nome: "CEMPKE612 - P=12mm VERDE (0,05€)"},
+                {id: "CEMPKE618", nome: "CEMPKE618 - P=18mm VERDE (0,12€)"},
+                {id: "CEMPKC612", nome: "CEMPKC612 - P=12mm NERO (0,04€)"},
+                {id: "CEMPKC618", nome: "CEMPKC618 - P=18mm NERO (0,12€)"},
+                {id: "CEMPKD612", nome: "CEMPKD612 - P=12mm GIALLO (0,05€)"},
+                {id: "CEMPKD618", nome: "CEMPKD618 - P=10mm GIALLO (0,12€)"}
+            ],
+            occhiello: [
+                {id: "CEMGF-M3", nome: "CEMGF-M3 - Vite 3mm GIALLO (0,19€)"},
+                {id: "CEMGF-M3.5", nome: "CEMGF-M3.5 - Vite 3.5mm GIALLO (0,19€)"},
+                {id: "CEMGF-M4", nome: "CEMGF-M4 - Vite 4mm GIALLO (0,17€)"},
+                {id: "CEMGF-M5", nome: "CEMGF-M5 - Vite 5mm GIALLO (0,17€)"},
+                {id: "CEMGF-M6", nome: "CEMGF-M6 - Vite 6mm GIALLO (0,15€)"},
+                {id: "CEMGF-M8", nome: "CEMGF-M8 - Vite 8mm GIALLO (0,21€)"}
+            ],
+            forcella: [
+                {id: "CEMGF-U3.5", nome: "CEMGF-U3.5 - Vite 3.5mm GIALLO (0,18€)"},
+                {id: "CEMGF-U4", nome: "CEMGF-U4 - Vite 4mm GIALLO (0,16€)"},
+                {id: "CEMGF-U5", nome: "CEMGF-U5 - Vite 5mm GIALLO (0,17€)"},
+                {id: "CEMGF-U6", nome: "CEMGF-U6 - Vite 6mm GIALLO (0,19€)"}
+            ],
+            faston: [
+                {id: "CEMGF-F608P", nome: "CEMGF-F608P - Femmina 6.35x0.8 tutto isolato (0,29€)"},
+                {id: "CEMGF-F608", nome: "CEMGF-F608 - Femmina 6.3x0.8 (0,29€)"},
+                {id: "CEMGF-M608", nome: "CEMGF-M608 - Maschio 6.35x0.8 (0,23€)"}
+            ]
+        },
+        "10 mm²": {
+            puntale: [
+                {id: "CEMPKE1012", nome: "CEMPKE1012 - P=12mm MARRONE (0,08€)"},
+                {id: "CEMPKE1018", nome: "CEMPKE1018 - P=18mm MARRONE (0,08€)"},
+                {id: "CEMPKC1012", nome: "CEMPKC1012 - P=12mm AVORIO (0,08€)"},
+                {id: "CEMPKC1018", nome: "CEMPKC1018 - P=18mm AVORIO (0,14€)"},
+                {id: "CEMPKD1012", nome: "CEMPKD1012 - P=12mm ROSSO (0,08€)"},
+                {id: "CEMPKD1018", nome: "CEMPKD1018 - P=10mm ROSSO (0,14€)"},
+                {id: "CEMA2P12", nome: "CEMA2P12 - Puntale non isolato p=12mm (0,65€)"}
+            ],
+            occhiello: [
+                {id: "CEMANE2-M4", nome: "CEMANE2-M4 - Occhiello isolato NERO vite 4mm (0,85€)"},
+                {id: "CEMANE2-M5", nome: "CEMANE2-M5 - Occhiello isolato NERO vite 5mm (0,83€)"},
+                {id: "CEMANE2-M6", nome: "CEMANE2-M6 - Occhiello isolato NERO vite 6mm (0,85€)"},
+                {id: "CEMANE2-M8", nome: "CEMANE2-M8 - Occhiello isolato NERO vite 8mm (0,30€)"},
+                {id: "CEMANE2-M10", nome: "CEMANE2-M10 - Occhiello isolato NERO vite 10mm (0,98€)"},
+                {id: "CEMANE2-M12", nome: "CEMANE2-M12 - Occhiello isolato NERO vite 12mm (0,98€)"},
+                {id: "CEMA2-M4", nome: "CEMA2-M4 - Occhiello non isolato vite 4mm (0,53€)"},
+                {id: "CEMA2-M5", nome: "CEMA2-M5 - Occhiello non isolato vite 5mm (0,50€)"},
+                {id: "CEMA2-M6", nome: "CEMA2-M6 - Occhiello non isolato vite 6mm (0,46€)"},
+                {id: "CEMA2-M8", nome: "CEMA2-M8 - Occhiello non isolato vite 8mm (0,55€)"},
+                {id: "CEMA2-M10", nome: "CEMA2-M10 - Occhiello non isolato vite 10mm (0,62€)"},
+                {id: "CEMA2-M12", nome: "CEMA2-M12 - Occhiello non isolato vite 12mm (0,83€)"}
+            ],
+            forcella: [
+                {id: "CEMANE2-U4", nome: "CEMANE2-U4 - Forcella isolata NERO vite 4mm (0,83€)"},
+                {id: "CEMANE2-U5", nome: "CEMANE2-U5 - Forcella isolata NERO vite 5mm (0,85€)"},
+                {id: "CEMA2-U4", nome: "CEMA2-U4 - Forcella non isolata vite 4mm (0,55€)"},
+                {id: "CEMA2-U5", nome: "CEMA2-U5 - Forcella non isolata vite 5mm (0,55€)"}
+            ],
+            faston: []
+        }
     };
 
     const databaseCaviSpecifici = {
@@ -622,6 +803,7 @@
 
         document.getElementById('terminale-a-tipo').value = "libero";
         document.getElementById('terminale-b-tipo').value = "libero";
+        aggiornaMenuTerminali();
         gestisciTerminaleA();
         gestisciTerminaleB();
 
@@ -648,7 +830,36 @@
         subData.sezioni.forEach(s => {
             selectSez.innerHTML += `<option value="${s}">${s}</option>`;
         });
+        aggiornaMenuTerminali();
         aggiornaConfigurazione();
+    }
+
+    function aggiornaMenuTerminali() {
+        let sezioneCorrente = document.getElementById('param-sezione').value;
+        // Normalizza la chiave per abbinarla all'oggetto dei terminali
+        let chiaveSez = sezioneCorrente;
+        if (!terminaliPerSezione[chiaveSez]) {
+            chiaveSez = "1.5 mm²"; // Fallback di sicurezza
+        }
+
+        let mapModelli = terminaliPerSezione[chiaveSez];
+
+        ['a', 'b'].forEach(lato => {
+            ['puntale', 'occhiello', 'forcella', 'faston'].forEach(tipo => {
+                let selectElem = document.getElementById(`term-${tipo}-${lato}-modello`);
+                if (selectElem) {
+                    selectElem.innerHTML = '';
+                    let lista = mapModelli[tipo] || [];
+                    if (lista.length === 0) {
+                        selectElem.innerHTML = `<option value="">Nessun modello disponibile</option>`;
+                    } else {
+                        lista.forEach(m => {
+                            selectElem.innerHTML += `<option value="${m.id}">${m.nome}</option>`;
+                        });
+                    }
+                }
+            });
+        });
     }
 
     function gestisciTerminaleA() {
@@ -686,15 +897,16 @@
     function raccogliDettagliTerminale(lato) {
         let prefisso = lato === 'a' ? 'a' : 'b';
         let tipo = document.getElementById(`terminale-${prefisso}-tipo`).value;
-        if (tipo === 'libero') return { testo: 'Libero', costo: 0 };
+        if (tipo === 'libero') return { testo: 'Libero', costo: 0, usato: false };
 
         let selectModello = document.getElementById(`term-${tipo}-${prefisso}-modello`);
         let modelloCodice = selectModello ? selectModello.value : "";
-        let costoTerminale = listinoTerminali[modelloCodice] || 0.10;
+        let costoTerminale = listinoTerminali[modelloCodice] || 0;
 
         return {
             testo: `${modelloCodice}`,
-            costo: costoTerminale
+            costo: costoTerminale,
+            usato: true
         };
     }
 
@@ -705,11 +917,15 @@
         let metri = parseFloat(document.getElementById('param-metri').value) || 1;
         let sezione = document.getElementById('param-sezione').value;
         let etichetta = document.getElementById('param-etichetta').value.trim();
+        let haTarghette = document.getElementById('param-targhette').checked;
         let prezzoMetro = 0;
         let dettagliTesto = "";
 
-        // 0.10€ per ogni metro di lunghezza per la lavorazione del taglio
+        // Costo base lavorazione taglio
         let costoTaglioTotale = metri * 0.10;
+
+        // Costo aggiuntivo 0,10€ se viene inserita una sigla/etichetta cliente
+        let costoSigla = etichetta !== "" ? 0.10 : 0;
 
         if (categoriaCorrente === 'unipolare') {
             let tipoUnipolare = document.getElementById('param-tipo-unipolare').value;
@@ -722,32 +938,40 @@
             let termAInfo = raccogliDettagliTerminale('a');
             let termBInfo = raccogliDettagliTerminale('b');
 
-            let prezzoTotale = costoFilo + costoTaglioTotale + termAInfo.costo + termBInfo.costo;
+            // Calcolo costo tubetti Cembre per terminale (0,01€ ciascuno se spuntato e terminale usato)
+            let costoTubetti = 0;
+            if (haTarghette) {
+                if (termAInfo.usato) costoTubetti += 0.01;
+                if (termBInfo.usato) costoTubetti += 0.01;
+            }
+
+            let prezzoTotale = costoFilo + costoTaglioTotale + costoSigla + termAInfo.costo + termBInfo.costo + costoTubetti;
 
             dettagliTesto = `${subData.desc} <br>Tipo: <b>${subData.nome}</b> | Sezione: <b>${sezione}</b> | Lunghezza: <b>${metri}m</b> | Colore: <b style="color:var(--primary);">${colore}</b>`;
-            if (etichetta) dettagliTesto += `<br>Etichetta/Numerazione: <b style="color:var(--accent);">${etichetta}</b>`;
+            if (etichetta) dettagliTesto += `<br>Etichetta/Numerazione: <b style="color:var(--accent);">${etichetta}</b> (+0,10€)`;
+            if (haTarghette) dettagliTesto += `<br>Targhette con tubetti Cembre: <b style="color:var(--accent);">Sì</b>`;
             dettagliTesto += `<br>Terminale A: <b>${termAInfo.testo}</b> | Terminale B: <b>${termBInfo.testo}</b>`;
-            dettagliTesto += `<br><span style="font-size:11px; color:#64748b;">(Incluso taglio: ${costoTaglioTotale.toFixed(2)}€)</span>`;
+            dettagliTesto += `<br><span style="font-size:11px; color:#64748b;">(Taglio: ${costoTaglioTotale.toFixed(2)}€${etichetta ? ' + Sigla: 0,10€' : ''}${haTarghette ? ' + Tubetti' : ''})</span>`;
 
             document.getElementById('risultato-prezzo').innerText = prezzoTotale.toFixed(2) + " €";
         } else if (categoriaCorrente === 'multipolare') {
             let conduttori = document.getElementById('param-conduttori').value;
             let chiavePrezzo = `${conduttori}_${sezione}`;
             prezzoMetro = data.prezziBase[chiavePrezzo] || 1.50;
-            let prezzoTotale = (prezzoMetro * metri) + costoTaglioTotale;
+            let prezzoTotale = (prezzoMetro * metri) + costoTaglioTotale + costoSigla;
 
             dettagliTesto = `${data.desc} <br>Conduttori: <b>${conduttori}</b> | Sezione: <b>${sezione}</b> | Lunghezza: <b>${metri}m</b>`;
-            if (etichetta) dettagliTesto += `<br>Etichetta/Numerazione: <b style="color:var(--accent);">${etichetta}</b>`;
-            dettagliTesto += `<br><span style="font-size:11px; color:#64748b;">(Incluso taglio: ${costoTaglioTotale.toFixed(2)}€)</span>`;
+            if (etichetta) dettagliTesto += `<br>Etichetta/Numerazione: <b style="color:var(--accent);">${etichetta}</b> (+0,10€)`;
+            dettagliTesto += `<br><span style="font-size:11px; color:#64748b;">(Taglio: ${costoTaglioTotale.toFixed(2)}€${etichetta ? ' + Sigla: 0,10€' : ''})</span>`;
 
             document.getElementById('risultato-prezzo').innerText = prezzoTotale.toFixed(2) + " €";
         } else {
             prezzoMetro = data.prezziBase[sezione] || 1.00;
-            let prezzoTotale = (prezzoMetro * metri) + costoTaglioTotale;
+            let prezzoTotale = (prezzoMetro * metri) + costoTaglioTotale + costoSigla;
 
             dettagliTesto = `${data.desc} <br>Sezione: <b>${sezione}</b> | Lunghezza: <b>${metri}m</b>`;
-            if (etichetta) dettagliTesto += `<br>Etichetta/Numerazione: <b style="color:var(--accent);">${etichetta}</b>`;
-            dettagliTesto += `<br><span style="font-size:11px; color:#64748b;">(Incluso taglio: ${costoTaglioTotale.toFixed(2)}€)</span>`;
+            if (etichetta) dettagliTesto += `<br>Etichetta/Numerazione: <b style="color:var(--accent);">${etichetta}</b> (+0,10€)`;
+            dettagliTesto += `<br><span style="font-size:11px; color:#64748b;">(Taglio: ${costoTaglioTotale.toFixed(2)}€${etichetta ? ' + Sigla: 0,10€' : ''})</span>`;
 
             document.getElementById('risultato-prezzo').innerText = prezzoTotale.toFixed(2) + " €";
         }
@@ -770,10 +994,12 @@
         let metri = document.getElementById('param-metri').value;
         let sezione = document.getElementById('param-sezione').value;
         let etichetta = document.getElementById('param-etichetta').value.trim();
+        let haTarghette = document.getElementById('param-targhette').checked;
         let prezzoTotale = parseFloat(document.getElementById('risultato-prezzo').innerText);
         
         let extraInfo = `L: ${metri}m - Sez: ${sezione}`;
         if (etichetta) extraInfo += ` - Etichetta: ${etichetta}`;
+        if (haTarghette) extraInfo += ` - Targhette (Tubetti Cembre)`;
 
         if (categoriaCorrente === 'unipolare') {
             let tipoUnipolare = document.getElementById('param-tipo-unipolare').value;
@@ -783,6 +1009,7 @@
             let termBInfo = raccogliDettagliTerminale('b');
             extraInfo = `${subData.nome} - L: ${metri}m - Sez: ${sezione} - Colore: ${colore}`;
             if (etichetta) extraInfo += ` - Etichetta: ${etichetta}`;
+            if (haTarghette) extraInfo += ` - Targhette (Tubetti Cembre)`;
             extraInfo += ` - Term.A: ${termAInfo.testo} - Term.B: ${termBInfo.testo}`;
         }
 
