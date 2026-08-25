@@ -356,7 +356,7 @@
                     </div>
                     <div class="form-group" style="flex: 2;">
                         <label>Città e Prov *</label>
-                        <input type="text" id="citta" placeholder="Pianiga (VE)" oninput="calcolaTotali()">
+                        <input type="text" id="citta" placeholder="Pianiga (VE)" onchange="calcolaTotali()">
                     </div>
                 </div>
             </div>
@@ -1160,6 +1160,8 @@ function inviaOrdine(metodo) {
 
             let subject = encodeURIComponent(`Ordine #${numeroOrdine} - Caccin Cablaggi`);
             let body = encodeURIComponent(bodyMail);
+            
+            // Tenta di aprire il client di posta
             window.location.href = `mailto:caccin.cablaggi@gmail.com?subject=${subject}&body=${body}`;
         }
     }
