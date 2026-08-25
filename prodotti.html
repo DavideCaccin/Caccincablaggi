@@ -432,7 +432,17 @@
         "CEMA2-M4": 0.53, "CEMA2-M5": 0.50, "CEMA2-M6": 0.46, "CEMA2-M8": 0.55, "CEMA2-M10": 0.62, "CEMA2-M12": 0.83,
         "CEMANE2-U4": 0.83, "CEMANE2-U5": 0.85,
         "CEMA2-U4": 0.55, "CEMA2-U5": 0.55,
-        "CEMA2P12": 0.65
+        "CEMA2P12": 0.65,
+
+        /* NUOVI ARTICOLI 16mmq */
+        "CEMPKE1612": 0.10, "CEMPKE1618": 0.17,
+        "CEMPKC1612": 0.10, "CEMPKC1618": 0.17,
+        "CEMPKD1612": 0.10, "CEMPKD1618": 0.17,
+        "CEMANE3-M4": 0.89, "CEMANE3-M5": 0.89, "CEMANE3-M6": 0.89, "CEMANE3-M8": 0.91, "CEMANE3-M10": 1.06, "CEMANE3-M12": 1.15,
+        "CEMA3-M4": 0.62, "CEMA3-M5": 0.69, "CEMA3-M6": 0.64, "CEMA3-M8": 0.62, "CEMA3-M10": 0.66, "CEMA3-M12": 0.83,
+        "CEMANE3-U4": 0.91, "CEMANE3-U5": 0.91,
+        "CEMA3-U4": 0.67, "CEMA3-U5": 0.67,
+        "CEMA3P14": 0.91
     };
 
     const terminaliPerSezione = {
@@ -653,6 +663,38 @@
                 {id: "CEMANE2-U5", nome: "CEMANE2-U5 - Forcella isolata NERO vite 5mm (0,85€)"},
                 {id: "CEMA2-U4", nome: "CEMA2-U4 - Forcella non isolata vite 4mm (0,55€)"},
                 {id: "CEMA2-U5", nome: "CEMA2-U5 - Forcella non isolata vite 5mm (0,55€)"}
+            ],
+            faston: []
+        },
+        "16 mm²": {
+            puntale: [
+                {id: "CEMPKE1612", nome: "CEMPKE1612 - P=12mm BIANCO (0,10€)"},
+                {id: "CEMPKE1618", nome: "CEMPKE1618 - P=18mm BIANCO (0,17€)"},
+                {id: "CEMPKC1612", nome: "CEMPKC1612 - P=12mm VERDE (0,10€)"},
+                {id: "CEMPKC1618", nome: "CEMPKC1618 - P=18mm VERDE (0,17€)"},
+                {id: "CEMPKD1612", nome: "CEMPKD1612 - P=12mm BLU (0,10€)"},
+                {id: "CEMPKD1618", nome: "CEMPKD1618 - P=18mm BLU (0,17€)"},
+                {id: "CEMA3P14", nome: "CEMA3P14 - Capocorda a puntale p=14mm non isolato (0,91€)"}
+            ],
+            occhiello: [
+                {id: "CEMANE3-M4", nome: "CEMANE3-M4 - Occhiello isolato NERO vite 4mm (0,89€)"},
+                {id: "CEMANE3-M5", nome: "CEMANE3-M5 - Occhiello isolato NERO vite 5mm (0,89€)"},
+                {id: "CEMANE3-M6", nome: "CEMANE3-M6 - Occhiello isolato NERO vite 6mm (0,89€)"},
+                {id: "CEMANE3-M8", nome: "CEMANE3-M8 - Occhiello isolato NERO vite 8mm (0,91€)"},
+                {id: "CEMANE3-M10", nome: "CEMANE3-M10 - Occhiello isolato NERO vite 10mm (1,06€)"},
+                {id: "CEMANE3-M12", nome: "CEMANE3-M12 - Occhiello isolato NERO vite 12mm (1,15€)"},
+                {id: "CEMA3-M4", nome: "CEMA3-M4 - Occhiello non isolato vite 4mm (0,62€)"},
+                {id: "CEMA3-M5", nome: "CEMA3-M5 - Occhiello non isolato vite 5mm (0,69€)"},
+                {id: "CEMA3-M6", nome: "CEMA3-M6 - Occhiello non isolato vite 6mm (0,64€)"},
+                {id: "CEMA3-M8", nome: "CEMA3-M8 - Occhiello non isolato vite 8mm (0,62€)"},
+                {id: "CEMA3-M10", nome: "CEMA3-M10 - Occhiello non isolato vite 10mm (0,66€)"},
+                {id: "CEMA3-M12", nome: "CEMA3-M12 - Occhiello non isolato vite 12mm (0,83€)"}
+            ],
+            forcella: [
+                {id: "CEMANE3-U4", nome: "CEMANE3-U4 - Forcella isolata NERO vite 4mm (0,91€)"},
+                {id: "CEMANE3-U5", nome: "CEMANE3-U5 - Forcella isolata NERO vite 5mm (0,91€)"},
+                {id: "CEMA3-U4", nome: "CEMA3-U4 - Forcella non isolata vite 4mm (0,67€)"},
+                {id: "CEMA3-U5", nome: "CEMA3-U5 - Forcella non isolata vite 5mm (0,67€)"}
             ],
             faston: []
         }
@@ -944,7 +986,6 @@
 
             document.getElementById('risultato-prezzo').innerText = prezzoTotale.toFixed(2) + " €";
             
-            // Assegnazione immagine in base al colore selezionato
             if (data.imgColore && data.imgColore[colore]) {
                 imgSrc = data.imgColore[colore];
             }
@@ -1119,7 +1160,7 @@
         }
     }
 
-function inviaOrdine(metodo) {
+    function inviaOrdine(metodo) {
         let nome = document.getElementById('nome').value.trim();
         let telefono = document.getElementById('telefono').value.trim();
         let tipoConsegna = document.getElementById('tipo-consegna').value;
@@ -1161,7 +1202,6 @@ function inviaOrdine(metodo) {
             let subject = encodeURIComponent(`Ordine #${numeroOrdine} - Caccin Cablaggi`);
             let body = encodeURIComponent(bodyMail);
             
-            // Tenta di aprire il client di posta
             window.location.href = `mailto:caccin.cablaggi@gmail.com?subject=${subject}&body=${body}`;
         }
     }
