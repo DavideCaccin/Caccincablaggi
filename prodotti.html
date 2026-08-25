@@ -159,7 +159,7 @@
                     
                     <div class="form-group">
                         <label>Sezione (mm²):</label>
-                        <select id="param-sezione" onchange="aggiornaConfigurazione()"></select>
+                        <select id="param-sezione" onchange="aggiornaMenuTerminali(); aggiornaConfigurazione();"></select>
                     </div>
 
                     <div class="form-group" id="box-colore" style="display: none;">
@@ -836,13 +836,9 @@
 
     function aggiornaMenuTerminali() {
         let sezioneCorrente = document.getElementById('param-sezione').value;
-        // Normalizza la chiave per abbinarla all'oggetto dei terminali
-        let chiaveSez = sezioneCorrente;
-        if (!terminaliPerSezione[chiaveSez]) {
-            chiaveSez = "1.5 mm²"; // Fallback di sicurezza
-        }
-
-        let mapModelli = terminaliPerSezione[chiaveSez];
+        
+        // Se la sezione non è presente nella lista dettagliata (es. 16mmq, 25mmq, ecc.), usiamo un fallback o un oggetto vuoto
+        let mapModelli = terminaliPerSezione[sezioneCorrente] || { puntale: [], occhiello: [], forcella: [], faston: [] };
 
         ['a', 'b'].forEach(lato => {
             ['puntale', 'occhiello', 'forcella', 'faston'].forEach(tipo => {
@@ -851,7 +847,7 @@
                     selectElem.innerHTML = '';
                     let lista = mapModelli[tipo] || [];
                     if (lista.length === 0) {
-                        selectElem.innerHTML = `<option value="">Nessun modello disponibile</option>`;
+                        selectElem.innerHTML = `<option value="">Nessun modello disponibile per questa sezione</option>`;
                     } else {
                         lista.forEach(m => {
                             selectElem.innerHTML += `<option value="${m.id}">${m.nome}</option>`;
