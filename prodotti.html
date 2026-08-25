@@ -1038,24 +1038,51 @@
         if (etichetta) extraInfo += ` - Etichetta: ${etichetta}`;
         if (haTarghette) extraInfo += ` - Targhette (Tubetti Cembre)`;
 
+        let oggettoCarrello = {
+            nome: `${data.titolo} Custom`,
+            prezzo: prezzoTotale,
+            qta: 1,
+            dettagliExtra: extraInfo,
+            datiTabella: {}
+        };
+
         if (categoriaCorrente === 'unipolare') {
             let tipoUnipolare = document.getElementById('param-tipo-unipolare').value;
             let subData = data.sottocategorie[tipoUnipolare];
             let colore = document.getElementById('param-colore').value;
             let termAInfo = raccogliDettagliTerminale('a');
             let termBInfo = raccogliDettagliTerminale('b');
+            
+            oggettoCarrello.datiTabella = {
+                tipo: subData.nome,
+                sezione: sezione,
+                colore: colore,
+                lunghezza: metri + "m",
+                etichetta: etichetta || "-",
+                targhette: haTarghette ? "Sì" : "No",
+                termA: termAInfo.testo,
+                termB: termBInfo.testo
+            };
+
             extraInfo = `${subData.nome} - L: ${metri}m - Sez: ${sezione} - Colore: ${colore}`;
             if (etichetta) extraInfo += ` - Etichetta: ${etichetta}`;
             if (haTarghette) extraInfo += ` - Targhette (Tubetti Cembre)`;
             extraInfo += ` - Term.A: ${termAInfo.testo} - Term.B: ${termBInfo.testo}`;
+        } else {
+            oggettoCarrello.datiTabella = {
+                tipo: data.titolo,
+                sezione: sezione,
+                colore: "-",
+                lunghezza: metri + "m",
+                etichetta: etichetta || "-",
+                targhette: "-",
+                termA: "-",
+                termB: "-"
+            };
         }
 
-        carrello.push({
-            nome: `${data.titolo} Custom`,
-            prezzo: prezzoTotale,
-            qta: 1,
-            dettagliExtra: extraInfo
-        });
+        oggettoCarrello.dettagliExtra = extraInfo;
+        carrello.push(oggettoCarrello);
 
         calcolaTotali();
         alert("Cavo aggiunto al carrello con successo!");
@@ -1066,7 +1093,17 @@
             nome: nome,
             prezzo: prezzo,
             qta: 1,
-            dettagliExtra: "Preassemblato standard"
+            dettagliExtra: "Preassemblato standard",
+            datiTabella: {
+                tipo: nome,
+                sezione: "-",
+                colore: "-",
+                lunghezza: "-",
+                etichetta: "-",
+                targhette: "-",
+                termA: "-",
+                termB: "-"
+            }
         });
         calcolaTotali();
         alert(nome + " aggiunto al carrello!");
@@ -1185,19 +1222,48 @@
 
         if (metodo === 'whatsapp') {
             let msgWa = `📦 *ORDINE E-COMMERCE #${numeroOrdine}*%0A%0A`;
-            carrello.forEach(i => {
-                msgWa += `- ${i.nome} (${i.dettagliExtra}) - ${(i.prezzo * i.qta).toFixed(2)}€%0A`;
+            
+            carrello.forEach((i, index) => {
+                let dt = i.datiTabella;
+                msgWa += `*Articolo ${index + 1}: ${i.nome}*%0A`;
+                msgWa += `├ Tipo: ${dt.tipo}%0A`;
+                msgWa += `├ Sezione: ${dt.sezione}%0A`;
+                msgWa += `├ Colore: ${dt.colore}%0A`;
+                msgWa += `├ Lunghezza: ${dt.lunghezza}%0A`;
+                msgWa += `├ Etichetta: ${dt.etichetta}%0A`;
+                msgWa += `├ Targhette: ${dt.targhette}%0A`;
+                msgWa += `├ Term. A: ${dt.termA}%0A`;
+                msgWa += `├ Term. B: ${dt.termB}%0A`;
+                msgWa += `└ *Prezzo: ${(i.prezzo * i.qta).toFixed(2)} €*%0A%0A`;
             });
-            msgWa += `%0A*Totale Complessivo:* ${document.getElementById('totale').innerText} €%0A%0A`;
+
+            msgWa += `*Totale Complessivo:* ${document.getElementById('totale').innerText} €%0A%0A`;
             msgWa += `👤 Cliente: ${nome}%0A📍 Indirizzo: ${indirizzoCompleto}%0A📞 Tel: ${telefono}%0A`;
             window.open(`https://wa.me/393392859037?text=${msgWa}`, '_blank');
         } else {
             let bodyMail = `ORDINE E-COMMERCE #${numeroOrdine}\n\n`;
-            carrello.forEach(i => {
-                bodyMail += `- ${i.nome} (${i.dettagliExtra}) - ${(i.prezzo * i.qta).toFixed(2)}€\n`;
+            
+            carrello.forEach((i, index) => {
+                let dt = i.datiTabella;
+                bodyMail += `----------------------------------------\n`;
+                bodyMail += `ARTICOLO ${index + 1}: ${i.nome}\n`;
+                bodyMail += `----------------------------------------\n`;
+                bodyMail += `• Tipo: ${dt.tipo}\n`;
+                bodyMail += `• Sezione: ${dt.sezione}\n`;
+                bodyMail += `• Colore: ${dt.colore}\n`;
+                bodyMail += `• Lunghezza: ${dt.lunghezza}\n`;
+                bodyMail += `• Etichetta: ${dt.etichetta}\n`;
+                bodyMail += `• Targhette (Tubetti Cembre): ${dt.targhette}\n`;
+                bodyMail += `• Terminale A: ${dt.termA}\n`;
+                bodyMail += `• Terminale B: ${dt.termB}\n`;
+                bodyMail += `• Prezzo Riga: ${(i.prezzo * i.qta).toFixed(2)} €\n\n`;
             });
-            bodyMail += `\nTotale Complessivo: ${document.getElementById('totale').innerText} €\n\n`;
-            bodyMail += `Cliente: ${nome}\nIndirizzo: ${indirizzoCompleto}\nTel: ${telefono}\n`;
+
+            bodyMail += `========================================\n`;
+            bodyMail += `Totale Complessivo: ${document.getElementById('totale').innerText} €\n`;
+            bodyMail += `========================================\n\n`;
+            bodyMail += `DATI CLIENTE:\n`;
+            bodyMail += `Nome: ${nome}\nIndirizzo: ${indirizzoCompleto}\nTel: ${telefono}\n`;
 
             let subject = encodeURIComponent(`Ordine #${numeroOrdine} - Caccin Cablaggi`);
             let body = encodeURIComponent(bodyMail);
