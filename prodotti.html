@@ -83,6 +83,23 @@
     <h1 style="color: var(--primary); text-align: center; margin-bottom: 8px; font-size: 28px;">Catalogo e Configuratore Cavi</h1>
     <p style="text-align: center; color: #475569; margin-bottom: 25px; font-size: 15px;">Scegli un cavo preassemblato pronto all'uso oppure configura un cavo su misura.</p>
 
+    <!-- NUOVA SEZIONE: UPLOAD LISTA FILI PER PREVENTIVO -->
+    <div class="configurator-box" style="border: 2px dashed var(--primary); background: #f0fdf4;">
+        <h2 style="color: var(--primary);">📋 Hai già una lista fili? Richiedi un Preventivo Rapido</h2>
+        <p style="font-size: 13px; color: #475569; margin-bottom: 15px;">Carica il tuo file (Excel, PDF o Word) con la lista dei cavi da produrre e inviacelo direttamente!</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; align-items: center;">
+            <div class="form-group" style="margin-bottom: 0;">
+                <label>Carica File (Excel / PDF / Word):</label>
+                <input type="file" id="file-preventivo" accept=".xlsx, .xls, .pdf, .docx, .doc" style="background: white;">
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 5px;">
+                <button class="btn btn-wa" onclick="inviaPreventivoFile('whatsapp')" style="margin-top:0;">💬 Invia via WhatsApp</button>
+                <button class="btn btn-mail" onclick="inviaPreventivoFile('mail')" style="margin-top:0;">📧 Invia via Email</button>
+            </div>
+        </div>
+    </div>
+
     <div class="shop-layout">
         <!-- COLONNA SINISTRA: PRODOTTI PREASSEMBLED + CONFIGURATORE -->
         <div class="products-container">
@@ -148,18 +165,27 @@
                     <div class="form-group" id="box-colore" style="display: none;">
                         <label>Colore Filo:</label>
                         <select id="param-colore" onchange="aggiornaConfigurazione()">
-                            <option value="Rosso">Rosso</option>
+                            <option value="Giallo/verde">Giallo/verde</option>
                             <option value="Blu">Blu</option>
-                            <option value="Nero">Nero</option>
                             <option value="Marrone">Marrone</option>
-                            <option value="Giallo/Verde">Giallo/Verde</option>
+                            <option value="Nero">Nero</option>
                             <option value="Grigio">Grigio</option>
+                            <option value="Rosso">Rosso</option>
+                            <option value="Bianco">Bianco</option>
+                            <option value="Arancione">Arancione</option>
+                            <option value="Rosa">Rosa</option>
+                            <option value="Viola">Viola</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Lunghezza (Metri):</label>
                         <input type="number" id="param-metri" value="1.0" min="0.5" step="0.5" oninput="aggiornaConfigurazione()">
+                    </div>
+
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label>Etichetta / Numerazione Filo:</label>
+                        <input type="text" id="param-etichetta" placeholder="es. W1, Morsetto X1, Cavo Alimentazione..." oninput="aggiornaConfigurazione()">
                     </div>
                 </div>
 
@@ -175,41 +201,57 @@
                                 <option value="occhiello">Terminale a Occhiello</option>
                                 <option value="forcella">Terminale a Forcella</option>
                                 <option value="faston">Terminale a Faston</option>
-                                <option value="spina">Terminale a Spina</option>
                             </select>
                         </div>
                         <div class="form-group sub-term-a" id="sub-puntale-a" style="display: none;">
-                            <label>Lunghezza Puntale (mm):</label>
-                            <input type="text" id="term-puntale-a-lunghezza" placeholder="es. 8mm, 10mm..." oninput="aggiornaConfigurazione()">
+                            <label>Modello Puntale 1mmq:</label>
+                            <select id="term-puntale-a-modello" onchange="aggiornaConfigurazione()">
+                                <option value="CEMPKE108">CEMPKE108 - P=8mm ROSSO (0,01€)</option>
+                                <option value="CEMPKC108">CEMPKC108 - P=8mm GIALLO (0,01€)</option>
+                                <option value="CEMPKC112">CEMPKC112 - P=12mm GIALLO (0,06€)</option>
+                                <option value="CEMPKD106">CEMPKD106 - P=6mm ROSSO (0,04€)</option>
+                                <option value="CEMPKD108">CEMPKD108 - P=8mm ROSSO (0,01€)</option>
+                                <option value="CEMPKD110">CEMPKD110 - P=10mm ROSSO (0,04€)</option>
+                                <option value="CEMPKD112">CEMPKD112 - P=12mm ROSSO (0,06€)</option>
+                            </select>
                         </div>
                         <div class="form-group sub-term-a" id="sub-occhiello-a" style="display: none;">
-                            <label>Grandezza Occhiello:</label>
-                            <select id="term-occhiello-a-misura" onchange="aggiornaConfigurazione()">
-                                <option value="m3">M3</option><option value="m4">M4</option><option value="m5">M5</option><option value="m6">M6</option><option value="m8">M8</option><option value="m10">M10</option><option value="m12">M12</option>
+                            <label>Modello Occhiello 1mmq:</label>
+                            <select id="term-occhiello-a-modello" onchange="aggiornaConfigurazione()">
+                                <option value="CEMRF-M2">CEMRF-M2 - Vite 2mm ROSSO (0,15€)</option>
+                                <option value="CEMRF-M3">CEMRF-M3 - Vite 3mm ROSSO (0,09€)</option>
+                                <option value="CEMRF-M3.5">CEMRF-M3.5 - Vite 3.5mm ROSSO (0,09€)</option>
+                                <option value="CEMRF-M4">CEMRF-M4 - Vite 4mm ROSSO (0,08€)</option>
+                                <option value="CEMRF-M5">CEMRF-M5 - Vite 5mm ROSSO (0,08€)</option>
+                                <option value="CEMRF-M6">CEMRF-M6 - Vite 6mm ROSSO (0,10€)</option>
+                                <option value="CEMRF-M8">CEMRF-M8 - Vite 8mm ROSSO (0,19€)</option>
                             </select>
                         </div>
                         <div class="form-group sub-term-a" id="sub-forcella-a" style="display: none;">
-                            <label>Grandezza Forcella:</label>
-                            <select id="term-forcella-a-misura" onchange="aggiornaConfigurazione()">
-                                <option value="u3">U3</option><option value="u4">U4</option><option value="u5">U5</option>
+                            <label>Modello Forcella 1mmq:</label>
+                            <select id="term-forcella-a-modello" onchange="aggiornaConfigurazione()">
+                                <option value="CEMRF-U3">CEMRF-U3 - Vite 3mm ROSSO (0,08€)</option>
+                                <option value="CEMRF-U3.5">CEMRF-U3.5 - Vite 3.5mm ROSSO (0,08€)</option>
+                                <option value="CEMRF-U4">CEMRF-U4 - Vite 4mm ROSSO (0,08€)</option>
+                                <option value="CEMRF-U5">CEMRF-U5 - Vite 5mm ROSSO (0,09€)</option>
+                                <option value="CEMRF-U6">CEMRF-U6 - Vite 6mm ROSSO (0,13€)</option>
                             </select>
                         </div>
                         <div class="form-group sub-term-a" id="sub-faston-a" style="display: none;">
-                            <label>Tipo Faston:</label>
-                            <select id="term-faston-a-tipo" onchange="aggiornaConfigurazione()">
-                                <option value="maschio">Maschio</option><option value="femmina">Femmina</option>
-                            </select>
-                        </div>
-                        <div class="form-group sub-term-a" id="sub-faston-a-larghezza" style="display: none;">
-                            <label>Larghezza Faston:</label>
-                            <select id="term-faston-a-largh" onchange="aggiornaConfigurazione()">
-                                <option value="4.8mm">4,8 mm</option><option value="6.3mm">6,3 mm</option>
-                            </select>
-                        </div>
-                        <div class="form-group sub-term-a" id="sub-spina-a" style="display: none;">
-                            <label>Tipo Spina:</label>
-                            <select id="term-spina-a-tipo" onchange="aggiornaConfigurazione()">
-                                <option value="maschio">Maschio</option><option value="femmina">Femmina</option>
+                            <label>Modello Faston 1mmq:</label>
+                            <select id="term-faston-a-modello" onchange="aggiornaConfigurazione()">
+                                <option value="CEMRF-F305P">CEMRF-F305P - Femmina 2,8x0,5 isolato (0,24€)</option>
+                                <option value="CEMRF-F308P">CEMRF-F308P - Femmina 2,8x0,8 isolato (0,16€)</option>
+                                <option value="CEMRF-F408P">CEMRF-F408P - Femmina 4,8x0,8 isolato (0,24€)</option>
+                                <option value="CEMRF-F405P">CEMRF-F405P - Femmina 4,8x0,5 isolato (0,25€)</option>
+                                <option value="CEMRF-F608P">CEMRF-F608P - Femmina 6,35x0,8 isolato (0,18€)</option>
+                                <option value="CEMRF-F305">CEMRF-F305 - Femmina 2,8x0,5 (0,16€)</option>
+                                <option value="CEMRF-F308">CEMRF-F308 - Femmina 2,8x0,8 (0,16€)</option>
+                                <option value="CEMRF-F408">CEMRF-F408 - Femmina 4,8x0,8 (0,17€)</option>
+                                <option value="CEMRF-F405">CEMRF-F405 - Femmina 4,8x0,5 (0,17€)</option>
+                                <option value="CEMRF-F608">CEMRF-F608 - Femmina 6,3x0,8 (0,16€)</option>
+                                <option value="CEMRF-M608P">CEMRF-M608P - Maschio 6,3x0,8 isolato (0,30€)</option>
+                                <option value="CEMRF-M608">CEMRF-M608 - Maschio 6,35x0,8 (0,16€)</option>
                             </select>
                         </div>
                     </div>
@@ -227,41 +269,57 @@
                                 <option value="occhiello">Terminale a Occhiello</option>
                                 <option value="forcella">Terminale a Forcella</option>
                                 <option value="faston">Terminale a Faston</option>
-                                <option value="spina">Terminale a Spina</option>
                             </select>
                         </div>
                         <div class="form-group sub-term-b" id="sub-puntale-b" style="display: none;">
-                            <label>Lunghezza Puntale (mm):</label>
-                            <input type="text" id="term-puntale-b-lunghezza" placeholder="es. 8mm, 10mm..." oninput="aggiornaConfigurazione()">
+                            <label>Modello Puntale 1mmq:</label>
+                            <select id="term-puntale-b-modello" onchange="aggiornaConfigurazione()">
+                                <option value="CEMPKE108">CEMPKE108 - P=8mm ROSSO (0,01€)</option>
+                                <option value="CEMPKC108">CEMPKC108 - P=8mm GIALLO (0,01€)</option>
+                                <option value="CEMPKC112">CEMPKC112 - P=12mm GIALLO (0,06€)</option>
+                                <option value="CEMPKD106">CEMPKD106 - P=6mm ROSSO (0,04€)</option>
+                                <option value="CEMPKD108">CEMPKD108 - P=8mm ROSSO (0,01€)</option>
+                                <option value="CEMPKD110">CEMPKD110 - P=10mm ROSSO (0,04€)</option>
+                                <option value="CEMPKD112">CEMPKD112 - P=12mm ROSSO (0,06€)</option>
+                            </select>
                         </div>
                         <div class="form-group sub-term-b" id="sub-occhiello-b" style="display: none;">
-                            <label>Grandezza Occhiello:</label>
-                            <select id="term-occhiello-b-misura" onchange="aggiornaConfigurazione()">
-                                <option value="m3">M3</option><option value="m4">M4</option><option value="m5">M5</option><option value="m6">M6</option><option value="m8">M8</option><option value="m10">M10</option><option value="m12">M12</option>
+                            <label>Modello Occhiello 1mmq:</label>
+                            <select id="term-occhiello-b-modello" onchange="aggiornaConfigurazione()">
+                                <option value="CEMRF-M2">CEMRF-M2 - Vite 2mm ROSSO (0,15€)</option>
+                                <option value="CEMRF-M3">CEMRF-M3 - Vite 3mm ROSSO (0,09€)</option>
+                                <option value="CEMRF-M3.5">CEMRF-M3.5 - Vite 3.5mm ROSSO (0,09€)</option>
+                                <option value="CEMRF-M4">CEMRF-M4 - Vite 4mm ROSSO (0,08€)</option>
+                                <option value="CEMRF-M5">CEMRF-M5 - Vite 5mm ROSSO (0,08€)</option>
+                                <option value="CEMRF-M6">CEMRF-M6 - Vite 6mm ROSSO (0,10€)</option>
+                                <option value="CEMRF-M8">CEMRF-M8 - Vite 8mm ROSSO (0,19€)</option>
                             </select>
                         </div>
                         <div class="form-group sub-term-b" id="sub-forcella-b" style="display: none;">
-                            <label>Grandezza Forcella:</label>
-                            <select id="term-forcella-b-misura" onchange="aggiornaConfigurazione()">
-                                <option value="u3">U3</option><option value="u4">U4</option><option value="u5">U5</option>
+                            <label>Modello Forcella 1mmq:</label>
+                            <select id="term-forcella-b-modello" onchange="aggiornaConfigurazione()">
+                                <option value="CEMRF-U3">CEMRF-U3 - Vite 3mm ROSSO (0,08€)</option>
+                                <option value="CEMRF-U3.5">CEMRF-U3.5 - Vite 3.5mm ROSSO (0,08€)</option>
+                                <option value="CEMRF-U4">CEMRF-U4 - Vite 4mm ROSSO (0,08€)</option>
+                                <option value="CEMRF-U5">CEMRF-U5 - Vite 5mm ROSSO (0,09€)</option>
+                                <option value="CEMRF-U6">CEMRF-U6 - Vite 6mm ROSSO (0,13€)</option>
                             </select>
                         </div>
                         <div class="form-group sub-term-b" id="sub-faston-b" style="display: none;">
-                            <label>Tipo Faston:</label>
-                            <select id="term-faston-b-tipo" onchange="aggiornaConfigurazione()">
-                                <option value="maschio">Maschio</option><option value="femmina">Femmina</option>
-                            </select>
-                        </div>
-                        <div class="form-group sub-term-b" id="sub-faston-b-larghezza" style="display: none;">
-                            <label>Larghezza Faston:</label>
-                            <select id="term-faston-b-largh" onchange="aggiornaConfigurazione()">
-                                <option value="4.8mm">4,8 mm</option><option value="6.3mm">6,3 mm</option>
-                            </select>
-                        </div>
-                        <div class="form-group sub-term-b" id="sub-spina-b" style="display: none;">
-                            <label>Tipo Spina:</label>
-                            <select id="term-spina-b-tipo" onchange="aggiornaConfigurazione()">
-                                <option value="maschio">Maschio</option><option value="femmina">Femmina</option>
+                            <label>Modello Faston 1mmq:</label>
+                            <select id="term-faston-b-modello" onchange="aggiornaConfigurazione()">
+                                <option value="CEMRF-F305P">CEMRF-F305P - Femmina 2,8x0,5 isolato (0,24€)</option>
+                                <option value="CEMRF-F308P">CEMRF-F308P - Femmina 2,8x0,8 isolato (0,16€)</option>
+                                <option value="CEMRF-F408P">CEMRF-F408P - Femmina 4,8x0,8 isolato (0,24€)</option>
+                                <option value="CEMRF-F405P">CEMRF-F405P - Femmina 4,8x0,5 isolato (0,25€)</option>
+                                <option value="CEMRF-F608P">CEMRF-F608P - Femmina 6,35x0,8 isolato (0,18€)</option>
+                                <option value="CEMRF-F305">CEMRF-F305 - Femmina 2,8x0,5 (0,16€)</option>
+                                <option value="CEMRF-F308">CEMRF-F308 - Femmina 2,8x0,8 (0,16€)</option>
+                                <option value="CEMRF-F408">CEMRF-F408 - Femmina 4,8x0,8 (0,17€)</option>
+                                <option value="CEMRF-F405">CEMRF-F405 - Femmina 4,8x0,5 (0,17€)</option>
+                                <option value="CEMRF-F608">CEMRF-F608 - Femmina 6,3x0,8 (0,16€)</option>
+                                <option value="CEMRF-M608P">CEMRF-M608P - Maschio 6,3x0,8 isolato (0,30€)</option>
+                                <option value="CEMRF-M608">CEMRF-M608 - Maschio 6,35x0,8 (0,16€)</option>
                             </select>
                         </div>
                     </div>
@@ -398,7 +456,41 @@
 </div>
 
 <script>
-    // Prezzi calcolati con il prezzo massimo + 10% di maggiorazione
+    // Tabella prezzi terminali aggiornata (prezzo base + 0,10€ di lavorazione se non libero)
+    const listinoTerminali = {
+        "CEMPKE108": 0.01 + 0.10,
+        "CEMPKC108": 0.01 + 0.10,
+        "CEMPKC112": 0.06 + 0.10,
+        "CEMPKD106": 0.04 + 0.10,
+        "CEMPKD108": 0.01 + 0.10,
+        "CEMPKD110": 0.04 + 0.10,
+        "CEMPKD112": 0.06 + 0.10,
+        "CEMRF-M2": 0.15 + 0.10,
+        "CEMRF-M3": 0.09 + 0.10,
+        "CEMRF-M3.5": 0.09 + 0.10,
+        "CEMRF-M4": 0.08 + 0.10,
+        "CEMRF-M5": 0.08 + 0.10,
+        "CEMRF-M6": 0.10 + 0.10,
+        "CEMRF-M8": 0.19 + 0.10,
+        "CEMRF-U3": 0.08 + 0.10,
+        "CEMRF-U3.5": 0.08 + 0.10,
+        "CEMRF-U4": 0.08 + 0.10,
+        "CEMRF-U5": 0.09 + 0.10,
+        "CEMRF-U6": 0.13 + 0.10,
+        "CEMRF-F305P": 0.24 + 0.10,
+        "CEMRF-F308P": 0.16 + 0.10,
+        "CEMRF-F408P": 0.24 + 0.10,
+        "CEMRF-F405P": 0.25 + 0.10,
+        "CEMRF-F608P": 0.18 + 0.10,
+        "CEMRF-F305": 0.16 + 0.10,
+        "CEMRF-F308": 0.16 + 0.10,
+        "CEMRF-F408": 0.17 + 0.10,
+        "CEMRF-F405": 0.17 + 0.10,
+        "CEMRF-F608": 0.16 + 0.10,
+        "CEMRF-M608P": 0.30 + 0.10,
+        "CEMRF-M608": 0.16 + 0.10
+    };
+
     const databaseCaviSpecifici = {
         "unipolare": {
             titolo: "Cavo Unipolare",
@@ -407,14 +499,14 @@
                 "fs17": { 
                     nome: "FS17 (PVC standard)", 
                     desc: "Cavo standard in PVC antifiamma per tubi e canaline interne.", 
-                    sezioni: ["1 mm²", "1.5 mm²", "2.5 mm²", "4 mm²", "6 mm²", "10 mm²", "16 mm²", "25 mm²", "35 mm²", "50 mm²", "70 mm²"], 
-                    prezzi: { "1 mm²": 0.22, "1.5 mm²": 0.275, "2.5 mm²": 0.385, "4 mm²": 0.605, "6 mm²": 0.935, "10 mm²": 1.54, "16 mm²": 2.42, "25 mm²": 3.74, "35 mm²": 5.28, "50 mm²": 7.48, "70 mm²": 10.45 } 
+                    sezioni: ["1 mm²", "1.5 mm²", "2.5 mm²", "4 mm²", "6 mm²", "10 mm²", "16 mm²", "25 mm²", "35 mm²", "50 mm²"], 
+                    prezzi: { "1 mm²": 0.23, "1.5 mm²": 0.28, "2.5 mm²": 0.46, "4 mm²": 0.75, "6 mm²": 1.11, "10 mm²": 2.37, "16 mm²": 3.62, "25 mm²": 5.61, "35 mm²": 7.85, "50 mm²": 11.18 } 
                 },
                 "h07vk": { 
                     nome: "H07V-K (Flessibile quadri)", 
                     desc: "Filo flessibile comune in PVC per l'interno di quadri di comando e automazione.", 
                     sezioni: ["0.5 mm²", "0.75 mm²", "1 mm²", "1.5 mm²", "2.5 mm²", "4 mm²", "6 mm²", "10 mm²", "16 mm²", "25 mm²", "35 mm²", "50 mm²", "70 mm²"], 
-                    prezzi: { "0.5 mm²": 0.165, "0.75 mm²": 0.198, "1 mm²": 0.22, "1.5 mm²": 0.275, "2.5 mm²": 0.385, "4 mm²": 0.605, "6 mm²": 0.935, "10 mm²": 1.485, "16 mm²": 2.365, "25 mm²": 3.63, "35 mm²": 5.06, "50 mm²": 7.15, "70 mm²": 10.01 } 
+                    prezzi: { "0.5 mm²": 0.165, "0.75 mm²": 0.198, "1 mm²": 0.23, "1.5 mm²": 0.28, "2.5 mm²": 0.46, "4 mm²": 0.75, "6 mm²": 1.11, "10 mm²": 1.485, "16 mm²": 2.365, "25 mm²": 3.63, "35 mm²": 5.06, "50 mm²": 7.15, "70 mm²": 10.01 } 
                 },
                 "fg17": { 
                     nome: "FG17 (Edilizia CPR)", 
@@ -567,10 +659,7 @@
         if (tipo === 'puntale') document.getElementById('sub-puntale-a').style.display = 'block';
         else if (tipo === 'occhiello') document.getElementById('sub-occhiello-a').style.display = 'block';
         else if (tipo === 'forcella') document.getElementById('sub-forcella-a').style.display = 'block';
-        else if (tipo === 'faston') {
-            document.getElementById('sub-faston-a').style.display = 'block';
-            document.getElementById('sub-faston-a-larghezza').style.display = 'block';
-        } else if (tipo === 'spina') document.getElementById('sub-spina-a').style.display = 'block';
+        else if (tipo === 'faston') document.getElementById('sub-faston-a').style.display = 'block';
 
         aggiornaConfigurazione();
     }
@@ -583,10 +672,7 @@
         if (tipo === 'puntale') document.getElementById('sub-puntale-b').style.display = 'block';
         else if (tipo === 'occhiello') document.getElementById('sub-occhiello-b').style.display = 'block';
         else if (tipo === 'forcella') document.getElementById('sub-forcella-b').style.display = 'block';
-        else if (tipo === 'faston') {
-            document.getElementById('sub-faston-b').style.display = 'block';
-            document.getElementById('sub-faston-b-larghezza').style.display = 'block';
-        } else if (tipo === 'spina') document.getElementById('sub-spina-b').style.display = 'block';
+        else if (tipo === 'faston') document.getElementById('sub-faston-b').style.display = 'block';
 
         aggiornaConfigurazione();
     }
@@ -600,27 +686,16 @@
     function raccogliDettagliTerminale(lato) {
         let prefisso = lato === 'a' ? 'a' : 'b';
         let tipo = document.getElementById(`terminale-${prefisso}-tipo`).value;
-        if (tipo === 'libero') return 'Libero';
+        if (tipo === 'libero') return { testo: 'Libero', costo: 0 };
 
-        let testo = tipo.toUpperCase();
-        if (tipo === 'puntale') {
-            let lung = document.getElementById(`term-puntale-${prefisso}-lunghezza`).value.trim();
-            if (lung) testo += ` (${lung})`;
-        } else if (tipo === 'occhiello') {
-            let mis = document.getElementById(`term-occhiello-${prefisso}-misura`).value.toUpperCase();
-            testo += ` (${mis})`;
-        } else if (tipo === 'forcella') {
-            let mis = document.getElementById(`term-forcella-${prefisso}-misura`).value.toUpperCase();
-            testo += ` (${mis})`;
-        } else if (tipo === 'faston') {
-            let tFaston = document.getElementById(`term-faston-${prefisso}-tipo`).value;
-            let lFaston = document.getElementById(`term-faston-${prefisso}-largh`).value;
-            testo += ` (${tFaston}, ${lFaston})`;
-        } else if (tipo === 'spina') {
-            let tSpina = document.getElementById(`term-spina-${prefisso}-tipo`).value;
-            testo += ` (${tSpina})`;
-        }
-        return testo;
+        let selectModello = document.getElementById(`term-${tipo}-${prefisso}-modello`);
+        let modelloCodice = selectModello ? selectModello.value : "";
+        let costoTerminale = listinoTerminali[modelloCodice] || 0.10;
+
+        return {
+            testo: `${modelloCodice}`,
+            costo: costoTerminale
+        };
     }
 
     function aggiornaConfigurazione() {
@@ -629,8 +704,12 @@
         
         let metri = parseFloat(document.getElementById('param-metri').value) || 1;
         let sezione = document.getElementById('param-sezione').value;
+        let etichetta = document.getElementById('param-etichetta').value.trim();
         let prezzoMetro = 0;
         let dettagliTesto = "";
+
+        // 0.10€ per ogni metro di lunghezza per la lavorazione del taglio
+        let costoTaglioTotale = metri * 0.10;
 
         if (categoriaCorrente === 'unipolare') {
             let tipoUnipolare = document.getElementById('param-tipo-unipolare').value;
@@ -638,26 +717,43 @@
             let colore = document.getElementById('param-colore').value;
 
             prezzoMetro = subData.prezzi[sezione] || 0.40;
+            let costoFilo = prezzoMetro * metri;
+
+            let termAInfo = raccogliDettagliTerminale('a');
+            let termBInfo = raccogliDettagliTerminale('b');
+
+            let prezzoTotale = costoFilo + costoTaglioTotale + termAInfo.costo + termBInfo.costo;
+
             dettagliTesto = `${subData.desc} <br>Tipo: <b>${subData.nome}</b> | Sezione: <b>${sezione}</b> | Lunghezza: <b>${metri}m</b> | Colore: <b style="color:var(--primary);">${colore}</b>`;
-            
-            let termA = raccogliDettagliTerminale('a');
-            let termB = raccogliDettagliTerminale('b');
-            dettagliTesto += `<br>Terminale A: <b>${termA}</b> | Terminale B: <b>${termB}</b>`;
+            if (etichetta) dettagliTesto += `<br>Etichetta/Numerazione: <b style="color:var(--accent);">${etichetta}</b>`;
+            dettagliTesto += `<br>Terminale A: <b>${termAInfo.testo}</b> | Terminale B: <b>${termBInfo.testo}</b>`;
+            dettagliTesto += `<br><span style="font-size:11px; color:#64748b;">(Incluso taglio: ${costoTaglioTotale.toFixed(2)}€)</span>`;
+
+            document.getElementById('risultato-prezzo').innerText = prezzoTotale.toFixed(2) + " €";
         } else if (categoriaCorrente === 'multipolare') {
             let conduttori = document.getElementById('param-conduttori').value;
             let chiavePrezzo = `${conduttori}_${sezione}`;
             prezzoMetro = data.prezziBase[chiavePrezzo] || 1.50;
+            let prezzoTotale = (prezzoMetro * metri) + costoTaglioTotale;
+
             dettagliTesto = `${data.desc} <br>Conduttori: <b>${conduttori}</b> | Sezione: <b>${sezione}</b> | Lunghezza: <b>${metri}m</b>`;
+            if (etichetta) dettagliTesto += `<br>Etichetta/Numerazione: <b style="color:var(--accent);">${etichetta}</b>`;
+            dettagliTesto += `<br><span style="font-size:11px; color:#64748b;">(Incluso taglio: ${costoTaglioTotale.toFixed(2)}€)</span>`;
+
+            document.getElementById('risultato-prezzo').innerText = prezzoTotale.toFixed(2) + " €";
         } else {
             prezzoMetro = data.prezziBase[sezione] || 1.00;
-            dettagliTesto = `${data.desc} <br>Sezione: <b>${sezione}</b> | Lunghezza: <b>${metri}m</b>`;
-        }
+            let prezzoTotale = (prezzoMetro * metri) + costoTaglioTotale;
 
-        let prezzoTotale = prezzoMetro * metri;
+            dettagliTesto = `${data.desc} <br>Sezione: <b>${sezione}</b> | Lunghezza: <b>${metri}m</b>`;
+            if (etichetta) dettagliTesto += `<br>Etichetta/Numerazione: <b style="color:var(--accent);">${etichetta}</b>`;
+            dettagliTesto += `<br><span style="font-size:11px; color:#64748b;">(Incluso taglio: ${costoTaglioTotale.toFixed(2)}€)</span>`;
+
+            document.getElementById('risultato-prezzo').innerText = prezzoTotale.toFixed(2) + " €";
+        }
 
         document.getElementById('risultato-nome').innerText = data.titolo;
         document.getElementById('risultato-dettagli').innerHTML = dettagliTesto;
-        document.getElementById('risultato-prezzo').innerText = prezzoTotale.toFixed(2) + " €";
         
         let imgElem = document.getElementById('risultato-img');
         if (data.img) {
@@ -673,16 +769,21 @@
         let data = databaseCaviSpecifici[categoriaCorrente];
         let metri = document.getElementById('param-metri').value;
         let sezione = document.getElementById('param-sezione').value;
+        let etichetta = document.getElementById('param-etichetta').value.trim();
         let prezzoTotale = parseFloat(document.getElementById('risultato-prezzo').innerText);
         
         let extraInfo = `L: ${metri}m - Sez: ${sezione}`;
+        if (etichetta) extraInfo += ` - Etichetta: ${etichetta}`;
+
         if (categoriaCorrente === 'unipolare') {
             let tipoUnipolare = document.getElementById('param-tipo-unipolare').value;
             let subData = data.sottocategorie[tipoUnipolare];
             let colore = document.getElementById('param-colore').value;
-            let termA = raccogliDettagliTerminale('a');
-            let termB = raccogliDettagliTerminale('b');
-            extraInfo = `${subData.nome} - L: ${metri}m - Sez: ${sezione} - Colore: ${colore} - Term.A: ${termA} - Term.B: ${termB}`;
+            let termAInfo = raccogliDettagliTerminale('a');
+            let termBInfo = raccogliDettagliTerminale('b');
+            extraInfo = `${subData.nome} - L: ${metri}m - Sez: ${sezione} - Colore: ${colore}`;
+            if (etichetta) extraInfo += ` - Etichetta: ${etichetta}`;
+            extraInfo += ` - Term.A: ${termAInfo.testo} - Term.B: ${termBInfo.testo}`;
         }
 
         carrello.push({
@@ -775,6 +876,24 @@
         document.getElementById('costo-spedizione').innerText = costoSpedizione.toFixed(2);
         document.getElementById('totale').innerText = totaleGenerale.toFixed(2);
         document.getElementById('tipo-spedizione').innerText = tipoSpedizioneTesto;
+    }
+
+    function inviaPreventivoFile(metodo) {
+        let fileInput = document.getElementById('file-preventivo');
+        if (fileInput.files.length === 0) {
+            alert("Seleziona prima un file (Excel, PDF o Word) da allegare per il preventivo!");
+            return;
+        }
+        let nomeFile = fileInput.files[0].name;
+        let msg = `📋 *RICHIESTA PREVENTIVO LISTA FILI*%0A%AHo allegato il file: *${nomeFile}* per la produzione dei cablaggi. Attendo vs riscontro.`;
+
+        if (metodo === 'whatsapp') {
+            window.open(`https://wa.me/393392859037?text=${msg}`, '_blank');
+        } else {
+            let subject = encodeURIComponent(`Richiesta Preventivo Lista Fili - ${nomeFile}`);
+            let body = encodeURIComponent(`Buongiorno,\n\nAllego il file (${nomeFile}) con la lista dei cavi per avere un preventivo di produzione.\n\nCordiali saluti.`);
+            window.location.href = `mailto:caccin.cablaggi@gmail.com?subject=${subject}&body=${body}`;
+        }
     }
 
     function inviaOrdine(metodo) {
